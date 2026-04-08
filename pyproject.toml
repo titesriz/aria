@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aria-rag"
+version = "0.1.0"
+description = "Starter RAG project for the ARIA document corpus."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "openai>=1.30.0",
+  "pypdf>=4.2.0",
+  "python-dotenv>=1.0.1",
+  "scipy>=1.13.0",
+  "scikit-learn>=1.5.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0.0",
+]
+
+[project.scripts]
+aria-rag = "aria_rag.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
