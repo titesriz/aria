@@ -35,6 +35,7 @@ def _run_aria_ask(
     backend: str,
     expand_query: bool = False,
     alpha: float = 0.7,
+    no_llm: bool = False,
     timeout: int = 120,
 ) -> str:
     cmd = ["aria-rag", "ask", question, "--top-k", str(top_k), "--backend", backend]
@@ -42,6 +43,8 @@ def _run_aria_ask(
         cmd += ["--family", family]
     if expand_query:
         cmd += ["--expand-query", "--alpha", str(alpha)]
+    if no_llm:
+        cmd += ["--no-llm"]
     result = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
     if result.returncode != 0:
         stderr = result.stderr.strip()
@@ -219,6 +222,7 @@ def run_eval(
     timeout: int = 120,
     expand_query: bool = False,
     alpha: float = 0.7,
+    no_llm: bool = False,
     baseline_results: list[dict[str, Any]] | None = None,
 ) -> list[dict[str, Any]]:
     ds_path = Path(dataset_path) if dataset_path else DEFAULT_DATASET
@@ -252,6 +256,7 @@ def run_eval(
                 backend=backend,
                 expand_query=expand_query,
                 alpha=alpha,
+                no_llm=no_llm,
                 timeout=timeout,
             )
             passages, answer, expansion_query, inferred_articles = _parse_output(raw)

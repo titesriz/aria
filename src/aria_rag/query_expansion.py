@@ -50,6 +50,7 @@ def _expand_with_ollama(question: str, ollama_host: str, ollama_model: str) -> l
         "prompt": question,
         "system": _SYSTEM_PROMPT,
         "stream": False,
+        "temperature": 0,
     }
     url = f"{ollama_host.rstrip('/')}/api/generate"
     try:

@@ -97,6 +97,12 @@ def build_parser() -> argparse.ArgumentParser:
         default=False,
         help="Run 3 evals: baseline, alpha=0.7, alpha=0.5 and display a comparison table. Implies --expand-query.",
     )
+    eval_parser.add_argument(
+        "--no-llm",
+        action="store_true",
+        default=False,
+        help="Skip LLM answer synthesis — score retrieval only. Useful to isolate retrieval from LLM latency.",
+    )
 
     ask_parser = subparsers.add_parser("ask", help="Search the index and optionally synthesize an answer")
     ask_parser.add_argument("question", help="Question to ask")
@@ -190,24 +196,25 @@ def main() -> None:
 
     if args.command == "eval":
         from aria_rag.eval import run_eval, _print_multi_comparison
+        no_llm = args.no_llm
         if args.multi_alpha:
             print("Run 1/3 — baseline sans query expansion\n")
             r_baseline = run_eval(
                 dataset_path=args.dataset, top_k=args.top_k, backend=args.backend,
                 ids=args.ids, results_dir=args.output, timeout=args.timeout,
-                expand_query=False,
+                expand_query=False, no_llm=no_llm,
             )
             print("\nRun 2/3 — avec query expansion alpha=0.7\n")
             r_07 = run_eval(
                 dataset_path=args.dataset, top_k=args.top_k, backend=args.backend,
                 ids=args.ids, results_dir=args.output, timeout=args.timeout,
-                expand_query=True, alpha=0.7,
+                expand_query=True, alpha=0.7, no_llm=no_llm,
             )
             print("\nRun 3/3 — avec query expansion alpha=0.5\n")
             r_05 = run_eval(
                 dataset_path=args.dataset, top_k=args.top_k, backend=args.backend,
                 ids=args.ids, results_dir=args.output, timeout=args.timeout,
-                expand_query=True, alpha=0.5,
+                expand_query=True, alpha=0.5, no_llm=no_llm,
             )
             _print_multi_comparison([
                 ("Baseline", r_baseline),
@@ -219,13 +226,13 @@ def main() -> None:
             r_baseline = run_eval(
                 dataset_path=args.dataset, top_k=args.top_k, backend=args.backend,
                 ids=args.ids, results_dir=args.output, timeout=args.timeout,
-                expand_query=False,
+                expand_query=False, no_llm=no_llm,
             )
             print(f"\nÉtape 2/2 — avec query expansion alpha={args.alpha}\n")
             r_expanded = run_eval(
                 dataset_path=args.dataset, top_k=args.top_k, backend=args.backend,
                 ids=args.ids, results_dir=args.output, timeout=args.timeout,
-                expand_query=True, alpha=args.alpha,
+                expand_query=True, alpha=args.alpha, no_llm=no_llm,
             )
             _print_multi_comparison([
                 ("Baseline", r_baseline),
@@ -235,6 +242,7 @@ def main() -> None:
             run_eval(
                 dataset_path=args.dataset, top_k=args.top_k, backend=args.backend,
                 ids=args.ids, results_dir=args.output, timeout=args.timeout,
+                no_llm=no_llm,
             )
         return
 
