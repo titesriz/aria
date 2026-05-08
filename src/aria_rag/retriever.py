@@ -111,7 +111,7 @@ def search_weighted(
     query_original: str,
     query_expansion: str | None,
     top_k: int | None = None,
-    alpha: float = 0.7,
+    alpha: float = 0.5,
     family_filter: list[str] | None = None,
 ) -> list[SearchHit]:
     """Hybrid weighted retrieval: alpha * RRF(original) + (1-alpha) * RRF(expansion).

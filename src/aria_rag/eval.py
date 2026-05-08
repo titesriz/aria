@@ -34,7 +34,7 @@ def _run_aria_ask(
     top_k: int,
     backend: str,
     expand_query: bool = False,
-    alpha: float = 0.7,
+    alpha: float = 0.5,
     no_llm: bool = False,
     timeout: int = 120,
 ) -> str:
@@ -221,7 +221,7 @@ def run_eval(
     results_dir: Path | None = None,
     timeout: int = 120,
     expand_query: bool = False,
-    alpha: float = 0.7,
+    alpha: float = 0.5,
     no_llm: bool = False,
     baseline_results: list[dict[str, Any]] | None = None,
 ) -> list[dict[str, Any]]:

@@ -87,9 +87,9 @@ def build_parser() -> argparse.ArgumentParser:
     eval_parser.add_argument(
         "--alpha",
         type=float,
-        default=0.7,
+        default=0.5,
         metavar="FLOAT",
-        help="Weight for original query in weighted retrieval (default 0.7). Only used with --expand-query.",
+        help="Weight for original query in weighted retrieval (default 0.5). Only used with --expand-query.",
     )
     eval_parser.add_argument(
         "--multi-alpha",
@@ -137,9 +137,9 @@ def build_parser() -> argparse.ArgumentParser:
     ask_parser.add_argument(
         "--alpha",
         type=float,
-        default=0.7,
+        default=0.5,
         metavar="FLOAT",
-        help="Weight for original query vs expansion (0.0–1.0, default 0.7). Only used with --expand-query.",
+        help="Weight for original query vs expansion (0.0–1.0, default 0.5). Only used with --expand-query.",
     )
     return parser
 
