@@ -1,0 +1,56 @@
+[
+  {
+    "id": "UC-01",
+    "question": "Je cherche la hauteur maximale autorisée pour une construction neuve en zone UG dans le 11e arrondissement de Paris, le terrain est en secteur DG5.",
+    "expected_articles": ["UG.3.2", "Plan général des hauteurs"],
+    "expected_keywords": ["hauteur", "plafond", "Plan général des hauteurs", "gabarit"],
+    "expected_answer_summary": "En zone UG, la hauteur maximale est définie par le Plan général des hauteurs (document graphique). Le plafond de hauteur applicable est celui indiqué sur ce plan pour la zone concernée. L'article UG.3.2 fixe les règles de hauteur et renvoie au Plan général des hauteurs.",
+    "family": "reglement_ecrit",
+    "complexity": "Moyenne"
+  },
+  {
+    "id": "UC-02",
+    "question": "Je cherche la règle de retrait par rapport à la voie publique pour une construction en zone UG dans le 15e arrondissement de Paris. Le projet est à l'alignement ou nécessite-t-il un retrait minimum de 3 mètres ?",
+    "expected_articles": ["UG.3.1.1", "UG.3.1"],
+    "expected_keywords": ["retrait", "voie", "alignement", "3 mètres", "recul", "emprise"],
+    "expected_answer_summary": "En zone UG, l'article UG.3.1.1 régit le recul par rapport aux voies. Les constructions peuvent s'implanter à l'alignement ou avec un retrait minimal selon les conditions du plan local. Un retrait de 3 mètres peut être exigé selon la configuration de la parcelle et les dispositions graphiques.",
+    "family": "reglement_ecrit",
+    "complexity": "Moyenne"
+  },
+  {
+    "id": "UC-03",
+    "question": "Je cherche la règle de prospect par rapport à une limite séparative latérale droite en zone UG. Mon bâtiment a des baies principales (PP) sur ce pignon, la hauteur est de 8 mètres. Quelle distance minimale dois-je respecter ?",
+    "expected_articles": ["UG.3.1.2", "UG.3.1"],
+    "expected_keywords": ["prospect", "limite séparative", "baie", "PP", "6 mètres", "H/2", "distance", "pignon"],
+    "expected_answer_summary": "En zone UG, l'article UG.3.1.2 impose un prospect minimum par rapport aux limites séparatives lorsque des baies principales (PP) sont présentes. La règle de prospect est généralement H/2 avec un minimum de 6 mètres. Pour une hauteur de 8 m, le prospect minimum serait de 6 mètres (plancher).",
+    "family": "reglement_ecrit",
+    "complexity": "Élevée"
+  },
+  {
+    "id": "UC-04",
+    "question": "Je cherche si un changement de destination de bureaux vers hôtel est autorisé en zone UG dans le 8e arrondissement de Paris. Quelles sont les conditions réglementaires applicables ?",
+    "expected_articles": ["UG.1.3", "UG.1"],
+    "expected_keywords": ["changement de destination", "bureaux", "hôtel", "hébergement hôtelier", "destinations", "plan d'équilibre", "mixité"],
+    "expected_answer_summary": "L'article UG.1.3 encadre les changements de destination en zone UG. Le passage de bureaux à hôtel (hébergement hôtelier) est soumis au respect du plan d'équilibre des destinations. Dans certains secteurs protégés (notamment le 8e), des restrictions s'appliquent pour préserver la mixité fonctionnelle.",
+    "family": "reglement_ecrit",
+    "complexity": "Élevée"
+  },
+  {
+    "id": "UC-05",
+    "question": "Je cherche les règles de mixité fonctionnelle pour un projet de 2000 m² de surface plancher mêlant bureaux et logements en zone UG. Quelle proportion de logements est imposée ?",
+    "expected_articles": ["UG.1.4.1", "UG.1.4"],
+    "expected_keywords": ["mixité", "logement", "bureaux", "surface plancher", "2000", "quota", "proportion", "fonctionnelle"],
+    "expected_answer_summary": "L'article UG.1.4.1 impose des obligations de mixité fonctionnelle au-delà d'un certain seuil de surface plancher. Pour un programme de 2000 m², une part minimale de logements est requise. Le règlement fixe un quota selon la surface totale et la zone.",
+    "family": "reglement_ecrit",
+    "complexity": "Élevée"
+  },
+  {
+    "id": "UC-16",
+    "question": "Je cherche à surélever un bâtiment existant R+4 culminant à 17 mètres en zone UG dans le 9e arrondissement. Le plan des hauteurs DG5 autorise 18 mètres à cet emplacement. La surélévation est-elle possible et sous quelles conditions ?",
+    "expected_articles": ["UG.3.2", "UG.3.3"],
+    "expected_keywords": ["surélévation", "existant", "hauteur", "hauteur plafond", "Plan général des hauteurs", "dépassement", "gabarit"],
+    "expected_answer_summary": "Les articles UG.3.2 et UG.3.3 encadrent les surélévations de bâtiments existants. Si le bâtiment est à 17 m et le plafond DG5 est à 18 m, une surélévation d'1 mètre est théoriquement possible dans la limite du gabarit autorisé. Des conditions spécifiques s'appliquent : intégration architecturale, respect des prospects, et éventuellement dérogation si le bâtiment existant dépasse déjà le gabarit.",
+    "family": "reglement_ecrit",
+    "complexity": "Élevée"
+  }
+]
