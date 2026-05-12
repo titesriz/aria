@@ -1,22 +1,48 @@
 from __future__ import annotations
 
+import hashlib
 import json
+import pickle
+import re
+import unicodedata
 from concurrent.futures import FIRST_COMPLETED, ProcessPoolExecutor, wait
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from time import monotonic
 from typing import Callable
 
-from sklearn.feature_extraction.text import TfidfVectorizer
+import faiss
+import numpy as np
+from rank_bm25 import BM25Okapi
+from sentence_transformers import SentenceTransformer
 
 from aria_rag.config import Settings
 from aria_rag.loader import iter_pdf_paths, read_pdf
+
+
+DOC_FAMILIES = {
+    "Règlement/Pièces écrites": "reglement_ecrit",
+    "Règlement/Documents graphiques": "reglement_graphique",
+    "Rapport de présentation": "rapport_presentation",
+    "OAP": "oap",
+    "PADD": "padd",
+    "Annexes": "annexes",
+}
+
+
+def infer_doc_family(path: Path) -> str:
+    path_str = unicodedata.normalize("NFC", str(path))
+    for fragment, family in DOC_FAMILIES.items():
+        if fragment in path_str:
+            return family
+    return "other"
 
 
 @dataclass(slots=True)
 class Chunk:
     chunk_id: str
     source_path: str
+    doc_family: str
     content: str
 
 
@@ -28,8 +54,21 @@ class IndexedFile:
     chunk_count: int
 
 
-def create_vectorizer() -> TfidfVectorizer:
-    return TfidfVectorizer(ngram_range=(1, 2), strip_accents="unicode")
+def _tokenize(text: str) -> list[str]:
+    return re.findall(r'\b\w+\b', text.lower())
+
+
+def _alpha_ratio(text: str) -> float:
+    return sum(1 for c in text if c.isalpha()) / len(text) if text else 0.0
+
+
+# Matches PLU article headers like "UG.3.1.1 Implantation..." in running text.
+# Excludes inline cross-references like "(UG.3.1.1, 3°)" by requiring:
+#   - not preceded by "("
+#   - followed by a capitalized French word (the article title), not a comma or another code
+_ARTICLE_HEADER = re.compile(
+    r'(?<!\()\b(UG(?:SU)?|UV|N|A|P)\w*\.\d+(?:\.\d+)*\s+[A-ZÀÂÄÉÈÊËÎÏÔÙÛÜŸÇ][a-zàâäéèêëîïôùûüÿç]'
+)
 
 
 def chunk_text(text: str, chunk_size: int, chunk_overlap: int) -> list[str]:
@@ -47,20 +86,65 @@ def chunk_text(text: str, chunk_size: int, chunk_overlap: int) -> list[str]:
     return [chunk.strip() for chunk in chunks if chunk.strip()]
 
 
+def chunk_text_by_article(text: str, chunk_size: int) -> list[str]:
+    """Split text on PLU article headers (UG.X.X, UGSU.X, UV.X, N.X …).
+
+    Each split starts at the header line. Articles longer than chunk_size are
+    further split by character so no chunk blows up the embedding model.
+    Falls back to the full text as a single chunk when no headers are found.
+    """
+    boundaries = [m.start() for m in _ARTICLE_HEADER.finditer(text)]
+
+    if not boundaries:
+        # No article structure detected — use the whole text as one block
+        return [text.strip()] if text.strip() else []
+
+    # Add a sentinel at the end
+    boundaries.append(len(text))
+
+    raw_articles: list[str] = []
+    for i in range(len(boundaries) - 1):
+        article = text[boundaries[i]: boundaries[i + 1]].strip()
+        if article:
+            raw_articles.append(article)
+
+    # Split oversized articles by character (no overlap — article boundary is the natural break)
+    chunks: list[str] = []
+    for article in raw_articles:
+        if len(article) <= chunk_size:
+            chunks.append(article)
+        else:
+            start = 0
+            while start < len(article):
+                chunks.append(article[start: start + chunk_size].strip())
+                start += chunk_size
+    return [c for c in chunks if c]
+
+
 def extract_chunks_from_pdf(
-    path: Path, chunk_size: int, chunk_overlap: int
+    path: Path, chunk_size: int, chunk_overlap: int, min_alpha_ratio: float = 0.55
 ) -> list[Chunk]:
     document = read_pdf(path)
     if not document.text:
         return []
 
+    doc_family = infer_doc_family(path)
+
+    # Use article-aware chunking for regulatory documents; fall back to sliding window otherwise.
+    if doc_family == "reglement_ecrit":
+        raw_chunks = chunk_text_by_article(document.text, chunk_size)
+    else:
+        raw_chunks = chunk_text(document.text, chunk_size, chunk_overlap)
+
     return [
         Chunk(
             chunk_id=f"{Path(document.path).stem}-{idx}",
             source_path=document.path,
+            doc_family=doc_family,
             content=chunk,
         )
-        for idx, chunk in enumerate(chunk_text(document.text, chunk_size, chunk_overlap))
+        for idx, chunk in enumerate(raw_chunks)
+        if _alpha_ratio(chunk) >= min_alpha_ratio
     ]
 
 
@@ -95,13 +179,16 @@ def build_index(
     progress_callback: Callable[[int, int, Path, int, str], None] | None = None,
     heartbeat_callback: Callable[[int, int, int], None] | None = None,
     rebuild: bool = False,
+    family_filter: list[str] | None = None,
 ) -> tuple[int, int]:
     pdf_paths = iter_pdf_paths(settings.docs_dir)
     if settings.max_files is not None:
         pdf_paths = pdf_paths[: settings.max_files]
 
-    existing_manifest = {} if rebuild else load_manifest(settings.index_dir)
-    existing_chunks = {} if rebuild else load_existing_chunks(settings.index_dir)
+    # With a family filter, always load existing data — files outside the filter are kept as-is.
+    force_rebuild_all = rebuild and not family_filter
+    existing_manifest = {} if force_rebuild_all else load_manifest(settings.index_dir)
+    existing_chunks = {} if force_rebuild_all else load_existing_chunks(settings.index_dir)
 
     chunks: list[Chunk] = []
     manifest_entries: list[IndexedFile] = []
@@ -113,8 +200,16 @@ def build_index(
         size_bytes, modified_time = get_file_signature(path)
         cached = existing_manifest.get(source_path)
         cached_chunks = existing_chunks.get(source_path, [])
+
+        # Force reprocess if: no family filter and rebuild=True,
+        # OR family filter matches this file and rebuild=True.
+        force_this_file = rebuild and (
+            not family_filter or infer_doc_family(path) in family_filter
+        )
+
         if (
-            cached is not None
+            not force_this_file
+            and cached is not None
             and cached.size_bytes == size_bytes
             and cached.modified_time == modified_time
             and len(cached_chunks) == cached.chunk_count
@@ -129,7 +224,7 @@ def build_index(
     processed_so_far = total - len(paths_to_process)
     if workers <= 1:
         for offset, path in enumerate(paths_to_process, start=1):
-            file_chunks = extract_chunks_from_pdf(path, settings.chunk_size, settings.chunk_overlap)
+            file_chunks = extract_chunks_from_pdf(path, settings.chunk_size, settings.chunk_overlap, settings.min_alpha_ratio)
             chunks.extend(file_chunks)
             size_bytes, modified_time = get_file_signature(path)
             manifest_entries.append(
@@ -152,7 +247,7 @@ def build_index(
         with ProcessPoolExecutor(max_workers=workers) as executor:
             future_to_path = {
                 executor.submit(
-                    extract_chunks_from_pdf, path, settings.chunk_size, settings.chunk_overlap
+                    extract_chunks_from_pdf, path, settings.chunk_size, settings.chunk_overlap, settings.min_alpha_ratio
                 ): path
                 for path in paths_to_process
             }
@@ -197,35 +292,47 @@ def build_index(
     if not chunks:
         raise RuntimeError(f"No text extracted from PDFs in {settings.docs_dir}")
 
+    # Deduplicate chunks with identical content (e.g. legend files duplicated across atlas directories)
+    seen_hashes: set[str] = set()
+    unique_chunks: list[Chunk] = []
+    for chunk in chunks:
+        h = hashlib.md5(chunk.content.encode()).hexdigest()
+        if h not in seen_hashes:
+            seen_hashes.add(h)
+            unique_chunks.append(chunk)
+    duplicates_removed = len(chunks) - len(unique_chunks)
+    if duplicates_removed:
+        print(f"Removed {duplicates_removed} duplicate chunks.", flush=True)
+    chunks = unique_chunks
+
     manifest_entries.sort(key=lambda item: item.source_path)
     chunks.sort(key=lambda chunk: (chunk.source_path, chunk.chunk_id))
 
-    vectorizer = create_vectorizer()
-    matrix = vectorizer.fit_transform(chunk.content for chunk in chunks)
+    print(f"Building embeddings with {settings.embedding_model} for {len(chunks)} chunks...", flush=True)
+    model = SentenceTransformer(settings.embedding_model)
+    texts = [chunk.content for chunk in chunks]
+    embeddings = model.encode(texts, batch_size=64, show_progress_bar=True, normalize_embeddings=True)
+    embeddings = np.array(embeddings, dtype=np.float32)
+
+    dimension = embeddings.shape[1]
+    faiss_index = faiss.IndexFlatIP(dimension)  # inner product = cosine similarity (normalized vectors)
+    faiss_index.add(embeddings)
 
     settings.index_dir.mkdir(parents=True, exist_ok=True)
-    metadata_path = settings.index_dir / "chunks.json"
-    manifest_path = settings.index_dir / "manifest.json"
-    vocab_path = settings.index_dir / "vocabulary.json"
-    matrix_path = settings.index_dir / "matrix.npz"
-    idf_path = settings.index_dir / "idf.npy"
 
-    metadata_path.write_text(
+    print(f"Building BM25 index...", flush=True)
+    bm25 = BM25Okapi([_tokenize(chunk.content) for chunk in chunks])
+    with open(settings.index_dir / "bm25.pkl", "wb") as f:
+        pickle.dump(bm25, f)
+
+    faiss.write_index(faiss_index, str(settings.index_dir / "index.faiss"))
+    (settings.index_dir / "chunks.json").write_text(
         json.dumps([asdict(chunk) for chunk in chunks], ensure_ascii=False, indent=2),
         encoding="utf-8",
     )
-    manifest_path.write_text(
+    (settings.index_dir / "manifest.json").write_text(
         json.dumps([asdict(item) for item in manifest_entries], ensure_ascii=False, indent=2),
         encoding="utf-8",
     )
-    vocab_path.write_text(
-        json.dumps(vectorizer.vocabulary_, ensure_ascii=False, indent=2),
-        encoding="utf-8",
-    )
 
-    from scipy import sparse
-    import numpy as np
-
-    sparse.save_npz(matrix_path, matrix)
-    np.save(idf_path, vectorizer.idf_)
     return len(pdf_paths), len(chunks)

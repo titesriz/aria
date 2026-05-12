@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
+import anthropic
 import httpx
 from openai import OpenAI
 
@@ -10,8 +11,9 @@ from aria_rag.retriever import SearchHit
 
 
 SYSTEM_PROMPT = (
-    "Answer using only the provided context. If the answer is not in the context, "
-    "say so clearly and cite the most relevant sources."
+    "Tu es un assistant spécialisé en urbanisme et droit de l'urbanisme français. "
+    "Réponds uniquement en français, en te basant exclusivement sur le contexte fourni. "
+    "Si la réponse ne figure pas dans le contexte, dis-le clairement et cite les sources les plus pertinentes."
 )
 
 
@@ -74,10 +76,41 @@ def answer_with_ollama(question: str, hits: list[SearchHit], settings: Settings)
     return text
 
 
+def answer_with_claude(question: str, hits: list[SearchHit], settings: Settings) -> str:
+    if not settings.anthropic_api_key:
+        raise RuntimeError("ANTHROPIC_API_KEY is not set.")
+
+    prompt = build_prompt(question, hits)
+    client = anthropic.Anthropic(api_key=settings.anthropic_api_key)
+
+    # Stream the response; use prompt caching on the stable system prompt.
+    full_text: list[str] = []
+    with client.messages.stream(
+        model=settings.claude_model,
+        max_tokens=4096,
+        system=[
+            {
+                "type": "text",
+                "text": prompt.system,
+                "cache_control": {"type": "ephemeral"},
+            }
+        ],
+        messages=[{"role": "user", "content": prompt.user}],
+    ) as stream:
+        for text in stream.text_stream:
+            print(text, end="", flush=True)
+            full_text.append(text)
+
+    print()  # newline after streaming
+    return "".join(full_text)
+
+
 def answer_question(question: str, hits: list[SearchHit], settings: Settings, backend: str) -> str:
     normalized = backend.lower()
     if normalized == "openai":
         return answer_with_openai(question, hits, settings)
     if normalized == "ollama":
         return answer_with_ollama(question, hits, settings)
+    if normalized == "claude":
+        return answer_with_claude(question, hits, settings)
     raise RuntimeError(f"Unsupported LLM backend: {backend}")
