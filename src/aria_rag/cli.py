@@ -141,6 +141,9 @@ def build_parser() -> argparse.ArgumentParser:
         metavar="FLOAT",
         help="Weight for original query vs expansion (0.0–1.0, default 0.5). Only used with --expand-query.",
     )
+
+    subparsers.add_parser("serve", help="Start the FastAPI HTTP server on port 8000")
+
     return parser
 
 
@@ -244,6 +247,11 @@ def main() -> None:
                 ids=args.ids, results_dir=args.output, timeout=args.timeout,
                 no_llm=no_llm,
             )
+        return
+
+    if args.command == "serve":
+        from aria_rag.api import serve
+        serve()
         return
 
     if args.command == "ask":
