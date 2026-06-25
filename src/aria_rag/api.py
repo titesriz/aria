@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 import logging
+import re
 import textwrap
 from contextlib import asynccontextmanager
+from pathlib import Path
 from typing import Optional
 
 import faiss
@@ -51,9 +53,18 @@ class AskRequest(BaseModel):
 
 class Citation(BaseModel):
     source: str
+    full_path: str
     family: str
-    score: float
     excerpt: str
+
+
+def _strip_markdown(text: str) -> str:
+    text = re.sub(r'\*\*(.*?)\*\*', r'\1', text)
+    text = re.sub(r'\*(.*?)\*', r'\1', text)
+    text = re.sub(r'^[ \t]*[*\-][ \t]+', '• ', text, flags=re.MULTILINE)
+    # Safety net: replace any Windows absolute path with just the filename
+    text = re.sub(r'[A-Za-z]:\\(?:[^\\<>:"/|?*\n]+\\)+([^\\<>:"/|?*\n]+)', r'\1', text)
+    return text
 
 
 class AskResponse(BaseModel):
@@ -192,15 +203,15 @@ def ask(req: AskRequest) -> AskResponse:
 
     citations = [
         Citation(
-            source=h.source_path,
+            source=Path(h.source_path).name,
+            full_path=h.source_path,
             family=h.doc_family,
-            score=h.score,
             excerpt=textwrap.shorten(h.content, width=500, placeholder="..."),
         )
         for h in hits
     ]
 
-    return AskResponse(answer=answer, citations=citations)
+    return AskResponse(answer=_strip_markdown(answer), citations=citations)
 
 
 def serve() -> None:

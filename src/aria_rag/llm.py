@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from pathlib import Path
 
 import anthropic
 import httpx
@@ -13,7 +14,10 @@ from aria_rag.retriever import SearchHit
 SYSTEM_PROMPT = (
     "Tu es un assistant spécialisé en urbanisme et droit de l'urbanisme français. "
     "Réponds uniquement en français, en te basant exclusivement sur le contexte fourni. "
-    "Si la réponse ne figure pas dans le contexte, dis-le clairement et cite les sources les plus pertinentes."
+    "Si la réponse ne figure pas dans le contexte, dis-le clairement et cite les sources les plus pertinentes. "
+    "Lorsque tu mentionnes une source, utilise uniquement le nom du fichier (ex: REG1.pdf) "
+    "ou une désignation générique (ex: 'le règlement écrit'). "
+    "N'inclus jamais de chemin complet ou de chemin absolu dans ta réponse."
 )
 
 
@@ -25,7 +29,7 @@ class PromptBundle:
 
 def build_prompt(question: str, hits: list[SearchHit]) -> PromptBundle:
     context = "\n\n".join(
-        f"Source: {hit.source_path}\nContent: {hit.content[:3000]}" for hit in hits
+        f"Source: {Path(hit.source_path).name}\nContent: {hit.content[:3000]}" for hit in hits
     )
     return PromptBundle(
         system=SYSTEM_PROMPT,
@@ -57,6 +61,7 @@ def answer_with_ollama(question: str, hits: list[SearchHit], settings: Settings)
         "system": prompt.system,
         "stream": False,
         "keep_alive": "10m",
+        "options": {"temperature": 0},
     }
     url = f"{settings.ollama_host.rstrip('/')}/api/generate"
 

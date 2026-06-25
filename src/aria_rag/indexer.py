@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import logging
 import pickle
 import re
 import unicodedata
@@ -19,6 +20,7 @@ from sentence_transformers import SentenceTransformer
 from aria_rag.config import Settings
 from aria_rag.loader import iter_pdf_paths, read_pdf
 
+logger = logging.getLogger(__name__)
 
 DOC_FAMILIES = {
     "Règlement/Pièces écrites": "reglement_ecrit",
@@ -31,7 +33,7 @@ DOC_FAMILIES = {
 
 
 def infer_doc_family(path: Path) -> str:
-    path_str = unicodedata.normalize("NFC", str(path))
+    path_str = unicodedata.normalize("NFC", path.as_posix())
     for fragment, family in DOC_FAMILIES.items():
         if fragment in path_str:
             return family
@@ -124,7 +126,11 @@ def chunk_text_by_article(text: str, chunk_size: int) -> list[str]:
 def extract_chunks_from_pdf(
     path: Path, chunk_size: int, chunk_overlap: int, min_alpha_ratio: float = 0.55
 ) -> list[Chunk]:
-    document = read_pdf(path)
+    try:
+        document = read_pdf(path)
+    except Exception as exc:
+        logger.warning("Skipping %s — could not parse PDF: %s", path.name, exc)
+        return []
     if not document.text:
         return []
 
