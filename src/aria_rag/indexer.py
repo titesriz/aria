@@ -72,6 +72,43 @@ _ARTICLE_HEADER = re.compile(
     r'(?<!\()\b(UG(?:SU)?|UV|N|A|P)\w*\.\d+(?:\.\d+)*\s+[A-ZÀÂÄÉÈÊËÎÏÔÙÛÜŸÇ][a-zàâäéèêëîïôùûüÿç]'
 )
 
+# Detects table rows from PLU reservation lists (Annexe III, V…)
+_TABLE_ROW = re.compile(r'\b(?:LS|BRS)\s+\d{2,3}-\d{2,3}\b')
+# Matches "ANNEXE V : LISTE…" headers as they appear in extracted PDF text
+# "A NNEXE" (with space) is a common pypdf extraction artefact
+_ANNEXE_HEADER = re.compile(
+    r'A\s*NNEXE\s+[IVXLCDM]+\s*[:\–\-]?\s*[A-ZÀÂÄÉÈÊËÎÏÔÙÛÜŸÇ][^\n]{0,120}',
+    re.IGNORECASE,
+)
+
+
+def _enrich_table_chunk(chunk: str, full_text: str, filename: str) -> str:
+    """Prepend [Section] and [Page] headers to chunks identified as table rows.
+
+    Detection: chunk contains at least one LS/BRS reservation code.
+    Page number: count \\n separators before the chunk's position in full_text
+    (each \\n marks a page boundary because read_pdf joins pages with \\n).
+    Section title: last ANNEXE header found in the text before the chunk.
+    """
+    if not _TABLE_ROW.search(chunk):
+        return chunk
+
+    pos = full_text.find(chunk[:80].strip())
+    if pos == -1:
+        return chunk
+
+    # Page number from \n count (read_pdf joins pages with \n, no \n within a page)
+    page_num = full_text[:pos].count('\n') + 1
+
+    # Nearest section title = last ANNEXE header before this position
+    section: str = filename
+    for m in _ANNEXE_HEADER.finditer(full_text[:pos]):
+        section = m.group(0).strip()
+    if len(section) > 100:
+        section = section[:97] + '...'
+
+    return f"[Section: {section}]\n[Page: {page_num}]\n{chunk}"
+
 
 def chunk_text(text: str, chunk_size: int, chunk_overlap: int) -> list[str]:
     if chunk_overlap >= chunk_size:
@@ -139,6 +176,9 @@ def extract_chunks_from_pdf(
     # Use article-aware chunking for regulatory documents; fall back to sliding window otherwise.
     if doc_family == "reglement_ecrit":
         raw_chunks = chunk_text_by_article(document.text, chunk_size)
+        raw_chunks = [
+            _enrich_table_chunk(c, document.text, path.name) for c in raw_chunks
+        ]
     else:
         raw_chunks = chunk_text(document.text, chunk_size, chunk_overlap)
 
