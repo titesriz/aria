@@ -141,6 +141,12 @@ def build_parser() -> argparse.ArgumentParser:
         metavar="FLOAT",
         help="Weight for original query vs expansion (0.0–1.0, default 0.5). Only used with --expand-query.",
     )
+    ask_parser.add_argument(
+        "--debug",
+        action="store_true",
+        default=False,
+        help="Print per-chunk FAISS, BM25 and RRF scores before the retrieved passages.",
+    )
 
     subparsers.add_parser("serve", help="Start the FastAPI HTTP server on port 8000")
 
@@ -277,10 +283,22 @@ def main() -> None:
                 family_filter=args.family,
             )
         else:
-            hits = search(settings, query, top_k=args.top_k, family_filter=args.family)
+            hits = search(settings, query, top_k=args.top_k, family_filter=args.family, debug=args.debug)
         if not hits:
             print("No relevant passages found.")
             return
+
+        if args.debug:
+            from pathlib import Path as _Path
+            print("Debug — chunks retrieved:\n")
+            for i, hit in enumerate(hits):
+                fname = _Path(hit.source_path).name
+                faiss_str = f"{hit.faiss_score:.4f}" if hit.faiss_score is not None else "n/a"
+                bm25_str  = f"{hit.bm25_score:.4f}"  if hit.bm25_score  is not None else "n/a"
+                print(f"[{i+1}] {fname} | {hit.doc_family}")
+                print(f"     FAISS: {faiss_str}  BM25: {bm25_str}  RRF: {hit.score:.5f}")
+                print(f"     {hit.content[:200]!r}")
+                print()
 
         print("Retrieved passages:\n")
         print(format_hits(hits))

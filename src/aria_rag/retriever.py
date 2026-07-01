@@ -24,6 +24,8 @@ class SearchHit:
     doc_family: str
     score: float
     content: str
+    faiss_score: float | None = None
+    bm25_score: float | None = None
 
 
 def _tokenize(text: str) -> list[str]:
@@ -48,6 +50,42 @@ def load_index(settings: Settings) -> tuple[SentenceTransformer, faiss.Index, ob
     return model, faiss_index, bm25, chunks
 
 
+def _compute_all_scores(
+    query: str,
+    model: SentenceTransformer,
+    faiss_index: faiss.Index,
+    bm25: object,
+    chunks: list[Chunk],
+    allowed: set[int],
+    fetch_k: int,
+) -> tuple[dict[int, float], dict[int, float], dict[int, float]]:
+    """Return (rrf_scores, faiss_scores, bm25_scores) dicts keyed by chunk index."""
+    query_embedding = model.encode([query], normalize_embeddings=True)
+    query_embedding = np.array(query_embedding, dtype=np.float32)
+    raw_scores, sem_indices_raw = faiss_index.search(query_embedding, fetch_k)
+
+    faiss_scores: dict[int, float] = {}
+    sem_indices: list[int] = []
+    for score, idx in zip(raw_scores[0], sem_indices_raw[0]):
+        idx = int(idx)
+        if idx != -1 and idx in allowed:
+            faiss_scores[idx] = float(score)
+            sem_indices.append(idx)
+
+    bm25_raw = bm25.get_scores(_tokenize(query))
+    bm25_scores: dict[int, float] = {i: float(bm25_raw[i]) for i in allowed}
+    bm25_all = list(np.argsort(bm25_raw)[::-1])
+    bm25_indices = [i for i in bm25_all if i in allowed][:fetch_k]
+
+    rrf: dict[int, float] = {}
+    for rank, idx in enumerate(sem_indices):
+        rrf[idx] = rrf.get(idx, 0.0) + 1.0 / (RRF_K + rank + 1)
+    for rank, idx in enumerate(bm25_indices):
+        rrf[idx] = rrf.get(idx, 0.0) + 1.0 / (RRF_K + rank + 1)
+
+    return rrf, faiss_scores, bm25_scores
+
+
 def _rrf_scores(
     query: str,
     model: SentenceTransformer,
@@ -58,20 +96,7 @@ def _rrf_scores(
     fetch_k: int,
 ) -> dict[int, float]:
     """Compute RRF scores for a query over the allowed chunk set."""
-    query_embedding = model.encode([query], normalize_embeddings=True)
-    query_embedding = np.array(query_embedding, dtype=np.float32)
-    _, sem_indices_raw = faiss_index.search(query_embedding, fetch_k)
-    sem_indices = [int(i) for i in sem_indices_raw[0] if i != -1 and i in allowed]
-
-    bm25_scores = bm25.get_scores(_tokenize(query))
-    bm25_all = list(np.argsort(bm25_scores)[::-1])
-    bm25_indices = [i for i in bm25_all if i in allowed][:fetch_k]
-
-    rrf: dict[int, float] = {}
-    for rank, idx in enumerate(sem_indices):
-        rrf[idx] = rrf.get(idx, 0.0) + 1.0 / (RRF_K + rank + 1)
-    for rank, idx in enumerate(bm25_indices):
-        rrf[idx] = rrf.get(idx, 0.0) + 1.0 / (RRF_K + rank + 1)
+    rrf, _, _ = _compute_all_scores(query, model, faiss_index, bm25, chunks, allowed, fetch_k)
     return rrf
 
 
@@ -80,6 +105,7 @@ def search(
     query: str,
     top_k: int | None = None,
     family_filter: list[str] | None = None,
+    debug: bool = False,
 ) -> list[SearchHit]:
     model, faiss_index, bm25, chunks = load_index(settings)
     limit = top_k or settings.top_k
@@ -93,7 +119,15 @@ def search(
         return []
 
     fetch_k = min(limit * 10, len(allowed))
-    rrf = _rrf_scores(query, model, faiss_index, bm25, chunks, allowed, fetch_k)
+
+    if debug:
+        rrf, faiss_scores, bm25_scores = _compute_all_scores(
+            query, model, faiss_index, bm25, chunks, allowed, fetch_k
+        )
+    else:
+        rrf = _rrf_scores(query, model, faiss_index, bm25, chunks, allowed, fetch_k)
+        faiss_scores = bm25_scores = {}
+
     top_indices = sorted(rrf, key=rrf.__getitem__, reverse=True)[:limit]
     return [
         SearchHit(
@@ -101,6 +135,8 @@ def search(
             doc_family=chunks[i].doc_family,
             score=rrf[i],
             content=chunks[i].content,
+            faiss_score=faiss_scores.get(i) if debug else None,
+            bm25_score=bm25_scores.get(i) if debug else None,
         )
         for i in top_indices
     ]
