@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import bisect
 import hashlib
 import json
 import logging
@@ -46,6 +47,8 @@ class Chunk:
     source_path: str
     doc_family: str
     content: str
+    page: int | None = None
+    section: str | None = None
 
 
 @dataclass(slots=True)
@@ -68,12 +71,20 @@ def _alpha_ratio(text: str) -> float:
 # Excludes inline cross-references like "(UG.3.1.1, 3°)" by requiring:
 #   - not preceded by "("
 #   - followed by a capitalized French word (the article title), not a comma or another code
+# Group 1 captures just the article code (e.g. "UG.3.1.1"), used for the Chunk.section field.
 _ARTICLE_HEADER = re.compile(
-    r'(?<!\()\b(UG(?:SU)?|UV|N|A|P)\w*\.\d+(?:\.\d+)*\s+[A-ZÀÂÄÉÈÊËÎÏÔÙÛÜŸÇ][a-zàâäéèêëîïôùûüÿç]'
+    r'(?<!\()\b((?:UG(?:SU)?|UV|N|A|P)\w*\.\d+(?:\.\d+)*)\s+[A-ZÀÂÄÉÈÊËÎÏÔÙÛÜŸÇ][a-zàâäéèêëîïôùûüÿç]'
 )
 
 # Detects table rows from PLU reservation lists (Annexe III, V…)
 _TABLE_ROW = re.compile(r'\b(?:LS|BRS)\s+\d{2,3}-\d{2,3}\b')
+# Detects address-list rows lacking an LS/BRS code (e.g. Annexe VI protected
+# green spaces): "<arrondissement> <house number(s)> <street keyword> ...",
+# one per line since loader.py (fix 2) preserves line breaks.
+_ADDRESS_ROW = re.compile(
+    r'(?m)^\s*\d{1,2}(?:er|e)?\s+.{0,40}?\b'
+    r'(?:[Rr]ue|[Aa]venue|[Bb]oulevard|[Pp]lace|[Ii]mpasse|[Qq]uai|[Aa]llée|[Ss]quare|[Vv]illa|[Vv]oie|[Cc]ité|[Pp]assage)\b'
+)
 # Matches "ANNEXE V : LISTE…" headers as they appear in extracted PDF text
 # "A NNEXE" (with space) is a common pypdf extraction artefact
 _ANNEXE_HEADER = re.compile(
@@ -82,82 +93,110 @@ _ANNEXE_HEADER = re.compile(
 )
 
 
-def _enrich_table_chunk(chunk: str, full_text: str, filename: str) -> str:
-    """Prepend [Section] and [Page] headers to chunks identified as table rows.
+def _titled_annexe_matches(full_text: str) -> list[re.Match]:
+    """ANNEXE header matches, excluding inline cross-references like "(Annexe IV)"."""
+    return [
+        m for m in _ANNEXE_HEADER.finditer(full_text)
+        if not full_text[: m.start()].rstrip().endswith("(")
+    ]
 
-    Detection: chunk contains at least one LS/BRS reservation code.
-    Page number: count \\n separators before the chunk's position in full_text
-    (each \\n marks a page boundary because read_pdf joins pages with \\n).
-    Section title: last ANNEXE header found in the text before the chunk.
+
+def _page_at_offset(page_starts: list[int], page_numbers: list[int], offset: int) -> int | None:
+    """Real PDF page number containing the given character offset in full_text."""
+    if not page_starts:
+        return None
+    i = bisect.bisect_right(page_starts, offset) - 1
+    return page_numbers[i] if i >= 0 else None
+
+
+def _strip_with_offset(text: str, base_offset: int) -> tuple[int, str] | None:
+    """Strip whitespace, adjusting base_offset for any trimmed leading chars.
+
+    Returns None if nothing remains after stripping.
     """
-    if not _TABLE_ROW.search(chunk):
-        return chunk
-
-    pos = full_text.find(chunk[:80].strip())
-    if pos == -1:
-        return chunk
-
-    # Page number from \n count (read_pdf joins pages with \n, no \n within a page)
-    page_num = full_text[:pos].count('\n') + 1
-
-    # Nearest section title = last ANNEXE header before this position
-    section: str = filename
-    for m in _ANNEXE_HEADER.finditer(full_text[:pos]):
-        section = m.group(0).strip()
-    if len(section) > 100:
-        section = section[:97] + '...'
-
-    return f"[Section: {section}]\n[Page: {page_num}]\n{chunk}"
+    stripped = text.strip()
+    if not stripped:
+        return None
+    leading_ws = len(text) - len(text.lstrip())
+    return base_offset + leading_ws, stripped
 
 
-def chunk_text(text: str, chunk_size: int, chunk_overlap: int) -> list[str]:
+def chunk_text(text: str, chunk_size: int, chunk_overlap: int) -> list[tuple[int, str]]:
+    """Sliding-window split. Returns (start_offset, text) pairs — offset is
+    this chunk's position in the original text, used for page attribution.
+    """
     if chunk_overlap >= chunk_size:
         raise ValueError("chunk_overlap must be smaller than chunk_size")
 
-    chunks: list[str] = []
+    chunks: list[tuple[int, str]] = []
     start = 0
     while start < len(text):
         end = start + chunk_size
-        chunks.append(text[start:end])
+        result = _strip_with_offset(text[start:end], start)
+        if result:
+            chunks.append(result)
         if end >= len(text):
             break
         start = end - chunk_overlap
-    return [chunk.strip() for chunk in chunks if chunk.strip()]
+    return chunks
 
 
-def chunk_text_by_article(text: str, chunk_size: int) -> list[str]:
+def _split_by_char(text: str, chunk_size: int, base_offset: int = 0) -> list[tuple[int, str]]:
+    """Split text into fixed-size chunks by character (no overlap).
+
+    base_offset shifts returned offsets into the coordinate space of the
+    original full document text (text here is usually a substring, e.g. one
+    oversized article).
+    """
+    chunks: list[tuple[int, str]] = []
+    start = 0
+    while start < len(text):
+        result = _strip_with_offset(text[start: start + chunk_size], base_offset + start)
+        if result:
+            chunks.append(result)
+        start += chunk_size
+    return chunks
+
+
+def chunk_text_by_article(text: str, chunk_size: int, source_path: str = "") -> list[tuple[int, str]]:
     """Split text on PLU article headers (UG.X.X, UGSU.X, UV.X, N.X …).
 
     Each split starts at the header line. Articles longer than chunk_size are
     further split by character so no chunk blows up the embedding model.
-    Falls back to the full text as a single chunk when no headers are found.
+    Falls back to a fixed-size character split when no headers are found.
+    Returns (start_offset, text) pairs — offset is this chunk's position in
+    the original text, used for page/section attribution.
     """
     boundaries = [m.start() for m in _ARTICLE_HEADER.finditer(text)]
 
     if not boundaries:
-        # No article structure detected — use the whole text as one block
-        return [text.strip()] if text.strip() else []
+        logger.warning(
+            "No article headers found in %s (%d chars) — falling back to fixed-size split",
+            source_path, len(text),
+        )
+        result = _strip_with_offset(text, 0)
+        if not result:
+            return []
+        leading_offset, stripped_text = result
+        return _split_by_char(stripped_text, chunk_size, base_offset=leading_offset)
 
     # Add a sentinel at the end
     boundaries.append(len(text))
 
-    raw_articles: list[str] = []
+    raw_articles: list[tuple[int, str]] = []
     for i in range(len(boundaries) - 1):
-        article = text[boundaries[i]: boundaries[i + 1]].strip()
-        if article:
-            raw_articles.append(article)
+        result = _strip_with_offset(text[boundaries[i]: boundaries[i + 1]], boundaries[i])
+        if result:
+            raw_articles.append(result)
 
     # Split oversized articles by character (no overlap — article boundary is the natural break)
-    chunks: list[str] = []
-    for article in raw_articles:
+    chunks: list[tuple[int, str]] = []
+    for offset, article in raw_articles:
         if len(article) <= chunk_size:
-            chunks.append(article)
+            chunks.append((offset, article))
         else:
-            start = 0
-            while start < len(article):
-                chunks.append(article[start: start + chunk_size].strip())
-                start += chunk_size
-    return [c for c in chunks if c]
+            chunks.extend(_split_by_char(article, chunk_size, base_offset=offset))
+    return chunks
 
 
 def extract_chunks_from_pdf(
@@ -168,30 +207,82 @@ def extract_chunks_from_pdf(
     except Exception as exc:
         logger.warning("Skipping %s — could not parse PDF: %s", path.name, exc)
         return []
-    if not document.text:
+    if not document.pages:
         return []
 
     doc_family = infer_doc_family(path)
 
+    # Join pages into one string for the existing regex-based chunkers, while
+    # tracking each page's start offset so chunks can be attributed back to
+    # a real PDF page number — this is the "known at extraction time" data
+    # the loader now provides, instead of counting \n after the fact.
+    full_text_parts: list[str] = []
+    page_starts: list[int] = []
+    page_numbers: list[int] = []
+    offset = 0
+    for page_num, page_text in document.pages:
+        page_starts.append(offset)
+        page_numbers.append(page_num)
+        full_text_parts.append(page_text)
+        offset += len(page_text) + 1  # +1 for the "\n" joiner below
+    full_text = "\n".join(full_text_parts)
+
     # Use article-aware chunking for regulatory documents; fall back to sliding window otherwise.
     if doc_family == "reglement_ecrit":
-        raw_chunks = chunk_text_by_article(document.text, chunk_size)
-        raw_chunks = [
-            _enrich_table_chunk(c, document.text, path.name) for c in raw_chunks
-        ]
+        raw_chunks = chunk_text_by_article(full_text, chunk_size, source_path=document.path)
+        article_matches = list(_ARTICLE_HEADER.finditer(full_text))
+        article_starts = [m.start() for m in article_matches]
+        annexe_matches = _titled_annexe_matches(full_text)
+        annexe_starts = [m.start() for m in annexe_matches]
     else:
-        raw_chunks = chunk_text(document.text, chunk_size, chunk_overlap)
+        raw_chunks = chunk_text(full_text, chunk_size, chunk_overlap)
+        article_matches = article_starts = annexe_matches = annexe_starts = []
 
-    return [
-        Chunk(
-            chunk_id=f"{Path(document.path).stem}-{idx}",
-            source_path=document.path,
-            doc_family=doc_family,
-            content=chunk,
+    kept: list[Chunk] = []
+    for idx, (start_offset, chunk) in enumerate(raw_chunks):
+        page = _page_at_offset(page_starts, page_numbers, start_offset)
+
+        section: str | None = None
+        if doc_family == "reglement_ecrit":
+            # Pick whichever structural header (article or annexe) most recently
+            # precedes this chunk. Tome 1 zone text only has article headers;
+            # Tome 2 annexe text only has annexe headers, so this naturally
+            # picks the right kind for each document without extra branching.
+            ai = bisect.bisect_right(article_starts, start_offset) - 1
+            ni = bisect.bisect_right(annexe_starts, start_offset) - 1
+            article_pos = article_starts[ai] if ai >= 0 else -1
+            annexe_pos = annexe_starts[ni] if ni >= 0 else -1
+            if annexe_pos > article_pos:
+                section = annexe_matches[ni].group(0).strip()
+                if len(section) > 100:
+                    section = section[:97] + '...'
+                # Keep a minimal one-line context prefix — annexe titles carry
+                # real BM25 signal (e.g. queries mentioning "annexe V") that
+                # the table-row content itself doesn't contain.
+                chunk = f"[Section: {section}]\n{chunk}"
+            elif article_pos >= 0:
+                section = article_matches[ai].group(1)
+
+        ratio = _alpha_ratio(chunk)
+        # Number-heavy table/address rows (LS/BRS codes, arrondissement address
+        # lists) are legitimate low-alpha content — don't drop those.
+        if ratio < min_alpha_ratio and not (_TABLE_ROW.search(chunk) or _ADDRESS_ROW.search(chunk)):
+            logger.warning(
+                "Dropping low-alpha chunk from %s (alpha=%.3f): %s",
+                path.name, ratio, chunk[:80].replace("\n", " "),
+            )
+            continue
+        kept.append(
+            Chunk(
+                chunk_id=f"{Path(document.path).stem}-{idx}",
+                source_path=document.path,
+                doc_family=doc_family,
+                content=chunk,
+                page=page,
+                section=section,
+            )
         )
-        for idx, chunk in enumerate(raw_chunks)
-        if _alpha_ratio(chunk) >= min_alpha_ratio
-    ]
+    return kept
 
 
 def get_file_signature(path: Path) -> tuple[int, float]:

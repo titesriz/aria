@@ -56,6 +56,8 @@ class Citation(BaseModel):
     full_path: str
     family: str
     excerpt: str
+    page: Optional[int] = None
+    section: Optional[str] = None
 
 
 def _strip_markdown(text: str) -> str:
@@ -99,6 +101,8 @@ def _search(
             doc_family=chunks[i].doc_family,
             score=rrf[i],
             content=chunks[i].content,
+            page=chunks[i].page,
+            section=chunks[i].section,
         )
         for i in top_indices
     ]
@@ -141,6 +145,8 @@ def _search_weighted(
                 doc_family=chunks[i].doc_family,
                 score=rrf_orig[i],
                 content=chunks[i].content,
+                page=chunks[i].page,
+                section=chunks[i].section,
             )
             for i in top_indices
         ]
@@ -157,6 +163,8 @@ def _search_weighted(
             doc_family=chunks[i].doc_family,
             score=combined[i],
             content=chunks[i].content,
+            page=chunks[i].page,
+            section=chunks[i].section,
         )
         for i in top_indices
     ]
@@ -207,6 +215,8 @@ def ask(req: AskRequest) -> AskResponse:
             full_path=h.source_path,
             family=h.doc_family,
             excerpt=textwrap.shorten(h.content, width=500, placeholder="..."),
+            page=h.page,
+            section=h.section,
         )
         for h in hits
     ]

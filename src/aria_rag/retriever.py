@@ -24,6 +24,8 @@ class SearchHit:
     doc_family: str
     score: float
     content: str
+    page: int | None = None
+    section: str | None = None
     faiss_score: float | None = None
     bm25_score: float | None = None
 
@@ -135,6 +137,8 @@ def search(
             doc_family=chunks[i].doc_family,
             score=rrf[i],
             content=chunks[i].content,
+            page=chunks[i].page,
+            section=chunks[i].section,
             faiss_score=faiss_scores.get(i) if debug else None,
             bm25_score=bm25_scores.get(i) if debug else None,
         )
@@ -186,6 +190,8 @@ def search_weighted(
                 doc_family=chunks[i].doc_family,
                 score=rrf_orig[i],
                 content=chunks[i].content,
+                page=chunks[i].page,
+                section=chunks[i].section,
             )
             for i in top_indices
         ]
@@ -202,6 +208,8 @@ def search_weighted(
             doc_family=chunks[i].doc_family,
             score=combined[i],
             content=chunks[i].content,
+            page=chunks[i].page,
+            section=chunks[i].section,
         )
         for i in top_indices
     ]
