@@ -45,7 +45,9 @@ def _run_aria_ask(
         cmd += ["--expand-query", "--alpha", str(alpha)]
     if no_llm:
         cmd += ["--no-llm"]
-    result = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
+    result = subprocess.run(
+        cmd, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=timeout
+    )
     if result.returncode != 0:
         stderr = result.stderr.strip()
         raise RuntimeError(stderr or f"aria-rag exited with code {result.returncode}")
