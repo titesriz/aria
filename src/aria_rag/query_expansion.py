@@ -59,7 +59,7 @@ def _expand_with_ollama(question: str, ollama_host: str, ollama_model: str) -> l
         raw = response.json().get("response", "")
         return _parse_articles(raw)
     except Exception as exc:  # noqa: BLE001
-        logger.debug("Query expansion failed (ollama): %s", exc)
+        logger.warning("Query expansion failed (ollama) — falling back to original query: %s", exc)
         return []
 
 
