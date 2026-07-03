@@ -18,10 +18,12 @@ import numpy as np
 from rank_bm25 import BM25Okapi
 from sentence_transformers import SentenceTransformer
 
-from aria_rag.config import Settings
+from aria_rag.config import ROOT_DIR, Settings
 from aria_rag.loader import iter_pdf_paths, read_pdf
 
 logger = logging.getLogger(__name__)
+
+ARTICLE_WHITELIST_PATH = ROOT_DIR / "eval" / "article_whitelist.json"
 
 DOC_FAMILIES = {
     "Règlement/Pièces écrites": "reglement_ecrit",
@@ -91,6 +93,21 @@ _ANNEXE_HEADER = re.compile(
     r'A\s*NNEXE\s+[IVXLCDM]+\s*[:\–\-]?\s*[A-ZÀÂÄÉÈÊËÎÏÔÙÛÜŸÇ][^\n]{0,120}',
     re.IGNORECASE,
 )
+
+# Matches a Chunk.section value that IS an article code (vs an annexe title) —
+# same charset as _ARTICLE_HEADER's group 1, anchored to the whole string.
+_ARTICLE_CODE_PATTERN = re.compile(r'^(?:UG(?:SU)?|UV|N|A|P)\w*\.\d+(?:\.\d+)*$')
+
+
+def build_article_whitelist(chunks: list[Chunk]) -> list[str]:
+    """Distinct article codes (Chunk.section values matching _ARTICLE_CODE_PATTERN),
+    used by query_expansion.py to reject LLM-hallucinated codes like "DG.2.7".
+    """
+    codes = {
+        c.section for c in chunks
+        if c.section is not None and _ARTICLE_CODE_PATTERN.match(c.section)
+    }
+    return sorted(codes)
 
 
 def _titled_annexe_matches(full_text: str) -> list[re.Match]:
@@ -471,5 +488,12 @@ def build_index(
         json.dumps([asdict(item) for item in manifest_entries], ensure_ascii=False, indent=2),
         encoding="utf-8",
     )
+
+    whitelist = build_article_whitelist(chunks)
+    ARTICLE_WHITELIST_PATH.parent.mkdir(parents=True, exist_ok=True)
+    ARTICLE_WHITELIST_PATH.write_text(
+        json.dumps(whitelist, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+    print(f"Wrote {len(whitelist)} article codes to {ARTICLE_WHITELIST_PATH}", flush=True)
 
     return len(pdf_paths), len(chunks)
