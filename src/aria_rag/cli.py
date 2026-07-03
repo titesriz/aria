@@ -53,7 +53,7 @@ def build_parser() -> argparse.ArgumentParser:
         metavar="PATH",
         help="Path to golden_dataset.json (default: eval/golden_dataset.json)",
     )
-    eval_parser.add_argument("--top-k", type=int, default=8, help="Number of chunks retrieved per query")
+    eval_parser.add_argument("--top-k", type=int, default=10, help="Number of chunks retrieved per query")
     eval_parser.add_argument(
         "--backend",
         choices=["openai", "ollama", "claude"],
@@ -104,6 +104,12 @@ def build_parser() -> argparse.ArgumentParser:
         default=False,
         help="Skip LLM answer synthesis — score retrieval only. Useful to isolate retrieval from LLM latency.",
     )
+    eval_parser.add_argument(
+        "--refresh-expansions",
+        action="store_true",
+        default=False,
+        help="Regenerate cached query-expansion results instead of reusing eval/expansion_cache.json.",
+    )
 
     ask_parser = subparsers.add_parser("ask", help="Search the index and optionally synthesize an answer")
     ask_parser.add_argument("question", help="Question to ask")
@@ -147,6 +153,28 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         default=False,
         help="Print per-chunk FAISS, BM25 and RRF scores before the retrieved passages.",
+    )
+    ask_parser.add_argument(
+        "--expansion-cache",
+        type=Path,
+        default=None,
+        metavar="PATH",
+        help="Cache query-expansion results in this JSON file, keyed by question text — "
+             "insurance against residual CPU-backend nondeterminism even at temperature=0.",
+    )
+    ask_parser.add_argument(
+        "--refresh-expansions",
+        action="store_true",
+        default=False,
+        help="Force recomputation of a cached expansion entry instead of reusing it.",
+    )
+    ask_parser.add_argument(
+        "--no-scoped-retrieval",
+        action="store_true",
+        default=False,
+        help="Disable per-family retrieval passes — fall back to one global ranking "
+             "across all families (the pre-scoped-retrieval behavior). Ignored when "
+             "--family is given (that already restricts to a single pool). For A/B comparison.",
     )
 
     subparsers.add_parser("serve", help="Start the FastAPI HTTP server on port 8000")
@@ -209,24 +237,25 @@ def main() -> None:
     if args.command == "eval":
         from aria_rag.eval import run_eval, _print_multi_comparison
         no_llm = args.no_llm
+        refresh_expansions = args.refresh_expansions
         if args.multi_alpha:
             print("Run 1/3 — baseline sans query expansion\n")
             r_baseline = run_eval(
                 dataset_path=args.dataset, top_k=args.top_k, backend=args.backend,
                 ids=args.ids, results_dir=args.output, timeout=args.timeout,
-                expand_query=False, no_llm=no_llm,
+                expand_query=False, no_llm=no_llm, refresh_expansions=refresh_expansions,
             )
             print("\nRun 2/3 — avec query expansion alpha=0.7\n")
             r_07 = run_eval(
                 dataset_path=args.dataset, top_k=args.top_k, backend=args.backend,
                 ids=args.ids, results_dir=args.output, timeout=args.timeout,
-                expand_query=True, alpha=0.7, no_llm=no_llm,
+                expand_query=True, alpha=0.7, no_llm=no_llm, refresh_expansions=refresh_expansions,
             )
             print("\nRun 3/3 — avec query expansion alpha=0.5\n")
             r_05 = run_eval(
                 dataset_path=args.dataset, top_k=args.top_k, backend=args.backend,
                 ids=args.ids, results_dir=args.output, timeout=args.timeout,
-                expand_query=True, alpha=0.5, no_llm=no_llm,
+                expand_query=True, alpha=0.5, no_llm=no_llm, refresh_expansions=refresh_expansions,
             )
             _print_multi_comparison([
                 ("Baseline", r_baseline),
@@ -238,13 +267,13 @@ def main() -> None:
             r_baseline = run_eval(
                 dataset_path=args.dataset, top_k=args.top_k, backend=args.backend,
                 ids=args.ids, results_dir=args.output, timeout=args.timeout,
-                expand_query=False, no_llm=no_llm,
+                expand_query=False, no_llm=no_llm, refresh_expansions=refresh_expansions,
             )
             print(f"\nÉtape 2/2 — avec query expansion alpha={args.alpha}\n")
             r_expanded = run_eval(
                 dataset_path=args.dataset, top_k=args.top_k, backend=args.backend,
                 ids=args.ids, results_dir=args.output, timeout=args.timeout,
-                expand_query=True, alpha=args.alpha, no_llm=no_llm,
+                expand_query=True, alpha=args.alpha, no_llm=no_llm, refresh_expansions=refresh_expansions,
             )
             _print_multi_comparison([
                 ("Baseline", r_baseline),
@@ -254,7 +283,7 @@ def main() -> None:
             run_eval(
                 dataset_path=args.dataset, top_k=args.top_k, backend=args.backend,
                 ids=args.ids, results_dir=args.output, timeout=args.timeout,
-                no_llm=no_llm,
+                no_llm=no_llm, refresh_expansions=refresh_expansions,
             )
         return
 
@@ -273,6 +302,8 @@ def main() -> None:
                 backend=backend_for_expansion,
                 ollama_host=settings.ollama_host,
                 ollama_model=settings.ollama_model,
+                cache_path=args.expansion_cache,
+                refresh=args.refresh_expansions,
             )
             if inferred_articles:
                 print(f"[query expansion] articles inférés : {inferred_articles}")
@@ -284,9 +315,13 @@ def main() -> None:
                 top_k=args.top_k,
                 alpha=args.alpha,
                 family_filter=args.family,
+                scoped=not args.no_scoped_retrieval,
             )
         else:
-            hits = search(settings, query, top_k=args.top_k, family_filter=args.family, debug=args.debug)
+            hits = search(
+                settings, query, top_k=args.top_k, family_filter=args.family, debug=args.debug,
+                scoped=not args.no_scoped_retrieval,
+            )
         if not hits:
             print("No relevant passages found.")
             return

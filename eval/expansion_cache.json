@@ -1,0 +1,48 @@
+{
+  "Je cherche la hauteur maximale autorisée pour une construction neuve en zone UG dans le 11e arrondissement de Paris, le terrain est en secteur DG5.": {
+    "expansion_query": "UG.3.2 UG.3.2.1 UG.3.2.2",
+    "inferred_articles": [
+      "UG.3.2",
+      "UG.3.2.1",
+      "UG.3.2.2"
+    ]
+  },
+  "Je cherche la règle de retrait par rapport à la voie publique pour une construction en zone UG dans le 15e arrondissement de Paris. Le projet est à l'alignement ou nécessite-t-il un retrait minimum de 3 mètres ?": {
+    "expansion_query": "UG.3.1 UG.3.1.1 UG.3.1.2",
+    "inferred_articles": [
+      "UG.3.1",
+      "UG.3.1.1",
+      "UG.3.1.2"
+    ]
+  },
+  "Je cherche la règle de prospect par rapport à une limite séparative latérale droite en zone UG. Mon bâtiment a des baies principales (PP) sur ce pignon, la hauteur est de 8 mètres. Quelle distance minimale dois-je respecter ?": {
+    "expansion_query": "UG.3.1.2 UG.3.1.3",
+    "inferred_articles": [
+      "UG.3.1.2",
+      "UG.3.1.3"
+    ]
+  },
+  "Je cherche si un changement de destination de bureaux vers hôtel est autorisé en zone UG dans le 8e arrondissement de Paris. Quelles sont les conditions réglementaires applicables ?": {
+    "expansion_query": "UG.1.3 UG.1.3.3 UG.1.3.4",
+    "inferred_articles": [
+      "UG.1.3",
+      "UG.1.3.3",
+      "UG.1.3.4"
+    ]
+  },
+  "Je cherche les règles de mixité fonctionnelle pour un projet de 2000 m² de surface plancher mêlant bureaux et logements en zone UG. Quelle proportion de logements est imposée ?": {
+    "expansion_query": "UG.1.4 UG.1.4.1",
+    "inferred_articles": [
+      "UG.1.4",
+      "UG.1.4.1"
+    ]
+  },
+  "Je cherche à surélever un bâtiment existant R+4 culminant à 17 mètres en zone UG dans le 9e arrondissement. Le plan des hauteurs DG5 autorise 18 mètres à cet emplacement. La surélévation est-elle possible et sous quelles conditions ?": {
+    "expansion_query": "UG.3.2 UG.3.2.1 UG.3.2.2",
+    "inferred_articles": [
+      "UG.3.2",
+      "UG.3.2.1",
+      "UG.3.2.2"
+    ]
+  }
+}

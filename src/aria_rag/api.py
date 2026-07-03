@@ -16,7 +16,13 @@ from sentence_transformers import SentenceTransformer
 from aria_rag.config import Settings, load_settings
 from aria_rag.indexer import Chunk
 from aria_rag.llm import answer_question
-from aria_rag.retriever import RRF_K, SearchHit, _rrf_scores, _tokenize, load_index
+from aria_rag.retriever import (
+    SearchHit,
+    _search_weighted_within,
+    _search_within,
+    load_index,
+    scoped_retrieval_merge,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -83,29 +89,31 @@ def _search(
     query: str,
     top_k: int | None = None,
     family_filter: list[str] | None = None,
+    scoped: bool | None = None,
 ) -> list[SearchHit]:
+    """Same family_filter / scoped retrieval semantics as retriever.search()."""
     limit = top_k or settings.top_k
-    allowed = (
-        {i for i, c in enumerate(chunks) if c.doc_family in family_filter}
-        if family_filter
-        else set(range(len(chunks)))
-    )
-    if not allowed:
-        return []
-    fetch_k = min(limit * 10, len(allowed))
-    rrf = _rrf_scores(query, model, faiss_index, bm25, chunks, allowed, fetch_k)
-    top_indices = sorted(rrf, key=rrf.__getitem__, reverse=True)[:limit]
-    return [
-        SearchHit(
-            source_path=chunks[i].source_path,
-            doc_family=chunks[i].doc_family,
-            score=rrf[i],
-            content=chunks[i].content,
-            page=chunks[i].page,
-            section=chunks[i].section,
-        )
-        for i in top_indices
-    ]
+    use_scoped = settings.scoped_retrieval if scoped is None else scoped
+
+    if family_filter:
+        allowed = {i for i, c in enumerate(chunks) if c.doc_family in family_filter}
+        return _search_within(model, faiss_index, bm25, chunks, query, limit, allowed, boost_factor=settings.lexical_boost_factor)
+
+    if not use_scoped:
+        allowed = set(range(len(chunks)))
+        return _search_within(model, faiss_index, bm25, chunks, query, limit, allowed, boost_factor=settings.lexical_boost_factor)
+
+    present_families = {c.doc_family for c in chunks}
+    scopes = [f for f in settings.family_slots if f in present_families]
+    if not scopes:
+        allowed = set(range(len(chunks)))
+        return _search_within(model, faiss_index, bm25, chunks, query, limit, allowed, boost_factor=settings.lexical_boost_factor)
+
+    def fetch_fn(family: str, k: int) -> list[SearchHit]:
+        fam_allowed = {i for i, c in enumerate(chunks) if c.doc_family == family}
+        return _search_within(model, faiss_index, bm25, chunks, query, k, fam_allowed, boost_factor=settings.lexical_boost_factor)
+
+    return scoped_retrieval_merge(scopes, settings.family_slots, limit, fetch_fn)
 
 
 def _search_weighted(
@@ -119,55 +127,43 @@ def _search_weighted(
     top_k: int | None = None,
     alpha: float = 0.5,
     family_filter: list[str] | None = None,
+    scoped: bool | None = None,
 ) -> list[SearchHit]:
-    if not query_expansion or not query_expansion.strip():
-        return _search(settings, model, faiss_index, bm25, chunks, query_original, top_k, family_filter)
-
+    """Same family_filter / scoped retrieval semantics as retriever.search_weighted()."""
     limit = top_k or settings.top_k
-    allowed = (
-        {i for i, c in enumerate(chunks) if c.doc_family in family_filter}
-        if family_filter
-        else set(range(len(chunks)))
-    )
-    if not allowed:
-        return []
-    fetch_k = min(limit * 10, len(allowed))
+    use_scoped = settings.scoped_retrieval if scoped is None else scoped
 
-    rrf_orig = _rrf_scores(query_original, model, faiss_index, bm25, chunks, allowed, fetch_k)
-    try:
-        rrf_exp = _rrf_scores(query_expansion, model, faiss_index, bm25, chunks, allowed, fetch_k)
-    except Exception as exc:
-        logger.warning("search_weighted: expansion retrieval failed (%s), falling back to original", exc)
-        top_indices = sorted(rrf_orig, key=rrf_orig.__getitem__, reverse=True)[:limit]
-        return [
-            SearchHit(
-                source_path=chunks[i].source_path,
-                doc_family=chunks[i].doc_family,
-                score=rrf_orig[i],
-                content=chunks[i].content,
-                page=chunks[i].page,
-                section=chunks[i].section,
-            )
-            for i in top_indices
-        ]
-
-    all_ids = set(rrf_orig) | set(rrf_exp)
-    combined = {
-        i: alpha * rrf_orig.get(i, 0.0) + (1 - alpha) * rrf_exp.get(i, 0.0)
-        for i in all_ids
-    }
-    top_indices = sorted(combined, key=combined.__getitem__, reverse=True)[:limit]
-    return [
-        SearchHit(
-            source_path=chunks[i].source_path,
-            doc_family=chunks[i].doc_family,
-            score=combined[i],
-            content=chunks[i].content,
-            page=chunks[i].page,
-            section=chunks[i].section,
+    if family_filter:
+        allowed = {i for i, c in enumerate(chunks) if c.doc_family in family_filter}
+        return _search_weighted_within(
+            model, faiss_index, bm25, chunks, query_original, query_expansion,
+            limit, allowed, alpha, boost_factor=settings.lexical_boost_factor,
         )
-        for i in top_indices
-    ]
+
+    if not use_scoped:
+        allowed = set(range(len(chunks)))
+        return _search_weighted_within(
+            model, faiss_index, bm25, chunks, query_original, query_expansion,
+            limit, allowed, alpha, boost_factor=settings.lexical_boost_factor,
+        )
+
+    present_families = {c.doc_family for c in chunks}
+    scopes = [f for f in settings.family_slots if f in present_families]
+    if not scopes:
+        allowed = set(range(len(chunks)))
+        return _search_weighted_within(
+            model, faiss_index, bm25, chunks, query_original, query_expansion,
+            limit, allowed, alpha, boost_factor=settings.lexical_boost_factor,
+        )
+
+    def fetch_fn(family: str, k: int) -> list[SearchHit]:
+        fam_allowed = {i for i, c in enumerate(chunks) if c.doc_family == family}
+        return _search_weighted_within(
+            model, faiss_index, bm25, chunks, query_original, query_expansion,
+            k, fam_allowed, alpha, boost_factor=settings.lexical_boost_factor,
+        )
+
+    return scoped_retrieval_merge(scopes, settings.family_slots, limit, fetch_fn)
 
 
 @app.get("/health")
