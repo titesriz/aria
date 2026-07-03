@@ -52,5 +52,45 @@
     "expected_answer_summary": "Les articles UG.3.2 et UG.3.3 encadrent les surélévations de bâtiments existants. Si le bâtiment est à 17 m et le plafond DG5 est à 18 m, une surélévation d'1 mètre est théoriquement possible dans la limite du gabarit autorisé. Des conditions spécifiques s'appliquent : intégration architecturale, respect des prospects, et éventuellement dérogation si le bâtiment existant dépasse déjà le gabarit.",
     "family": "reglement_ecrit",
     "complexity": "Élevée"
+  },
+  {
+    "id": "CH-01",
+    "question": "Je veux faire une surélévation d'un immeuble de bureau à Paris. Quelles sont les restrictions ?",
+    "expected_articles": ["UG.3.2", "UG.3.3", "UG.1.4.1"],
+    "expected_keywords": ["surélévation", "hauteur", "mixité fonctionnelle", "gabarit", "Plan général des hauteurs", "habitation"],
+    "expected_answer_summary": "Les articles UG.3.2/UG.3.3 encadrent les hauteurs et surélévations. L'article UG.1.4.1 impose une obligation de mixité fonctionnelle (part d'habitation) pour les surélévations comportant une surface de bureau significative (seuil 4 500 m² SPE, minimum 10% / 500 m²). Des secteurs spécifiques (ex. Ternes-Maillot) ont des règles dérogatoires.",
+    "family": null,
+    "complexity": "Élevée",
+    "source": "Éval Charline 02/07 — Q1 (réponse jugée partiellement fausse, citation active non correspondante)"
+  },
+  {
+    "id": "CH-03",
+    "question": "Je souhaite remplacer mon toit en zinc par un toit en tuile. Est-ce que c'est possible ?",
+    "expected_articles": ["UG.2.2.3", "Annexe X"],
+    "expected_keywords": ["couronnement", "couverture", "toiture", "zinc", "tuile", "insertion", "protection patrimoniale", "bâtiment protégé"],
+    "expected_answer_summary": "L'article UG.2.2.3 (Couronnement et couverture) fonde l'appréciation d'insertion paysagère. Trois cas : bâtiment protégé au titre du PLUb (Annexe X — interventions respectant l'architecture), abords de monument historique (avis ABF), cas général (déclaration préalable, appréciation d'insertion). Réponse de référence : celle de Claude collée par Charline dans la page Notion d'éval.",
+    "family": null,
+    "complexity": "Élevée",
+    "source": "Éval Charline 02/07 — Q4 (gold standard informel fourni par Charline)"
+  },
+  {
+    "id": "CH-04",
+    "question": "Donne moi la liste des occupations et utilisations du sol interdites",
+    "expected_articles": ["UG.1.1", "N.1.1", "UV.1.1", "UGSU.1.1"],
+    "expected_keywords": ["interdites", "occupations", "utilisations du sol", "zone"],
+    "expected_answer_summary": "Question ambiguë sans zone précisée : la réponse doit couvrir (ou demander de préciser) les interdictions par zone — UG.1.1, UGSU.1.1, UV.1.1, N.1.1 — sans mélanger les zones ni introduire de contenu non sourcé.",
+    "family": null,
+    "complexity": "Moyenne",
+    "source": "Éval Charline 02/07 — Q6 (3 dernières puces d'origine non traçable)"
+  },
+  {
+    "id": "CH-06",
+    "question": "Peux tu me donner la liste des adresses du 1er arrondissement ?",
+    "expected_articles": ["Annexe V"],
+    "expected_keywords": ["rue d'Argenteuil", "rue du Bouloi", "avenue de l'Opéra", "rue des Pyramides", "emplacements réservés", "LS"],
+    "expected_answer_summary": "La liste complète des emplacements réservés logement du 1er arrondissement (Annexe V, ~20 adresses) : rue d'Argenteuil, rue de l'Échelle, avenue de l'Opéra, rue des Bons Enfants, rue du Bouloi, rue Jean Lantier, rue Molière, rue du Mont-Thabor, rue des Pyramides, rue de Rivoli, rue des Lavandières, rue de la Sourdière, rue Saint-Hyacinthe... Critère : exhaustivité (le bug d'origine retournait 2 adresses sur ~20).",
+    "family": null,
+    "complexity": "Moyenne",
+    "source": "Éval Charline 02/07 — test extraction simple (cas Table-1er, critère de sortie du chantier ranking)"
   }
 ]

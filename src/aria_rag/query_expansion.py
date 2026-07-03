@@ -28,7 +28,11 @@ _SYSTEM_PROMPT = (
     "Q: \"Un local de bureaux peut-il être transformé en hôtel ?\"\n"
     "R: [\"UG.1.3\", \"UG.1.3.3\"]\n\n"
     "Q: \"Quelle mixité fonctionnelle entre bureaux et logements est imposée ?\"\n"
-    "R: [\"UG.1.4.1\", \"UG.1.4\"]"
+    "R: [\"UG.1.4.1\", \"UG.1.4\"]\n\n"
+    "Q: \"Puis-je changer la couverture de ma toiture (tuile, zinc) ou l'aspect de ma façade ?\"\n"
+    "R: [\"UG.2.2.3\", \"UG.2.2\"]\n\n"
+    "Q: \"Quelles occupations et utilisations du sol sont interdites, sans zone précisée ?\"\n"
+    "R: [\"UG.1.1\", \"N.1.1\", \"UV.1.1\", \"UGSU.1.1\"]"
 )
 
 _TIMEOUT = 60  # CPU-backed Ollama inference can exceed 15s; a timeout here silently
