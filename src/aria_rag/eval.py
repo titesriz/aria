@@ -10,6 +10,7 @@ from typing import Any
 _REPO_ROOT = Path(__file__).parent.parent.parent
 DEFAULT_DATASET = _REPO_ROOT / "eval" / "golden_dataset.json"
 DEFAULT_RESULTS_DIR = _REPO_ROOT / "eval" / "results"
+DEFAULT_EXPANSION_CACHE = _REPO_ROOT / "eval" / "expansion_cache.json"
 
 _PASSAGES_MARKER = "Retrieved passages:"
 _ANSWER_MARKER = "LLM answer:"
@@ -37,12 +38,18 @@ def _run_aria_ask(
     alpha: float = 0.5,
     no_llm: bool = False,
     timeout: int = 120,
+    refresh_expansions: bool = False,
 ) -> str:
     cmd = ["aria-rag", "ask", question, "--top-k", str(top_k), "--backend", backend]
     if family:
         cmd += ["--family", family]
     if expand_query:
-        cmd += ["--expand-query", "--alpha", str(alpha)]
+        # Cache expansion results — CPU-backed Ollama can vary by a token even
+        # at temperature=0+seed, which would otherwise make eval scores a
+        # partly-random draw across runs.
+        cmd += ["--expand-query", "--alpha", str(alpha), "--expansion-cache", str(DEFAULT_EXPANSION_CACHE)]
+        if refresh_expansions:
+            cmd += ["--refresh-expansions"]
     if no_llm:
         cmd += ["--no-llm"]
     result = subprocess.run(
@@ -226,6 +233,7 @@ def run_eval(
     alpha: float = 0.5,
     no_llm: bool = False,
     baseline_results: list[dict[str, Any]] | None = None,
+    refresh_expansions: bool = False,
 ) -> list[dict[str, Any]]:
     ds_path = Path(dataset_path) if dataset_path else DEFAULT_DATASET
     out_dir = Path(results_dir) if results_dir else DEFAULT_RESULTS_DIR
@@ -260,6 +268,7 @@ def run_eval(
                 alpha=alpha,
                 no_llm=no_llm,
                 timeout=timeout,
+                refresh_expansions=refresh_expansions,
             )
             passages, answer, expansion_query, inferred_articles = _parse_output(raw)
             ret_score, missing_arts = _score_retrieval(passages, uc.get("expected_articles", []))
