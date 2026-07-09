@@ -3,11 +3,19 @@ from __future__ import annotations
 
 import json
 import logging
+import re
 from pathlib import Path
 
 import httpx
 
 logger = logging.getLogger(__name__)
+
+_REPO_ROOT = Path(__file__).resolve().parents[2]
+# Shared cache — eval.py defines its own DEFAULT_EXPANSION_CACHE pointing at
+# the same path; this is the canonical constant for other callers (aria_rag.api)
+# so an interactively-typed question and a golden-dataset question can reuse
+# each other's cached expansion.
+DEFAULT_EXPANSION_CACHE_PATH = _REPO_ROOT / "eval" / "expansion_cache.json"
 
 _SYSTEM_PROMPT = (
     "Tu es un expert du PLU bioclimatique de Paris. "
@@ -120,10 +128,26 @@ def _expand_with_ollama(question: str, ollama_host: str, ollama_model: str) -> t
     return valid, ("ok" if valid else "empty")
 
 
+def _cache_key(question: str) -> str:
+    """Normalize a question into a stable cache key — collapses whitespace
+    and casefolds, so trivial interactive variations (extra spaces,
+    capitalization) reuse a cached expansion instead of paying a fresh
+    7-28s CPU-bound Ollama call every time. Only the cache KEY is
+    normalized; the `question` value expand_query returns is always the
+    caller's original, unmodified text.
+    """
+    return re.sub(r'\s+', ' ', question.strip()).casefold()
+
+
 def _load_cache(cache_path: Path) -> dict:
-    if cache_path.exists():
-        return json.loads(cache_path.read_text(encoding="utf-8"))
-    return {}
+    if not cache_path.exists():
+        return {}
+    raw = json.loads(cache_path.read_text(encoding="utf-8"))
+    # Re-key by normalized form on every load so cache files written before
+    # normalization (raw question text as key) keep matching — the next
+    # write then persists the re-keyed (normalized) form, self-migrating
+    # the file over time without a one-off migration script.
+    return {_cache_key(k): v for k, v in raw.items()}
 
 
 def _save_cache(cache_path: Path, cache: dict) -> None:
@@ -158,11 +182,12 @@ def expand_query(
     entry.
     """
     cache: dict | None = None
+    cache_key = _cache_key(question)
     if cache_path is not None:
         cache_path = Path(cache_path)
         cache = _load_cache(cache_path)
-        if not refresh and question in cache:
-            entry = cache[question]
+        if not refresh and cache_key in cache:
+            entry = cache[cache_key]
             # Older cache entries predate expansion_status — infer it from
             # inferred_articles so existing caches don't need invalidating.
             status = entry.get("expansion_status") or ("ok" if entry["inferred_articles"] else "empty")
@@ -177,7 +202,7 @@ def expand_query(
     expansion_query = " ".join(articles) if articles else ""
 
     if cache is not None:
-        cache[question] = {
+        cache[cache_key] = {
             "expansion_query": expansion_query,
             "inferred_articles": articles,
             "expansion_status": status,

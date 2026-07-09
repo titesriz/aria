@@ -42,15 +42,22 @@ def answer_with_openai(question: str, hits: list[SearchHit], settings: Settings)
         raise RuntimeError("OPENAI_API_KEY is not set.")
 
     prompt = build_prompt(question, hits)
-    client = OpenAI(api_key=settings.openai_api_key)
-    response = client.responses.create(
-        model=settings.chat_model,
-        input=[
-            {"role": "system", "content": prompt.system},
-            {"role": "user", "content": prompt.user},
-        ],
-    )
-    return response.output_text.strip()
+    client = OpenAI(api_key=settings.openai_api_key, timeout=120)
+    try:
+        response = client.responses.create(
+            model=settings.chat_model,
+            input=[
+                {"role": "system", "content": prompt.system},
+                {"role": "user", "content": prompt.user},
+            ],
+        )
+    except openai.OpenAIError as exc:
+        raise RuntimeError(f"OpenAI request failed ({type(exc).__name__}). Please try again.") from exc
+
+    text = (response.output_text or "").strip()
+    if not text:
+        raise RuntimeError("OpenAI returned an empty response.")
+    return text
 
 
 def answer_with_ollama(question: str, hits: list[SearchHit], settings: Settings) -> str:
@@ -86,28 +93,34 @@ def answer_with_claude(question: str, hits: list[SearchHit], settings: Settings)
         raise RuntimeError("ANTHROPIC_API_KEY is not set.")
 
     prompt = build_prompt(question, hits)
-    client = anthropic.Anthropic(api_key=settings.anthropic_api_key)
+    client = anthropic.Anthropic(api_key=settings.anthropic_api_key, timeout=120)
 
     # Stream the response; use prompt caching on the stable system prompt.
     full_text: list[str] = []
-    with client.messages.stream(
-        model=settings.claude_model,
-        max_tokens=4096,
-        system=[
-            {
-                "type": "text",
-                "text": prompt.system,
-                "cache_control": {"type": "ephemeral"},
-            }
-        ],
-        messages=[{"role": "user", "content": prompt.user}],
-    ) as stream:
-        for text in stream.text_stream:
-            print(text, end="", flush=True)
-            full_text.append(text)
+    try:
+        with client.messages.stream(
+            model=settings.claude_model,
+            max_tokens=4096,
+            system=[
+                {
+                    "type": "text",
+                    "text": prompt.system,
+                    "cache_control": {"type": "ephemeral"},
+                }
+            ],
+            messages=[{"role": "user", "content": prompt.user}],
+        ) as stream:
+            for text in stream.text_stream:
+                print(text, end="", flush=True)
+                full_text.append(text)
+        print()  # newline after streaming
+    except anthropic.AnthropicError as exc:
+        raise RuntimeError(f"Claude request failed ({type(exc).__name__}). Please try again.") from exc
 
-    print()  # newline after streaming
-    return "".join(full_text)
+    text = "".join(full_text).strip()
+    if not text:
+        raise RuntimeError("Claude returned an empty response.")
+    return text
 
 
 def answer_question(question: str, hits: list[SearchHit], settings: Settings, backend: str) -> str:

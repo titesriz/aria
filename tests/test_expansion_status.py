@@ -21,7 +21,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from aria_rag import query_expansion
 from aria_rag.eval import _make_results_path, _parse_output, _print_summary
-from aria_rag.query_expansion import _expand_with_ollama, expand_query
+from aria_rag.query_expansion import _cache_key, _expand_with_ollama, expand_query
 
 _QUESTION = "Je souhaite remplacer mon toit en zinc par un toit en tuile."
 
@@ -59,7 +59,7 @@ def test_expand_query_propagates_failed_status_and_caches_it(tmp_path):
     assert expansion_q == ""
 
     cache = json.loads(cache_path.read_text(encoding="utf-8"))
-    assert cache[_QUESTION]["expansion_status"] == "failed"
+    assert cache[query_expansion._cache_key(_QUESTION)]["expansion_status"] == "failed"
 
 
 def test_expand_query_cache_hit_returns_cached_status(tmp_path):
@@ -96,6 +96,53 @@ def test_expand_query_cache_hit_backward_compat_infers_status(tmp_path):
 
     assert status_with_articles == "ok"
     assert status_empty == "empty"
+
+
+# ---------------------------------------------------------------------------
+# _cache_key — normalized cache key (interactive /ask reuse)
+# ---------------------------------------------------------------------------
+
+def test_cache_key_collapses_whitespace_and_casefolds():
+    assert _cache_key("  Quelle   hauteur  ?  ") == "quelle hauteur ?"
+    assert _cache_key("Quelle hauteur ?") == _cache_key("  Quelle   hauteur  ?  ")
+    assert _cache_key("QUELLE HAUTEUR ?") == _cache_key("quelle hauteur ?")
+
+
+def test_expand_query_cache_hit_across_whitespace_and_case_variation(tmp_path):
+    """A question typed interactively with different spacing/casing than
+    what's cached must still hit — this is the whole point of normalizing
+    the key, since eval's cache is keyed by exact golden-dataset text but
+    /ask now shares the same cache file for interactive questions.
+    """
+    cache_path = tmp_path / "expansion_cache.json"
+    cache_path.write_text(
+        json.dumps({_cache_key(_QUESTION): {
+            "expansion_query": "UG.2.2.3", "inferred_articles": ["UG.2.2.3"], "expansion_status": "ok",
+        }}),
+        encoding="utf-8",
+    )
+    variant = "  " + _QUESTION.upper() + "  "
+    # No mock — must be a cache hit, never a live Ollama call.
+    original_q, expansion_q, articles, status = expand_query(variant, cache_path=cache_path)
+
+    assert status == "ok"
+    assert articles == ["UG.2.2.3"]
+    assert original_q == variant  # the caller's exact text is preserved, only the cache KEY is normalized
+
+
+def test_load_cache_matches_pre_normalization_raw_keyed_entries(tmp_path):
+    """A cache file written before normalization existed (raw question text
+    as key, e.g. with irregular whitespace) must still be matched.
+    """
+    cache_path = tmp_path / "expansion_cache.json"
+    raw_key = "  " + _QUESTION + "   "  # simulates an old entry keyed by unnormalized text
+    cache_path.write_text(
+        json.dumps({raw_key: {"expansion_query": "X.1", "inferred_articles": ["X.1"], "expansion_status": "ok"}}),
+        encoding="utf-8",
+    )
+    _, _, articles, status = expand_query(_QUESTION, cache_path=cache_path)
+    assert status == "ok"
+    assert articles == ["X.1"]
 
 
 # ---------------------------------------------------------------------------

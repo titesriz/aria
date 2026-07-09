@@ -7,6 +7,7 @@ __pycache__/
 .mypy_cache/
 
 data/index/
+data/sessions/
 Ressources/
 src/*.egg-info/
 eval/results/

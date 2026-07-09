@@ -3,7 +3,9 @@ from __future__ import annotations
 import logging
 import re
 import textwrap
+import time
 from contextlib import asynccontextmanager
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
 
@@ -24,6 +26,7 @@ from aria_rag.retriever import (
     load_index,
     scoped_retrieval_merge,
 )
+from aria_rag.sessions import log_ask_call, new_session_log_path
 
 logger = logging.getLogger(__name__)
 
@@ -37,8 +40,10 @@ async def lifespan(app: FastAPI):
     app.state.faiss_index = faiss_index
     app.state.bm25 = bm25
     app.state.chunks = chunks
+    app.state.session_log_path = new_session_log_path()
     logger.info("Model loaded, ready to serve")
     print("Model loaded, ready to serve", flush=True)
+    print(f"Session log: {app.state.session_log_path}", flush=True)
     yield
 
 
@@ -180,49 +185,93 @@ def ask(req: AskRequest) -> AskResponse:
     settings: Settings = state.settings
     backend = req.backend or settings.llm_backend
 
-    if req.expand_query:
-        from aria_rag.query_expansion import expand_query
-        original_q, expansion_q, _, _ = expand_query(
-            req.question,
-            backend=backend,
-            ollama_host=settings.ollama_host,
-            ollama_model=settings.ollama_model,
-        )
-        hits = _search_weighted(
-            settings, state.model, state.faiss_index, state.bm25, state.chunks,
-            query_original=original_q,
-            query_expansion=expansion_q,
-            alpha=0.5,
-        )
-    else:
-        hits = _search(
-            settings, state.model, state.faiss_index, state.bm25, state.chunks,
-            query=req.question,
-        )
-
-    if not hits:
-        raise HTTPException(status_code=404, detail="No relevant passages found.")
+    timestamp = datetime.now(timezone.utc).isoformat()
+    total_t0 = time.monotonic()
+    latency_ms: dict[str, float] = {}
+    expansion_status: str | None = None
+    expansion_query_text = ""
+    hits: list[SearchHit] = []
+    answer_text: str | None = None
+    error_message: str | None = None
 
     try:
-        answer = answer_question(req.question, hits, settings, backend)
-    except RuntimeError as exc:
-        raise HTTPException(status_code=502, detail=str(exc)) from exc
+        try:
+            if req.expand_query:
+                from aria_rag.query_expansion import DEFAULT_EXPANSION_CACHE_PATH, expand_query
+                t0 = time.monotonic()
+                original_q, expansion_query_text, _, expansion_status = expand_query(
+                    req.question,
+                    backend=backend,
+                    ollama_host=settings.ollama_host,
+                    ollama_model=settings.ollama_model,
+                    cache_path=DEFAULT_EXPANSION_CACHE_PATH,
+                )
+                latency_ms["expansion_ms"] = round((time.monotonic() - t0) * 1000, 1)
 
-    citations = [
-        Citation(
-            source=Path(h.source_path).name,
-            full_path=h.source_path,
-            family=h.doc_family,
-            excerpt=textwrap.shorten(h.content, width=500, placeholder="..."),
-            page=h.page,
-            page_end=h.page_end,
-            page_citation=format_page_citation(h.page, h.page_end),
-            section=h.section,
+                t0 = time.monotonic()
+                hits = _search_weighted(
+                    settings, state.model, state.faiss_index, state.bm25, state.chunks,
+                    query_original=original_q,
+                    query_expansion=expansion_query_text,
+                    alpha=0.5,
+                )
+            else:
+                t0 = time.monotonic()
+                hits = _search(
+                    settings, state.model, state.faiss_index, state.bm25, state.chunks,
+                    query=req.question,
+                )
+            latency_ms["retrieval_ms"] = round((time.monotonic() - t0) * 1000, 1)
+        except Exception as exc:  # noqa: BLE001 — never leak a raw stack trace to the client
+            logger.exception("Retrieval failed for question=%r", req.question)
+            error_message = "La recherche dans le corpus a échoué. Merci de réessayer."
+            raise HTTPException(status_code=503, detail=error_message) from exc
+
+        if not hits:
+            error_message = "Aucun passage pertinent n'a été trouvé pour cette question."
+            raise HTTPException(status_code=404, detail=error_message)
+
+        try:
+            t0 = time.monotonic()
+            answer_text = answer_question(req.question, hits, settings, backend)
+            latency_ms["synthesis_ms"] = round((time.monotonic() - t0) * 1000, 1)
+        except RuntimeError as exc:
+            logger.exception("Synthesis failed for question=%r", req.question)
+            error_message = "La génération de la réponse a échoué. Merci de réessayer."
+            raise HTTPException(status_code=502, detail=error_message) from exc
+        except Exception as exc:  # noqa: BLE001 — same guarantee for anything unforeseen
+            logger.exception("Unexpected error during synthesis for question=%r", req.question)
+            error_message = "Une erreur inattendue est survenue. Merci de réessayer."
+            raise HTTPException(status_code=500, detail=error_message) from exc
+
+        citations = [
+            Citation(
+                source=Path(h.source_path).name,
+                full_path=h.source_path,
+                family=h.doc_family,
+                excerpt=textwrap.shorten(h.content, width=500, placeholder="..."),
+                page=h.page,
+                page_end=h.page_end,
+                page_citation=format_page_citation(h.page, h.page_end),
+                section=h.section,
+            )
+            for h in hits
+        ]
+        return AskResponse(answer=_strip_markdown(answer_text), citations=citations)
+    finally:
+        latency_ms["total_ms"] = round((time.monotonic() - total_t0) * 1000, 1)
+        log_ask_call(
+            state.session_log_path,
+            timestamp=timestamp,
+            question=req.question,
+            expand_query_requested=req.expand_query,
+            expansion_status=expansion_status,
+            expansion_query=expansion_query_text,
+            hits=hits,
+            answer=answer_text,
+            error=error_message,
+            latency_ms=latency_ms,
         )
-        for h in hits
-    ]
-
-    return AskResponse(answer=_strip_markdown(answer), citations=citations)
 
 
 def serve() -> None:
