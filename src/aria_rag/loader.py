@@ -11,9 +11,21 @@ from pypdf import PdfReader
 # that cp1252 consoles cannot encode.
 _PUA_BULLET = re.compile(f"[{chr(0xF000)}-{chr(0xF0FF)}]")
 
+# Some fonts (mostly plan-tile legend labels in reglement_graphique/annexes)
+# are effectively 2-byte (UTF-16/CID) encoded but get decoded as if 1-byte,
+# leaving the zero high-byte of each code unit as a literal U+0000 before
+# EVERY character of the run, e.g. "\x00M\x00é\x00t\x00a\x00l" for "Métal".
+# U+0002 shows up the same way as part of a symbol-font marker pair
+# ("\x02\x8c"), unrelated to the interleaving but equally non-printable
+# noise. Confirmed corpus-wide: U+0000 never appears doubled (no
+# "\x00\x00"), so it is strictly one-per-character and plain removal
+# reconstructs the original text — it never functions as a word separator,
+# so stripping it cannot merge two previously-distinct words.
+_STRAY_CONTROL_CHARS = re.compile(f"[{chr(0x00)}{chr(0x02)}]")
 
-def _normalize_pua(text: str) -> str:
-    return _PUA_BULLET.sub("• ", text)
+
+def _normalize_font_artifacts(text: str) -> str:
+    return _PUA_BULLET.sub("• ", _STRAY_CONTROL_CHARS.sub("", text))
 
 
 _HORIZONTAL_WS = re.compile(r"[ \t]+")
@@ -53,7 +65,7 @@ def read_pdf(path: Path) -> Document:
     pages: list[tuple[int, str]] = []
     for page_num, page in enumerate(reader.pages, start=1):
         text = page.extract_text() or ""
-        cleaned = _normalize_whitespace(_normalize_pua(text))
+        cleaned = _normalize_whitespace(_normalize_font_artifacts(text))
         if cleaned:
             pages.append((page_num, cleaned))
     return Document(path=str(path), pages=pages)
