@@ -17,8 +17,10 @@ _PASSAGES_MARKER = "Retrieved passages:"
 _ANSWER_MARKER = "LLM answer:"
 _EXPANSION_ARTICLES_MARKER = "[query expansion] articles inférés : "
 _EXPANSION_QUERY_MARKER = "[query expansion] expansion query  : "
-# One per retrieved hit, printed by `aria-rag ask --debug` (cli.py). Used to score
-# against each hit's section metadata instead of its raw content — see _score_retrieval.
+# Two lines per retrieved hit, printed by `aria-rag ask --debug` (cli.py), in a
+# fixed 1:1:1 order per hit — used to score against each hit's *metadata*
+# (section, source filename) instead of its raw content. See _score_retrieval.
+_DEBUG_HIT_HEADER = re.compile(r'^\[\d+\]\s+(.+?)\s+\|\s+\S+\s*$', re.MULTILINE)
 _DEBUG_SECTION_LINE = re.compile(r'^\s*Page:\s*\S+\s+Section:\s*(.*)$', re.MULTILINE)
 
 RESET = "\033[0m"
@@ -69,19 +71,26 @@ def _run_aria_ask(
 # Output parser
 # ---------------------------------------------------------------------------
 
-def _parse_output(raw: str) -> tuple[str, str, str, list[str], list[str | None]]:
-    """Return (passages_block, llm_answer, expansion_query, inferred_articles, hit_sections)
-    from aria-rag stdout. hit_sections is one entry per retrieved hit, in rank order, parsed
-    from the --debug output's "Page: X  Section: Y" lines — None where the hit has no section
-    (printed as "n/a" by cli.py). Requires --debug to have been passed to `aria-rag ask`.
+def _parse_output(raw: str) -> tuple[str, str, str, list[str], list[dict[str, str | None]]]:
+    """Return (passages_block, llm_answer, expansion_query, inferred_articles, hits)
+    from aria-rag stdout. `hits` is one {"section", "filename"} dict per retrieved hit,
+    in rank order, parsed from the --debug output: "section" comes from the "Page: X
+    Section: Y" line (None where the hit has no section, printed as "n/a" by cli.py);
+    "filename" from the "[N] filename | family" header line (always present — a hit
+    always has a source file). Requires --debug to have been passed to `aria-rag ask`.
     """
     passages = ""
     answer = ""
     expansion_query = ""
     inferred_articles: list[str] = []
-    hit_sections: list[str | None] = [
+    filenames = [m.group(1).strip() for m in _DEBUG_HIT_HEADER.finditer(raw)]
+    sections: list[str | None] = [
         None if m.group(1).strip() == "n/a" else m.group(1).strip()
         for m in _DEBUG_SECTION_LINE.finditer(raw)
+    ]
+    hits: list[dict[str, str | None]] = [
+        {"filename": fname, "section": section}
+        for fname, section in zip(filenames, sections)
     ]
 
     # Parse query expansion headers if present
@@ -107,7 +116,7 @@ def _parse_output(raw: str) -> tuple[str, str, str, list[str], list[str | None]]
     else:
         passages = raw.strip()
 
-    return passages, answer, expansion_query, inferred_articles, hit_sections
+    return passages, answer, expansion_query, inferred_articles, hits
 
 
 # ---------------------------------------------------------------------------
@@ -123,30 +132,65 @@ def _normalize_code(s: str) -> str:
     return re.sub(r'\s+', '', s).lower().rstrip('.')
 
 
-def _score_retrieval(
-    hit_sections: list[str | None], expected_articles: list[str]
-) -> tuple[float, list[str]]:
-    """A hit satisfies an expected article only if that article's code/title is a
-    (normalized) substring of the hit's *section* metadata — not its raw content.
-    Chunks with section=None can never satisfy anything (explicit, not incidental):
-    they're excluded from `sections` before any matching is attempted.
-
-    This intentionally keeps the "expected code is a prefix of a more specific
-    section" relationship the old content-substring check relied on (expected
-    articles are frequently a parent code like "UG.3.1" while chunks are tagged
-    with the specific sub-article, e.g. section="UG.3.1.2") — normalized substring
-    against section preserves that, while no longer matching a code that merely
-    appears somewhere in an unrelated chunk's body text (e.g. a reference table
-    listing dozens of article codes as data).
+def _normalize_expectations(uc: dict[str, Any]) -> list[dict[str, str]]:
+    """Return uc's expected-retrieval items in canonical [{"type", "value"}, ...]
+    form. Supports both the legacy `expected_articles: [str, ...]` field (every
+    item treated as type "article" — unchanged behavior for any case that hasn't
+    been migrated to the new format) and the new `expected: [{"type", "value"},
+    ...]` field. A case must use one or the other, not both.
     """
-    if not expected_articles:
+    if "expected" in uc:
+        return uc["expected"]
+    return [{"type": "article", "value": v} for v in uc.get("expected_articles", [])]
+
+
+def _hit_satisfies(hit: dict[str, str | None], item_type: str, value: str) -> bool:
+    """Whether one retrieved hit's *metadata* (never its raw content — this is
+    the invariant that killed the magnet-chunk artifact, and it must hold for
+    every expectation type) satisfies one expected item.
+
+    - "document": exact (normalized) equality against the hit's source filename.
+      Coarse-grained fallback for labels that name a whole document/plan rather
+      than an article — a hit's filename always exists, so section=None hits
+      can still satisfy this. Exact equality, not substring: a substring check
+      on a value without its extension would let "REG1" wrongly match
+      "REG10.pdf"; requiring the full normalized basename avoids that.
+    - "article" / "section_label": normalized substring against the hit's
+      `section` metadata. Both types check the same field — "section_label"
+      exists as a distinct, documented category for prose labels (e.g. "Plan
+      général des hauteurs") and annexe/document titles rather than bare
+      article codes, but the match mechanics are identical to "article".
+      section=None hits never satisfy either.
+    """
+    if item_type == "document":
+        return _normalize_code(value) == _normalize_code(hit["filename"])
+    if hit["section"] is None:
+        return False
+    return _normalize_code(value) in _normalize_code(hit["section"])
+
+
+def _score_retrieval(
+    hits: list[dict[str, str | None]], expected: list[dict[str, str]]
+) -> tuple[float, list[str]]:
+    """Fraction of `expected` items satisfied by at least one hit, regardless of
+    type — a hit's raw content is never consulted (see _hit_satisfies).
+
+    Substring (not exact) matching for "article"/"section_label" intentionally
+    keeps the "expected code is a prefix of a more specific section" relationship
+    the old content-substring check relied on (expected articles are frequently
+    a parent code like "UG.3.1" while chunks are tagged with the specific
+    sub-article, e.g. section="UG.3.1.2") — normalized substring against section
+    preserves that, while no longer matching a code that merely appears somewhere
+    in an unrelated chunk's body text (e.g. a reference table listing dozens of
+    article codes as data).
+    """
+    if not expected:
         return 1.0, []
-    sections = [_normalize_code(s) for s in hit_sections if s is not None]
     missing = [
-        art for art in expected_articles
-        if not any(_normalize_code(art) in sec for sec in sections)
+        item["value"] for item in expected
+        if not any(_hit_satisfies(hit, item["type"], item["value"]) for hit in hits)
     ]
-    return (len(expected_articles) - len(missing)) / len(expected_articles), missing
+    return (len(expected) - len(missing)) / len(expected), missing
 
 
 def _score_answer(answer: str, expected_keywords: list[str]) -> tuple[float, list[str]]:
@@ -309,14 +353,14 @@ def run_eval(
                 timeout=timeout,
                 refresh_expansions=refresh_expansions,
             )
-            passages, answer, expansion_query, inferred_articles, hit_sections = _parse_output(raw)
-            ret_score, missing_arts = _score_retrieval(hit_sections, uc.get("expected_articles", []))
+            passages, answer, expansion_query, inferred_articles, hits = _parse_output(raw)
+            ret_score, missing_arts = _score_retrieval(hits, _normalize_expectations(uc))
             ans_score, missing_kws = _score_answer(answer, uc.get("expected_keywords", []))
             error = None
         except Exception as exc:  # noqa: BLE001
             passages, answer, expansion_query, inferred_articles = "", "", "", []
             ret_score, ans_score = 0.0, 0.0
-            missing_arts = uc.get("expected_articles", [])
+            missing_arts = [item["value"] for item in _normalize_expectations(uc)]
             missing_kws = uc.get("expected_keywords", [])
             error = str(exc)
             print(f"    {_RED}ERREUR : {exc}{RESET}", flush=True)

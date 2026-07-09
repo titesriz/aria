@@ -2,7 +2,10 @@
   {
     "id": "UC-01",
     "question": "Je cherche la hauteur maximale autorisée pour une construction neuve en zone UG dans le 11e arrondissement de Paris, le terrain est en secteur DG5.",
-    "expected_articles": ["UG.3.2", "Plan général des hauteurs"],
+    "expected": [
+      {"type": "article", "value": "UG.3.2"},
+      {"type": "document", "value": "DG_E_HAUTEUR.pdf"}
+    ],
     "expected_keywords": ["hauteur", "plafond", "Plan général des hauteurs", "gabarit"],
     "expected_answer_summary": "En zone UG, la hauteur maximale est définie par le Plan général des hauteurs (document graphique). Le plafond de hauteur applicable est celui indiqué sur ce plan pour la zone concernée. L'article UG.3.2 fixe les règles de hauteur et renvoie au Plan général des hauteurs.",
     "family": "reglement_ecrit",
