@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import re
 import subprocess
 from datetime import datetime
 from pathlib import Path
@@ -16,6 +17,9 @@ _PASSAGES_MARKER = "Retrieved passages:"
 _ANSWER_MARKER = "LLM answer:"
 _EXPANSION_ARTICLES_MARKER = "[query expansion] articles inférés : "
 _EXPANSION_QUERY_MARKER = "[query expansion] expansion query  : "
+# One per retrieved hit, printed by `aria-rag ask --debug` (cli.py). Used to score
+# against each hit's section metadata instead of its raw content — see _score_retrieval.
+_DEBUG_SECTION_LINE = re.compile(r'^\s*Page:\s*\S+\s+Section:\s*(.*)$', re.MULTILINE)
 
 RESET = "\033[0m"
 BOLD = "\033[1m"
@@ -40,7 +44,7 @@ def _run_aria_ask(
     timeout: int = 120,
     refresh_expansions: bool = False,
 ) -> str:
-    cmd = ["aria-rag", "ask", question, "--top-k", str(top_k), "--backend", backend]
+    cmd = ["aria-rag", "ask", question, "--top-k", str(top_k), "--backend", backend, "--debug"]
     if family:
         cmd += ["--family", family]
     if expand_query:
@@ -65,12 +69,20 @@ def _run_aria_ask(
 # Output parser
 # ---------------------------------------------------------------------------
 
-def _parse_output(raw: str) -> tuple[str, str, str, list[str]]:
-    """Return (passages_block, llm_answer, expansion_query, inferred_articles) from aria-rag stdout."""
+def _parse_output(raw: str) -> tuple[str, str, str, list[str], list[str | None]]:
+    """Return (passages_block, llm_answer, expansion_query, inferred_articles, hit_sections)
+    from aria-rag stdout. hit_sections is one entry per retrieved hit, in rank order, parsed
+    from the --debug output's "Page: X  Section: Y" lines — None where the hit has no section
+    (printed as "n/a" by cli.py). Requires --debug to have been passed to `aria-rag ask`.
+    """
     passages = ""
     answer = ""
     expansion_query = ""
     inferred_articles: list[str] = []
+    hit_sections: list[str | None] = [
+        None if m.group(1).strip() == "n/a" else m.group(1).strip()
+        for m in _DEBUG_SECTION_LINE.finditer(raw)
+    ]
 
     # Parse query expansion headers if present
     for line in raw.splitlines():
@@ -95,18 +107,45 @@ def _parse_output(raw: str) -> tuple[str, str, str, list[str]]:
     else:
         passages = raw.strip()
 
-    return passages, answer, expansion_query, inferred_articles
+    return passages, answer, expansion_query, inferred_articles, hit_sections
 
 
 # ---------------------------------------------------------------------------
 # Scoring
 # ---------------------------------------------------------------------------
 
-def _score_retrieval(passages: str, expected_articles: list[str]) -> tuple[float, list[str]]:
+def _normalize_code(s: str) -> str:
+    """Case/dot/whitespace-insensitive form for comparing an article code against
+    a chunk's section title. Collapses all whitespace and strips a trailing period
+    ("UG.3.1.1." vs "UG.3.1.1") without touching internal dots — those are
+    meaningful separators (stripping them would conflate e.g. UG.3.1 and UG.31).
+    """
+    return re.sub(r'\s+', '', s).lower().rstrip('.')
+
+
+def _score_retrieval(
+    hit_sections: list[str | None], expected_articles: list[str]
+) -> tuple[float, list[str]]:
+    """A hit satisfies an expected article only if that article's code/title is a
+    (normalized) substring of the hit's *section* metadata — not its raw content.
+    Chunks with section=None can never satisfy anything (explicit, not incidental):
+    they're excluded from `sections` before any matching is attempted.
+
+    This intentionally keeps the "expected code is a prefix of a more specific
+    section" relationship the old content-substring check relied on (expected
+    articles are frequently a parent code like "UG.3.1" while chunks are tagged
+    with the specific sub-article, e.g. section="UG.3.1.2") — normalized substring
+    against section preserves that, while no longer matching a code that merely
+    appears somewhere in an unrelated chunk's body text (e.g. a reference table
+    listing dozens of article codes as data).
+    """
     if not expected_articles:
         return 1.0, []
-    lower = passages.lower()
-    missing = [art for art in expected_articles if art.lower() not in lower]
+    sections = [_normalize_code(s) for s in hit_sections if s is not None]
+    missing = [
+        art for art in expected_articles
+        if not any(_normalize_code(art) in sec for sec in sections)
+    ]
     return (len(expected_articles) - len(missing)) / len(expected_articles), missing
 
 
@@ -270,8 +309,8 @@ def run_eval(
                 timeout=timeout,
                 refresh_expansions=refresh_expansions,
             )
-            passages, answer, expansion_query, inferred_articles = _parse_output(raw)
-            ret_score, missing_arts = _score_retrieval(passages, uc.get("expected_articles", []))
+            passages, answer, expansion_query, inferred_articles, hit_sections = _parse_output(raw)
+            ret_score, missing_arts = _score_retrieval(hit_sections, uc.get("expected_articles", []))
             ans_score, missing_kws = _score_answer(answer, uc.get("expected_keywords", []))
             error = None
         except Exception as exc:  # noqa: BLE001
