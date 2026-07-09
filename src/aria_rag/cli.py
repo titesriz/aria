@@ -44,6 +44,26 @@ def build_parser() -> argparse.ArgumentParser:
             "Choices: reglement_ecrit, reglement_graphique, rapport_presentation, oap, padd, annexes, other"
         ),
     )
+    ingest_parser.add_argument(
+        "--strict-check",
+        action="store_true",
+        default=False,
+        help="Exit non-zero if the invariant check that runs automatically after ingest finds any FAIL. For CI.",
+    )
+    ingest_parser.add_argument(
+        "--skip-check",
+        action="store_true",
+        default=False,
+        help="Skip the automatic invariant check after ingest.",
+    )
+
+    check_parser = subparsers.add_parser("check", help="Run ingestion invariant checks against the current index")
+    check_parser.add_argument(
+        "--strict",
+        action="store_true",
+        default=False,
+        help="Exit non-zero if any invariant FAILs. For CI.",
+    )
 
     eval_parser = subparsers.add_parser("eval", help="Run evaluation against the golden dataset")
     eval_parser.add_argument(
@@ -238,6 +258,15 @@ def main() -> None:
             family_filter=args.family,
         )
         print(f"Indexed {file_count} PDF files into {chunk_count} chunks at {settings.index_dir}")
+        if not args.skip_check:
+            from aria_rag.check import run_checks
+            print()
+            run_checks(settings, strict=args.strict_check)
+        return
+
+    if args.command == "check":
+        from aria_rag.check import run_checks
+        run_checks(settings, strict=args.strict)
         return
 
     if args.command == "eval":

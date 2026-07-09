@@ -234,14 +234,21 @@ def chunk_text_by_article(text: str, chunk_size: int, source_path: str = "") -> 
 
 def extract_chunks_from_pdf(
     path: Path, chunk_size: int, chunk_overlap: int, min_alpha_ratio: float = 0.55
-) -> list[Chunk]:
+) -> tuple[list[Chunk], list[dict]]:
+    """Returns (kept_chunks, drops). drops records what extraction discarded
+    or degraded — low-alpha chunks and reglement_ecrit files that fell back
+    to fixed-size chunking for lack of article headers — so build_index can
+    persist it to drop_log.json instead of it only ever reaching a transient
+    logger.warning (see the check suite's drop-log invariant).
+    """
+    drops: list[dict] = []
     try:
         document = read_pdf(path)
     except Exception as exc:
         logger.warning("Skipping %s — could not parse PDF: %s", path.name, exc)
-        return []
+        return [], drops
     if not document.pages:
-        return []
+        return [], drops
 
     doc_family = infer_doc_family(path)
 
@@ -267,6 +274,16 @@ def extract_chunks_from_pdf(
         article_starts = [m.start() for m in article_matches]
         annexe_matches = _titled_annexe_matches(full_text)
         annexe_starts = [m.start() for m in annexe_matches]
+        if not article_matches:
+            # Same condition chunk_text_by_article checks internally (identical
+            # regex over the identical full_text) to fall back to a fixed-size
+            # split — detected here too, redundantly but harmlessly, purely to
+            # log it without touching that function's own logic.
+            drops.append({
+                "type": "no_header_fallback",
+                "source_path": document.path,
+                "text_length": len(full_text),
+            })
     else:
         raw_chunks = chunk_text(full_text, chunk_size, chunk_overlap)
         article_matches = article_starts = annexe_matches = annexe_starts = []
@@ -309,6 +326,13 @@ def extract_chunks_from_pdf(
                 "Dropping low-alpha chunk from %s (alpha=%.3f): %s",
                 path.name, ratio, chunk[:80].replace("\n", " "),
             )
+            drops.append({
+                "type": "low_alpha",
+                "source_path": document.path,
+                "chunk_index": idx,
+                "alpha_ratio": round(ratio, 3),
+                "content_preview": chunk[:80].replace("\n", " "),
+            })
             continue
         kept.append(
             Chunk(
@@ -321,7 +345,7 @@ def extract_chunks_from_pdf(
                 section=section,
             )
         )
-    return kept
+    return kept, drops
 
 
 def get_file_signature(path: Path) -> tuple[int, float]:
@@ -369,6 +393,7 @@ def build_index(
     chunks: list[Chunk] = []
     manifest_entries: list[IndexedFile] = []
     paths_to_process: list[Path] = []
+    all_drops: list[dict] = []
     total = len(pdf_paths)
 
     for index, path in enumerate(pdf_paths, start=1):
@@ -400,8 +425,9 @@ def build_index(
     processed_so_far = total - len(paths_to_process)
     if workers <= 1:
         for offset, path in enumerate(paths_to_process, start=1):
-            file_chunks = extract_chunks_from_pdf(path, settings.chunk_size, settings.chunk_overlap, settings.min_alpha_ratio)
+            file_chunks, file_drops = extract_chunks_from_pdf(path, settings.chunk_size, settings.chunk_overlap, settings.min_alpha_ratio)
             chunks.extend(file_chunks)
+            all_drops.extend(file_drops)
             size_bytes, modified_time = get_file_signature(path)
             manifest_entries.append(
                 IndexedFile(
@@ -441,9 +467,10 @@ def build_index(
 
                 for future in done:
                     path = future_to_path[future]
-                    file_chunks = future.result()
+                    file_chunks, file_drops = future.result()
                     completed += 1
                     chunks.extend(file_chunks)
+                    all_drops.extend(file_drops)
                     size_bytes, modified_time = get_file_signature(path)
                     manifest_entries.append(
                         IndexedFile(
@@ -469,14 +496,24 @@ def build_index(
         raise RuntimeError(f"No text extracted from PDFs in {settings.docs_dir}")
 
     # Deduplicate chunks with identical content (e.g. legend files duplicated across atlas directories)
-    seen_hashes: set[str] = set()
+    seen_hashes: dict[str, Chunk] = {}
     unique_chunks: list[Chunk] = []
+    dedup_ledger: list[dict] = []
     for chunk in chunks:
         h = hashlib.md5(chunk.content.encode()).hexdigest()
-        if h not in seen_hashes:
-            seen_hashes.add(h)
+        kept_chunk = seen_hashes.get(h)
+        if kept_chunk is None:
+            seen_hashes[h] = chunk
             unique_chunks.append(chunk)
-    duplicates_removed = len(chunks) - len(unique_chunks)
+        else:
+            dedup_ledger.append({
+                "removed_chunk_id": chunk.chunk_id,
+                "removed_source_path": chunk.source_path,
+                "kept_chunk_id": kept_chunk.chunk_id,
+                "kept_source_path": kept_chunk.source_path,
+                "content_hash": h,
+            })
+    duplicates_removed = len(dedup_ledger)
     if duplicates_removed:
         print(f"Removed {duplicates_removed} duplicate chunks.", flush=True)
     chunks = unique_chunks
@@ -509,6 +546,15 @@ def build_index(
     (settings.index_dir / "manifest.json").write_text(
         json.dumps([asdict(item) for item in manifest_entries], ensure_ascii=False, indent=2),
         encoding="utf-8",
+    )
+    # Audit trail for the check suite (aria_rag.check) — previously these only
+    # ever reached a transient logger.warning. Reflects only files reprocessed
+    # this run (empty on a no-op incremental ingest), not a historical archive.
+    (settings.index_dir / "drop_log.json").write_text(
+        json.dumps(all_drops, ensure_ascii=False, indent=2), encoding="utf-8"
+    )
+    (settings.index_dir / "dedup_ledger.json").write_text(
+        json.dumps(dedup_ledger, ensure_ascii=False, indent=2), encoding="utf-8"
     )
 
     whitelist = build_article_whitelist(chunks)

@@ -46,7 +46,8 @@ def test_page_at_offset_empty():
 # ---------------------------------------------------------------------------
 
 def _reg1_chunks():
-    return extract_chunks_from_pdf(_REG1_PDF, chunk_size=1200, chunk_overlap=200, min_alpha_ratio=0.55)
+    chunks, _ = extract_chunks_from_pdf(_REG1_PDF, chunk_size=1200, chunk_overlap=200, min_alpha_ratio=0.55)
+    return chunks
 
 
 def test_known_multi_page_chunk_gets_correct_range():

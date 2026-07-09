@@ -37,7 +37,7 @@ mismatched: list[str] = []
 missing: list[str] = []
 
 for i, path in enumerate(pdf_paths, start=1):
-    fresh_chunks = extract_chunks_from_pdf(
+    fresh_chunks, _ = extract_chunks_from_pdf(
         path, settings.chunk_size, settings.chunk_overlap, settings.min_alpha_ratio
     )
     for fc in fresh_chunks:
