@@ -89,9 +89,24 @@ _ADDRESS_ROW = re.compile(
 )
 # Matches "ANNEXE V : LISTE…" headers as they appear in extracted PDF text
 # "A NNEXE" (with space) is a common pypdf extraction artefact
+#
+# Corpus check (data/index/chunks.json): every genuine title header starts
+# with an uppercase "A" — "ANNEXE X - LISTE..." (all-caps), "A NNEXE V :
+# LISTE..." (the pypdf split artefact), or "Annexe V : Liste..." (Title
+# Case, seen in REG2A1.pdf specifically). Every one of the 81 false-positive
+# chunks (inline prose mentions like "l'annexe I du tome 2 du règlement
+# écrit indique...") starts with a lowercase "a" — none of the 3,489 real
+# headers do, and none of the 81 false positives don't. So only the leading
+# "A" needs to be case-SENSITIVE; the rest of "NNEXE" stays scoped
+# case-insensitive via (?i:...) to cover both the all-caps and Title Case
+# variants. The roman numeral and the trailing title-starter char class are
+# also left case-sensitive (uppercase-only), matching the original design
+# intent (see _ARTICLE_HEADER's identical convention) and giving a second,
+# independent signal — belt and suspenders. A bare `re.IGNORECASE` flag
+# neutralized all of this, which is what let 81/4438 reglement_ecrit chunks
+# pick up a garbage mid-sentence section value (see ingestion audit).
 _ANNEXE_HEADER = re.compile(
-    r'A\s*NNEXE\s+[IVXLCDM]+\s*[:\–\-]?\s*[A-ZÀÂÄÉÈÊËÎÏÔÙÛÜŸÇ][^\n]{0,120}',
-    re.IGNORECASE,
+    r'A\s*(?i:NNEXE)\s+[IVXLCDM]+\s*[:\–\-]?\s*[A-ZÀÂÄÉÈÊËÎÏÔÙÛÜŸÇ][^\n]{0,120}'
 )
 
 # Matches a Chunk.section value that IS an article code (vs an annexe title) —
