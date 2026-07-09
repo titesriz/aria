@@ -20,6 +20,7 @@ from aria_rag.retriever import (
     SearchHit,
     _search_weighted_within,
     _search_within,
+    format_page_citation,
     load_index,
     scoped_retrieval_merge,
 )
@@ -63,6 +64,8 @@ class Citation(BaseModel):
     family: str
     excerpt: str
     page: Optional[int] = None
+    page_end: Optional[int] = None
+    page_citation: Optional[str] = None
     section: Optional[str] = None
 
 
@@ -212,6 +215,8 @@ def ask(req: AskRequest) -> AskResponse:
             family=h.doc_family,
             excerpt=textwrap.shorten(h.content, width=500, placeholder="..."),
             page=h.page,
+            page_end=h.page_end,
+            page_citation=format_page_citation(h.page, h.page_end),
             section=h.section,
         )
         for h in hits

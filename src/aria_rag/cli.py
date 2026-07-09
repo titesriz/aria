@@ -333,7 +333,15 @@ def main() -> None:
                 fname = _Path(hit.source_path).name
                 faiss_str = f"{hit.faiss_score:.4f}" if hit.faiss_score is not None else "n/a"
                 bm25_str  = f"{hit.bm25_score:.4f}"  if hit.bm25_score  is not None else "n/a"
-                page_str = str(hit.page) if hit.page is not None else "n/a"
+                if hit.page is None:
+                    page_str = "n/a"
+                elif hit.page_end is None or hit.page_end == hit.page:
+                    page_str = str(hit.page)
+                else:
+                    # Single whitespace-free token — eval.py's debug-output
+                    # parser expects exactly one word between "Page:" and
+                    # "Section:" (see eval.py's _DEBUG_SECTION_LINE regex).
+                    page_str = f"{hit.page}–{hit.page_end}"
                 section_str = hit.section if hit.section is not None else "n/a"
                 print(f"[{i+1}] {fname} | {hit.doc_family}")
                 print(f"     FAISS: {faiss_str}  BM25: {bm25_str}  RRF: {hit.score:.5f}")

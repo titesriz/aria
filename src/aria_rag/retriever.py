@@ -112,9 +112,21 @@ class SearchHit:
     score: float
     content: str
     page: int | None = None
+    page_end: int | None = None
     section: str | None = None
     faiss_score: float | None = None
     bm25_score: float | None = None
+
+
+def format_page_citation(page: int | None, page_end: int | None) -> str | None:
+    """Human-readable page citation: "p. 19" for a single page, "p. 19–21"
+    for a chunk spanning multiple pages. None if page is unknown.
+    """
+    if page is None:
+        return None
+    if page_end is None or page_end == page:
+        return f"p. {page}"
+    return f"p. {page}–{page_end}"
 
 
 def scoped_retrieval_merge(
@@ -298,6 +310,7 @@ def _search_within(
             score=rrf[i],
             content=chunks[i].content,
             page=chunks[i].page,
+            page_end=chunks[i].page_end,
             section=chunks[i].section,
             faiss_score=faiss_scores.get(i) if debug else None,
             bm25_score=bm25_scores.get(i) if debug else None,
@@ -401,6 +414,7 @@ def _search_weighted_within(
                 score=rrf_orig[i],
                 content=chunks[i].content,
                 page=chunks[i].page,
+                page_end=chunks[i].page_end,
                 section=chunks[i].section,
             )
             for i in top_indices
@@ -420,6 +434,7 @@ def _search_weighted_within(
             score=combined[i],
             content=chunks[i].content,
             page=chunks[i].page,
+            page_end=chunks[i].page_end,
             section=chunks[i].section,
         )
         for i in top_indices

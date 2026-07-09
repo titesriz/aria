@@ -50,6 +50,7 @@ class Chunk:
     doc_family: str
     content: str
     page: int | None = None
+    page_end: int | None = None
     section: str | None = None
 
 
@@ -273,6 +274,11 @@ def extract_chunks_from_pdf(
     kept: list[Chunk] = []
     for idx, (start_offset, chunk) in enumerate(raw_chunks):
         page = _page_at_offset(page_starts, page_numbers, start_offset)
+        # End offset of the chunk's own text, computed before any section-prefix
+        # is prepended below — the prefix is synthesized metadata, not part of
+        # the document, so it must not shift which page counts as the last one.
+        end_offset = start_offset + max(len(chunk) - 1, 0)
+        page_end = _page_at_offset(page_starts, page_numbers, end_offset)
 
         section: str | None = None
         if doc_family == "reglement_ecrit":
@@ -311,6 +317,7 @@ def extract_chunks_from_pdf(
                 doc_family=doc_family,
                 content=chunk,
                 page=page,
+                page_end=page_end,
                 section=section,
             )
         )
