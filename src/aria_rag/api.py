@@ -182,7 +182,7 @@ def ask(req: AskRequest) -> AskResponse:
 
     if req.expand_query:
         from aria_rag.query_expansion import expand_query
-        original_q, expansion_q, _ = expand_query(
+        original_q, expansion_q, _, _ = expand_query(
             req.question,
             backend=backend,
             ollama_host=settings.ollama_host,

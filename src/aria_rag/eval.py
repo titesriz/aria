@@ -4,6 +4,7 @@ from __future__ import annotations
 import json
 import re
 import subprocess
+import uuid
 from datetime import datetime
 from pathlib import Path
 from typing import Any
@@ -17,6 +18,7 @@ _PASSAGES_MARKER = "Retrieved passages:"
 _ANSWER_MARKER = "LLM answer:"
 _EXPANSION_ARTICLES_MARKER = "[query expansion] articles inférés : "
 _EXPANSION_QUERY_MARKER = "[query expansion] expansion query  : "
+_EXPANSION_STATUS_MARKER = "[query expansion] status : "
 # Two lines per retrieved hit, printed by `aria-rag ask --debug` (cli.py), in a
 # fixed 1:1:1 order per hit — used to score against each hit's *metadata*
 # (section, source filename) instead of its raw content. See _score_retrieval.
@@ -71,18 +73,23 @@ def _run_aria_ask(
 # Output parser
 # ---------------------------------------------------------------------------
 
-def _parse_output(raw: str) -> tuple[str, str, str, list[str], list[dict[str, str | None]]]:
-    """Return (passages_block, llm_answer, expansion_query, inferred_articles, hits)
-    from aria-rag stdout. `hits` is one {"section", "filename"} dict per retrieved hit,
-    in rank order, parsed from the --debug output: "section" comes from the "Page: X
-    Section: Y" line (None where the hit has no section, printed as "n/a" by cli.py);
-    "filename" from the "[N] filename | family" header line (always present — a hit
-    always has a source file). Requires --debug to have been passed to `aria-rag ask`.
+def _parse_output(raw: str) -> tuple[str, str, str, list[str], str | None, list[dict[str, str | None]]]:
+    """Return (passages_block, llm_answer, expansion_query, inferred_articles,
+    expansion_status, hits) from aria-rag stdout. `hits` is one {"section",
+    "filename"} dict per retrieved hit, in rank order, parsed from the --debug
+    output: "section" comes from the "Page: X Section: Y" line (None where the
+    hit has no section, printed as "n/a" by cli.py); "filename" from the
+    "[N] filename | family" header line (always present — a hit always has a
+    source file). Requires --debug to have been passed to `aria-rag ask`.
+    expansion_status is None when --expand-query wasn't passed (no
+    "[query expansion] status" line to parse); otherwise "ok" / "empty" /
+    "failed" per query_expansion.expand_query.
     """
     passages = ""
     answer = ""
     expansion_query = ""
     inferred_articles: list[str] = []
+    expansion_status: str | None = None
     filenames = [m.group(1).strip() for m in _DEBUG_HIT_HEADER.finditer(raw)]
     sections: list[str | None] = [
         None if m.group(1).strip() == "n/a" else m.group(1).strip()
@@ -103,6 +110,8 @@ def _parse_output(raw: str) -> tuple[str, str, str, list[str], list[dict[str, st
                 pass
         elif line.startswith(_EXPANSION_QUERY_MARKER):
             expansion_query = line[len(_EXPANSION_QUERY_MARKER):].strip()
+        elif line.startswith(_EXPANSION_STATUS_MARKER):
+            expansion_status = line[len(_EXPANSION_STATUS_MARKER):].strip()
 
     if _PASSAGES_MARKER in raw:
         start = raw.index(_PASSAGES_MARKER) + len(_PASSAGES_MARKER)
@@ -116,7 +125,7 @@ def _parse_output(raw: str) -> tuple[str, str, str, list[str], list[dict[str, st
     else:
         passages = raw.strip()
 
-    return passages, answer, expansion_query, inferred_articles, hits
+    return passages, answer, expansion_query, inferred_articles, expansion_status, hits
 
 
 # ---------------------------------------------------------------------------
@@ -223,6 +232,14 @@ def _print_summary(results: list[dict[str, Any]]) -> None:
     total_w = id_w + q_w + score_w * 2
     sep = "─" * total_w
 
+    failed_ids = [r["id"] for r in results if r.get("expansion_status") == "failed"]
+    if failed_ids:
+        print(
+            f"\n{_RED}{BOLD}⚠ QUERY EXPANSION FAILED for {len(failed_ids)} case(s): "
+            f"{', '.join(failed_ids)} — scored against a silent fallback to the "
+            f"original query, not a genuine expansion. See ERROR-level logs above.{RESET}"
+        )
+
     title = "ARIA RAG — Résultats d'évaluation"
     print(f"\n{BOLD}{title:^{total_w}}{RESET}")
     print(sep)
@@ -241,8 +258,11 @@ def _print_summary(results: list[dict[str, Any]]) -> None:
         # ANSI codes add invisible chars so we pad manually
         ret_cell = f"{_color(rs)}{rs:.0%} {_bar(rs)}{RESET}"
         ans_cell = f"{_color(ans)}{ans:.0%} {_bar(ans)}{RESET}"
-        print(f"{r['id']:<{id_w}}{q_short:<{q_w}}{ret_cell:<{score_w + 10}}{ans_cell}")
+        id_label = (r["id"] + "!") if r["id"] in failed_ids else r["id"]
+        print(f"{id_label:<{id_w}}{q_short:<{q_w}}{ret_cell:<{score_w + 10}}{ans_cell}")
 
+        if r["id"] in failed_ids:
+            print(f"{_RED}  {'':>{id_w}}✗ expansion failed : scored on fallback-to-original retrieval{RESET}")
         if r["missing_articles"]:
             print(f"{_DIM}  {'':>{id_w}}▸ articles manquants : {', '.join(r['missing_articles'])}{RESET}")
         if r["missing_keywords"]:
@@ -259,6 +279,16 @@ def _print_summary(results: list[dict[str, Any]]) -> None:
         f"{_color(avg_ans)}{avg_ans:.0%} {_bar(avg_ans)}{RESET}"
     )
     print(sep)
+
+
+def _make_results_path(out_dir: Path, ts: str | None = None) -> Path:
+    """results_{timestamp}_{short-uuid}.json — the uuid suffix guarantees two
+    writes never collide even when they land in the same wall-clock second,
+    whether from concurrent processes or two fast-sequential run_eval() calls
+    (e.g. the baseline + expansion pair `--expand-query` makes) within one.
+    """
+    ts = ts or datetime.now().strftime("%Y%m%d_%H%M%S")
+    return out_dir / f"results_{ts}_{uuid.uuid4().hex[:8]}.json"
 
 
 # ---------------------------------------------------------------------------
@@ -317,6 +347,7 @@ def run_eval(
     no_llm: bool = False,
     baseline_results: list[dict[str, Any]] | None = None,
     refresh_expansions: bool = False,
+    strict_expansion: bool = False,
 ) -> list[dict[str, Any]]:
     ds_path = Path(dataset_path) if dataset_path else DEFAULT_DATASET
     out_dir = Path(results_dir) if results_dir else DEFAULT_RESULTS_DIR
@@ -353,12 +384,16 @@ def run_eval(
                 timeout=timeout,
                 refresh_expansions=refresh_expansions,
             )
-            passages, answer, expansion_query, inferred_articles, hits = _parse_output(raw)
+            passages, answer, expansion_query, inferred_articles, expansion_status, hits = _parse_output(raw)
             ret_score, missing_arts = _score_retrieval(hits, _normalize_expectations(uc))
             ans_score, missing_kws = _score_answer(answer, uc.get("expected_keywords", []))
             error = None
         except Exception as exc:  # noqa: BLE001
             passages, answer, expansion_query, inferred_articles = "", "", "", []
+            # We don't know whether expansion itself failed or the whole
+            # subprocess did — mark it failed too rather than silently
+            # reporting no signal, so --strict-expansion still catches it.
+            expansion_status = "failed" if expand_query else None
             ret_score, ans_score = 0.0, 0.0
             missing_arts = [item["value"] for item in _normalize_expectations(uc)]
             missing_kws = uc.get("expected_keywords", [])
@@ -376,6 +411,7 @@ def run_eval(
             "alpha": alpha if expand_query else None,
             "expansion_query": expansion_query,
             "inferred_articles": inferred_articles,
+            "expansion_status": expansion_status,
             "raw_passages": passages,
             "raw_answer": answer,
             "error": error,
@@ -386,9 +422,16 @@ def run_eval(
     if baseline_results is not None:
         _print_comparison(baseline_results, results)
 
-    ts = datetime.now().strftime("%Y%m%d_%H%M%S")
-    out_path = out_dir / f"results_{ts}.json"
+    out_path = _make_results_path(out_dir)
     out_path.write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"\n{_DIM}Résultats détaillés → {out_path}{RESET}\n")
+
+    if strict_expansion:
+        failed_ids = [r["id"] for r in results if r.get("expansion_status") == "failed"]
+        if failed_ids:
+            raise SystemExit(
+                f"--strict-expansion: query expansion failed for {len(failed_ids)} case(s): "
+                f"{', '.join(failed_ids)}"
+            )
 
     return results

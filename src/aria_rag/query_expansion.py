@@ -78,7 +78,14 @@ def _parse_articles(raw: str) -> list[str]:
         return []
 
 
-def _expand_with_ollama(question: str, ollama_host: str, ollama_model: str) -> list[str]:
+def _expand_with_ollama(question: str, ollama_host: str, ollama_model: str) -> tuple[list[str], str]:
+    """Return (articles, status). status is "ok" (articles inferred), "empty"
+    (no exception, but no usable articles — none returned or all filtered as
+    hallucinations), or "failed" (the Ollama call itself raised, including
+    the _TIMEOUT above) — logged as an ERROR so a silent fallback to the
+    original query is never mistaken for a genuine "no relevant articles"
+    answer.
+    """
     payload = {
         "model": ollama_model,
         "prompt": question,
@@ -100,17 +107,17 @@ def _expand_with_ollama(question: str, ollama_host: str, ollama_model: str) -> l
         raw = response.json().get("response", "")
         articles = _parse_articles(raw)
     except Exception as exc:  # noqa: BLE001
-        logger.warning("Query expansion failed (ollama) — falling back to original query: %s", exc)
-        return []
+        logger.error("Query expansion FAILED (ollama) for question=%r: %s", question, exc)
+        return [], "failed"
 
     whitelist = _load_whitelist()
     if whitelist is None:
-        return articles
+        return articles, ("ok" if articles else "empty")
     valid = [a for a in articles if a in whitelist]
     dropped = [a for a in articles if a not in whitelist]
     if dropped:
         logger.debug("Dropping hallucinated article code(s) not in corpus whitelist: %s", dropped)
-    return valid
+    return valid, ("ok" if valid else "empty")
 
 
 def _load_cache(cache_path: Path) -> dict:
@@ -131,18 +138,24 @@ def expand_query(
     ollama_model: str = "gemma3:4b",
     cache_path: Path | str | None = None,
     refresh: bool = False,
-) -> tuple[str, str, list[str]]:
-    """Return (question_originale, expansion_query, inferred_articles).
+) -> tuple[str, str, list[str], str]:
+    """Return (question_originale, expansion_query, inferred_articles, expansion_status).
 
     expansion_query = article codes joined by spaces (e.g. "UG.3.1 UG.3.1.1").
-    Falls back to (question, "", []) on any error or when no articles are inferred.
+    expansion_status is "ok" (articles inferred), "empty" (no exception, but
+    no usable articles), or "failed" (the LLM call raised/timed out — see
+    _expand_with_ollama). Falls back to (question, "", [], status) on any
+    error or when no articles are inferred — callers must check
+    expansion_status, not just an empty inferred_articles list, to tell a
+    genuine "no relevant articles" answer apart from a silent failure.
 
-    cache_path: if given, results are cached on disk keyed by question text.
-    Even with temperature=0 and a fixed seed, CPU-backed Ollama inference can
-    occasionally differ by a token (floating-point non-associativity in
-    multi-threaded matmul reduction) — callers that need run-to-run
-    reproducibility (e.g. eval) should pass a cache_path. refresh=True forces
-    recomputation and overwrites the cached entry.
+    cache_path: if given, results (including expansion_status) are cached on
+    disk keyed by question text. Even with temperature=0 and a fixed seed,
+    CPU-backed Ollama inference can occasionally differ by a token
+    (floating-point non-associativity in multi-threaded matmul reduction) —
+    callers that need run-to-run reproducibility (e.g. eval) should pass a
+    cache_path. refresh=True forces recomputation and overwrites the cached
+    entry.
     """
     cache: dict | None = None
     if cache_path is not None:
@@ -150,23 +163,30 @@ def expand_query(
         cache = _load_cache(cache_path)
         if not refresh and question in cache:
             entry = cache[question]
-            return question, entry["expansion_query"], entry["inferred_articles"]
+            # Older cache entries predate expansion_status — infer it from
+            # inferred_articles so existing caches don't need invalidating.
+            status = entry.get("expansion_status") or ("ok" if entry["inferred_articles"] else "empty")
+            return question, entry["expansion_query"], entry["inferred_articles"], status
 
     if backend == "ollama":
-        articles = _expand_with_ollama(question, ollama_host, ollama_model)
+        articles, status = _expand_with_ollama(question, ollama_host, ollama_model)
     else:
         logger.debug("Query expansion not implemented for backend=%s, skipping.", backend)
-        return question, "", []
+        return question, "", [], "empty"
 
     expansion_query = " ".join(articles) if articles else ""
 
     if cache is not None:
-        cache[question] = {"expansion_query": expansion_query, "inferred_articles": articles}
+        cache[question] = {
+            "expansion_query": expansion_query,
+            "inferred_articles": articles,
+            "expansion_status": status,
+        }
         _save_cache(cache_path, cache)
 
     if not articles:
         logger.debug("Query expansion returned no articles.")
-        return question, "", []
+        return question, "", [], status
 
     logger.debug("Query expansion inferred articles: %s", articles)
-    return question, expansion_query, articles
+    return question, expansion_query, articles, status

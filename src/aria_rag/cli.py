@@ -110,6 +110,12 @@ def build_parser() -> argparse.ArgumentParser:
         default=False,
         help="Regenerate cached query-expansion results instead of reusing eval/expansion_cache.json.",
     )
+    eval_parser.add_argument(
+        "--strict-expansion",
+        action="store_true",
+        default=False,
+        help="Exit non-zero if any case's query expansion failed (expansion_status=\"failed\"). For CI.",
+    )
 
     ask_parser = subparsers.add_parser("ask", help="Search the index and optionally synthesize an answer")
     ask_parser.add_argument("question", help="Question to ask")
@@ -238,24 +244,28 @@ def main() -> None:
         from aria_rag.eval import run_eval, _print_multi_comparison
         no_llm = args.no_llm
         refresh_expansions = args.refresh_expansions
+        strict_expansion = args.strict_expansion
         if args.multi_alpha:
             print("Run 1/3 — baseline sans query expansion\n")
             r_baseline = run_eval(
                 dataset_path=args.dataset, top_k=args.top_k, backend=args.backend,
                 ids=args.ids, results_dir=args.output, timeout=args.timeout,
                 expand_query=False, no_llm=no_llm, refresh_expansions=refresh_expansions,
+                strict_expansion=strict_expansion,
             )
             print("\nRun 2/3 — avec query expansion alpha=0.7\n")
             r_07 = run_eval(
                 dataset_path=args.dataset, top_k=args.top_k, backend=args.backend,
                 ids=args.ids, results_dir=args.output, timeout=args.timeout,
                 expand_query=True, alpha=0.7, no_llm=no_llm, refresh_expansions=refresh_expansions,
+                strict_expansion=strict_expansion,
             )
             print("\nRun 3/3 — avec query expansion alpha=0.5\n")
             r_05 = run_eval(
                 dataset_path=args.dataset, top_k=args.top_k, backend=args.backend,
                 ids=args.ids, results_dir=args.output, timeout=args.timeout,
                 expand_query=True, alpha=0.5, no_llm=no_llm, refresh_expansions=refresh_expansions,
+                strict_expansion=strict_expansion,
             )
             _print_multi_comparison([
                 ("Baseline", r_baseline),
@@ -268,12 +278,14 @@ def main() -> None:
                 dataset_path=args.dataset, top_k=args.top_k, backend=args.backend,
                 ids=args.ids, results_dir=args.output, timeout=args.timeout,
                 expand_query=False, no_llm=no_llm, refresh_expansions=refresh_expansions,
+                strict_expansion=strict_expansion,
             )
             print(f"\nÉtape 2/2 — avec query expansion alpha={args.alpha}\n")
             r_expanded = run_eval(
                 dataset_path=args.dataset, top_k=args.top_k, backend=args.backend,
                 ids=args.ids, results_dir=args.output, timeout=args.timeout,
                 expand_query=True, alpha=args.alpha, no_llm=no_llm, refresh_expansions=refresh_expansions,
+                strict_expansion=strict_expansion,
             )
             _print_multi_comparison([
                 ("Baseline", r_baseline),
@@ -284,6 +296,7 @@ def main() -> None:
                 dataset_path=args.dataset, top_k=args.top_k, backend=args.backend,
                 ids=args.ids, results_dir=args.output, timeout=args.timeout,
                 no_llm=no_llm, refresh_expansions=refresh_expansions,
+                strict_expansion=strict_expansion,
             )
         return
 
@@ -297,7 +310,7 @@ def main() -> None:
         if args.expand_query:
             from aria_rag.query_expansion import expand_query
             backend_for_expansion = args.backend or settings.llm_backend
-            original_q, expansion_q, inferred_articles = expand_query(
+            original_q, expansion_q, inferred_articles, expansion_status = expand_query(
                 query,
                 backend=backend_for_expansion,
                 ollama_host=settings.ollama_host,
@@ -305,9 +318,14 @@ def main() -> None:
                 cache_path=args.expansion_cache,
                 refresh=args.refresh_expansions,
             )
+            print(f"[query expansion] status : {expansion_status}")
             if inferred_articles:
                 print(f"[query expansion] articles inférés : {inferred_articles}")
                 print(f"[query expansion] expansion query  : {expansion_q}\n")
+            elif expansion_status == "failed":
+                print("[query expansion] WARNING: expansion failed — falling back to original query\n")
+            else:
+                print()
             hits = search_weighted(
                 settings,
                 query_original=original_q,

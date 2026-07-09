@@ -124,7 +124,7 @@ def test_magnet_chunk_parsed_from_real_debug_output():
     against it must reproduce the same partial (not full) result.
     """
     raw = _debug_block([_hit(section=_MAGNET_CHUNK_SECTION, filename=_MAGNET_CHUNK_FILENAME)])
-    _, _, _, _, hits = _parse_output(raw)
+    _, _, _, _, _, hits = _parse_output(raw)
 
     assert hits == [{"filename": _MAGNET_CHUNK_FILENAME, "section": _MAGNET_CHUNK_SECTION}]
     score, missing = _score_retrieval(
