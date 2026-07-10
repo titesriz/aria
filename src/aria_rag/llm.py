@@ -69,7 +69,7 @@ def answer_with_ollama(question: str, hits: list[SearchHit], settings: Settings)
         "system": prompt.system,
         "stream": False,
         "keep_alive": "10m",
-        "options": {"temperature": 0, "num_predict": settings.num_predict},
+        "options": {"temperature": 0, "num_predict": settings.num_predict, "num_ctx": settings.num_ctx},
     }
     url = f"{settings.ollama_host.rstrip('/')}/api/generate"
 
