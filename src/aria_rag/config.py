@@ -49,16 +49,37 @@ class Settings:
     openai_api_key: str | None = None
     chat_model: str = "gpt-4.1-mini"
     ollama_host: str = "http://localhost:11434"
+    # Deprecated: pre-split single model for both pipeline stages. Still
+    # honored as a fallback (see load_settings) so an existing .env with only
+    # ARIA_OLLAMA_MODEL set keeps behaving exactly as before — no silent
+    # change for existing setups. New setups should use expansion_model /
+    # synthesis_model instead.
     ollama_model: str = "gemma3:4b"
+    # eval/expansion_cache.json's 80.0/91.7-92 reference scores are certified
+    # against gemma3:4b doing expansion — do not change this default without
+    # re-certifying the eval numbers.
+    expansion_model: str = "gemma3:4b"
+    # Synthesis-engine bench winner (fewest regulatory-content errors across
+    # the 13-case grid; see the synthesis engine bench report) — production
+    # default as of the config split.
+    synthesis_model: str = "ministral-3:8b"
     anthropic_api_key: str | None = None
     claude_model: str = "claude-opus-4-6"
-    num_predict: int = 768
+    # Synthesis-only; query_expansion.py sets no num_predict of its own.
+    num_predict: int = 1024
     num_ctx: int = 8192
 
 
 def load_settings() -> Settings:
     load_dotenv()
     max_files = os.getenv("ARIA_MAX_FILES")
+    ollama_model_env = os.getenv("ARIA_OLLAMA_MODEL")
+    ollama_model = ollama_model_env or "gemma3:4b"
+    # Resolution order per stage: its own env var, then the deprecated
+    # shared ARIA_OLLAMA_MODEL (preserves existing single-model setups
+    # exactly), then the new per-stage default.
+    expansion_model = os.getenv("ARIA_EXPANSION_MODEL") or ollama_model_env or "gemma3:4b"
+    synthesis_model = os.getenv("ARIA_SYNTHESIS_MODEL") or ollama_model_env or "ministral-3:8b"
     return Settings(
         max_files=int(max_files) if max_files else None,
         min_alpha_ratio=float(os.getenv("ARIA_MIN_ALPHA_RATIO", "0.55")),
@@ -69,9 +90,11 @@ def load_settings() -> Settings:
         openai_api_key=os.getenv("OPENAI_API_KEY") or None,
         chat_model=os.getenv("ARIA_CHAT_MODEL", "gpt-4.1-mini"),
         ollama_host=os.getenv("ARIA_OLLAMA_HOST", "http://localhost:11434"),
-        ollama_model=os.getenv("ARIA_OLLAMA_MODEL", "gemma3:4b"),
+        ollama_model=ollama_model,
+        expansion_model=expansion_model,
+        synthesis_model=synthesis_model,
         anthropic_api_key=os.getenv("ANTHROPIC_API_KEY") or None,
         claude_model=os.getenv("ARIA_CLAUDE_MODEL", "claude-opus-4-6"),
-        num_predict=int(os.getenv("ARIA_NUM_PREDICT", "768")),
+        num_predict=int(os.getenv("ARIA_NUM_PREDICT", "1024")),
         num_ctx=int(os.getenv("ARIA_NUM_CTX", "8192")),
     )

@@ -64,7 +64,7 @@ def answer_with_openai(question: str, hits: list[SearchHit], settings: Settings)
 def answer_with_ollama(question: str, hits: list[SearchHit], settings: Settings) -> str:
     prompt = build_prompt(question, hits)
     payload = {
-        "model": settings.ollama_model,
+        "model": settings.synthesis_model,
         "prompt": prompt.user,
         "system": prompt.system,
         "stream": False,
@@ -79,7 +79,7 @@ def answer_with_ollama(question: str, hits: list[SearchHit], settings: Settings)
     except httpx.HTTPError as exc:
         raise RuntimeError(
             "Ollama request failed. Make sure Ollama is installed, the app or service is "
-            f"running, and model `{settings.ollama_model}` is available at {settings.ollama_host}."
+            f"running, and model `{settings.synthesis_model}` is available at {settings.ollama_host}."
         ) from exc
 
     data = response.json()

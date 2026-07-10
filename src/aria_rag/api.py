@@ -43,6 +43,11 @@ async def lifespan(app: FastAPI):
     app.state.session_log_path = new_session_log_path()
     logger.info("Model loaded, ready to serve")
     print("Model loaded, ready to serve", flush=True)
+    logger.info(
+        "Resolved models: expansion=%s synthesis=%s",
+        settings.expansion_model, settings.synthesis_model,
+    )
+    print(f"[models] expansion={settings.expansion_model}  synthesis={settings.synthesis_model}", flush=True)
     print(f"Session log: {app.state.session_log_path}", flush=True)
     yield
 
@@ -184,6 +189,11 @@ def ask(req: AskRequest) -> AskResponse:
     state = app.state
     settings: Settings = state.settings
     backend = req.backend or settings.llm_backend
+    synthesis_model = {
+        "ollama": settings.synthesis_model,
+        "openai": settings.chat_model,
+        "claude": settings.claude_model,
+    }.get(backend)
 
     timestamp = datetime.now(timezone.utc).isoformat()
     total_t0 = time.monotonic()
@@ -203,7 +213,7 @@ def ask(req: AskRequest) -> AskResponse:
                     req.question,
                     backend=backend,
                     ollama_host=settings.ollama_host,
-                    ollama_model=settings.ollama_model,
+                    ollama_model=settings.expansion_model,
                     cache_path=DEFAULT_EXPANSION_CACHE_PATH,
                 )
                 latency_ms["expansion_ms"] = round((time.monotonic() - t0) * 1000, 1)
@@ -269,6 +279,7 @@ def ask(req: AskRequest) -> AskResponse:
             expansion_query=expansion_query_text,
             hits=hits,
             answer=answer_text,
+            synthesis_model=synthesis_model,
             error=error_message,
             latency_ms=latency_ms,
         )

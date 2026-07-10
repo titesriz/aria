@@ -41,6 +41,7 @@ def _build_entry(
     expansion_query: str,
     hits: list[SearchHit],
     answer: str | None,
+    synthesis_model: str | None,
     error: str | None,
     latency_ms: dict[str, float],
 ) -> dict[str, Any]:
@@ -63,6 +64,7 @@ def _build_entry(
             for i, h in enumerate(hits)
         ],
         "answer": answer,
+        "synthesis_model": synthesis_model,
         "error": error,
         "latency_ms": latency_ms,
     }
@@ -78,6 +80,7 @@ def log_ask_call(
     expansion_query: str,
     hits: list[SearchHit],
     answer: str | None,
+    synthesis_model: str | None = None,
     error: str | None,
     latency_ms: dict[str, float],
 ) -> None:
@@ -91,6 +94,7 @@ def log_ask_call(
             expansion_query=expansion_query,
             hits=hits,
             answer=answer,
+            synthesis_model=synthesis_model,
             error=error,
             latency_ms=latency_ms,
         )

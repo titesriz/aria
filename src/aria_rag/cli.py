@@ -236,6 +236,12 @@ def main() -> None:
     args = parser.parse_args()
     settings = load_settings()
 
+    if args.command in ("ask", "eval"):
+        print(
+            f"[models] expansion={settings.expansion_model}  synthesis={settings.synthesis_model}",
+            flush=True,
+        )
+
     if args.command == "ingest":
         if args.max_files is not None:
             settings.max_files = args.max_files
@@ -343,7 +349,7 @@ def main() -> None:
                 query,
                 backend=backend_for_expansion,
                 ollama_host=settings.ollama_host,
-                ollama_model=settings.ollama_model,
+                ollama_model=settings.expansion_model,
                 cache_path=args.expansion_cache,
                 refresh=args.refresh_expansions,
             )
