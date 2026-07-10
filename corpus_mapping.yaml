@@ -1,0 +1,77 @@
+# Corpus classification — config-driven replacement for the old hardcoded
+# DOC_FAMILIES dict in indexer.py. Read by aria_rag.corpus_mapping.
+#
+# Each rule maps a folder (or file) PREFIX, relative to Settings.docs_dir
+# (Ressources/), forward-slash, NFC-normalized, to a classification:
+# family, norm_level (national | local), city, and validity
+# (current | superseded — omit for the default, "current").
+#
+# Matching: longest matching prefix wins, independent of list order below
+# (order here is just for human readability — file-specific overrides are
+# listed first since they're the most specific case). A path matching no
+# rule classifies as family "other" — aria_rag.check's family-coverage
+# invariant treats any family absent from both the retrieval slot config
+# and its own documented allowlist as a hard failure, so an unmapped file
+# is loud, not silent.
+#
+# Superseded files: discovered during ingestion (they're still valid PDFs
+# on disk) but never chunked/indexed — the assumption is a byte-identical,
+# legally-current replacement exists under a different filename (verified
+# by full-text diff before adding an entry here; see the MS1-vs-base audit
+# for the REG1/REG2A1 case below). aria_rag.check's coverage invariant
+# knows about this list and does not flag a superseded file as "missing
+# from manifest".
+
+rules:
+  # --- File-specific overrides: REG1.pdf and REG2A1.pdf are byte-identical
+  # (confirmed via exhaustive page-by-page text diff, 0 differences across
+  # 250 and 224 pages respectively) to REG1_MS1.pdf / REG2A1_MS1.pdf, the
+  # legally-current "modification simplifiée n°1" consolidations. Same
+  # family/norm_level/city as the reglement_ecrit rule below — only
+  # validity differs, which is why these need their own longest-prefix
+  # entries rather than a folder-level rule.
+  - prefix: "PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 1/REG1.pdf"
+    family: reglement_ecrit
+    norm_level: local
+    city: paris
+    validity: superseded
+  - prefix: "PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 2/REG2A1.pdf"
+    family: reglement_ecrit
+    norm_level: local
+    city: paris
+    validity: superseded
+
+  # --- PLU bioclimatique de Paris (today's corpus) — norm_level: local,
+  # city: paris.
+  - prefix: "PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites"
+    family: reglement_ecrit
+    norm_level: local
+    city: paris
+  - prefix: "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques"
+    family: reglement_graphique
+    norm_level: local
+    city: paris
+  - prefix: "PLU/75 Paris/PLU Bioclimatique/Rapport de présentation"
+    family: rapport_presentation
+    norm_level: local
+    city: paris
+  - prefix: "PLU/75 Paris/PLU Bioclimatique/OAP"
+    family: oap
+    norm_level: local
+    city: paris
+  - prefix: "PLU/75 Paris/PLU Bioclimatique/PADD"
+    family: padd
+    norm_level: local
+    city: paris
+  - prefix: "PLU/75 Paris/PLU Bioclimatique/Annexes"
+    family: annexes
+    norm_level: local
+    city: paris
+
+  # --- Code de la Construction et de l'Habitation (national norm) — the
+  # CCH dual-source prototype's second source. Previously fell through to
+  # family "other" for lack of any matching DOC_FAMILIES fragment.
+  - prefix: "LEGIFRANCE/CCH"
+    family: cch
+    norm_level: national
+    city: null

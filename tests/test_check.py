@@ -25,6 +25,7 @@ from aria_rag.check import (
     run_checks,
 )
 from aria_rag.config import Settings
+from aria_rag.corpus_mapping import MappingRule
 from aria_rag.indexer import Chunk, IndexedFile
 
 
@@ -56,10 +57,24 @@ def _settings(tmp_path: Path, **overrides) -> Settings:
 
 def test_family_coverage_passes_for_documented_unserved_family(tmp_path):
     settings = _settings(tmp_path, family_slots={"reglement_ecrit": 6})
-    chunks = [_chunk(doc_family="other")]  # documented in KNOWN_UNSERVED_FAMILIES
+    chunks = [_chunk(doc_family="cch")]  # documented in KNOWN_UNSERVED_FAMILIES since Stage A
     result = check_family_coverage(chunks, settings, tmp_path / "reports")
     assert result.status == "pass"
     assert result.count == 0
+
+
+def test_family_coverage_fails_for_other_since_stage_a(tmp_path):
+    """Stage A's corpus_mapping.yaml classifies every file under
+    Ressources/ — a chunk landing in "other" now means something is
+    genuinely unmapped, not a known, accepted catch-all (that was CCH,
+    before it got its own family). "other" was deliberately removed from
+    KNOWN_UNSERVED_FAMILIES; this is the regression guard for that.
+    """
+    settings = _settings(tmp_path, family_slots={"reglement_ecrit": 6})
+    chunks = [_chunk(doc_family="other", chunk_id="X-0")]
+    result = check_family_coverage(chunks, settings, tmp_path / "reports")
+    assert result.status == "fail"
+    assert result.count == 1
 
 
 def test_family_coverage_fails_for_new_undocumented_family(tmp_path):
@@ -68,7 +83,7 @@ def test_family_coverage_fails_for_new_undocumented_family(tmp_path):
     generalized to catch a NEW unmapped family too.
     """
     settings = _settings(tmp_path, family_slots={"reglement_ecrit": 6})
-    chunks = [_chunk(doc_family="cch", chunk_id="CCH-0")]
+    chunks = [_chunk(doc_family="some_future_family", chunk_id="FUT-0")]
     result = check_family_coverage(chunks, settings, tmp_path / "reports")
     assert result.status == "fail"
     assert result.count == 1
@@ -241,6 +256,42 @@ def test_coverage_passes_for_documented_zero_chunk_file(tmp_path):
     result = check_coverage(manifest, settings, tmp_path / "reports", known_zero_chunk_path=known)
     assert result.status == "pass"
     assert result.count == 0
+
+
+def test_coverage_passes_for_superseded_file_not_in_manifest(tmp_path):
+    """A validity=superseded file (corpus_mapping.yaml) is discovered on
+    disk but deliberately never indexed — it must not be flagged as
+    missing, unlike a genuinely forgotten file.
+    """
+    settings = _settings(tmp_path)
+    settings.docs_dir.mkdir(parents=True, exist_ok=True)
+    (settings.docs_dir / "REG1.pdf").write_bytes(b"%PDF-1.4")
+    empty_known = tmp_path / "known_zero.json"
+    empty_known.write_text(json.dumps({"entries": []}), encoding="utf-8")
+    rules = [MappingRule(prefix="REG1.pdf", family="reglement_ecrit", norm_level="local", city="paris", validity="superseded")]
+    result = check_coverage(
+        [], settings, tmp_path / "reports", known_zero_chunk_path=empty_known, mapping_rules=rules
+    )
+    assert result.status == "pass"
+    assert result.count == 0
+
+
+def test_coverage_still_fails_for_missing_file_not_covered_by_a_superseded_rule(tmp_path):
+    """A superseded rule for one file must not blanket-excuse a genuinely
+    different missing file.
+    """
+    settings = _settings(tmp_path)
+    settings.docs_dir.mkdir(parents=True, exist_ok=True)
+    (settings.docs_dir / "REG1.pdf").write_bytes(b"%PDF-1.4")
+    (settings.docs_dir / "orphan.pdf").write_bytes(b"%PDF-1.4")
+    empty_known = tmp_path / "known_zero.json"
+    empty_known.write_text(json.dumps({"entries": []}), encoding="utf-8")
+    rules = [MappingRule(prefix="REG1.pdf", family="reglement_ecrit", norm_level="local", city="paris", validity="superseded")]
+    result = check_coverage(
+        [], settings, tmp_path / "reports", known_zero_chunk_path=empty_known, mapping_rules=rules
+    )
+    assert result.status == "fail"
+    assert result.count == 1
 
 
 # ---------------------------------------------------------------------------

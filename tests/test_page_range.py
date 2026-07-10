@@ -13,11 +13,14 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
+from aria_rag.corpus_mapping import classify_path, load_rules
 from aria_rag.indexer import Chunk, _page_at_offset, extract_chunks_from_pdf
 from aria_rag.retriever import format_page_citation
 
-_REG1_PDF = Path(__file__).resolve().parents[1] / (
-    "Ressources/PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 1/REG1.pdf"
+_REPO_ROOT = Path(__file__).resolve().parents[1]
+_DOCS_DIR = _REPO_ROOT / "Ressources"
+_REG1_PDF = _DOCS_DIR / (
+    "PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 1/REG1.pdf"
 )
 
 
@@ -46,7 +49,16 @@ def test_page_at_offset_empty():
 # ---------------------------------------------------------------------------
 
 def _reg1_chunks():
-    chunks, _ = extract_chunks_from_pdf(_REG1_PDF, chunk_size=1200, chunk_overlap=200, min_alpha_ratio=0.55)
+    # REG1.pdf is validity=superseded in corpus_mapping.yaml (REG1_MS1.pdf is
+    # the legally-current, byte-identical twin — see the MS1-vs-base audit)
+    # so build_index() never indexes it, but extract_chunks_from_pdf() itself
+    # doesn't care about validity — it's still valid raw material for testing
+    # page/page_end bisection against real, complex PDF text.
+    rules = load_rules()
+    classification = classify_path(_REG1_PDF, _DOCS_DIR, rules)
+    chunks, _ = extract_chunks_from_pdf(
+        _REG1_PDF, chunk_size=1200, chunk_overlap=200, min_alpha_ratio=0.55, classification=classification
+    )
     return chunks
 
 

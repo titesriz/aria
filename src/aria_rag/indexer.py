@@ -6,7 +6,6 @@ import json
 import logging
 import pickle
 import re
-import unicodedata
 from concurrent.futures import FIRST_COMPLETED, ProcessPoolExecutor, wait
 from dataclasses import asdict, dataclass
 from pathlib import Path
@@ -19,28 +18,12 @@ from rank_bm25 import BM25Okapi
 from sentence_transformers import SentenceTransformer
 
 from aria_rag.config import ROOT_DIR, Settings
+from aria_rag.corpus_mapping import Classification, classify_path, load_rules
 from aria_rag.loader import iter_pdf_paths, read_pdf
 
 logger = logging.getLogger(__name__)
 
 ARTICLE_WHITELIST_PATH = ROOT_DIR / "eval" / "article_whitelist.json"
-
-DOC_FAMILIES = {
-    "Règlement/Pièces écrites": "reglement_ecrit",
-    "Règlement/Documents graphiques": "reglement_graphique",
-    "Rapport de présentation": "rapport_presentation",
-    "OAP": "oap",
-    "PADD": "padd",
-    "Annexes": "annexes",
-}
-
-
-def infer_doc_family(path: Path) -> str:
-    path_str = unicodedata.normalize("NFC", path.as_posix())
-    for fragment, family in DOC_FAMILIES.items():
-        if fragment in path_str:
-            return family
-    return "other"
 
 
 @dataclass(slots=True)
@@ -52,6 +35,8 @@ class Chunk:
     page: int | None = None
     page_end: int | None = None
     section: str | None = None
+    norm_level: str | None = None
+    city: str | None = None
 
 
 @dataclass(slots=True)
@@ -233,13 +218,18 @@ def chunk_text_by_article(text: str, chunk_size: int, source_path: str = "") -> 
 
 
 def extract_chunks_from_pdf(
-    path: Path, chunk_size: int, chunk_overlap: int, min_alpha_ratio: float = 0.55
+    path: Path, chunk_size: int, chunk_overlap: int, min_alpha_ratio: float, classification: Classification
 ) -> tuple[list[Chunk], list[dict]]:
     """Returns (kept_chunks, drops). drops records what extraction discarded
     or degraded — low-alpha chunks and reglement_ecrit files that fell back
     to fixed-size chunking for lack of article headers — so build_index can
     persist it to drop_log.json instead of it only ever reaching a transient
     logger.warning (see the check suite's drop-log invariant).
+
+    classification comes from corpus_mapping.classify_path — computed once
+    by the caller (build_index already needs it to decide whether this path
+    is superseded and should be skipped entirely) rather than re-derived
+    here.
     """
     drops: list[dict] = []
     try:
@@ -250,7 +240,7 @@ def extract_chunks_from_pdf(
     if not document.pages:
         return [], drops
 
-    doc_family = infer_doc_family(path)
+    doc_family = classification.family
 
     # Join pages into one string for the existing regex-based chunkers, while
     # tracking each page's start offset so chunks can be attributed back to
@@ -343,6 +333,8 @@ def extract_chunks_from_pdf(
                 page=page,
                 page_end=page_end,
                 section=section,
+                norm_level=classification.norm_level,
+                city=classification.city,
             )
         )
     return kept, drops
@@ -385,6 +377,20 @@ def build_index(
     if settings.max_files is not None:
         pdf_paths = pdf_paths[: settings.max_files]
 
+    # Classify every discovered file once, up front — reused below both for
+    # the --family rebuild filter and for extract_chunks_from_pdf. Applies
+    # regardless of incremental vs --rebuild mode: a superseded file (e.g.
+    # REG1.pdf, byte-identical to REG1_MS1.pdf — see corpus_mapping.yaml)
+    # is discovered but never indexed, so its stale manifest/chunks entries
+    # (if any exist from before this file was marked superseded) are simply
+    # never regenerated.
+    mapping_rules = load_rules()
+    classifications = {str(p): classify_path(p, settings.docs_dir, mapping_rules) for p in pdf_paths}
+    superseded = [p for p in pdf_paths if classifications[str(p)].validity == "superseded"]
+    if superseded:
+        print(f"Excluding {len(superseded)} superseded file(s) from indexing: {[p.name for p in superseded]}", flush=True)
+    pdf_paths = [p for p in pdf_paths if classifications[str(p)].validity != "superseded"]
+
     # With a family filter, always load existing data — files outside the filter are kept as-is.
     force_rebuild_all = rebuild and not family_filter
     existing_manifest = {} if force_rebuild_all else load_manifest(settings.index_dir)
@@ -405,7 +411,7 @@ def build_index(
         # Force reprocess if: no family filter and rebuild=True,
         # OR family filter matches this file and rebuild=True.
         force_this_file = rebuild and (
-            not family_filter or infer_doc_family(path) in family_filter
+            not family_filter or classifications[str(path)].family in family_filter
         )
 
         if (
@@ -425,7 +431,9 @@ def build_index(
     processed_so_far = total - len(paths_to_process)
     if workers <= 1:
         for offset, path in enumerate(paths_to_process, start=1):
-            file_chunks, file_drops = extract_chunks_from_pdf(path, settings.chunk_size, settings.chunk_overlap, settings.min_alpha_ratio)
+            file_chunks, file_drops = extract_chunks_from_pdf(
+                path, settings.chunk_size, settings.chunk_overlap, settings.min_alpha_ratio, classifications[str(path)]
+            )
             chunks.extend(file_chunks)
             all_drops.extend(file_drops)
             size_bytes, modified_time = get_file_signature(path)
@@ -449,7 +457,8 @@ def build_index(
         with ProcessPoolExecutor(max_workers=workers) as executor:
             future_to_path = {
                 executor.submit(
-                    extract_chunks_from_pdf, path, settings.chunk_size, settings.chunk_overlap, settings.min_alpha_ratio
+                    extract_chunks_from_pdf, path, settings.chunk_size, settings.chunk_overlap,
+                    settings.min_alpha_ratio, classifications[str(path)],
                 ): path
                 for path in paths_to_process
             }

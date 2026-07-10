@@ -17,6 +17,7 @@ from pathlib import Path
 
 sys.path.insert(0, "src")
 from aria_rag.config import load_settings
+from aria_rag.corpus_mapping import classify_path, load_rules
 from aria_rag.indexer import extract_chunks_from_pdf, iter_pdf_paths
 
 settings = load_settings()
@@ -29,6 +30,7 @@ existing_by_key: dict[tuple[str, str], dict] = {
 }
 
 pdf_paths = iter_pdf_paths(settings.docs_dir)
+mapping_rules = load_rules()
 print(f"Re-extracting (chunking only, no embedding) {len(pdf_paths)} files...", flush=True)
 
 t0 = time.time()
@@ -37,8 +39,9 @@ mismatched: list[str] = []
 missing: list[str] = []
 
 for i, path in enumerate(pdf_paths, start=1):
+    classification = classify_path(path, settings.docs_dir, mapping_rules)
     fresh_chunks, _ = extract_chunks_from_pdf(
-        path, settings.chunk_size, settings.chunk_overlap, settings.min_alpha_ratio
+        path, settings.chunk_size, settings.chunk_overlap, settings.min_alpha_ratio, classification
     )
     for fc in fresh_chunks:
         key = (fc.source_path, fc.chunk_id)

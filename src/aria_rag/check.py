@@ -21,6 +21,7 @@ from pathlib import Path
 from typing import Literal
 
 from aria_rag.config import ROOT_DIR, Settings
+from aria_rag.corpus_mapping import MappingRule, classify_path, load_rules
 from aria_rag.indexer import Chunk, IndexedFile, load_existing_chunks, load_manifest
 from aria_rag.loader import iter_pdf_paths
 
@@ -66,13 +67,16 @@ def _relative_path(source_path: str, docs_dir: Path) -> str:
 # DEFAULT_FAMILY_SLOTS) — documented, not silent.
 #   - reglement_graphique, rapport_presentation: low-value for narrative
 #     Q&A (see config.py's DEFAULT_FAMILY_SLOTS comment).
-#   - other: catch-all for root-level PDFs outside the PLU folder structure
-#     — currently the entire CCH (LEGIFRANCE/CCH/LEGITEXT000006074096.pdf,
-#     Code de la Construction et de l'Habitation, one 5,062-chunk file)
-#     pending its own "cch" family in the S3 rebuild's config-driven
-#     mapping. Remove "other" from this set once that lands, so a genuinely
-#     NEW unmapped family fails loudly instead of silently joining it.
-KNOWN_UNSERVED_FAMILIES = {"reglement_graphique", "rapport_presentation", "other"}
+#   - cch: Code de la Construction et de l'Habitation (LEGIFRANCE/CCH/,
+#     national norm_level) — its own family since Stage A's config-driven
+#     mapping (corpus_mapping.yaml), previously fell through to "other".
+#     Gets real retrieval slots in Stage C of the CCH dual-source
+#     prototype; documented here as unserved until then.
+# "other" is deliberately NOT here: every file under Ressources/ is now
+# classified by corpus_mapping.yaml, so a chunk landing in "other" means a
+# genuinely new, unmapped source was added — that must fail loudly, not
+# join this list silently.
+KNOWN_UNSERVED_FAMILIES = {"reglement_graphique", "rapport_presentation", "cch"}
 
 
 def check_family_coverage(chunks: list[Chunk], settings: Settings, reports_dir: Path) -> InvariantResult:
@@ -262,6 +266,7 @@ def check_coverage(
     settings: Settings,
     reports_dir: Path,
     known_zero_chunk_path: Path | None = None,
+    mapping_rules: list[MappingRule] | None = None,
 ) -> InvariantResult:
     known_zero_chunk_path = known_zero_chunk_path or KNOWN_ZERO_CHUNK_FILES_PATH
     known_zero: set[str] = set()
@@ -269,9 +274,18 @@ def check_coverage(
         data = json.loads(known_zero_chunk_path.read_text(encoding="utf-8"))
         known_zero = set(data.get("entries", []))
 
+    rules = mapping_rules if mapping_rules is not None else load_rules()
+
     manifest_paths = {m.source_path for m in manifest}
-    on_disk = {str(p.resolve()) for p in iter_pdf_paths(settings.docs_dir)}
-    missing = sorted(on_disk - manifest_paths)
+    on_disk = list(iter_pdf_paths(settings.docs_dir))
+    on_disk_paths = {str(p.resolve()) for p in on_disk}
+    # A validity=superseded file (corpus_mapping.yaml) is discovered but
+    # deliberately never indexed — it must not be flagged as missing.
+    superseded_on_disk = {
+        str(p.resolve()) for p in on_disk
+        if classify_path(p, settings.docs_dir, rules).validity == "superseded"
+    }
+    missing = sorted(on_disk_paths - manifest_paths - superseded_on_disk)
 
     new_zero_chunk = []
     for m in manifest:
@@ -282,16 +296,18 @@ def check_coverage(
 
     count = len(missing) + len(new_zero_chunk)
     details_path = _write_details(reports_dir, "coverage", {
-        "on_disk_pdf_count": len(on_disk),
+        "on_disk_pdf_count": len(on_disk_paths),
         "manifest_entry_count": len(manifest),
         "missing_from_manifest": missing,
+        "excluded_superseded": sorted(_relative_path(p, settings.docs_dir) for p in superseded_on_disk),
         "known_zero_chunk_count": len(known_zero),
         "new_unexplained_zero_chunk_files": new_zero_chunk,
     })
     status: Status = "fail" if count else "pass"
     message = (
         f"{len(missing)} PDF(s) on disk missing from manifest, {len(new_zero_chunk)} new unexplained "
-        f"zero-chunk file(s) ({len(known_zero)} documented in {known_zero_chunk_path.name})"
+        f"zero-chunk file(s) ({len(known_zero)} documented in {known_zero_chunk_path.name}), "
+        f"{len(superseded_on_disk)} superseded (excluded, expected)"
     )
     return InvariantResult("6. Coverage", status, count, message, details_path)
 

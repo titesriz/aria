@@ -1,5 +1,5 @@
 {
-  "_description": "Manifest.chunk_count records the PRE-dedup chunk count captured at extraction time; chunks.json reflects the POST-dedup (cross-file, content-hash) final count. build_index() never writes back the post-dedup count to manifest.json, so any file that contributed a cross-file duplicate desyncs permanently. This is a known, accepted debt (not yet fixed) — aria_rag.check treats exactly these paths as pass, and fails on any NEW desync not in this list. Paths are relative to Settings.docs_dir (Ressources/), forward-slash, for portability.",
+  "_description": "Manifest.chunk_count records the PRE-dedup chunk count captured at extraction time; chunks.json reflects the POST-dedup (cross-file, content-hash) final count. build_index() never writes back the post-dedup count to manifest.json, so any file that contributed a cross-file duplicate desyncs permanently. This is a known, accepted debt (not yet fixed) -- aria_rag.check treats exactly these paths as pass, and fails on any NEW desync not in this list. Paths are relative to Settings.docs_dir (Ressources/), forward-slash, for portability. Regenerated after Stage A of the CCH dual-source prototype (corpus_mapping.yaml): REG1.pdf and REG2A1.pdf are now validity=superseded (excluded from indexing entirely, not just deduped), so their entries are gone; REG1_MS1.pdf/REG2A1_MS1.pdf/REG2A10_1DE2.pdf changed which desync amount (or whether they desync at all) applies, since removing REG1.pdf/REG2A1.pdf shifted who wins the alphabetical-first-survivor race for shared content -- REG2A10_1DE2_MS1.pdf is a newly-desynced ripple effect of that (was not desynced before Stage A; REG2A10_1DE2.pdf was desynced instead, and now is not).",
   "entries": [
     {
       "source_path": "PLU/75 Paris/PLU Bioclimatique/Annexes/Plans SUP/ASUP4_2025_12_19.pdf",
@@ -122,23 +122,13 @@
       "actual_chunk_count": 0
     },
     {
-      "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 1/REG1.pdf",
+      "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 1/REG1_MS1.pdf",
       "manifest_chunk_count": 667,
       "actual_chunk_count": 666
     },
     {
-      "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 1/REG1_MS1.pdf",
-      "manifest_chunk_count": 667,
-      "actual_chunk_count": 0
-    },
-    {
-      "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 2/REG2A10_1DE2.pdf",
+      "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 2/REG2A10_1DE2_MS1.pdf",
       "manifest_chunk_count": 1636,
-      "actual_chunk_count": 0
-    },
-    {
-      "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 2/REG2A1_MS1.pdf",
-      "manifest_chunk_count": 274,
       "actual_chunk_count": 0
     }
   ]

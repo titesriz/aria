@@ -1,31 +1,24 @@
-"""Patch doc_family in chunks.json and rebuild BM25 — no re-embedding needed."""
+"""Patch doc_family (+ norm_level/city) in chunks.json and rebuild BM25 —
+no re-embedding needed. Reads classification from corpus_mapping.yaml, the
+same source of truth indexer.py uses — this script no longer carries its
+own copy of the classification rules (it used to duplicate the old
+hardcoded DOC_FAMILIES dict, which silently went stale when that dict was
+replaced by the config-driven mapping in Stage A of the CCH prototype).
+"""
 from __future__ import annotations
 
 import json
 import pickle
 import re
-import unicodedata
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 INDEX_DIR = ROOT / "data" / "index"
+DOCS_DIR = ROOT / "Ressources"
 
-DOC_FAMILIES = {
-    "Règlement/Pièces écrites": "reglement_ecrit",
-    "Règlement/Documents graphiques": "reglement_graphique",
-    "Rapport de présentation": "rapport_presentation",
-    "OAP": "oap",
-    "PADD": "padd",
-    "Annexes": "annexes",
-}
-
-
-def infer_doc_family(source_path: str) -> str:
-    path_str = unicodedata.normalize("NFC", source_path)
-    for fragment, family in DOC_FAMILIES.items():
-        if fragment in path_str:
-            return family
-    return "other"
+sys.path.insert(0, str(ROOT / "src"))
+from aria_rag.corpus_mapping import classify_path, load_rules
 
 
 def tokenize(text: str) -> list[str]:
@@ -37,10 +30,14 @@ def main() -> None:
     bm25_path = INDEX_DIR / "bm25.pkl"
 
     chunks = json.loads(chunks_path.read_text(encoding="utf-8"))
+    rules = load_rules()
 
     before = {c["doc_family"] for c in chunks}
     for chunk in chunks:
-        chunk["doc_family"] = infer_doc_family(chunk["source_path"])
+        classification = classify_path(Path(chunk["source_path"]), DOCS_DIR, rules)
+        chunk["doc_family"] = classification.family
+        chunk["norm_level"] = classification.norm_level
+        chunk["city"] = classification.city
     after = {c["doc_family"] for c in chunks}
 
     counts = {}
