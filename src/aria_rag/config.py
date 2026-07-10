@@ -66,8 +66,14 @@ class Settings:
     anthropic_api_key: str | None = None
     claude_model: str = "claude-opus-4-6"
     # Synthesis-only; query_expansion.py sets no num_predict of its own.
-    num_predict: int = 1024
+    # 1024 still truncated ministral's most verbose answers (Adversarial-A).
+    num_predict: int = 1280
     num_ctx: int = 8192
+    # `serve` refuses to start if the backend check (backend_check.py) finds
+    # either configured Ollama model landed on CPU instead of GPU — this has
+    # silently confounded measurements twice before. Override with
+    # --allow-cpu / ARIA_ALLOW_CPU=1 only for deliberate CPU-mode testing.
+    allow_cpu: bool = False
 
 
 def load_settings() -> Settings:
@@ -95,6 +101,7 @@ def load_settings() -> Settings:
         synthesis_model=synthesis_model,
         anthropic_api_key=os.getenv("ANTHROPIC_API_KEY") or None,
         claude_model=os.getenv("ARIA_CLAUDE_MODEL", "claude-opus-4-6"),
-        num_predict=int(os.getenv("ARIA_NUM_PREDICT", "1024")),
+        num_predict=int(os.getenv("ARIA_NUM_PREDICT", "1280")),
         num_ctx=int(os.getenv("ARIA_NUM_CTX", "8192")),
+        allow_cpu=os.getenv("ARIA_ALLOW_CPU", "0") not in ("0", "false", "False", ""),
     )

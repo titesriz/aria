@@ -203,7 +203,14 @@ def build_parser() -> argparse.ArgumentParser:
              "--family is given (that already restricts to a single pool). For A/B comparison.",
     )
 
-    subparsers.add_parser("serve", help="Start the FastAPI HTTP server on port 8000")
+    serve_parser = subparsers.add_parser("serve", help="Start the FastAPI HTTP server on port 8000")
+    serve_parser.add_argument(
+        "--allow-cpu",
+        action="store_true",
+        default=False,
+        help="Start even if the backend check finds a model on CPU instead of GPU "
+             "(silent CPU fallback). Off by default — expect much higher latency if used.",
+    )
 
     return parser
 
@@ -241,6 +248,16 @@ def main() -> None:
             f"[models] expansion={settings.expansion_model}  synthesis={settings.synthesis_model}",
             flush=True,
         )
+        from aria_rag.backend_check import verify_backend
+        backend_status = verify_backend(settings)
+        if backend_status.checked and not backend_status.gpu_verified:
+            print(
+                "\033[91mWARNING: backend check found a model NOT running 100% on GPU "
+                "(silent CPU fallback) — latency and possibly quality will be affected. "
+                "This has confounded measurements before; verify Ollama/Vulkan before trusting "
+                "results from this run.\033[0m",
+                flush=True,
+            )
 
     if args.command == "ingest":
         if args.max_files is not None:
@@ -336,6 +353,8 @@ def main() -> None:
         return
 
     if args.command == "serve":
+        if args.allow_cpu:
+            os.environ["ARIA_ALLOW_CPU"] = "1"
         from aria_rag.api import serve
         serve()
         return

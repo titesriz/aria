@@ -42,6 +42,7 @@ def _build_entry(
     hits: list[SearchHit],
     answer: str | None,
     synthesis_model: str | None,
+    synthesis_model_was_resident: bool | None,
     error: str | None,
     latency_ms: dict[str, float],
 ) -> dict[str, Any]:
@@ -65,6 +66,12 @@ def _build_entry(
         ],
         "answer": answer,
         "synthesis_model": synthesis_model,
+        # True: synthesis_model was already resident before this call (no
+        # load/swap). False: it wasn't, and synthesis_ms includes a load.
+        # None: residency couldn't be determined (check itself failed).
+        # Explains the ~20s latency variance from the split-model swap cost
+        # (gemma3 expansion / ministral synthesis don't co-reside in 8GB).
+        "synthesis_model_was_resident": synthesis_model_was_resident,
         "error": error,
         "latency_ms": latency_ms,
     }
@@ -81,6 +88,7 @@ def log_ask_call(
     hits: list[SearchHit],
     answer: str | None,
     synthesis_model: str | None = None,
+    synthesis_model_was_resident: bool | None = None,
     error: str | None,
     latency_ms: dict[str, float],
 ) -> None:
@@ -95,6 +103,7 @@ def log_ask_call(
             hits=hits,
             answer=answer,
             synthesis_model=synthesis_model,
+            synthesis_model_was_resident=synthesis_model_was_resident,
             error=error,
             latency_ms=latency_ms,
         )

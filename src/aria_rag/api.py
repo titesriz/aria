@@ -15,6 +15,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from sentence_transformers import SentenceTransformer
 
+from aria_rag.backend_check import BackendStatus, is_model_resident, startup_should_refuse, verify_backend
 from aria_rag.config import Settings, load_settings
 from aria_rag.indexer import Chunk
 from aria_rag.llm import answer_question
@@ -34,6 +35,34 @@ logger = logging.getLogger(__name__)
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     settings = load_settings()
+    print(f"[models] expansion={settings.expansion_model}  synthesis={settings.synthesis_model}", flush=True)
+
+    backend_status = verify_backend(settings)
+    app.state.backend_status = backend_status
+    if backend_status.checked:
+        for check, stage in (
+            (backend_status.expansion_check, "expansion"),
+            (backend_status.synthesis_check, "synthesis"),
+        ):
+            tag = "\033[92mGPU\033[0m" if check.gpu_verified else "\033[91mCPU/UNVERIFIED\033[0m"
+            print(f"[backend check] {stage} model {check.model}: {tag}", flush=True)
+
+    if startup_should_refuse(settings.llm_backend, backend_status, settings.allow_cpu):
+        message = (
+            "\033[91mBACKEND CHECK FAILED: at least one Ollama model did not land 100% on GPU "
+            "(silent CPU fallback). This has confounded measurements twice before — refusing to "
+            "start. Fix the Ollama/Vulkan setup, or pass --allow-cpu to override.\033[0m"
+        )
+        print(message, flush=True)
+        logger.error("Backend check failed: refusing to start (CPU fallback detected)")
+        raise RuntimeError("Backend GPU check failed — refusing to start. Use --allow-cpu to override.")
+    elif backend_status.checked and not backend_status.gpu_verified and settings.allow_cpu:
+        print(
+            "\033[91mWARNING: CPU fallback detected, but --allow-cpu is set — starting anyway. "
+            "Expect much higher latency than the certified GPU baseline.\033[0m",
+            flush=True,
+        )
+
     model, faiss_index, bm25, chunks = load_index(settings)
     app.state.settings = settings
     app.state.model = model
@@ -47,7 +76,6 @@ async def lifespan(app: FastAPI):
         "Resolved models: expansion=%s synthesis=%s",
         settings.expansion_model, settings.synthesis_model,
     )
-    print(f"[models] expansion={settings.expansion_model}  synthesis={settings.synthesis_model}", flush=True)
     print(f"Session log: {app.state.session_log_path}", flush=True)
     yield
 
@@ -179,9 +207,22 @@ def _search_weighted(
     return scoped_retrieval_merge(scopes, settings.family_slots, limit, fetch_fn)
 
 
+def _health_payload(state) -> dict:
+    bs: BackendStatus | None = getattr(state, "backend_status", None)
+    return {
+        "status": "ok",
+        "backend_status": {
+            "expansion_model": bs.expansion_model,
+            "synthesis_model": bs.synthesis_model,
+            "gpu_verified": bs.gpu_verified,
+            "last_check": bs.last_check,
+        } if bs is not None else None,
+    }
+
+
 @app.get("/health")
 def health() -> dict:
-    return {"status": "ok"}
+    return _health_payload(app.state)
 
 
 @app.post("/ask", response_model=AskResponse)
@@ -203,6 +244,7 @@ def ask(req: AskRequest) -> AskResponse:
     hits: list[SearchHit] = []
     answer_text: str | None = None
     error_message: str | None = None
+    synthesis_model_was_resident: bool | None = None
 
     try:
         try:
@@ -241,6 +283,9 @@ def ask(req: AskRequest) -> AskResponse:
             error_message = "Aucun passage pertinent n'a été trouvé pour cette question."
             raise HTTPException(status_code=404, detail=error_message)
 
+        synthesis_model_was_resident = (
+            is_model_resident(settings.ollama_host, settings.synthesis_model) if backend == "ollama" else None
+        )
         try:
             t0 = time.monotonic()
             answer_text = answer_question(req.question, hits, settings, backend)
@@ -280,6 +325,7 @@ def ask(req: AskRequest) -> AskResponse:
             hits=hits,
             answer=answer_text,
             synthesis_model=synthesis_model,
+            synthesis_model_was_resident=synthesis_model_was_resident,
             error=error_message,
             latency_ms=latency_ms,
         )
