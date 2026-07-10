@@ -52,6 +52,7 @@ class Settings:
     ollama_model: str = "gemma3:4b"
     anthropic_api_key: str | None = None
     claude_model: str = "claude-opus-4-6"
+    num_predict: int = 768
 
 
 def load_settings() -> Settings:
@@ -70,4 +71,5 @@ def load_settings() -> Settings:
         ollama_model=os.getenv("ARIA_OLLAMA_MODEL", "gemma3:4b"),
         anthropic_api_key=os.getenv("ANTHROPIC_API_KEY") or None,
         claude_model=os.getenv("ARIA_CLAUDE_MODEL", "claude-opus-4-6"),
+        num_predict=int(os.getenv("ARIA_NUM_PREDICT", "768")),
     )

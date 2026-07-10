@@ -50,6 +50,7 @@ def answer_with_openai(question: str, hits: list[SearchHit], settings: Settings)
                 {"role": "system", "content": prompt.system},
                 {"role": "user", "content": prompt.user},
             ],
+            max_output_tokens=settings.num_predict,
         )
     except openai.OpenAIError as exc:
         raise RuntimeError(f"OpenAI request failed ({type(exc).__name__}). Please try again.") from exc
@@ -68,7 +69,7 @@ def answer_with_ollama(question: str, hits: list[SearchHit], settings: Settings)
         "system": prompt.system,
         "stream": False,
         "keep_alive": "10m",
-        "options": {"temperature": 0},
+        "options": {"temperature": 0, "num_predict": settings.num_predict},
     }
     url = f"{settings.ollama_host.rstrip('/')}/api/generate"
 
@@ -100,7 +101,7 @@ def answer_with_claude(question: str, hits: list[SearchHit], settings: Settings)
     try:
         with client.messages.stream(
             model=settings.claude_model,
-            max_tokens=4096,
+            max_tokens=settings.num_predict,
             system=[
                 {
                     "type": "text",
