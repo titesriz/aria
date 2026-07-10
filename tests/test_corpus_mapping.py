@@ -108,7 +108,7 @@ def test_load_rules_reads_real_corpus_mapping_yaml():
     assert "cch" in families
     assert "reglement_ecrit" in families
     superseded = [r for r in rules if r.validity == "superseded"]
-    assert len(superseded) == 2
+    assert len(superseded) == 3
     assert all(r.prefix.endswith(".pdf") for r in superseded)
 
 
@@ -122,10 +122,11 @@ def test_load_rules_defaults_validity_to_current():
 # superseded_paths
 # ---------------------------------------------------------------------------
 
-def test_superseded_paths_returns_both_reg_files():
+def test_superseded_paths_returns_all_three_reg_files():
     rules = load_rules(Path(__file__).resolve().parents[1] / "corpus_mapping.yaml")
     docs_dir = Path("/docs")  # unused by superseded_paths, rules already store final prefixes
     paths = superseded_paths(docs_dir, rules)
-    assert len(paths) == 2
-    assert any("REG1.pdf" in p for p in paths)
-    assert any("REG2A1.pdf" in p for p in paths)
+    assert len(paths) == 3
+    assert any(p.endswith("REG1.pdf") for p in paths)
+    assert any(p.endswith("REG2A1.pdf") for p in paths)
+    assert any(p.endswith("REG2A10_1DE2.pdf") for p in paths)

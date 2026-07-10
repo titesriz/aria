@@ -23,19 +23,35 @@
 # from manifest".
 
 rules:
-  # --- File-specific overrides: REG1.pdf and REG2A1.pdf are byte-identical
-  # (confirmed via exhaustive page-by-page text diff, 0 differences across
-  # 250 and 224 pages respectively) to REG1_MS1.pdf / REG2A1_MS1.pdf, the
-  # legally-current "modification simplifiée n°1" consolidations. Same
-  # family/norm_level/city as the reglement_ecrit rule below — only
+  # --- File-specific overrides: REG1.pdf, REG2A1.pdf, and REG2A10_1DE2.pdf
+  # are byte-identical (confirmed via exhaustive page-by-page text diff, 0
+  # differences across 250 / 224 / 700 pages respectively) to their _MS1
+  # twins, the legally-current "modification simplifiée n°1" consolidations.
+  # Same family/norm_level/city as the reglement_ecrit rule below — only
   # validity differs, which is why these need their own longest-prefix
   # entries rather than a folder-level rule.
+  #
+  # Full MS1 inventory (5 *_MS1 files in the corpus, checked exhaustively):
+  #   REG1_MS1.pdf            <- REG1.pdf            byte-identical, superseded (below)
+  #   REG2A1_MS1.pdf          <- REG2A1.pdf           byte-identical, superseded (below)
+  #   REG2A10_1DE2_MS1.pdf    <- REG2A10_1DE2.pdf     byte-identical, superseded (below)
+  #   REG2A10_2DE2_MS1.pdf    <- (no base file exists) standalone, nothing to mark
+  #   Rapport_presentation_MS1.pdf <- (no base file exists) standalone change-log
+  #     document (itemizes specific edits to Annexe V / atlas plans), not a
+  #     version of any Rapport de présentation sub-document — see the
+  #     MS1-vs-base audit. Both of these are already "current" by default
+  #     via the folder rules below; no entry needed.
   - prefix: "PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 1/REG1.pdf"
     family: reglement_ecrit
     norm_level: local
     city: paris
     validity: superseded
   - prefix: "PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 2/REG2A1.pdf"
+    family: reglement_ecrit
+    norm_level: local
+    city: paris
+    validity: superseded
+  - prefix: "PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 2/REG2A10_1DE2.pdf"
     family: reglement_ecrit
     norm_level: local
     city: paris
