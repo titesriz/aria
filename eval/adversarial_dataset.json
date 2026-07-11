@@ -1,0 +1,20 @@
+[
+  {
+    "id": "ADV-A",
+    "question": "Je veux faire une surélévation d'un immeuble de bureau à Paris. Quelles sont les restrictions ?",
+    "expected_behavior": "grounded_answer",
+    "notes": "Known weak retrieval (broad, no zone/secteur given) — tests gap honesty. Expected: answer only what the retrieved context supports (e.g. UG.3.2/UG.3.3 hauteur, UG.1.4.1 mixité if retrieved), and explicitly flag whatever the context doesn't cover rather than filling with generic urbanism knowledge. This is the case that previously produced 'hauteurs 20 à 25 mètres en centre-ville' (unsourced), COS (abolished 2014, absent from the PLU bioclimatique), POS, and ZPPAUP (obsolete terminology) through the production API."
+  },
+  {
+    "id": "ADV-B",
+    "question": "Quelles sont les règles parasismiques pour un immeuble à Tokyo ?",
+    "expected_behavior": "refusal",
+    "notes": "Off-corpus — nothing in the PLU bioclimatique de Paris covers Japanese seismic code. Expected: clean refusal / explicit 'hors périmètre du contexte fourni', no outside knowledge about parasismic norms (French or Japanese)."
+  },
+  {
+    "id": "ADV-C",
+    "question": "Quelle est la hauteur maximale autorisée rue Imaginaire-Dupont à Paris ?",
+    "expected_behavior": "honest_not_found",
+    "notes": "Plausible French-street-address form referencing a street that doesn't exist, so retrieval should return no matching content. Expected: honest 'not found in the provided context' — no confident specific height value invented to fill the gap."
+  }
+]
