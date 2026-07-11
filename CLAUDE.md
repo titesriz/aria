@@ -2,88 +2,39 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## Project purpose
+## 1. What this is
 
-ARIA is a local RAG pipeline over the **PLU bioclimatique de Paris** PDF corpus. The primary use case is answering urban planning questions (zoning rules, setbacks, heights, mixed-use programmes) grounded in official regulatory documents.
+ARIA — a RAG pipeline for architects, answering regulatory questions grounded in the **PLU bioclimatique de Paris** (zoning: heights, setbacks, mixed-use) and the **CCH** (Code de la Construction et de l'Habitation, national). Owner: Anna. Convention: code and technical writing in English, business/user-facing docs in French — this file, docstrings, commit messages are English; `eval/README.md`, prompts, and answers are French.
 
-## Common commands
+## 2. Architecture in 10 lines
 
-```bash
-# Activate the venv first
-source .venv/bin/activate
+**Offline (ingest, `indexer.py`)**: `loader.py` walks `Ressources/`, extracts PDF text with `pypdf` → `corpus_mapping.yaml` (config-driven, via `aria_rag.corpus_mapping`) classifies every file into `{family, norm_level, city, validity}` by longest-matching prefix → text is chunked (1200/200 overlap), filtered by `min_alpha_ratio` → embedded with `paraphrase-multilingual-mpnet-base-v2` into a FAISS `IndexFlatIP` + a pickled BM25Okapi index, alongside a manifest for incremental re-ingestion → `aria-rag check` runs automatically after, enforcing corpus invariants (`check.py`).
 
-# Install / reinstall in editable mode
-pip install -e ".[dev]"
+**Online (ask, `retriever.py` + `llm.py`)**: query → expansion with **gemma3:4b** (`query_expansion.py`, infers PLU article codes, temperature=0, cached) → hybrid retrieval, FAISS + BM25 fused by **Reciprocal Rank Fusion** (RRF_K=60), scoped per-family with slots from `config.py`'s `DEFAULT_FAMILY_SLOTS` → top-k hits synthesized into an answer by **ministral-3:8b** via `llm.py`'s grounding-constrained system prompt.
 
-# Ingest PDFs (incremental by default — reuses unchanged files)
-aria-rag ingest
-aria-rag ingest --max-files 5        # quick test
-aria-rag ingest --rebuild            # force full rebuild
+## 3. Critical invariants & conventions (the expensive lessons)
 
-# Query — retrieval only (no API cost)
-aria-rag ask "question" --no-llm --top-k 8 --family reglement_ecrit
+- **Audit before fix; one fix at a time; measure between each.** Every fix in git log (grounding, markers, num_ctx, num_predict) shipped with a before/after eval run in `eval/results/` — never bundle a fix with the measurement of a different fix.
+- **Eval reference: 80.0% baseline retrieval / 91.7% with query expansion**, computed across the 10-case golden dataset. Comparisons must be run **sequentially, never concurrently** — concurrent runs corrupt the shared query-expansion cache (`eval/expansion_cache.json`).
+- **The scorer matches section METADATA, never raw chunk text** (the "magnet-chunk" lesson, `f17a9fc`) — a chunk can mention an article number in passing without being about it; only the chunk's own `section` field counts as a hit.
+- **gemma3:4b (expansion) and ministral-3:8b (synthesis) do not co-reside in 8GB VRAM.** Ollama swaps between them per call — expect ~20s of extra latency when `synthesis_model_was_resident=False` in session logs. This is known and expected, not a bug.
+- **GPU via `OLLAMA_LLM_LIBRARY=vulkan`.** `backend_check.py` force-loads each model and checks `/api/ps`'s `size_vram == size` before trusting any latency measurement — silent CPU fallback (stale Vulkan-env-var config, model reports "loaded" but runs on CPU) has bitten this project twice already. `aria-rag serve` refuses to start on an unverified GPU unless `--allow-cpu` is passed.
+- **Beware stale `aria-rag serve` processes left running on port 8000** after a code change — bitten 3× (identical byte-for-byte answers served hours apart from a process that never picked up the fix). Before trusting any live-server measurement, hit `GET /health` and check `backend_status` reflects the change you expect, not an old resident process.
+- **Synthesis grounding contract** (`llm.py`'s `SYSTEM_PROMPT`): answer only from provided context, state gaps explicitly ("le contexte ne précise pas..." — see `eval/fidelity_method.md`'s GENERIC category) rather than filling them, and mark each factual claim with a `[N]` chunk-index marker. Markers are **unreliable ~30% of the time** (missing or out-of-range) — `extract_cited_markers()` falls back gracefully, and the UI hides citation chips when markers are absent rather than showing broken ones.
+- **temperature=0 everywhere** (expansion and synthesis). Identical inputs produce identical outputs — two answers that are byte-identical across hours apart are the deterministic pipeline working correctly, not a sign of a stuck/stale process. (Use `/health` and `synthesis_model_was_resident`, not answer-text diffing, to actually diagnose staleness.)
 
-# Query — with LLM synthesis
-aria-rag ask "question" --backend openai   # needs OPENAI_API_KEY in .env
-aria-rag ask "question" --backend ollama   # needs Ollama running locally
+## 4. Eval harness
 
-# Patch doc_family/norm_level/city without re-embedding (after corpus_mapping.yaml changes)
-python scripts/patch_doc_family.py
+- `eval/golden_dataset.json` — 10 cases: UC-01/02/03/04/05/16 (original PLU use cases) + CH-01/03/04/06 (Charline's real-world questions).
+- `eval/adversarial_dataset.json` — 3 cases (ADV-A/B/C): weak-retrieval honesty, off-corpus refusal, plausible-but-fabricated-reference honesty.
+- `eval/fidelity_method.md` — claim-level grounding methodology (SUPPORTED / UNSUPPORTED / GENERIC) for scoring synthesis changes independently of retrieval quality; see it before touching `SYSTEM_PROMPT`.
+- Commands: `aria-rag eval` (golden dataset, retrieval + answer-coverage scores), `aria-rag check` (corpus invariants), `aria-rag sessions --last N` (read-only digest of logged `/ask` calls — question, hits, answer, synthesis model, latencies).
+- Known-failure allowlists (`checks/known_*.json`) exist so **today's** documented debt stays green while a genuinely new instance of the same problem fails loudly — never widen an allowlist to silence a new failure; that defeats the point.
 
-# Run ingestion invariant checks (also runs automatically after `aria-rag ingest`)
-aria-rag check
-aria-rag check --strict   # exit non-zero on any FAIL, for CI
+## 5. Current state & roadmap
 
-# Run tests
-pytest
-```
+Phase: **post-grounding-fix, post-citation-markers, pre-retest** (Charline's real-world retest is the next milestone). **Notion is the task/roadmap source of truth** — this file is a map to the code, not a substitute for the project board; check Notion for what's next and who owns it.
 
-## Architecture
+## 6. Session protocol
 
-The pipeline has two phases: **ingest** and **ask**.
-
-**Ingest** (`indexer.py`):
-1. `loader.py` — walks `Ressources/` recursively, extracts text from PDFs with `pypdf`
-2. `corpus_mapping.yaml` (repo root, loaded via `aria_rag.corpus_mapping`) classifies every discovered file by longest-matching folder/file prefix into `{family, norm_level, city, validity}` — config-driven, replaces the old hardcoded `DOC_FAMILIES` dict. A path matching no rule gets `family="other"` (flagged by `aria-rag check`'s family-coverage invariant, not silently accepted). A file with `validity: superseded` (e.g. `REG1.pdf`, byte-identical to the legally-current `REG1_MS1.pdf` consolidation — see the MS1-vs-base audit) is discovered but never indexed.
-3. Text is chunked (default 1200 chars / 200 overlap) and filtered by `min_alpha_ratio` to drop scanned/garbage pages
-4. Embeddings are built with `sentence-transformers/paraphrase-multilingual-mpnet-base-v2` and stored in a FAISS `IndexFlatIP` (cosine similarity on normalized vectors)
-5. A BM25Okapi index is also built and pickled alongside
-6. A manifest tracks file size + mtime for incremental re-ingestion
-7. `aria-rag check` runs automatically after ingest — see "Ingestion invariants" below
-
-**Ask** (`retriever.py`):
-1. Query is encoded with the same embedding model
-2. Both FAISS (semantic) and BM25 (lexical) are searched independently with `fetch_k = limit × 10`
-3. Results are fused with **Reciprocal Rank Fusion** (RRF_K=60)
-4. Optional `--family` filter restricts the candidate set before both searches
-5. Top-k hits are passed to `llm.py` as context for answer synthesis
-
-**LLM** (`llm.py`): supports OpenAI (`gpt-4.1-mini` default) and Ollama (`gemma3:4b` default). The system prompt instructs the model to answer only from provided context.
-
-## Corpus structure
-
-Classification is config-driven (`corpus_mapping.yaml`, repo root) — see that file for the authoritative, versioned rule list. Today's tree:
-
-```
-Ressources/PLU/75 Paris/PLU Bioclimatique/
-  Règlement/Pièces écrites/     → reglement_ecrit, norm_level=local, city=paris
-  Règlement/Documents graphiques/ → reglement_graphique, norm_level=local, city=paris
-  Rapport de présentation/      → rapport_presentation, norm_level=local, city=paris
-  OAP/                          → oap, norm_level=local, city=paris
-  PADD/                         → padd, norm_level=local, city=paris
-  Annexes/                      → annexes, norm_level=local, city=paris
-Ressources/LEGIFRANCE/CCH/       → cch, norm_level=national, city=null
-```
-
-`REG1.pdf` and `REG2A1.pdf` are `validity: superseded` — byte-identical to `REG1_MS1.pdf` / `REG2A1_MS1.pdf` (verified by exhaustive page-by-page text diff), the legally-current "modification simplifiée n°1" consolidations. They're discovered by the file walk but never chunked/indexed, so citations for this content correctly show the `_MS1` filename.
-
-A file matching no rule gets `doc_family = "other"` — `aria-rag check`'s family-coverage invariant treats any `other` chunk as a hard failure (nothing should legitimately land there; every current source is mapped).
-
-`cch` currently has no scoped-retrieval slots (`config.py`'s `DEFAULT_FAMILY_SLOTS`) — documented as intentionally unserved in `aria_rag.check.KNOWN_UNSERVED_FAMILIES` pending a later stage of the CCH dual-source prototype that gives it real slots.
-
-## Known issues / gotchas
-
-- **macOS NFD encoding**: folder names with accented characters (é, è, î…) are stored as NFD by HFS+. `aria_rag.corpus_mapping.classify_path()` normalizes paths to NFC before matching — this must be preserved whenever `corpus_mapping.yaml` prefixes are edited.
-- **Stale index**: if `Chunk` dataclass fields change, existing `chunks.json` will fail to deserialize. Run `aria-rag ingest --rebuild` or use `scripts/patch_doc_family.py` for lightweight fixes that don't require re-embedding.
-- **FAISS k=0 guard**: `retriever.py` returns `[]` early if the family filter matches no chunks, avoiding a FAISS assertion error.
-- **HF_TOKEN warning**: the sentence-transformers model loads from cache; the unauthenticated HF Hub warning is harmless.
+See `SESSION_STATE.md` (repo root) for the full contract. In short: **read `CLAUDE.md` + the top 2 entries of `SESSION_STATE.md` before any diagnostic work**, and **append a dated entry at the end of every session** (newest on top) — what was done, what was measured, what was decided, and the open threads the next session needs.
