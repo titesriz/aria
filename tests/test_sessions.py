@@ -14,7 +14,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from aria_rag.retriever import SearchHit
-from aria_rag.sessions import log_ask_call, new_session_log_path
+from aria_rag.sessions import log_ask_call, log_feedback, new_session_log_path
 
 
 def _hit(**overrides) -> SearchHit:
@@ -132,4 +132,52 @@ def test_log_ask_call_never_raises_when_path_is_unwritable(tmp_path):
         bad_path, timestamp="t", question="q", expand_query_requested=False,
         expansion_status=None, expansion_query="", hits=[], answer="a", error=None,
         latency_ms={"total_ms": 1.0},
+    )  # must not raise
+
+
+# ---------------------------------------------------------------------------
+# log_feedback — shape, content, and failure-safety
+# ---------------------------------------------------------------------------
+
+def test_log_feedback_writes_one_jsonl_line_with_expected_fields(tmp_path):
+    log_path = tmp_path / "feedback.jsonl"
+    log_feedback(
+        log_path=log_path,
+        session_id="session_2026-07-11_abc12345",
+        question="Quelle hauteur maximale ?",
+        answer_shown="La hauteur maximale est...",
+        expected_answer="Le contexte ne précise pas...",
+        expected_documents="REG1_MS1.pdf",
+    )
+
+    lines = log_path.read_text(encoding="utf-8").strip().splitlines()
+    assert len(lines) == 1
+    entry = json.loads(lines[0])
+
+    assert entry["session_id"] == "session_2026-07-11_abc12345"
+    assert entry["question"] == "Quelle hauteur maximale ?"
+    assert entry["answer_shown"] == "La hauteur maximale est..."
+    assert entry["expected_answer"] == "Le contexte ne précise pas..."
+    assert entry["expected_documents"] == "REG1_MS1.pdf"
+    assert "timestamp" in entry
+
+
+def test_log_feedback_appends_multiple_lines(tmp_path):
+    log_path = tmp_path / "feedback.jsonl"
+    for i in range(3):
+        log_feedback(
+            log_path=log_path, session_id=f"s{i}", question=f"q{i}",
+            answer_shown="a", expected_answer="", expected_documents="",
+        )
+    lines = log_path.read_text(encoding="utf-8").strip().splitlines()
+    assert len(lines) == 3
+    assert [json.loads(l)["question"] for l in lines] == ["q0", "q1", "q2"]
+
+
+def test_log_feedback_never_raises_when_path_is_unwritable(tmp_path):
+    bad_path = tmp_path / "a_directory"
+    bad_path.mkdir()
+    log_feedback(
+        log_path=bad_path, session_id="s", question="q",
+        answer_shown="a", expected_answer="", expected_documents="",
     )  # must not raise

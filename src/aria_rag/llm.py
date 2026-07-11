@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -24,8 +25,36 @@ SYSTEM_PROMPT = (
     "Cite les sources les plus pertinentes du contexte. "
     "Lorsque tu mentionnes une source, utilise uniquement le nom du fichier (ex: REG1.pdf) "
     "ou une désignation générique (ex: 'le règlement écrit'). "
-    "N'inclus jamais de chemin complet ou de chemin absolu dans ta réponse."
+    "N'inclus jamais de chemin complet ou de chemin absolu dans ta réponse. "
+    "Le contexte est découpé en passages numérotés [1], [2], etc. Chaque affirmation "
+    "factuelle doit porter le marqueur [N] du passage qui la fonde (ex : « ...doivent "
+    "être implantées à l'alignement [3]. »). Toute affirmation qui ne peut porter aucun "
+    "marqueur doit être supprimée ou explicitement déplacée dans le constat de lacune."
 )
+
+_MARKER_RE = re.compile(r'\[(\d+)\]')
+
+
+def extract_cited_markers(answer: str, num_chunks: int) -> set[int] | None:
+    """Parse [N] markers out of a synthesized answer.
+
+    Returns the set of valid, in-range marker numbers (1..num_chunks) actually
+    cited in `answer`, or None if the answer carries no markers at all — the
+    caller's signal to fall back to `used=None` for every citation rather than
+    treating an unmarked answer as "cited nothing." Markers are progressive
+    enhancement (older prompts/backends may not produce them), never a
+    correctness requirement, so this never raises: a regex match failure is
+    not possible here, but any future parsing complexity added to this
+    function must preserve that guarantee.
+    """
+    found = {int(m) for m in _MARKER_RE.findall(answer)}
+    if not found:
+        return None
+    in_range = {n for n in found if 1 <= n <= num_chunks}
+    # All markers present were out of range (e.g. [99] with 8 chunks) — as
+    # unusable as no markers at all, so fall back the same way rather than
+    # reporting every citation as unused.
+    return in_range or None
 
 
 @dataclass(slots=True)
@@ -36,7 +65,8 @@ class PromptBundle:
 
 def build_prompt(question: str, hits: list[SearchHit]) -> PromptBundle:
     context = "\n\n".join(
-        f"Source: {Path(hit.source_path).name}\nContent: {hit.content[:3000]}" for hit in hits
+        f"[{i}] Source: {Path(hit.source_path).name}\nContent: {hit.content[:3000]}"
+        for i, hit in enumerate(hits, start=1)
     )
     return PromptBundle(
         system=SYSTEM_PROMPT,

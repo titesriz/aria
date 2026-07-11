@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Optional
 
 import faiss
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from sentence_transformers import SentenceTransformer
@@ -18,7 +18,7 @@ from sentence_transformers import SentenceTransformer
 from aria_rag.backend_check import BackendStatus, is_model_resident, startup_should_refuse, verify_backend
 from aria_rag.config import Settings, load_settings
 from aria_rag.indexer import Chunk
-from aria_rag.llm import answer_question
+from aria_rag.llm import answer_question, extract_cited_markers
 from aria_rag.retriever import (
     SearchHit,
     _search_weighted_within,
@@ -27,7 +27,7 @@ from aria_rag.retriever import (
     load_index,
     scoped_retrieval_merge,
 )
-from aria_rag.sessions import log_ask_call, new_session_log_path
+from aria_rag.sessions import log_ask_call, log_feedback, new_session_log_path
 
 logger = logging.getLogger(__name__)
 
@@ -105,6 +105,15 @@ class Citation(BaseModel):
     page_end: Optional[int] = None
     page_citation: Optional[str] = None
     section: Optional[str] = None
+    # 1-based position of this hit among the numbered [N] context passages
+    # sent to the synthesis model (see llm.build_prompt) — lets a UI map a
+    # [N] marker in the answer text back to this citation card.
+    marker_index: Optional[int] = None
+    # Whether this citation's marker_index appears in the answer's [N]
+    # markers. None means "can't tell" (no markers in the answer at all, or
+    # every marker present was out of range) — never treat None as False;
+    # it means the signal isn't there, not that the passage went unused.
+    used: Optional[bool] = None
 
 
 def _strip_markdown(text: str) -> str:
@@ -119,6 +128,10 @@ def _strip_markdown(text: str) -> str:
 class AskResponse(BaseModel):
     answer: str
     citations: list[Citation]
+    # Identifies the server process's session log (see sessions.py) — echo
+    # this back in a /feedback call so a feedback line can be correlated
+    # with the /ask call it's about.
+    session_id: str
 
 
 def _search(
@@ -299,6 +312,12 @@ def ask(req: AskRequest) -> AskResponse:
             error_message = "Une erreur inattendue est survenue. Merci de réessayer."
             raise HTTPException(status_code=500, detail=error_message) from exc
 
+        try:
+            cited_markers = extract_cited_markers(answer_text, len(hits))
+        except Exception as exc:  # noqa: BLE001 — markers are progressive enhancement, never fatal
+            logger.error("Marker parsing failed for question=%r: %s", req.question, exc)
+            cited_markers = None
+
         citations = [
             Citation(
                 source=Path(h.source_path).name,
@@ -309,10 +328,16 @@ def ask(req: AskRequest) -> AskResponse:
                 page_end=h.page_end,
                 page_citation=format_page_citation(h.page, h.page_end),
                 section=h.section,
+                marker_index=i,
+                used=None if cited_markers is None else (i in cited_markers),
             )
-            for h in hits
+            for i, h in enumerate(hits, start=1)
         ]
-        return AskResponse(answer=_strip_markdown(answer_text), citations=citations)
+        return AskResponse(
+            answer=_strip_markdown(answer_text),
+            citations=citations,
+            session_id=state.session_log_path.stem,
+        )
     finally:
         latency_ms["total_ms"] = round((time.monotonic() - total_t0) * 1000, 1)
         log_ask_call(
@@ -329,6 +354,47 @@ def ask(req: AskRequest) -> AskResponse:
             error=error_message,
             latency_ms=latency_ms,
         )
+
+
+_FEEDBACK_MAX_BODY_BYTES = 1_000_000  # prototype guard, not a security boundary
+_FEEDBACK_FIELD_MAX_LEN = 5000
+
+
+@app.post("/feedback", status_code=202)
+async def feedback(request: Request) -> dict:
+    """Fire-and-forget human feedback capture. Must never error the UI —
+    every path returns 202; failures are logged server-side only. No auth
+    (prototype). See sessions.log_feedback for the append-only JSONL sink.
+    """
+    content_length = request.headers.get("content-length")
+    try:
+        if content_length and int(content_length) > _FEEDBACK_MAX_BODY_BYTES:
+            logger.warning("Feedback payload rejected: %s bytes exceeds cap", content_length)
+            return {"status": "rejected_too_large"}
+    except ValueError:
+        pass
+
+    try:
+        body = await request.json()
+        if not isinstance(body, dict):
+            raise ValueError(f"expected a JSON object, got {type(body).__name__}")
+    except Exception as exc:  # noqa: BLE001 — malformed body is not the caller's problem to see
+        logger.error("Feedback payload parse failed: %s", exc)
+        return {"status": "logged_partial"}
+
+    def _field(name: str) -> str:
+        return str(body.get(name, "") or "")[:_FEEDBACK_FIELD_MAX_LEN]
+
+    # log_feedback carries the same never-raises guarantee as log_ask_call —
+    # called unwrapped, same as log_ask_call is in ask()'s finally block.
+    log_feedback(
+        session_id=_field("session_id"),
+        question=_field("question"),
+        answer_shown=_field("answer_shown"),
+        expected_answer=_field("expected_answer"),
+        expected_documents=_field("expected_documents"),
+    )
+    return {"status": "ok"}
 
 
 def serve() -> None:

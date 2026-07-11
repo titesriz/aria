@@ -12,7 +12,7 @@ from __future__ import annotations
 import json
 import logging
 import uuid
-from datetime import date
+from datetime import date, datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -22,6 +22,9 @@ from aria_rag.retriever import SearchHit, format_page_citation
 logger = logging.getLogger(__name__)
 
 SESSIONS_DIR = ROOT_DIR / "data" / "sessions"
+# Single shared file, unlike the per-process session_*.jsonl logs — feedback
+# is low-volume and there's no benefit to splitting it per server process.
+FEEDBACK_LOG_PATH = SESSIONS_DIR / "feedback.jsonl"
 
 
 def new_session_log_path(sessions_dir: Path | None = None) -> Path:
@@ -112,3 +115,33 @@ def log_ask_call(
             f.write(json.dumps(entry, ensure_ascii=False) + "\n")
     except Exception as exc:  # noqa: BLE001 — logging must never break the answer path
         logger.error("Session log write failed (%s): %s", log_path, exc)
+
+
+def log_feedback(
+    *,
+    session_id: str,
+    question: str,
+    answer_shown: str,
+    expected_answer: str,
+    expected_documents: str,
+    log_path: Path | None = None,
+) -> None:
+    """Append one human-feedback line. Never raises — same guarantee as
+    log_ask_call, for the same reason: the /feedback endpoint must return
+    202 regardless of whether the write actually landed.
+    """
+    log_path = log_path or FEEDBACK_LOG_PATH
+    try:
+        entry = {
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "session_id": session_id,
+            "question": question,
+            "answer_shown": answer_shown,
+            "expected_answer": expected_answer,
+            "expected_documents": expected_documents,
+        }
+        log_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(log_path, "a", encoding="utf-8") as f:
+            f.write(json.dumps(entry, ensure_ascii=False) + "\n")
+    except Exception as exc:  # noqa: BLE001 — logging must never break the endpoint response
+        logger.error("Feedback log write failed (%s): %s", log_path, exc)
