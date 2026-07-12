@@ -6,6 +6,18 @@
 
 ---
 
+## 2026-07-12 — repo hygiene
+
+**Done** (1 commit, no code/server impact): deleted two unreferenced scratch files (`test.txt`, `page_end_sample.txt` — verified via repo-wide grep before deleting, zero hits). `.gitignore`: added `.claude/` (local Claude Code config) and `referentiel_*.xlsx` (regenerable export, `referentiel.yaml` is the source of truth) — both affect only *future* untracked files, not what's already committed (see decision below). Removed the `eval/results/` ignore rule and tracked all 93 existing result JSONs (5.2MB) — this is the fix-by-fix measurement history CLAUDE.md's audit-before-fix convention depends on (`eval/results/` paths cited per fix), and it had never actually been version-controlled.
+
+**Decision — left already-tracked files alone**: `.claude/settings.json` and `referentiel_20260712.xlsx` were committed last session on explicit instruction ("commit and push all"); adding their patterns to `.gitignore` now doesn't retroactively untrack them. Asked Anna whether to `git rm --cached` both — she said leave them tracked as-is. So: new files under `.claude/` or new `referentiel_*.xlsx` exports won't be tracked going forward, but these two specific files remain in version control.
+
+**Verified**: `git status` clean after the commit (nothing untracked, nothing modified).
+
+**Open threads**: none new. Existing threads (U+008C warn-only, referentiel coverage gaps, `#page=19` anchor check) unchanged, see entries below.
+
+---
+
 ## 2026-07-12 — encoding invariant known-failure allowlist
 
 **Done** (1 commit): added `checks/known_encoding_failures.json` (same mechanics as `known_manifest_desync.json`) documenting the 42 U+FFFD chunks in `RP_DIAGNOSTIC.pdf` (font-subset corruption of periods, extraction audit finding, `family=rapport_presentation`/slot=0, zero production impact). `check_encoding` (`check.py`) now takes `settings` + an optional `known_encoding_path`, splits hard-fail hits into documented vs. new per `(source_path, char)` pair, and only ever suppresses **U+FFFD** — `_ALLOWLISTABLE_HARD_FAIL_CHARS = {"U+FFFD"}` hardcodes this so U+0000/U+0002 can never be silenced by this file even by mistake (tested: `test_encoding_fails_for_nul_byte_even_if_allowlisted`). Documented hits print a visible `known-failure (documented, see known_encoding_failures.json)` line rather than disappearing silently. 3 new tests (documented-pass, other-file-fails, nul-byte-cannot-be-allowlisted).

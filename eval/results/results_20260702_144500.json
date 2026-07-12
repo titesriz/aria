@@ -1,0 +1,150 @@
+[
+  {
+    "id": "UC-01",
+    "question": "Je cherche la hauteur maximale autorisée pour une construction neuve en zone UG dans le 11e arrondissement de Paris, le terrain est en secteur DG5.",
+    "complexity": "Moyenne",
+    "retrieval_score": 0.0,
+    "answer_score": 0.0,
+    "missing_articles": [
+      "UG.3.2",
+      "Plan général des hauteurs"
+    ],
+    "missing_keywords": [
+      "hauteur",
+      "plafond",
+      "Plan général des hauteurs",
+      "gabarit"
+    ],
+    "alpha": null,
+    "expansion_query": "",
+    "inferred_articles": [],
+    "raw_passages": "",
+    "raw_answer": "",
+    "error": "Command '['aria-rag', 'ask', 'Je cherche la hauteur maximale autorisée pour une construction neuve en zone UG dans le 11e arrondissement de Paris, le terrain est en secteur DG5.', '--top-k', '8', '--backend', 'ollama', '--family', 'reglement_ecrit']' timed out after 120 seconds"
+  },
+  {
+    "id": "UC-02",
+    "question": "Je cherche la règle de retrait par rapport à la voie publique pour une construction en zone UG dans le 15e arrondissement de Paris. Le projet est à l'alignement ou nécessite-t-il un retrait minimum de 3 mètres ?",
+    "complexity": "Moyenne",
+    "retrieval_score": 0.0,
+    "answer_score": 0.0,
+    "missing_articles": [
+      "UG.3.1.1",
+      "UG.3.1"
+    ],
+    "missing_keywords": [
+      "retrait",
+      "voie",
+      "alignement",
+      "3 mètres",
+      "recul",
+      "emprise"
+    ],
+    "alpha": null,
+    "expansion_query": "",
+    "inferred_articles": [],
+    "raw_passages": "",
+    "raw_answer": "",
+    "error": "Command '['aria-rag', 'ask', \"Je cherche la règle de retrait par rapport à la voie publique pour une construction en zone UG dans le 15e arrondissement de Paris. Le projet est à l'alignement ou nécessite-t-il un retrait minimum de 3 mètres ?\", '--top-k', '8', '--backend', 'ollama', '--family', 'reglement_ecrit']' timed out after 120 seconds"
+  },
+  {
+    "id": "UC-03",
+    "question": "Je cherche la règle de prospect par rapport à une limite séparative latérale droite en zone UG. Mon bâtiment a des baies principales (PP) sur ce pignon, la hauteur est de 8 mètres. Quelle distance minimale dois-je respecter ?",
+    "complexity": "Élevée",
+    "retrieval_score": 0.0,
+    "answer_score": 0.75,
+    "missing_articles": [
+      "UG.3.1.2",
+      "UG.3.1"
+    ],
+    "missing_keywords": [
+      "H/2",
+      "pignon"
+    ],
+    "alpha": null,
+    "expansion_query": "",
+    "inferred_articles": [],
+    "raw_passages": "[score=0.032] [reglement_ecrit] C:\\Users\\Wenwen\\aria\\Ressources\\PLU bioclimatique\\Règlement\\Pièces écrites\\Tome 1\\REG1.pdf\nation en retrait, le nu extérieur de la façade* doit être implanté à une distance minimale de 3 mètres par rapport à la limite séparative*. Lorsque la construction projetée est implantée en vis-vis d’une construction existante sur le fonds voisin dont la façade* comporte des baies, un prospect* minimal de 6 mètres entre façades* peut être imposé pour ne pas porter gravement atteinte à l’habitabilité* des locaux en vis-à-vis. 5° Cours communes et servitudes contractuelles d’implantation Les...\n\n[score=0.032] [reglement_ecrit] C:\\Users\\Wenwen\\aria\\Ressources\\PLU bioclimatique\\Règlement\\Pièces écrites\\Tome 1\\REG1.pdf\nier en vis-à-vis d’une limite séparative* comporte une ou plusieurs baies* dont aucune ne constitue l’éclairement premier d’une pièce principale*, le nu extérieur de la façade* doit, au droit de cette baie ou de ces baies, être implanté à une distance minimale de 3 mètres par rapport à la limite séparative*. Lorsque la construction projetée est implantée en vis-vis d’une construction existante sur le fonds voisin dont la façade* comporte des baies, un prospect* minimal de 6 mètres entre...\n\n[score=0.031] [reglement_ecrit] C:\\Users\\Wenwen\\aria\\Ressources\\PLU bioclimatique\\Règlement\\Pièces écrites\\Tome 1\\REG1.pdf\nminimale de 3 mètres par rapport à la limite séparative*. Lorsque la construction projetée est implantée en vis-vis d’une construction existante sur le fonds voisin dont la façade* comporte des baies, un prospect* minimal de 6 mètres entre façades* peut être imposé pour ne pas porter gravement atteinte à l’habitabilité* des locaux en vis-à-vis. 5° Cours communes et servitudes contractuelles d’implantation Les propriétaires de terrains* contigus ont la possibilité de ménager entre leurs...\n\n[score=0.029] [reglement_ecrit] C:\\Users\\Wenwen\\aria\\Ressources\\PLU bioclimatique\\Règlement\\Pièces écrites\\Tome 1\\REG1.pdf\nairement premier d’une pièce principale* Lorsqu’une façade* à édifier en vis-à-vis d’une limite séparative* comporte une ou plusieurs baies* dont aucune ne constitue l’éclairement premier d’une pièce principale*, le nu extérieur de la façade* doit, au droit de cette baie ou de ces baies, être implanté à une distance minimale de 3 mètres par rapport à la limite séparative*. Lorsque la construction projetée est implantée en vis-vis d’une construction existante sur le fonds voisin dont la...\n\n[score=0.027] [reglement_ecrit] C:\\Users\\Wenwen\\aria\\Ressources\\PLU bioclimatique\\Règlement\\Pièces écrites\\Tome 1\\REG1.pdf\nnde de constructibilité principale*, le gabarit-enveloppe* se compose d’une verticale limitée par une horizontale située à la hauteur plafond définie au Plan général des hauteurs. Sur les autres limites séparatives*, les dispositions du paragraphe 2° ci-avant (terrains dont la superficie est supérieure à 4 000 mètres carrés) s’appliquent quelle que soit la superficie du terrain*. Le point d’attache du gabarit-enveloppe* est pris sur la surface de nivellement* de l’îlot, en limite séparative*,...\n\n[score=0.026] [reglement_ecrit] C:\\Users\\Wenwen\\aria\\Ressources\\PLU bioclimatique\\Règlement\\Pièces écrites\\Tome 1\\REG1.pdf\nprécédentes peut être maintenue : • au droit d’un jour ou d’une baie située en limite du terrain* voisin ; • au droit d’une courette voisine ouverte en limite séparative*. Les parties de la construction projetée en adossement qui sont édifiées au-delà de la hauteur de 15 mètres résultant de l’application du paragraphe 2° de la sous-section UG.3.2.1 (limitation des hauteurs au-delà de la bande de constructibilité principale) doivent respecter un retrait minimal de 6 mètres par rapport aux...\n\n[score=0.026] [reglement_ecrit] C:\\Users\\Wenwen\\aria\\Ressources\\PLU bioclimatique\\Règlement\\Pièces écrites\\Tome 1\\REG1.pdf\nt premier de pièces principales* Lorsqu’une façade* à édifier en vis-à-vis d’une limite séparative* comporte une ou plusieurs baies* constituant l’éclairement premier de pièces principales*, le nu extérieur de la façade* doit, au droit de cette baie ou de ces baies, et sur une largeur minimale de 4 mètres, être implanté à une distance minimale de 6 mètres par rapport à la limite séparative*. Cette disposition ne s’applique pas lorsqu’il est fait application des dispositions définies au...\n\n[score=0.026] [reglement_ecrit] C:\\Users\\Wenwen\\aria\\Ressources\\PLU bioclimatique\\Règlement\\Pièces écrites\\Tome 1\\REG1.pdf\nUGSU.3.3.2 Adossements en limite séparative* Au-delà de la bande de constructibilité principale*, en cas d’adossement à une construction ou à un mur de soutènement implanté en limite séparative* sur le fonds voisin, une hauteur supérieure à la hauteur maximale prévue à la sous-section UGSU.3.2.5 (gabarit-enveloppe en limite séparative) est admise, dans la limite de la hauteur de cette construction ou de ce mur de soutènement et de la hauteur plafond définie au Plan général des hauteurs, sur...",
+    "raw_answer": "En se basant sur le REG1.pdf, voici les règles concernant le prospect par rapport à une limite séparative latérale droite en zone UG avec un bâtiment de 8 mètres de hauteur et des baies principales :\n\n*   **Distance minimale générale:** La distance minimale est de 3 mètres par rapport au nu extérieur de la façade si la construction est implantée en vis-à-vis d'une construction existante sur le fonds voisin dont la façade comporte des baies.\n*   **Prospect minimal:** Si aucune baie ne constitue l’éclairement premier d’une pièce principale, un prospect minimal de 6 mètres entre façades peut être imposé.\n\nIl est important de noter que ces règles sont modifiées si des cours communes ou servitudes contractuelles d'implantation existent (distance minimale de 2 mètres). De plus, la disposition ne s'applique pas si l’application des dispositions du paragraphe 5° ou de la sous-section UGSU.3.2.6 est faite.\n\nEn cas de doute, il faut considérer les dispositions relatives aux adossements en limite séparative (UGSU.3.3.2) qui permettent un dépassement de hauteur limité à 15 mètres sur une distance de 15 mètres si l'adossement prend en compte l’habitabilité d'une construction voisine.",
+    "error": null
+  },
+  {
+    "id": "UC-04",
+    "question": "Je cherche si un changement de destination de bureaux vers hôtel est autorisé en zone UG dans le 8e arrondissement de Paris. Quelles sont les conditions réglementaires applicables ?",
+    "complexity": "Élevée",
+    "retrieval_score": 0.0,
+    "answer_score": 0.0,
+    "missing_articles": [
+      "UG.1.3",
+      "UG.1"
+    ],
+    "missing_keywords": [
+      "changement de destination",
+      "bureaux",
+      "hôtel",
+      "hébergement hôtelier",
+      "destinations",
+      "plan d'équilibre",
+      "mixité"
+    ],
+    "alpha": null,
+    "expansion_query": "",
+    "inferred_articles": [],
+    "raw_passages": "",
+    "raw_answer": "",
+    "error": "Command '['aria-rag', 'ask', 'Je cherche si un changement de destination de bureaux vers hôtel est autorisé en zone UG dans le 8e arrondissement de Paris. Quelles sont les conditions réglementaires applicables ?', '--top-k', '8', '--backend', 'ollama', '--family', 'reglement_ecrit']' timed out after 120 seconds"
+  },
+  {
+    "id": "UC-05",
+    "question": "Je cherche les règles de mixité fonctionnelle pour un projet de 2000 m² de surface plancher mêlant bureaux et logements en zone UG. Quelle proportion de logements est imposée ?",
+    "complexity": "Élevée",
+    "retrieval_score": 0.0,
+    "answer_score": 0.0,
+    "missing_articles": [
+      "UG.1.4.1",
+      "UG.1.4"
+    ],
+    "missing_keywords": [
+      "mixité",
+      "logement",
+      "bureaux",
+      "surface plancher",
+      "2000",
+      "quota",
+      "proportion",
+      "fonctionnelle"
+    ],
+    "alpha": null,
+    "expansion_query": "",
+    "inferred_articles": [],
+    "raw_passages": "",
+    "raw_answer": "",
+    "error": "Command '['aria-rag', 'ask', 'Je cherche les règles de mixité fonctionnelle pour un projet de 2000 m² de surface plancher mêlant bureaux et logements en zone UG. Quelle proportion de logements est imposée ?', '--top-k', '8', '--backend', 'ollama', '--family', 'reglement_ecrit']' timed out after 120 seconds"
+  },
+  {
+    "id": "UC-16",
+    "question": "Je cherche à surélever un bâtiment existant R+4 culminant à 17 mètres en zone UG dans le 9e arrondissement. Le plan des hauteurs DG5 autorise 18 mètres à cet emplacement. La surélévation est-elle possible et sous quelles conditions ?",
+    "complexity": "Élevée",
+    "retrieval_score": 0.0,
+    "answer_score": 0.0,
+    "missing_articles": [
+      "UG.3.2",
+      "UG.3.3"
+    ],
+    "missing_keywords": [
+      "surélévation",
+      "existant",
+      "hauteur",
+      "hauteur plafond",
+      "Plan général des hauteurs",
+      "dépassement",
+      "gabarit"
+    ],
+    "alpha": null,
+    "expansion_query": "",
+    "inferred_articles": [],
+    "raw_passages": "",
+    "raw_answer": "",
+    "error": "Command '['aria-rag', 'ask', 'Je cherche à surélever un bâtiment existant R+4 culminant à 17 mètres en zone UG dans le 9e arrondissement. Le plan des hauteurs DG5 autorise 18 mètres à cet emplacement. La surélévation est-elle possible et sous quelles conditions ?', '--top-k', '8', '--backend', 'ollama', '--family', 'reglement_ecrit']' timed out after 120 seconds"
+  }
+]

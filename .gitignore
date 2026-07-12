@@ -10,4 +10,11 @@ data/index/
 data/sessions/
 Ressources/
 src/*.egg-info/
-eval/results/
+
+# Local Claude Code config (per-user permissions, not shared project config)
+.claude/
+
+# Generated referentiel exports (regenerable from referentiel.yaml, the
+# source of truth) -- not tracked, keep the current one on disk for the
+# Charline round-trip
+referentiel_*.xlsx
