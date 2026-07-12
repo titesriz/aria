@@ -1,0 +1,10 @@
+{
+  "_description": "U+FFFD (replacement character) hits from a known font-subset corruption -- confirmed by the extraction audit (2026-07-12 session) to be pypdf mis-decoding periods in a corrupted font subset embedded in the source PDF, not a general extraction bug. Scoped to RP_DIAGNOSTIC.pdf only: family=rapport_presentation, slot=0 (already in KNOWN_UNSERVED_FAMILIES, check.py), so these chunks never reach retrieval -- zero production impact. aria_rag.check treats exactly these (source_path, char) pairs as pass, and fails on any NEW U+FFFD hit not in this list. Only U+FFFD is eligible for this allowlist at all -- see check.py's _ALLOWLISTABLE_HARD_FAIL_CHARS; U+0000/U+0002 were fixed corpus-wide and a reappearance is always a regression, enforced independently of this file's contents. Paths are relative to Settings.docs_dir (Ressources/), forward-slash, for portability.",
+  "entries": [
+    {
+      "source_path": "PLU/75 Paris/PLU Bioclimatique/Rapport de présentation/RP_DIAGNOSTIC.pdf",
+      "char": "U+FFFD",
+      "known_chunk_count": 42
+    }
+  ]
+}

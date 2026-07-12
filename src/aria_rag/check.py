@@ -29,6 +29,7 @@ from aria_rag.referentiel import Piece, load_referentiel, match_piece
 CHECKS_DIR = ROOT_DIR / "checks"
 KNOWN_MANIFEST_DESYNC_PATH = CHECKS_DIR / "known_manifest_desync.json"
 KNOWN_ZERO_CHUNK_FILES_PATH = CHECKS_DIR / "known_zero_chunk_files.json"
+KNOWN_ENCODING_FAILURES_PATH = CHECKS_DIR / "known_encoding_failures.json"
 
 Status = Literal["pass", "fail", "warn"]
 
@@ -196,23 +197,69 @@ def check_metadata_integrity(chunks: list[Chunk], reports_dir: Path) -> Invarian
 _HARD_FAIL_CHARS = {"U+0000": chr(0x0000), "U+0002": chr(0x0002), "U+FFFD": chr(0xFFFD)}
 _WARN_ONLY_CHARS = {"U+008C": chr(0x008C)}  # known leftover, not yet addressed by loader.py -- see docstring there
 
-def check_encoding(chunks: list[Chunk], reports_dir: Path) -> InvariantResult:
-    hard_hits = {name: [c.chunk_id for c in chunks if ch in c.content] for name, ch in _HARD_FAIL_CHARS.items()}
+# Only U+FFFD may ever be suppressed by checks/known_encoding_failures.json.
+# U+0000 and U+0002 were fixed corpus-wide (see loader.py's control-char
+# strip) -- a reappearance of either is a regression, not a known issue, so
+# no allowlist entry can suppress them even if one is mistakenly added to
+# that file.
+_ALLOWLISTABLE_HARD_FAIL_CHARS = {"U+FFFD"}
+
+
+def check_encoding(
+    chunks: list[Chunk],
+    reports_dir: Path,
+    settings: Settings | None = None,
+    known_encoding_path: Path | None = None,
+) -> InvariantResult:
+    known_encoding_path = known_encoding_path or KNOWN_ENCODING_FAILURES_PATH
+    known_pairs: set[tuple[str, str]] = set()
+    if known_encoding_path.exists():
+        data = json.loads(known_encoding_path.read_text(encoding="utf-8"))
+        known_pairs = {(e["source_path"], e["char"]) for e in data.get("entries", [])}
+
+    hard_hits: dict[str, list[str]] = {}
+    documented_hits: dict[str, list[str]] = {}
+    new_hits: dict[str, list[str]] = {}
+    for name, ch in _HARD_FAIL_CHARS.items():
+        matches = [c for c in chunks if ch in c.content]
+        hard_hits[name] = [c.chunk_id for c in matches]
+        documented: list[Chunk] = []
+        if name in _ALLOWLISTABLE_HARD_FAIL_CHARS and settings is not None:
+            documented = [
+                c for c in matches
+                if (_relative_path(c.source_path, settings.docs_dir), name) in known_pairs
+            ]
+        documented_ids = {c.chunk_id for c in documented}
+        documented_hits[name] = [c.chunk_id for c in documented]
+        new_hits[name] = [c.chunk_id for c in matches if c.chunk_id not in documented_ids]
+
     warn_hits = {name: [c.chunk_id for c in chunks if ch in c.content] for name, ch in _WARN_ONLY_CHARS.items()}
-    hard_count = sum(len(v) for v in hard_hits.values())
+    new_count = sum(len(v) for v in new_hits.values())
     warn_count = sum(len(v) for v in warn_hits.values())
 
-    details_path = _write_details(reports_dir, "encoding", {"hard_fail": hard_hits, "warn_only": warn_hits})
+    details_path = _write_details(reports_dir, "encoding", {
+        "hard_fail": hard_hits,
+        "documented_hard_fail": documented_hits,
+        "new_hard_fail": new_hits,
+        "warn_only": warn_hits,
+    })
 
-    if hard_count:
+    if new_count:
         status: Status = "fail"
     elif warn_count:
         status = "warn"
     else:
         status = "pass"
-    hard_summary = ", ".join(f"{k}={len(v)}" for k, v in hard_hits.items() if v) or "none"
+
+    parts = []
+    for name in _HARD_FAIL_CHARS:
+        if new_hits[name]:
+            parts.append(f"{name}={len(new_hits[name])}")
+        if documented_hits[name]:
+            parts.append(f"{name}={len(documented_hits[name])} known-failure (documented, see {known_encoding_path.name})")
+    hard_summary = ", ".join(parts) or "none"
     message = f"hard-fail: {hard_summary}; warn-only U+008C: {warn_count} chunk(s) (known leftover)"
-    return InvariantResult("4. Encoding", status, hard_count, message, details_path)
+    return InvariantResult("4. Encoding", status, new_count, message, details_path)
 
 
 # ---------------------------------------------------------------------------
@@ -445,7 +492,7 @@ def run_checks(settings: Settings, strict: bool = False) -> list[InvariantResult
         check_family_coverage(chunks, settings, reports_dir),
         check_size_cap(chunks, settings, reports_dir),
         check_metadata_integrity(chunks, reports_dir),
-        check_encoding(chunks, reports_dir),
+        check_encoding(chunks, reports_dir, settings),
         check_manifest_consistency(chunks, manifest, settings, reports_dir),
         check_coverage(manifest, settings, reports_dir),
         check_fragment_floor(chunks, reports_dir),

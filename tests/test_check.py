@@ -190,6 +190,60 @@ def test_encoding_passes_clean_content(tmp_path):
     assert result.status == "pass"
 
 
+def _known_encoding_path(tmp_path: Path, entries: list[dict]) -> Path:
+    path = tmp_path / "known_encoding_failures.json"
+    path.write_text(json.dumps({"entries": entries}), encoding="utf-8")
+    return path
+
+
+def test_encoding_passes_for_documented_replacement_char(tmp_path):
+    """RP_DIAGNOSTIC.pdf's U+FFFD hits (font-subset corruption of periods,
+    confirmed by the extraction audit) are documented debt, not a live
+    regression -- the allowlist mechanics mirror
+    checks/known_manifest_desync.json.
+    """
+    settings = _settings(tmp_path)
+    source_path = str(settings.docs_dir / "RP_DIAGNOSTIC.pdf")
+    known_path = _known_encoding_path(tmp_path, [
+        {"source_path": "RP_DIAGNOSTIC.pdf", "char": "U+FFFD"},
+    ])
+    chunks = [_chunk(source_path=source_path, content="hello" + chr(0xFFFD) + "world", doc_family="rapport_presentation")]
+    result = check_encoding(chunks, tmp_path / "reports", settings, known_path)
+    assert result.status == "pass"
+    assert result.count == 0
+    assert "known-failure (documented" in result.message
+
+
+def test_encoding_fails_for_replacement_char_in_other_file(tmp_path):
+    """The allowlist is file-scoped -- U+FFFD in any file other than the
+    documented RP_DIAGNOSTIC.pdf entry must still fail loudly.
+    """
+    settings = _settings(tmp_path)
+    source_path = str(settings.docs_dir / "OTHER_FILE.pdf")
+    known_path = _known_encoding_path(tmp_path, [
+        {"source_path": "RP_DIAGNOSTIC.pdf", "char": "U+FFFD"},
+    ])
+    chunks = [_chunk(source_path=source_path, content="hello" + chr(0xFFFD) + "world")]
+    result = check_encoding(chunks, tmp_path / "reports", settings, known_path)
+    assert result.status == "fail"
+    assert result.count == 1
+
+
+def test_encoding_fails_for_nul_byte_even_if_allowlisted(tmp_path):
+    """U+0000/U+0002 were fixed corpus-wide -- a reappearance is always a
+    regression, so no allowlist entry (even a mistaken one) can suppress it.
+    """
+    settings = _settings(tmp_path)
+    source_path = str(settings.docs_dir / "RP_DIAGNOSTIC.pdf")
+    known_path = _known_encoding_path(tmp_path, [
+        {"source_path": "RP_DIAGNOSTIC.pdf", "char": "U+0000"},
+    ])
+    chunks = [_chunk(source_path=source_path, content="hello" + chr(0x0000) + "world")]
+    result = check_encoding(chunks, tmp_path / "reports", settings, known_path)
+    assert result.status == "fail"
+    assert result.count == 1
+
+
 # ---------------------------------------------------------------------------
 # 5. Manifest consistency
 # ---------------------------------------------------------------------------

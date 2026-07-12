@@ -6,6 +6,20 @@
 
 ---
 
+## 2026-07-12 — encoding invariant known-failure allowlist
+
+**Done** (1 commit): added `checks/known_encoding_failures.json` (same mechanics as `known_manifest_desync.json`) documenting the 42 U+FFFD chunks in `RP_DIAGNOSTIC.pdf` (font-subset corruption of periods, extraction audit finding, `family=rapport_presentation`/slot=0, zero production impact). `check_encoding` (`check.py`) now takes `settings` + an optional `known_encoding_path`, splits hard-fail hits into documented vs. new per `(source_path, char)` pair, and only ever suppresses **U+FFFD** — `_ALLOWLISTABLE_HARD_FAIL_CHARS = {"U+FFFD"}` hardcodes this so U+0000/U+0002 can never be silenced by this file even by mistake (tested: `test_encoding_fails_for_nul_byte_even_if_allowlisted`). Documented hits print a visible `known-failure (documented, see known_encoding_failures.json)` line rather than disappearing silently. 3 new tests (documented-pass, other-file-fails, nul-byte-cannot-be-allowlisted).
+
+**Measured**: full suite 150 passed (was 147). `aria-rag check --strict`: **0 FAIL** (was 1) / 3 WARN / 6 PASS, exit 0.
+
+**Decision — table doesn't match the original 7-PASS/1-WARN expectation**: the `4. Encoding` invariant itself is still **WARN**, not PASS — a separate, pre-existing, unrelated U+008C warn-only condition (176 chunks, "known leftover" per `check.py`'s existing comment, not touched this session) sits on the same invariant line and keeps it at WARN regardless of the FFFD fix. The actual 3 WARNs: `7. Fragment floor` (18 chunks, pre-existing), `4. Encoding` (U+008C, pre-existing), `9. Referentiel coverage` (2 gaps, pre-existing, per the prior session entry below). Net effect of this fix: FAIL→0, which was the actual goal (a permanently red check being ignored).
+
+**Open threads**:
+- U+008C warn-only (176 chunks) is still unaddressed by `loader.py` — separate, pre-existing debt, own future fix.
+- Everything else from the prior 2026-07-12 entry (below) is unchanged and still open.
+
+---
+
 ## 2026-07-12 — corpus referentiel + document-serving endpoint
 
 **Done** (1 commit, uncommitted at session end pending review — see below): added `referentiel.yaml` (git-tracked, repo root) — a piece-level metadata manifest (`pieces:` hand-authored, `family`/`status_opposabilite`/`expected`/`file_match`; `files:` generated) layered on top of `corpus_mapping.yaml`'s file-level classification. New module `aria_rag/referentiel.py`. Seeded 17 pieces (15 present + 2 expected-but-absent: `annexe-sanitaire`, `annexe-liste-servitudes` — both `notes: "à confirmer"`) covering all 413 indexed PDFs with zero unmapped files. New CLI: `aria-rag referentiel export`/`import` (xlsx round-trip via openpyxl, French headers, status dropdown) — round-trip test (export→import→regenerate) passes byte-identical. New check invariant "9. Referentiel coverage" (FAIL on unmapped indexed file, WARN on expected-but-absent piece) — wired into `run_checks`. New `GET /document/{piece_id}` endpoint (inline PDF, path-safety via referentiel-only lookup, 404 for multi-file pieces e.g. atlases) + `document_url` on `/ask` citations (only for single-current-file pieces). Added `openpyxl` dependency.
