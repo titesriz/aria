@@ -16,8 +16,8 @@ from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from sentence_transformers import SentenceTransformer
 
-from aria_rag.backend_check import BackendStatus, is_model_resident, startup_should_refuse, verify_backend
-from aria_rag.config import Settings, load_settings
+from aria_rag.backend_check import BackendStatus, is_model_resident, resolve_git_commit, startup_should_refuse, verify_backend
+from aria_rag.config import ROOT_DIR, Settings, load_settings
 from aria_rag.indexer import Chunk
 from aria_rag.llm import answer_question, extract_cited_markers
 from aria_rag.referentiel import PieceNotServableError, load_referentiel, resolve_document_path
@@ -38,6 +38,10 @@ logger = logging.getLogger(__name__)
 async def lifespan(app: FastAPI):
     settings = load_settings()
     print(f"[models] expansion={settings.expansion_model}  synthesis={settings.synthesis_model}", flush=True)
+
+    git_commit = resolve_git_commit(ROOT_DIR)
+    app.state.git_commit = git_commit
+    print(f"[startup] git_commit={git_commit}", flush=True)
 
     backend_status = verify_backend(settings)
     app.state.backend_status = backend_status
@@ -246,6 +250,7 @@ def _health_payload(state) -> dict:
     bs: BackendStatus | None = getattr(state, "backend_status", None)
     return {
         "status": "ok",
+        "git_commit": getattr(state, "git_commit", "unknown"),
         "backend_status": {
             "expansion_model": bs.expansion_model,
             "synthesis_model": bs.synthesis_model,

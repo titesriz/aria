@@ -6,6 +6,37 @@
 
 ---
 
+## 2026-07-12 — serve hardening: startup retry + version visibility
+
+**Done** (1 commit): two fixes for failure modes hit repeatedly this week, both in `backend_check.py`/`api.py`. (1) **Startup retry**: split `check_model_gpu` into a raising primitive (`_load_and_verify_gpu_once`) and two callers — `check_model_gpu` (unchanged, single-attempt, used where Ollama being down is a fact to report) and new `check_model_gpu_with_retry` (5 attempts, 2/4/8/16s backoff, used by `verify_backend` at startup) — retries **only** on `httpx.ConnectError` (Ollama not listening yet, the cold-boot race), never on a model that's reachable but lands on CPU (that's a real, distinct failure, reported immediately, not retried into a 30s wait). Each retry logs visibly (`logger.warning` + `print`); exhausting all 5 attempts still fails clearly, not an infinite wait. (2) **Version visibility**: new `resolve_git_commit(repo_root)` (`git rev-parse --short HEAD`, "unknown" fallback, never raises) — resolved once at startup, printed (`[startup] git_commit=...`), stored on `app.state.git_commit`, exposed in `/health` as top-level `git_commit` alongside `backend_status`.
+
+**Measured**: full suite **158 passed** (was 150) — 8 new tests: 4 retry-path (refused-then-up succeeds, exhausts-and-fails-clearly, genuine-CPU-fallback-not-retried, single-attempt-still-immediate), 4 `resolve_git_commit` (hash on success, unknown on nonzero exit, unknown when git missing, unknown on subprocess error), plus `git_commit` assertions added to the two existing `/health` payload tests. `eval/` untouched.
+
+**Verified live**: killed a stale `aria-rag serve` (PID 17512, predating today's changes) holding :8000, restarted after this commit. Startup log showed **zero retry lines** (Ollama already up) and `[startup] git_commit=` matching this session's commit hash (a commit can't quote its own hash in its own diff — see chat log for the exact verbatim `/health` payload reported to Anna, which does show it).
+
+**Also**: committed the CH-07 research session's `SESSION_STATE.md` entry (previously 0 commits, read-only) after re-verifying it's still accurate — nothing touched `data/index/` since it was written.
+
+**Open threads**: none new. The retry only guards the connection-refused race; if Ollama comes up but a model is still mid-load (e.g. answers a health-check-style ping but the real generate call times out rather than refusing), that's a different failure shape not covered here — flag if it recurs.
+
+---
+
+## 2026-07-12 — CH-07 corpus research (surélévation bureaux, zone UG)
+
+**Done** (0 commits — read-only, no code/dataset changes): grepped `data/index/chunks.json` directly (not through the RAG pipeline) for the règlement provisions governing "surélévation d'un immeuble de bureaux à Paris" in zone UG. Delivered a ranked article table (verbatim excerpts + page/source) and a vocabulary-gap table to Anna/Charline for the CH-07 golden-case draft. Not yet written into `eval/golden_dataset.json` — pending Charline's review per her instruction.
+
+**Key finding (non-obvious, corrects a likely wrong assumption)**: `UG.3.3.3` ("Surélévations destinées à l'Habitation") is the only height-bonus/dérogation article for surélévations in UG — and it's **explicitly Habitation-only**. A bureaux surélévation gets **no height bonus**; it's capped by the ordinary `UG.3.2.4` gabarit-enveloppe and the `Plan général des hauteurs` (graphic doc, `DG_E_HAUTEUR.pdf`), same as new construction. `UG.3.3.1` (dispositions générales on dépassements) names `UG.3.3.3` explicitly as Habitation-only, confirming this isn't a chunking artifact.
+
+**Second finding**: bioclimatic obligations for a surélévation are **not** `UG.5.2` (constructions existantes) — that section explicitly excludes extensions/surélévations, redirecting to `UG.5.1` (constructions neuves, extensions, surélévations), which has separate numeric thresholds for "bâtiments de bureau au sens de la RE 2020" (Bbio -5%, DH≤500°h, Cep,nr -20%, carbone ≤710 kgCO2/m²) distinct from logement collectif.
+
+**Vocabulary gap flagged for the expansion/ontology work**: "CINASPIC" (0 hits in `reglement_ecrit`, only appears in `rapport_presentation` as legacy/explanatory reference) — the 2025 PLU bioclimatique's actual binding destination name is "Équipements d'intérêt collectif et services publics". An architect query using "CINASPIC" would need this mapped, or expansion won't find the destination articles.
+
+**Open threads**:
+- CH-07 draft itself not yet written — next step is Charline's review of the ranked table before anything enters `eval/golden_dataset.json`.
+- Didn't check `UG.7.2.2`/`UG.7.2.3` (stationnement bureau) or `UG.3.1.1`/`UG.3.1.2` (implantation) in depth — flagged as lower-priority/secondary checks, not in the ranked 3-6.
+- Whether the specific bureaux building in Charline's case is patrimonially protected (`UG.2.4.1`) is unknown without the address — noted as conditional, not resolved.
+
+---
+
 ## 2026-07-12 — repo hygiene
 
 **Done** (1 commit, no code/server impact): deleted two unreferenced scratch files (`test.txt`, `page_end_sample.txt` — verified via repo-wide grep before deleting, zero hits). `.gitignore`: added `.claude/` (local Claude Code config) and `referentiel_*.xlsx` (regenerable export, `referentiel.yaml` is the source of truth) — both affect only *future* untracked files, not what's already committed (see decision below). Removed the `eval/results/` ignore rule and tracked all 93 existing result JSONs (5.2MB) — this is the fix-by-fix measurement history CLAUDE.md's audit-before-fix convention depends on (`eval/results/` paths cited per fix), and it had never actually been version-controlled.

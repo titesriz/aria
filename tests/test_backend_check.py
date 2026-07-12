@@ -8,16 +8,21 @@ failing) and assert it's detected loudly rather than swallowed.
 """
 from __future__ import annotations
 
+import subprocess
 import sys
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
+import httpx
+
 from aria_rag import backend_check
 from aria_rag.backend_check import (
     check_model_gpu,
+    check_model_gpu_with_retry,
     is_model_resident,
+    resolve_git_commit,
     startup_should_refuse,
     verify_backend,
 )
@@ -121,6 +126,104 @@ def test_check_model_gpu_matches_on_name_field_too():
         result = check_model_gpu("http://localhost:11434", "gemma3:4b")
 
     assert result.gpu_verified is True
+
+
+# ---------------------------------------------------------------------------
+# check_model_gpu_with_retry — the cold-boot race (Ollama not listening yet)
+# ---------------------------------------------------------------------------
+
+def test_retry_succeeds_after_connection_refused_then_up():
+    """The exact failure mode reported this week: connection refused on
+    the first model, success on the second seconds later. Simulates two
+    refused attempts followed by Ollama coming up.
+    """
+    ps_response = _response({"models": [{"model": "gemma3:4b", "size": 100, "size_vram": 100}]})
+    post_calls = {"n": 0}
+
+    def fake_post(*args, **kwargs):
+        post_calls["n"] += 1
+        if post_calls["n"] < 3:
+            raise httpx.ConnectError("connection refused")
+        return _response({})
+
+    with patch.object(backend_check, "time") as mock_time, \
+         patch.object(backend_check.httpx, "post", side_effect=fake_post), \
+         patch.object(backend_check.httpx, "get", return_value=ps_response):
+        result = check_model_gpu_with_retry("http://localhost:11434", "gemma3:4b")
+
+    assert result.gpu_verified is True
+    assert post_calls["n"] == 3
+    # Two retries happened (attempts 1 and 2 failed), so two backoff sleeps,
+    # the documented 2s/4s doubling.
+    assert mock_time.sleep.call_args_list == [((2.0,),), ((4.0,),)]
+
+
+def test_retry_fails_clearly_after_exhausting_attempts():
+    """A genuinely-down Ollama must still fail clearly, not hang forever —
+    all 5 attempts refused, bounded wait, clear error at the end.
+    """
+    with patch.object(backend_check, "time") as mock_time, \
+         patch.object(backend_check.httpx, "post", side_effect=httpx.ConnectError("connection refused")):
+        result = check_model_gpu_with_retry("http://localhost:11434", "gemma3:4b")
+
+    assert result.gpu_verified is False
+    assert "after 5 attempts" in result.error
+    assert mock_time.sleep.call_count == 4  # 4 backoff waits between 5 attempts
+
+
+def test_retry_does_not_retry_genuine_cpu_fallback():
+    """A model that Ollama reaches but reports as CPU-resident is a real,
+    distinct failure — must be reported on the first attempt, never
+    retried into a 30s wait.
+    """
+    ps_response = _response({"models": [{"model": "gemma3:4b", "size": 3000000000, "size_vram": 0}]})
+    with patch.object(backend_check, "time") as mock_time, \
+         patch.object(backend_check.httpx, "post", return_value=_response({})), \
+         patch.object(backend_check.httpx, "get", return_value=ps_response):
+        result = check_model_gpu_with_retry("http://localhost:11434", "gemma3:4b")
+
+    assert result.gpu_verified is False
+    mock_time.sleep.assert_not_called()
+
+
+def test_check_model_gpu_single_attempt_reports_connection_failure_immediately():
+    """check_model_gpu (as opposed to the _with_retry variant) never
+    retries — used where Ollama being down is a fact to report, not a
+    race to wait out.
+    """
+    with patch.object(backend_check, "time") as mock_time, \
+         patch.object(backend_check.httpx, "post", side_effect=httpx.ConnectError("connection refused")):
+        result = check_model_gpu("http://localhost:11434", "gemma3:4b")
+
+    assert result.gpu_verified is False
+    assert "load failed" in result.error
+    mock_time.sleep.assert_not_called()
+
+
+# ---------------------------------------------------------------------------
+# resolve_git_commit — version visibility (the ghost-server killer)
+# ---------------------------------------------------------------------------
+
+def test_resolve_git_commit_returns_hash_on_success(tmp_path):
+    fake_result = MagicMock(returncode=0, stdout="a1b2c3d\n")
+    with patch.object(backend_check.subprocess, "run", return_value=fake_result):
+        assert resolve_git_commit(tmp_path) == "a1b2c3d"
+
+
+def test_resolve_git_commit_unknown_on_nonzero_exit(tmp_path):
+    fake_result = MagicMock(returncode=128, stdout="")
+    with patch.object(backend_check.subprocess, "run", return_value=fake_result):
+        assert resolve_git_commit(tmp_path) == "unknown"
+
+
+def test_resolve_git_commit_unknown_when_git_missing(tmp_path):
+    with patch.object(backend_check.subprocess, "run", side_effect=FileNotFoundError("git not found")):
+        assert resolve_git_commit(tmp_path) == "unknown"
+
+
+def test_resolve_git_commit_unknown_on_subprocess_error(tmp_path):
+    with patch.object(backend_check.subprocess, "run", side_effect=subprocess.TimeoutExpired("git", 5)):
+        assert resolve_git_commit(tmp_path) == "unknown"
 
 
 # ---------------------------------------------------------------------------
@@ -235,9 +338,11 @@ def test_health_payload_shape_with_backend_status():
             expansion_model="gemma3:4b", synthesis_model="ministral-3:8b",
             gpu_verified=True, last_check="2026-07-10T00:00:00+00:00",
         )
+        git_commit = "a1b2c3d"
 
     payload = _health_payload(FakeState())
     assert payload["status"] == "ok"
+    assert payload["git_commit"] == "a1b2c3d"
     assert payload["backend_status"] == {
         "expansion_model": "gemma3:4b",
         "synthesis_model": "ministral-3:8b",
@@ -250,8 +355,9 @@ def test_health_payload_backend_status_none_before_startup_check_ran():
     from aria_rag.api import _health_payload
 
     class FakeState:
-        pass  # no backend_status attribute set yet
+        pass  # no backend_status or git_commit attribute set yet
 
     payload = _health_payload(FakeState())
     assert payload["status"] == "ok"
     assert payload["backend_status"] is None
+    assert payload["git_commit"] == "unknown"
