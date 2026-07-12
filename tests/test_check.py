@@ -21,12 +21,14 @@ from aria_rag.check import (
     check_fragment_floor,
     check_manifest_consistency,
     check_metadata_integrity,
+    check_referentiel_coverage,
     check_size_cap,
     run_checks,
 )
 from aria_rag.config import Settings
 from aria_rag.corpus_mapping import MappingRule
 from aria_rag.indexer import Chunk, IndexedFile
+from aria_rag.referentiel import Piece
 
 
 def _chunk(**overrides) -> Chunk:
@@ -339,6 +341,65 @@ def test_dedup_ledger_passes_for_valid_ledger(tmp_path):
     result = check_dedup_ledger(settings, tmp_path / "reports")
     assert result.status == "pass"
     assert result.count == 1
+
+
+# ---------------------------------------------------------------------------
+# 9. Referentiel coverage
+# ---------------------------------------------------------------------------
+
+def _piece(**overrides) -> Piece:
+    defaults = dict(
+        id="p1", official_name="Pièce 1", status_opposabilite="opposable",
+        family="annexes", norm_level="local", expected=True, file_match="Annexes",
+        notes="",
+    )
+    defaults.update(overrides)
+    return Piece(**defaults)
+
+
+def test_referentiel_coverage_passes_when_every_file_mapped_and_no_gaps(tmp_path):
+    settings = _settings(tmp_path)
+    docs_dir = settings.docs_dir
+    docs_dir.mkdir(parents=True, exist_ok=True)
+    source_path = str(docs_dir / "Annexes" / "A.pdf")
+    manifest = [IndexedFile(source_path=source_path, size_bytes=1, modified_time=1.0, chunk_count=5)]
+    pieces = [_piece(id="p1", file_match="Annexes", expected=True)]
+    result = check_referentiel_coverage(manifest, pieces, settings, tmp_path / "reports")
+    assert result.status == "pass"
+    assert result.count == 0
+
+
+def test_referentiel_coverage_fails_for_unmapped_indexed_file(tmp_path):
+    settings = _settings(tmp_path)
+    docs_dir = settings.docs_dir
+    docs_dir.mkdir(parents=True, exist_ok=True)
+    source_path = str(docs_dir / "Unmapped" / "A.pdf")
+    manifest = [IndexedFile(source_path=source_path, size_bytes=1, modified_time=1.0, chunk_count=5)]
+    pieces = [_piece(id="p1", file_match="Annexes", expected=True)]
+    result = check_referentiel_coverage(manifest, pieces, settings, tmp_path / "reports")
+    assert result.status == "fail"
+    assert result.count == 1
+
+
+def test_referentiel_coverage_warns_for_expected_piece_with_no_file(tmp_path):
+    settings = _settings(tmp_path)
+    docs_dir = settings.docs_dir
+    docs_dir.mkdir(parents=True, exist_ok=True)
+    manifest = []  # nothing indexed at all
+    pieces = [_piece(id="annexe-sanitaire", file_match=None, expected=True)]
+    result = check_referentiel_coverage(manifest, pieces, settings, tmp_path / "reports")
+    assert result.status == "warn"
+    assert result.count == 0  # count tracks unmapped files, not coverage gaps
+
+
+def test_referentiel_coverage_does_not_warn_for_non_expected_absent_piece(tmp_path):
+    settings = _settings(tmp_path)
+    docs_dir = settings.docs_dir
+    docs_dir.mkdir(parents=True, exist_ok=True)
+    manifest = []
+    pieces = [_piece(id="optional-piece", file_match=None, expected=False)]
+    result = check_referentiel_coverage(manifest, pieces, settings, tmp_path / "reports")
+    assert result.status == "pass"
 
 
 # ---------------------------------------------------------------------------

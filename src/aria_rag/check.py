@@ -24,6 +24,7 @@ from aria_rag.config import ROOT_DIR, Settings
 from aria_rag.corpus_mapping import MappingRule, classify_path, load_rules
 from aria_rag.indexer import Chunk, IndexedFile, load_existing_chunks, load_manifest
 from aria_rag.loader import iter_pdf_paths
+from aria_rag.referentiel import Piece, load_referentiel, match_piece
 
 CHECKS_DIR = ROOT_DIR / "checks"
 KNOWN_MANIFEST_DESYNC_PATH = CHECKS_DIR / "known_manifest_desync.json"
@@ -364,6 +365,55 @@ def check_dedup_ledger(settings: Settings, reports_dir: Path) -> InvariantResult
 
 
 # ---------------------------------------------------------------------------
+# 9. Referentiel coverage
+# ---------------------------------------------------------------------------
+
+def check_referentiel_coverage(
+    manifest: list[IndexedFile],
+    pieces: list[Piece],
+    settings: Settings,
+    reports_dir: Path,
+) -> InvariantResult:
+    """Every indexed (manifest) file must map to exactly one referentiel
+    piece — an unmapped file means referentiel.yaml has fallen out of sync
+    with the corpus (FAIL, loud by design, same posture as family coverage).
+    Every expected=true piece with no matching file is a documented gap in
+    the corpus relative to the official PLU dossier structure (WARN, not
+    FAIL — an intentionally absent piece, e.g. "à confirmer" annexes, is
+    known debt, not a regression).
+
+    "every piece with present=true has >=1 file" (the spec's middle clause)
+    is not separately checked: present is *derived* as "has >=1 matching
+    file" (see referentiel.piece_present), so it holds by construction — the
+    only way it could fail is a bug in piece_present itself, which is a unit
+    test's job, not a corpus-check's.
+    """
+    unmapped: list[str] = []
+    piece_has_file: dict[str, bool] = {p.id: False for p in pieces}
+    for m in manifest:
+        rel = _relative_path(m.source_path, settings.docs_dir)
+        piece = match_piece(rel, pieces)
+        if piece is None:
+            unmapped.append(rel)
+        else:
+            piece_has_file[piece.id] = True
+
+    coverage_gaps = sorted(p.id for p in pieces if p.expected and not piece_has_file.get(p.id, False))
+
+    details_path = _write_details(reports_dir, "referentiel_coverage", {
+        "unmapped_indexed_files": unmapped,
+        "expected_pieces_with_no_file": coverage_gaps,
+    })
+    status: Status = "fail" if unmapped else ("warn" if coverage_gaps else "pass")
+    count = len(unmapped)
+    message = (
+        f"{len(unmapped)} indexed file(s) unmapped to any referentiel piece; "
+        f"{len(coverage_gaps)} expected piece(s) with no file (coverage gap): {coverage_gaps}"
+    )
+    return InvariantResult("9. Referentiel coverage", status, count, message, details_path)
+
+
+# ---------------------------------------------------------------------------
 # Report + entry point
 # ---------------------------------------------------------------------------
 
@@ -389,6 +439,7 @@ def run_checks(settings: Settings, strict: bool = False) -> list[InvariantResult
     chunks = [c for source_chunks in chunks_by_source.values() for c in source_chunks]
     manifest = list(load_manifest(settings.index_dir).values())
     reports_dir = settings.index_dir / "check_reports"
+    pieces = load_referentiel().pieces
 
     results = [
         check_family_coverage(chunks, settings, reports_dir),
@@ -399,6 +450,7 @@ def run_checks(settings: Settings, strict: bool = False) -> list[InvariantResult
         check_coverage(manifest, settings, reports_dir),
         check_fragment_floor(chunks, reports_dir),
         check_dedup_ledger(settings, reports_dir),
+        check_referentiel_coverage(manifest, pieces, settings, reports_dir),
     ]
     print_report(results)
 

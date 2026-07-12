@@ -1,0 +1,2414 @@
+# Corpus referentiel — piece-level metadata manifest for the official PLU
+# dossier structure. Read/written by aria_rag.referentiel. See that module's
+# docstring for the schema. Round-trip this file via
+# `aria-rag referentiel export` / `aria-rag referentiel import <xlsx>` rather
+# than hand-editing the `files:` section (regenerated every import/export —
+# any hand edit there is silently discarded).
+#
+# pieces: hand-authored. file_match is a folder/file PREFIX, relative to
+# Settings.docs_dir, forward-slash, NFC-normalized — same longest-prefix-wins
+# matching convention as corpus_mapping.yaml. null for a piece expected by
+# the official dossier structure but absent from today's corpus.
+#
+# files: GENERATED — do not hand-edit. Regenerated from the current corpus
+# (on-disk PDFs + data/index/chunks.json) every export/import.
+
+pieces:
+- id: reg-ecrit-t1
+  official_name: Règlement — Pièces écrites — Tome 1
+  status_opposabilite: opposable
+  family: reglement_ecrit
+  norm_level: local
+  expected: true
+  file_match: PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 1
+  notes: ''
+- id: reg-ecrit-t2
+  official_name: Règlement — Pièces écrites — Tome 2
+  status_opposabilite: opposable
+  family: reglement_ecrit
+  norm_level: local
+  expected: true
+  file_match: PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 2
+  notes: Multi-fichiers même après exclusion des versions superseded (REG2A1_MS1 +
+    REG2A10_1DE2_MS1 + REG2A10_2DE2_MS1) — /document ne sert pas cette pièce individuellement.
+- id: reg-graphique-atlas1
+  official_name: Règlement — Documents graphiques — Atlas 1 (zonage général, hauteurs,
+    bois)
+  status_opposabilite: opposable
+  family: reglement_graphique
+  norm_level: local
+  expected: true
+  file_match: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas
+    1
+  notes: ''
+- id: reg-graphique-atlas2
+  official_name: Règlement — Documents graphiques — Atlas 2 (planches au 1/2000)
+  status_opposabilite: opposable
+  family: reglement_graphique
+  norm_level: local
+  expected: true
+  file_match: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas
+    2
+  notes: ''
+- id: reg-graphique-atlas3
+  official_name: Règlement — Documents graphiques — Atlas 3 (secteurs maisons/villas,
+    Montmartre)
+  status_opposabilite: opposable
+  family: reglement_graphique
+  norm_level: local
+  expected: true
+  file_match: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas
+    3
+  notes: ''
+- id: annexe-textes-illustres
+  official_name: Annexes — Textes et documents illustrés (ANN1–ANN11)
+  status_opposabilite: opposable
+  family: annexes
+  norm_level: local
+  expected: true
+  file_match: PLU/75 Paris/PLU Bioclimatique/Annexes/Textes et documents illustrés
+  notes: ''
+- id: annexe-addenda
+  official_name: Annexes — Addenda (ANNAD1–ANNAD4)
+  status_opposabilite: opposable
+  family: annexes
+  norm_level: local
+  expected: true
+  file_match: PLU/75 Paris/PLU Bioclimatique/Annexes/Addenda
+  notes: ''
+- id: annexe-plans-sup
+  official_name: Annexes — Servitudes d'utilité publique (plans SUP)
+  status_opposabilite: opposable
+  family: annexes
+  norm_level: local
+  expected: true
+  file_match: PLU/75 Paris/PLU Bioclimatique/Annexes/Plans SUP
+  notes: à confirmer — vérifier qu'il existe une liste textuelle des servitudes en
+    complément des plans (voir aussi annexe-liste-servitudes, absente du corpus).
+- id: annexe-ppri
+  official_name: Annexes — Plan de prévention des risques d'inondation (PPRI)
+  status_opposabilite: opposable
+  family: annexes
+  norm_level: local
+  expected: true
+  file_match: PLU/75 Paris/PLU Bioclimatique/Annexes/Plans SUP/PPRI
+  notes: ''
+- id: annexe-plans-autres-perimetres
+  official_name: Annexes — Plans autres périmètres (A15152)
+  status_opposabilite: opposable
+  family: annexes
+  norm_level: local
+  expected: true
+  file_match: PLU/75 Paris/PLU Bioclimatique/Annexes/Plans autres périmètres
+  notes: à confirmer — nature exacte du périmètre A15152 non vérifiée.
+- id: oap-sectorielles
+  official_name: OAP — Orientations d'aménagement sectorielles
+  status_opposabilite: opposable_compatibilite
+  family: oap
+  norm_level: local
+  expected: true
+  file_match: PLU/75 Paris/PLU Bioclimatique/OAP/Sectorielles
+  notes: ''
+- id: oap-thematiques
+  official_name: OAP — Orientations d'aménagement thématiques
+  status_opposabilite: opposable_compatibilite
+  family: oap
+  norm_level: local
+  expected: true
+  file_match: PLU/75 Paris/PLU Bioclimatique/OAP/Thématiques
+  notes: ''
+- id: padd
+  official_name: Projet d'Aménagement et de Développement Durables (PADD)
+  status_opposabilite: informatif
+  family: padd
+  norm_level: local
+  expected: true
+  file_match: PLU/75 Paris/PLU Bioclimatique/PADD
+  notes: ''
+- id: rapport-presentation
+  official_name: Rapport de présentation
+  status_opposabilite: informatif
+  family: rapport_presentation
+  norm_level: local
+  expected: true
+  file_match: PLU/75 Paris/PLU Bioclimatique/Rapport de présentation
+  notes: ''
+- id: cch
+  official_name: Code de la Construction et de l'Habitation (CCH)
+  status_opposabilite: norme_nationale
+  family: cch
+  norm_level: national
+  expected: true
+  file_match: LEGIFRANCE/CCH
+  notes: ''
+- id: annexe-sanitaire
+  official_name: Annexes sanitaires (eau potable, assainissement, déchets)
+  status_opposabilite: opposable
+  family: annexes
+  norm_level: local
+  expected: true
+  file_match: null
+  notes: à confirmer — non trouvé dans le corpus actuel ; pièce généralement obligatoire
+    au dossier PLU (art. R151-51 s. du Code de l'urbanisme).
+- id: annexe-liste-servitudes
+  official_name: Liste des servitudes d'utilité publique (texte, en complément des
+    plans SUP)
+  status_opposabilite: opposable
+  family: annexes
+  norm_level: local
+  expected: true
+  file_match: null
+  notes: à confirmer — seuls les plans graphiques (ASUP*) sont présents ; pas de document
+    texte listant les servitudes trouvé.
+files:
+- path: LEGIFRANCE/CCH/LEGITEXT000006074096.pdf
+  piece_id: cch
+  validity: current
+  chunk_count: 5062
+  pages: 1856
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Addenda/ANNAD1_2025_12_19.pdf
+  piece_id: annexe-addenda
+  validity: current
+  chunk_count: 41
+  pages: 8
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Addenda/ANNAD2.pdf
+  piece_id: annexe-addenda
+  validity: current
+  chunk_count: 8
+  pages: 4
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Addenda/ANNAD3.pdf
+  piece_id: annexe-addenda
+  validity: current
+  chunk_count: 5
+  pages: 3
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Addenda/ANNAD4.pdf
+  piece_id: annexe-addenda
+  validity: current
+  chunk_count: 27
+  pages: 5
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Plans SUP/ASUP1_2025_12_19.pdf
+  piece_id: annexe-plans-sup
+  validity: current
+  chunk_count: 209
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Plans SUP/ASUP2AD5.pdf
+  piece_id: annexe-plans-sup
+  validity: current
+  chunk_count: 2
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Plans SUP/ASUP2D3.pdf
+  piece_id: annexe-plans-sup
+  validity: current
+  chunk_count: 205
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Plans SUP/ASUP2E.pdf
+  piece_id: annexe-plans-sup
+  validity: current
+  chunk_count: 202
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Plans SUP/ASUP4_2025_12_19.pdf
+  piece_id: annexe-plans-sup
+  validity: current
+  chunk_count: 201
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Plans SUP/ASUPBOIS.pdf
+  piece_id: annexe-plans-sup
+  validity: current
+  chunk_count: 53
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Plans SUP/PPRI/ALEA1910.pdf
+  piece_id: annexe-ppri
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Plans SUP/PPRI/BOREUX.pdf
+  piece_id: annexe-ppri
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Plans SUP/PPRI/ENJEUX.pdf
+  piece_id: annexe-ppri
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Plans SUP/PPRI/PPRI12.pdf
+  piece_id: annexe-ppri
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Plans SUP/PPRI/PPRI1234_11.pdf
+  piece_id: annexe-ppri
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Plans SUP/PPRI/PPRI13.pdf
+  piece_id: annexe-ppri
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Plans SUP/PPRI/PPRI15.pdf
+  piece_id: annexe-ppri
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Plans SUP/PPRI/PPRI16.pdf
+  piece_id: annexe-ppri
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Plans SUP/PPRI/PPRI5_6_7.pdf
+  piece_id: annexe-ppri
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Plans SUP/PPRI/PPRI8_9_10.pdf
+  piece_id: annexe-ppri
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Plans SUP/PPRI/PPRIBOU.pdf
+  piece_id: annexe-ppri
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Plans SUP/PPRI/PPRI_LEGEND.pdf
+  piece_id: annexe-ppri
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Plans autres périmètres/A15152_01A04_2025_12_19.pdf
+  piece_id: annexe-plans-autres-perimetres
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Plans autres périmètres/A15152_05_06_2025_12_19.pdf
+  piece_id: annexe-plans-autres-perimetres
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Plans autres périmètres/A15152_07_08_2025_12_19.pdf
+  piece_id: annexe-plans-autres-perimetres
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Plans autres périmètres/A15152_09_10_2025_12_19.pdf
+  piece_id: annexe-plans-autres-perimetres
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Plans autres périmètres/A15152_11_2025_12_19.pdf
+  piece_id: annexe-plans-autres-perimetres
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Plans autres périmètres/A15152_12_2025_12_19.pdf
+  piece_id: annexe-plans-autres-perimetres
+  validity: current
+  chunk_count: 3
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Plans autres périmètres/A15152_13_2025_12_19.pdf
+  piece_id: annexe-plans-autres-perimetres
+  validity: current
+  chunk_count: 3
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Plans autres périmètres/A15152_14_2025_12_19.pdf
+  piece_id: annexe-plans-autres-perimetres
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Plans autres périmètres/A15152_15_2025_12_19.pdf
+  piece_id: annexe-plans-autres-perimetres
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Plans autres périmètres/A15152_16_2025_12_19.pdf
+  piece_id: annexe-plans-autres-perimetres
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Plans autres périmètres/A15152_17_2025_12_19.pdf
+  piece_id: annexe-plans-autres-perimetres
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Plans autres périmètres/A15152_18_2025_12_19.pdf
+  piece_id: annexe-plans-autres-perimetres
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Plans autres périmètres/A15152_19_2025_12_19.pdf
+  piece_id: annexe-plans-autres-perimetres
+  validity: current
+  chunk_count: 3
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Plans autres périmètres/A15152_20_2025_12_19.pdf
+  piece_id: annexe-plans-autres-perimetres
+  validity: current
+  chunk_count: 2
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Textes et documents illustrés/ANN10.pdf
+  piece_id: annexe-textes-illustres
+  validity: current
+  chunk_count: 5
+  pages: 22
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Textes et documents illustrés/ANN11_2025_12_19.pdf
+  piece_id: annexe-textes-illustres
+  validity: current
+  chunk_count: 3
+  pages: 3
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Textes et documents illustrés/ANN1_2025_12_19.pdf
+  piece_id: annexe-textes-illustres
+  validity: current
+  chunk_count: 702
+  pages: 140
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Textes et documents illustrés/ANN2A_2025_12_19.pdf
+  piece_id: annexe-textes-illustres
+  validity: current
+  chunk_count: 4
+  pages: 20
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Textes et documents illustrés/ANN2B_2025_12_19.pdf
+  piece_id: annexe-textes-illustres
+  validity: current
+  chunk_count: 48
+  pages: 51
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Textes et documents illustrés/ANN3.pdf
+  piece_id: annexe-textes-illustres
+  validity: current
+  chunk_count: 23
+  pages: 10
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Textes et documents illustrés/ANN4_2025_12_19.pdf
+  piece_id: annexe-textes-illustres
+  validity: current
+  chunk_count: 240
+  pages: 128
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Textes et documents illustrés/ANN5_2025_12_19.pdf
+  piece_id: annexe-textes-illustres
+  validity: current
+  chunk_count: 143
+  pages: 34
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Textes et documents illustrés/ANN6.pdf
+  piece_id: annexe-textes-illustres
+  validity: current
+  chunk_count: 6
+  pages: 3
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Textes et documents illustrés/ANN7.pdf
+  piece_id: annexe-textes-illustres
+  validity: current
+  chunk_count: 2
+  pages: 6
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Textes et documents illustrés/ANN8_2025_12_19.pdf
+  piece_id: annexe-textes-illustres
+  validity: current
+  chunk_count: 33
+  pages: 12
+- path: PLU/75 Paris/PLU Bioclimatique/Annexes/Textes et documents illustrés/ANN9.pdf
+  piece_id: annexe-textes-illustres
+  validity: current
+  chunk_count: 92
+  pages: 34
+- path: PLU/75 Paris/PLU Bioclimatique/OAP/Sectorielles/OAP_BARTHOLOME_BRANCION.pdf
+  piece_id: oap-sectorielles
+  validity: current
+  chunk_count: 6
+  pages: 6
+- path: PLU/75 Paris/PLU Bioclimatique/OAP/Sectorielles/OAP_BEAUGRENELLE.pdf
+  piece_id: oap-sectorielles
+  validity: current
+  chunk_count: 7
+  pages: 8
+- path: PLU/75 Paris/PLU Bioclimatique/OAP/Sectorielles/OAP_BEDIER_OUDINE.pdf
+  piece_id: oap-sectorielles
+  validity: current
+  chunk_count: 11
+  pages: 8
+- path: PLU/75 Paris/PLU Bioclimatique/OAP/Sectorielles/OAP_BERCY_CHARENTON.pdf
+  piece_id: oap-sectorielles
+  validity: current
+  chunk_count: 8
+  pages: 6
+- path: PLU/75 Paris/PLU Bioclimatique/OAP/Sectorielles/OAP_GARE_DE_LYON_DAUMESNIL.pdf
+  piece_id: oap-sectorielles
+  validity: current
+  chunk_count: 6
+  pages: 6
+- path: PLU/75 Paris/PLU Bioclimatique/OAP/Sectorielles/OAP_MAINE_MONTPARNASSE.pdf
+  piece_id: oap-sectorielles
+  validity: current
+  chunk_count: 6
+  pages: 6
+- path: PLU/75 Paris/PLU Bioclimatique/OAP/Sectorielles/OAP_OLYMPIADES.pdf
+  piece_id: oap-sectorielles
+  validity: current
+  chunk_count: 8
+  pages: 8
+- path: PLU/75 Paris/PLU Bioclimatique/OAP/Sectorielles/OAP_PARIS_NORD_EST.pdf
+  piece_id: oap-sectorielles
+  validity: current
+  chunk_count: 31
+  pages: 12
+- path: PLU/75 Paris/PLU Bioclimatique/OAP/Sectorielles/OAP_PARIS_RIVE_GAUCHE.pdf
+  piece_id: oap-sectorielles
+  validity: current
+  chunk_count: 18
+  pages: 10
+- path: PLU/75 Paris/PLU Bioclimatique/OAP/Sectorielles/OAP_PAUL_BOURGET.pdf
+  piece_id: oap-sectorielles
+  validity: current
+  chunk_count: 6
+  pages: 6
+- path: PLU/75 Paris/PLU Bioclimatique/OAP/Sectorielles/OAP_PORTES_EST.pdf
+  piece_id: oap-sectorielles
+  validity: current
+  chunk_count: 15
+  pages: 8
+- path: PLU/75 Paris/PLU Bioclimatique/OAP/Sectorielles/OAP_SAINT_VINCENT_DE_PAUL.pdf
+  piece_id: oap-sectorielles
+  validity: current
+  chunk_count: 5
+  pages: 6
+- path: PLU/75 Paris/PLU Bioclimatique/OAP/Sectorielles/OAP_SUZANNE_LENGLEN.pdf
+  piece_id: oap-sectorielles
+  validity: current
+  chunk_count: 7
+  pages: 6
+- path: PLU/75 Paris/PLU Bioclimatique/OAP/Thématiques/OAP_BIODIVERSITE.pdf
+  piece_id: oap-thematiques
+  validity: current
+  chunk_count: 34
+  pages: 26
+- path: PLU/75 Paris/PLU Bioclimatique/OAP/Thématiques/OAP_CONSTRUCTION.pdf
+  piece_id: oap-thematiques
+  validity: current
+  chunk_count: 18
+  pages: 11
+- path: PLU/75 Paris/PLU Bioclimatique/OAP/Thématiques/OAP_ESPACE_PUBLIC.pdf
+  piece_id: oap-thematiques
+  validity: current
+  chunk_count: 18
+  pages: 12
+- path: PLU/75 Paris/PLU Bioclimatique/OAP/Thématiques/OAP_HERITAGE.pdf
+  piece_id: oap-thematiques
+  validity: current
+  chunk_count: 21
+  pages: 12
+- path: PLU/75 Paris/PLU Bioclimatique/OAP/Thématiques/OAP_METROPOLE.pdf
+  piece_id: oap-thematiques
+  validity: current
+  chunk_count: 20
+  pages: 14
+- path: PLU/75 Paris/PLU Bioclimatique/OAP/Thématiques/OAP_QUART_HEURE.pdf
+  piece_id: oap-thematiques
+  validity: current
+  chunk_count: 16
+  pages: 9
+- path: PLU/75 Paris/PLU Bioclimatique/OAP/Thématiques/OAP_SANTE.pdf
+  piece_id: oap-thematiques
+  validity: current
+  chunk_count: 31
+  pages: 13
+- path: PLU/75 Paris/PLU Bioclimatique/PADD/PADD.pdf
+  piece_id: padd
+  validity: current
+  chunk_count: 148
+  pages: 55
+- path: PLU/75 Paris/PLU Bioclimatique/Rapport de présentation/RP_20251017_MC1_HOTEL_DIEU.pdf
+  piece_id: rapport-presentation
+  validity: current
+  chunk_count: 131
+  pages: 40
+- path: PLU/75 Paris/PLU Bioclimatique/Rapport de présentation/RP_CHOIX.pdf
+  piece_id: rapport-presentation
+  validity: current
+  chunk_count: 946
+  pages: 283
+- path: PLU/75 Paris/PLU Bioclimatique/Rapport de présentation/RP_DE.pdf
+  piece_id: rapport-presentation
+  validity: current
+  chunk_count: 90
+  pages: 38
+- path: PLU/75 Paris/PLU Bioclimatique/Rapport de présentation/RP_DIAGNOSTIC.pdf
+  piece_id: rapport-presentation
+  validity: current
+  chunk_count: 789
+  pages: 390
+- path: PLU/75 Paris/PLU Bioclimatique/Rapport de présentation/RP_EIE.pdf
+  piece_id: rapport-presentation
+  validity: current
+  chunk_count: 632
+  pages: 388
+- path: PLU/75 Paris/PLU Bioclimatique/Rapport de présentation/RP_EVAL.pdf
+  piece_id: rapport-presentation
+  validity: current
+  chunk_count: 748
+  pages: 352
+- path: PLU/75 Paris/PLU Bioclimatique/Rapport de présentation/RP_INDIC.pdf
+  piece_id: rapport-presentation
+  validity: current
+  chunk_count: 37
+  pages: 31
+- path: PLU/75 Paris/PLU Bioclimatique/Rapport de présentation/RP_PREAMBULE.pdf
+  piece_id: rapport-presentation
+  validity: current
+  chunk_count: 18
+  pages: 9
+- path: PLU/75 Paris/PLU Bioclimatique/Rapport de présentation/RP_RNT.pdf
+  piece_id: rapport-presentation
+  validity: current
+  chunk_count: 127
+  pages: 73
+- path: PLU/75 Paris/PLU Bioclimatique/Rapport de présentation/Rapport_presentation_MS1.pdf
+  piece_id: rapport-presentation
+  validity: current
+  chunk_count: 97
+  pages: 103
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Alignements
+    arbres/DG_H_ARBRALIG_NE.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 49
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Alignements
+    arbres/DG_H_ARBRALIG_NO.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 35
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Alignements
+    arbres/DG_H_ARBRALIG_SE.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 42
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Alignements
+    arbres/DG_H_ARBRALIG_SO.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 40
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Bois
+    Boulogne/BBC.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 3
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Bois
+    Boulogne/BBN.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 6
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Bois
+    Boulogne/BBRG.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Bois
+    Boulogne/BBS.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Bois
+    Boulogne/LEG2000.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Bois
+    Vincennes/BVNE.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 3
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Bois
+    Vincennes/BVO.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 7
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Bois
+    Vincennes/BVSE.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 3
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Bois
+    Vincennes/LEG2000.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/DG_A_ZONAGE.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 10
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/DG_E_HAUTEUR.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 10
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/DG_L_BOIS_VINCENNES.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/DG_M_BOIS_BOULOGNE.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Equilibre
+    destinations/DG_B_DEST_NE.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 2
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Equilibre
+    destinations/DG_B_DEST_NO.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Equilibre
+    destinations/DG_B_DEST_SE.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Equilibre
+    destinations/DG_B_DEST_SO.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Fuseaux
+    protection/DG_F_FUSEAU_NE.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Fuseaux
+    protection/DG_F_FUSEAU_NO.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Fuseaux
+    protection/DG_F_FUSEAU_SE.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 2
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Fuseaux
+    protection/DG_F_FUSEAU_SO.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Limitation
+    parc stationnement/DG_I_PARCSTAT_NE.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Limitation
+    parc stationnement/DG_I_PARCSTAT_NO.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Limitation
+    parc stationnement/DG_I_PARCSTAT_SE.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Limitation
+    parc stationnement/DG_I_PARCSTAT_SO.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Mixité
+    sociale/DG_D_LOGSOC_NE.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 2
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Mixité
+    sociale/DG_D_LOGSOC_NO.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Mixité
+    sociale/DG_D_LOGSOC_SE.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 41
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Mixité
+    sociale/DG_D_LOGSOC_SO.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Protections
+    commerces/DG_C_PROTCOM_NE.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 2
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Protections
+    commerces/DG_C_PROTCOM_NO.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Protections
+    commerces/DG_C_PROTCOM_SE.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Protections
+    commerces/DG_C_PROTCOM_SO.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Renforcement
+    végétal/DG_G_RENFVEG_NE.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 2
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Renforcement
+    végétal/DG_G_RENFVEG_NO.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Renforcement
+    végétal/DG_G_RENFVEG_SE.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Renforcement
+    végétal/DG_G_RENFVEG_SO.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Secteurs
+    risques/DG_J_RISQUE.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Secteurs
+    risques/DG_K_SOURCENORD.pdf
+  piece_id: reg-graphique-atlas1
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/A_08.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 3
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/A_09.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/A_10.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/B_05.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/B_06.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/B_07.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/B_08.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/B_09.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/B_10.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 3
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/B_11.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 2
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/C_03.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/C_04.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/C_05.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/C_06_A_251216.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/C_07.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/C_08_A_251216.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/C_09_A_251216.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/C_10.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/C_11.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 3
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/Consultation_des_planches_au_1_sur_2000.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 3
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/D_02.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/D_03_A_251216.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/D_04.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/D_05_A_251216.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/D_06_A_251216.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/D_07.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/D_08_A_251216.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/D_09_A_251216.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 3
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/D_10_A_251216.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/D_11_A_251216.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/D_12.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 3
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/E_01.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 3
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/E_02.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/E_03_A_251216.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/E_04.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/E_05_A_251216.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/E_06_A_251216.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/E_07.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/E_08.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/E_09.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/E_10_A_251216.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 6
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/E_11_A_251216.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 6
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/E_12.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 6
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/F_01.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/F_02.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/F_03_A_251216.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/F_04_A_251216.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/F_05_A_251216.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/F_06.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 3
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/F_07.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/F_08.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/F_09_A_251216.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/F_10.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 6
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/F_11.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 6
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/F_12.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/F_13.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 3
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/G_01.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/G_02.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/G_03.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 6
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/G_04.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/G_05.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/G_06_A_251216.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/G_07.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/G_08.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 7
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/G_09.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 6
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/G_10_A_251216.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/G_11.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/G_12_A_251216.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/G_13_A_251216.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 3
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/H_01.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/H_02.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/H_03.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 6
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/H_04.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/H_05.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/H_06.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 6
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/H_07.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 7
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/H_08_A_251216.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 6
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/H_09.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 7
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/H_10_A_251216.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 6
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/H_11.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/H_12_A_251216.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 6
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/H_13.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/I_01.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 2
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/I_02.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/I_03.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/I_04_A_251216.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/I_05.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/I_06.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/I_07.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 7
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/I_08.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 6
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/I_09.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 2
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/I_10.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/I_11.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 3
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/I_12.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/I_13.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/J_01.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/J_02.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/J_03.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/J_04.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/J_05.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/J_06_A_251216.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/J_07.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/J_08.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/J_09.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/J_10.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/J_11.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/J_12.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/J_13.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 3
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/K_01.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 3
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/K_02.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 2
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/K_03.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/K_04.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/K_05_A_251216.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/K_06_A_251216.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 7
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/K_07_A_251216.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 6
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/K_08.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 3
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/K_09_A_251216.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/K_10.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/K_11.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 3
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/K_12.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 3
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/LEG2000.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/L_03.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/L_04.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/L_05_A_251216.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/L_06.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/L_07.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 7
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/L_08.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/L_09_A_251216.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/L_10.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 5
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/L_11.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 3
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/M_05.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 3
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/M_06_A_251216.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/M_07_A_251216.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 3
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/M_08.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/M_09.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/M_10.pdf
+  piece_id: reg-graphique-atlas2
+  validity: current
+  chunk_count: 3
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/Consultation_des_planches_d_ilots_du_secteur_de_Montmartre.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 4
+  pages: 3
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/LEGMONT.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M69105.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M69106.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M69107.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M69108.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M69109.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M69110.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M69111.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M69112.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M69113.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M69114.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M69115.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M69116.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M69117.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M69118.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M69119.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M69120.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M69121.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M69122.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M69123.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M69124.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M69125.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M69126.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M69127.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M69128.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M69129.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M69130.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M69131.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M69132.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M69133.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M69134.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M69137.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M69138.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M69139.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M69140.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M69173.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70001.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70002.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70003.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70004.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70005.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70006.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70007.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70008.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70009.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70010.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70011.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70012.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70013.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70014.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70015.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70016.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70017.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70018.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70019.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70020.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70021.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70022.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70023.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70024.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70025.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70026.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70027.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70029.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70033.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70034.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70035.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70036.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70037.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70038.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70039.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70040.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70041.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70042.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70043.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70044.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70045.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70046.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70047.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70048.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70049.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70050.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70051.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70052.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70053.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70054.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70055.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70056.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70057.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70058.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70059.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70060.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70061.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70062.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    Montmartre/M70177.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/Consultation_des_plans_des_secteurs_de_maisons_et_villas.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 2
+  pages: 2
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/LEGSMV.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P07.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P08.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P09.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P10.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P11.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P12.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P13.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P14.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P15.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P16.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P17.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P18.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P19.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P20.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P21.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P22.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P23.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P24.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P25.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P26.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P27.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P28.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P29.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P30.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P31.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 2
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P32.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P33.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P34.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P35.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P36.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P37.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P38.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P39.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P40.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 2
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P42.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P44.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P45.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P46.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P47.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P48.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P49.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P50.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P51.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 4
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P54.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P55.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P56.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 0
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P57.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P58.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur
+    maisons et villas/P59.pdf
+  piece_id: reg-graphique-atlas3
+  validity: current
+  chunk_count: 1
+  pages: 1
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 1/REG1.pdf
+  piece_id: reg-ecrit-t1
+  validity: superseded
+  chunk_count: 0
+  pages: 250
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 1/REG1_MS1.pdf
+  piece_id: reg-ecrit-t1
+  validity: current
+  chunk_count: 666
+  pages: 250
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 2/REG2A1.pdf
+  piece_id: reg-ecrit-t2
+  validity: superseded
+  chunk_count: 0
+  pages: 224
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 2/REG2A10_1DE2.pdf
+  piece_id: reg-ecrit-t2
+  validity: superseded
+  chunk_count: 0
+  pages: 700
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 2/REG2A10_1DE2_MS1.pdf
+  piece_id: reg-ecrit-t2
+  validity: current
+  chunk_count: 1636
+  pages: 700
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 2/REG2A10_2DE2_MS1.pdf
+  piece_id: reg-ecrit-t2
+  validity: current
+  chunk_count: 1862
+  pages: 889
+- path: PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 2/REG2A1_MS1.pdf
+  piece_id: reg-ecrit-t2
+  validity: current
+  chunk_count: 274
+  pages: 224

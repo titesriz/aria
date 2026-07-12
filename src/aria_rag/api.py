@@ -12,6 +12,7 @@ from typing import Optional
 import faiss
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from sentence_transformers import SentenceTransformer
 
@@ -19,6 +20,7 @@ from aria_rag.backend_check import BackendStatus, is_model_resident, startup_sho
 from aria_rag.config import Settings, load_settings
 from aria_rag.indexer import Chunk
 from aria_rag.llm import answer_question, extract_cited_markers
+from aria_rag.referentiel import PieceNotServableError, load_referentiel, resolve_document_path
 from aria_rag.retriever import (
     SearchHit,
     _search_weighted_within,
@@ -70,6 +72,21 @@ async def lifespan(app: FastAPI):
     app.state.bm25 = bm25
     app.state.chunks = chunks
     app.state.session_log_path = new_session_log_path()
+
+    # Loaded once at startup, same posture as the FAISS/BM25 index above — a
+    # referentiel.yaml change (e.g. via `aria-rag referentiel import`) needs
+    # a server restart to take effect (see CLAUDE.md's stale-process caveat).
+    referentiel = load_referentiel()
+    app.state.referentiel = referentiel
+    app.state.piece_id_by_abs_path = {
+        str((settings.docs_dir / f.path).resolve()): f.piece_id
+        for f in referentiel.files if f.piece_id is not None
+    }
+    _current_file_counts: dict[str, int] = {}
+    for f in referentiel.files:
+        if f.piece_id is not None and f.validity == "current":
+            _current_file_counts[f.piece_id] = _current_file_counts.get(f.piece_id, 0) + 1
+    app.state.servable_piece_ids = {pid for pid, count in _current_file_counts.items() if count == 1}
     logger.info("Model loaded, ready to serve")
     print("Model loaded, ready to serve", flush=True)
     logger.info(
@@ -114,6 +131,11 @@ class Citation(BaseModel):
     # every marker present was out of range) — never treat None as False;
     # it means the signal isn't there, not that the passage went unused.
     used: Optional[bool] = None
+    # Relative path to GET /document/{piece_id} (UI prepends its own API
+    # base — never hardcode a host here). None when the hit's source file
+    # doesn't resolve to a referentiel piece, or resolves to a multi-file
+    # piece (e.g. an atlas) that /document doesn't serve individually.
+    document_url: Optional[str] = None
 
 
 def _strip_markdown(text: str) -> str:
@@ -238,6 +260,29 @@ def health() -> dict:
     return _health_payload(app.state)
 
 
+@app.get("/document/{piece_id}")
+def get_document(piece_id: str) -> FileResponse:
+    """Serves a referentiel piece's primary PDF inline (browsers render it
+    in-tab; a citation's #page=N URL fragment then anchors the viewer to the
+    right page). piece_id only ever selects into referentiel.files — see
+    resolve_document_path's docstring for the path-safety argument.
+    """
+    state = app.state
+    settings: Settings = state.settings
+    referentiel = state.referentiel
+
+    if not any(p.id == piece_id for p in referentiel.pieces):
+        raise HTTPException(status_code=404, detail=f"Pièce inconnue : {piece_id}")
+    try:
+        path = resolve_document_path(piece_id, settings.docs_dir, referentiel)
+    except PieceNotServableError as exc:
+        raise HTTPException(status_code=404, detail=str(exc)) from exc
+    if not path.exists():
+        raise HTTPException(status_code=404, detail=f"Fichier introuvable sur disque pour la pièce '{piece_id}'.")
+
+    return FileResponse(path, media_type="application/pdf", filename=path.name, content_disposition_type="inline")
+
+
 @app.post("/ask", response_model=AskResponse)
 def ask(req: AskRequest) -> AskResponse:
     state = app.state
@@ -318,6 +363,12 @@ def ask(req: AskRequest) -> AskResponse:
             logger.error("Marker parsing failed for question=%r: %s", req.question, exc)
             cited_markers = None
 
+        def _document_url(source_path: str) -> str | None:
+            piece_id = state.piece_id_by_abs_path.get(str(Path(source_path).resolve()))
+            if piece_id is None or piece_id not in state.servable_piece_ids:
+                return None
+            return f"/document/{piece_id}"
+
         citations = [
             Citation(
                 source=Path(h.source_path).name,
@@ -330,6 +381,7 @@ def ask(req: AskRequest) -> AskResponse:
                 section=h.section,
                 marker_index=i,
                 used=None if cited_markers is None else (i in cited_markers),
+                document_url=_document_url(h.source_path),
             )
             for i, h in enumerate(hits, start=1)
         ]

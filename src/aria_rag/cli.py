@@ -203,6 +203,31 @@ def build_parser() -> argparse.ArgumentParser:
              "--family is given (that already restricts to a single pool). For A/B comparison.",
     )
 
+    sessions_parser = subparsers.add_parser(
+        "sessions", help="Print a readable digest of logged /ask sessions (read-only)"
+    )
+    sessions_parser.add_argument(
+        "--last", type=int, default=3, metavar="N", help="Number of most recent entries to show (default: 3)"
+    )
+
+    referentiel_parser = subparsers.add_parser(
+        "referentiel", help="Manage the piece-level corpus referentiel (referentiel.yaml)"
+    )
+    referentiel_sub = referentiel_parser.add_subparsers(dest="referentiel_command", required=True)
+
+    referentiel_export_parser = referentiel_sub.add_parser(
+        "export", help="Export referentiel.yaml to a dated .xlsx for domain-expert review"
+    )
+    referentiel_export_parser.add_argument(
+        "--output", type=Path, default=None, metavar="PATH",
+        help="Output .xlsx path (default: referentiel_YYYYMMDD.xlsx at repo root)",
+    )
+
+    referentiel_import_parser = referentiel_sub.add_parser(
+        "import", help="Regenerate referentiel.yaml from an annotated .xlsx"
+    )
+    referentiel_import_parser.add_argument("xlsx_path", type=Path, help="Path to the annotated .xlsx")
+
     serve_parser = subparsers.add_parser("serve", help="Start the FastAPI HTTP server on port 8000")
     serve_parser.add_argument(
         "--allow-cpu",
@@ -351,6 +376,41 @@ def main() -> None:
                 strict_expansion=strict_expansion,
             )
         return
+
+    if args.command == "sessions":
+        from aria_rag.sessions import format_entry_digest, read_all_entries
+        entries = read_all_entries()
+        for entry in entries[-args.last:]:
+            print(format_entry_digest(entry))
+            print("-" * 80)
+        return
+
+    if args.command == "referentiel":
+        from aria_rag.referentiel import (
+            DEFAULT_REFERENTIEL_PATH,
+            Referentiel,
+            default_export_path,
+            export_xlsx,
+            import_xlsx,
+            load_referentiel,
+            regenerate_files,
+            save_referentiel,
+        )
+        if args.referentiel_command == "export":
+            referentiel = load_referentiel()
+            referentiel.files = regenerate_files(settings, referentiel.pieces)
+            save_referentiel(referentiel, DEFAULT_REFERENTIEL_PATH)
+            out_path = args.output or default_export_path()
+            export_xlsx(referentiel, out_path)
+            print(f"Exported {len(referentiel.pieces)} pieces / {len(referentiel.files)} files to {out_path}")
+            return
+        if args.referentiel_command == "import":
+            existing = load_referentiel()
+            pieces = import_xlsx(args.xlsx_path, existing)
+            files = regenerate_files(settings, pieces)
+            save_referentiel(Referentiel(pieces=pieces, files=files), DEFAULT_REFERENTIEL_PATH)
+            print(f"Imported {len(pieces)} pieces from {args.xlsx_path} -> {DEFAULT_REFERENTIEL_PATH}")
+            return
 
     if args.command == "serve":
         if args.allow_cpu:

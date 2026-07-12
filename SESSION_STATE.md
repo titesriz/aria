@@ -6,6 +6,25 @@
 
 ---
 
+## 2026-07-12 — corpus referentiel + document-serving endpoint
+
+**Done** (1 commit, uncommitted at session end pending review — see below): added `referentiel.yaml` (git-tracked, repo root) — a piece-level metadata manifest (`pieces:` hand-authored, `family`/`status_opposabilite`/`expected`/`file_match`; `files:` generated) layered on top of `corpus_mapping.yaml`'s file-level classification. New module `aria_rag/referentiel.py`. Seeded 17 pieces (15 present + 2 expected-but-absent: `annexe-sanitaire`, `annexe-liste-servitudes` — both `notes: "à confirmer"`) covering all 413 indexed PDFs with zero unmapped files. New CLI: `aria-rag referentiel export`/`import` (xlsx round-trip via openpyxl, French headers, status dropdown) — round-trip test (export→import→regenerate) passes byte-identical. New check invariant "9. Referentiel coverage" (FAIL on unmapped indexed file, WARN on expected-but-absent piece) — wired into `run_checks`. New `GET /document/{piece_id}` endpoint (inline PDF, path-safety via referentiel-only lookup, 404 for multi-file pieces e.g. atlases) + `document_url` on `/ask` citations (only for single-current-file pieces). Added `openpyxl` dependency.
+
+**Measured**: full test suite 147 passed (12 new referentiel tests, 4 new `/document` tests, 4 new check tests). `aria-rag eval --no-llm` retrieval = 80% (matches documented baseline exactly, confirming no retrieval regression). `aria-rag check`: 9 invariants, 1 pre-existing unrelated FAIL (see below), 2 WARN (referentiel coverage gaps — both documented/expected), rest PASS.
+
+**Verified**: restarted `aria-rag serve` (a stale pre-session process on :8000 was serving old code — killed it, confirmed via `/health`'s `last_check` timestamp). `/document/reg-ecrit-t1` confirmed end-to-end through the live ngrok tunnel via `curl`: HTTP 200, `Content-Disposition: inline`, downloaded bytes verified as a genuine 250-page PDF. Did **not** visually verify the `#page=19` browser anchor — no browser-automation tool is available in this environment; that fragment is interpreted client-side by the browser's native PDF viewer, so it needs a human check.
+
+**Found, not fixed** (pre-existing, unrelated, out of scope — flagged per audit-before-fix): encoding invariant FAILs on 42 chunks (U+FFFD) all in `RP_DIAGNOSTIC`, predating this session (chunks.json unchanged since 2026-07-10). Also: `src/aria_rag/sessions.py` and part of `cli.py` (the `aria-rag sessions` command, `read_all_entries`/`format_entry_digest`) were already modified-but-uncommitted at session start — functionality already documented in `CLAUDE.md` §4 but never committed. Bundled into this session's single commit since it was already interleaved in `cli.py`'s diff; flagged to Anna for awareness rather than split out.
+
+**Open threads**:
+- `#page=19` anchor: needs a human to open `<ngrok>/document/reg-ecrit-t1#page=19` in an actual browser tab and confirm.
+- Two coverage gaps (`annexe-sanitaire`, `annexe-liste-servitudes`) need Charline's confirmation — are they genuinely absent from the corpus, or misfiled under an existing piece?
+- `annexe-plans-sup` and `annexe-plans-autres-perimetres` notes marked "à confirmer" — granularity/naming needs a domain-expert pass before this goes further.
+- Encoding FAIL (42 chunks, `RP_DIAGNOSTIC`, U+FFFD) is untouched — next session should audit it separately (own fix, own before/after measurement, per CLAUDE.md §3).
+- Next step: `referentiel_YYYYMMDD.xlsx` export → Charline review → `aria-rag referentiel import` before Charline's PLU retest (Notion is still the roadmap source of truth).
+
+---
+
 ## 2026-07-11 — post-grounding-fix, post-markers, pre-retest
 
 **Done** (commits `da52e38`..`5e65177`): backend CPU-fallback guard (`da52e38`); split expansion/synthesis models, wired ministral-3:8b for synthesis (`8c5e22f`); fixed silent prompt truncation via explicit `num_ctx` (`878b5ea`); strengthened grounding contract in the synthesis system prompt (`b41d076`); added `[N]` citation markers + anti-fabrication clause + `/feedback` endpoint (`5e65177`).

@@ -117,6 +117,72 @@ def log_ask_call(
         logger.error("Session log write failed (%s): %s", log_path, exc)
 
 
+def read_all_entries(sessions_dir: Path | None = None) -> list[dict[str, Any]]:
+    """Load every /ask entry across all session_*.jsonl files, oldest first.
+
+    Excludes feedback.jsonl (a different schema — human corrections, not
+    /ask calls). Malformed lines are skipped rather than raising, since this
+    reads logs written by past and possibly differently-versioned processes.
+    """
+    sessions_dir = sessions_dir or SESSIONS_DIR
+    entries: list[dict[str, Any]] = []
+    for path in sorted(sessions_dir.glob("session_*.jsonl")):
+        with open(path, encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+                try:
+                    entries.append(json.loads(line))
+                except json.JSONDecodeError:
+                    continue
+    entries.sort(key=lambda e: e.get("timestamp", ""))
+    return entries
+
+
+def format_entry_digest(entry: dict[str, Any]) -> str:
+    """Human-readable digest of one /ask session entry for `aria-rag sessions`."""
+    lines = [
+        f"Q: {entry.get('question')}",
+        f"timestamp: {entry.get('timestamp')}",
+    ]
+
+    expansion_status = entry.get("expansion_status")
+    if entry.get("expand_query_requested"):
+        lines.append(f"expansion: {expansion_status} -> {entry.get('expansion_query')}")
+    else:
+        lines.append("expansion: not requested")
+
+    hits = entry.get("hits") or []
+    lines.append(f"hits ({len(hits)}):")
+    for h in hits:
+        lines.append(
+            f"  [{h.get('rank')}] {h.get('filename')}"
+            f" | section={h.get('section')}"
+            f" | {h.get('page_citation')}"
+            f" | score={h.get('score')} faiss={h.get('faiss_score')} bm25={h.get('bm25_score')}"
+        )
+
+    answer = entry.get("answer") or ""
+    lines.append(f"answer (first 200 chars): {answer[:200]!r}")
+
+    synthesis_model = entry.get("synthesis_model")
+    was_resident = entry.get("synthesis_model_was_resident")
+    if synthesis_model is not None or was_resident is not None:
+        lines.append(f"synthesis_model: {synthesis_model} (was_resident={was_resident})")
+    else:
+        lines.append("synthesis_model: <field absent — pre-dates synthesis_model logging>")
+
+    latency = entry.get("latency_ms") or {}
+    latency_str = ", ".join(f"{k}={v}ms" for k, v in latency.items())
+    lines.append(f"latency: {latency_str}")
+
+    if entry.get("error"):
+        lines.append(f"error: {entry['error']}")
+
+    return "\n".join(lines)
+
+
 def log_feedback(
     *,
     session_id: str,
