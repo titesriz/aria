@@ -113,7 +113,13 @@ app.add_middleware(
 
 class AskRequest(BaseModel):
     question: str
-    expand_query: bool = False
+    # Opt-out, not opt-in, as of 2026-07-14: Charline's entire retest
+    # (data/sessions/session_2026-07-12_480ffc42.jsonl) ran with
+    # expand_query_requested=false on all 9 questions, meaning she tested
+    # the 80%-retrieval config rather than the measured 91.7% one -- see
+    # SESSION_STATE.md. A client that OMITS this field now gets expansion;
+    # a client that sends an explicit `false` still opts out.
+    expand_query: bool = True
     backend: Optional[str] = None
 
 

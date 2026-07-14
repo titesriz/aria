@@ -460,6 +460,65 @@ def check_referentiel_coverage(
     return InvariantResult("9. Referentiel coverage", status, count, message, details_path)
 
 
+# Matches a Chunk.section value that IS a genuine annexe title (same
+# leading-uppercase convention as indexer.py's _ANNEXE_HEADER — "ANNEXE V",
+# "A NNEXE V", "Annexe V"), not a lowercase prose mention.
+_ANNEXE_SECTION_VALUE = re.compile(r'^A\s*(?i:NNEXE)\b')
+
+# A source file genuinely dedicated to annexe content (e.g. REG2A10's Tome 2
+# annex listings) has the overwhelming majority of its chunks so labeled.
+# The 2026-07-14 boundary bug (SESSION_STATE.md) put a small MINORITY of one
+# file's chunks (43/666, ~6%) under a real annexe title that belonged to a
+# different tome entirely — a plausible re-occurrence of the same shape (or
+# a new instance of it in a different file) would look the same: some but
+# not most of a file's chunks claiming an annexe section. This is a
+# heuristic, not a page-range lookup — referentiel.py's PieceFile only
+# tracks a file's total page count, not per-annexe sub-ranges, so there's no
+# ground truth to compare a chunk's page against; the ratio is the closest
+# verifiable signal available today.
+_ANNEXE_MINORITY_MAX_RATIO = 0.5
+
+
+def check_annexe_section_plausibility(chunks: list[Chunk], reports_dir: Path) -> InvariantResult:
+    """WARN if a reglement_ecrit source file has annexe-titled chunks
+    (section matches _ANNEXE_SECTION_VALUE) but they're a MINORITY of that
+    file's chunks (< _ANNEXE_MINORITY_MAX_RATIO) — the boundary-bug
+    signature: a genuine annexe-dedicated file (REG2A10 series) is almost
+    entirely annexe content, so a small partial contamination means some
+    OTHER content (a table of contents entry, an overview paragraph, a
+    cross-tome reference) is being misattributed to a real annexe title
+    that doesn't actually open a section in this file.
+    """
+    by_file: dict[str, list[Chunk]] = {}
+    for c in chunks:
+        if c.doc_family == "reglement_ecrit":
+            by_file.setdefault(c.source_path, []).append(c)
+
+    suspects: dict[str, dict] = {}
+    for source_path, file_chunks in by_file.items():
+        annexe_chunks = [c for c in file_chunks if c.section and _ANNEXE_SECTION_VALUE.match(c.section)]
+        if not annexe_chunks:
+            continue
+        ratio = len(annexe_chunks) / len(file_chunks)
+        if ratio < _ANNEXE_MINORITY_MAX_RATIO:
+            suspects[Path(source_path).name] = {
+                "annexe_chunk_count": len(annexe_chunks),
+                "total_chunk_count": len(file_chunks),
+                "ratio": round(ratio, 3),
+                "sample_chunk_ids": [c.chunk_id for c in annexe_chunks[:5]],
+                "sample_sections": sorted({c.section for c in annexe_chunks})[:5],
+            }
+
+    details_path = _write_details(reports_dir, "annexe_section_plausibility", {"suspect_files": suspects})
+    status: Status = "warn" if suspects else "pass"
+    count = sum(s["annexe_chunk_count"] for s in suspects.values())
+    message = (
+        f"{len(suspects)} file(s) with a minority annexe-section contamination: {sorted(suspects)}"
+        if suspects else "no file has a minority-only annexe-section pattern"
+    )
+    return InvariantResult("10. Annexe section plausibility", status, count, message, details_path)
+
+
 # ---------------------------------------------------------------------------
 # Report + entry point
 # ---------------------------------------------------------------------------
@@ -498,6 +557,7 @@ def run_checks(settings: Settings, strict: bool = False) -> list[InvariantResult
         check_fragment_floor(chunks, reports_dir),
         check_dedup_ledger(settings, reports_dir),
         check_referentiel_coverage(manifest, pieces, settings, reports_dir),
+        check_annexe_section_plausibility(chunks, reports_dir),
     ]
     print_report(results)
 

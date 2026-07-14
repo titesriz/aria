@@ -111,12 +111,85 @@ def build_article_whitelist(chunks: list[Chunk]) -> list[str]:
     return sorted(codes)
 
 
-def _titled_annexe_matches(full_text: str) -> list[re.Match]:
-    """ANNEXE header matches, excluding inline cross-references like "(Annexe IV)"."""
-    return [
+
+# Threshold for _drop_enumeration_runs: verified empirically against every
+# genuine annexe-to-annexe transition in the corpus (REG2A1_MS1.pdf) is
+# 580+ chars apart -- a real header is never this close to a DIFFERENT
+# annexe's header. Only a descriptive overview paragraph (e.g. REG1_MS1.pdf
+# p.15-16: "Annexe I ... ; Annexe II ... ; ... ; Annexe X ...", introducing
+# all ten by name in ~1600 chars) packs distinct titles this tightly.
+_ENUMERATION_MAX_GAP = 400
+_ENUMERATION_MIN_DISTINCT = 3
+
+
+def _enumeration_run_indices(matches: list[re.Match]) -> set[int]:
+    """Indices (into `matches`, sorted by offset) that belong to a
+    tightly-packed run of >= _ENUMERATION_MIN_DISTINCT DIFFERENT annexe
+    titles -- see _drop_enumeration_runs for why this is the enumeration
+    signature and not a real header.
+    """
+    drop: set[int] = set()
+    run = [0]
+    for i in range(1, len(matches) + 1):
+        same_run = i < len(matches) and matches[i].start() - matches[i - 1].start() <= _ENUMERATION_MAX_GAP
+        if same_run:
+            run.append(i)
+            continue
+        distinct_texts = {matches[j].group(0) for j in run}
+        if len(run) >= _ENUMERATION_MIN_DISTINCT and len(distinct_texts) >= _ENUMERATION_MIN_DISTINCT:
+            drop.update(run)
+        run = [i]
+    return drop
+
+
+def _drop_enumeration_runs(matches: list[re.Match]) -> list[re.Match]:
+    """Exclude matches that sit inside a tightly-packed run of >= 3
+    DIFFERENT annexe titles -- the boundary bug behind the retest debrief's
+    citation complaint (SESSION_STATE.md, 2026-07-14): REG1_MS1.pdf's own
+    running-header repeats of the SAME annexe (e.g. a page-footer restating
+    "Annexe VI" many times) also cluster tightly, but never vary in text,
+    so they survive this filter; only a genuine enumeration (many
+    DIFFERENT titles in a row) doesn't open a real section in THIS
+    document and gets dropped, letting the bisect-based section lookup
+    correctly fall through to None (or the next real header) instead of
+    the enumeration's last item silently absorbing everything up to it.
+    """
+    if not matches:
+        return matches
+    drop = _enumeration_run_indices(matches)
+    return [m for i, m in enumerate(matches) if i not in drop]
+
+
+def _titled_annexe_matches(full_text: str, source_path: str = "") -> list[re.Match]:
+    """ANNEXE header matches, excluding inline cross-references like
+    "(Annexe IV)" everywhere, plus two more exclusions scoped to
+    REG1_MS1.pdf specifically:
+    - a header whose own captured title admits it belongs to a different
+      tome ("Annexe IV du tome 2 du règlement écrit...") -- a cross-
+      reference within THIS document's running prose, not a section it
+      opens itself;
+    - a tightly-packed enumeration of several different annexe titles in
+      a row (see _drop_enumeration_runs) -- REG1_MS1.pdf p.15-16's
+      descriptive "voici les annexes" overview paragraph, not real
+      section-opening headers (the bug behind the retest debrief's
+      citation complaint, SESSION_STATE.md 2026-07-14).
+
+    Narrowed to REG1_MS1.pdf because that's the only file audited and
+    confirmed to have this failure shape. Other reglement_ecrit files
+    (e.g. REG2A1_MS1.pdf, which has its own annexe listing with a
+    different structure) haven't had the same audit -- applying these two
+    filters there during this fix's own dry-run mislabeled a chunk whose
+    content genuinely was Annexe III as Annexe II instead, so this stays
+    intentionally narrow rather than broadly "clean" but unverified.
+    """
+    candidates = [
         m for m in _ANNEXE_HEADER.finditer(full_text)
         if not full_text[: m.start()].rstrip().endswith("(")
     ]
+    if Path(source_path).name != "REG1_MS1.pdf":
+        return candidates
+    candidates = [m for m in candidates if "tome" not in m.group(0).lower()]
+    return _drop_enumeration_runs(candidates)
 
 
 def _page_at_offset(page_starts: list[int], page_numbers: list[int], offset: int) -> int | None:
@@ -260,9 +333,24 @@ def extract_chunks_from_pdf(
     # Use article-aware chunking for regulatory documents; fall back to sliding window otherwise.
     if doc_family == "reglement_ecrit":
         raw_chunks = chunk_text_by_article(full_text, chunk_size, source_path=document.path)
+        # Section-label attribution uses the body-only (ToC-filtered) matches
+        # -- see _titled_annexe_matches -- so an overview-list entry can
+        # never masquerade as the section covering everything up to the
+        # next real header. The article side has its own, DIFFERENT
+        # ToC-pollution bug (discovered during this audit, e.g. a page-5
+        # ToC line "N.7.2 Stationnement......226" outranking real headers
+        # for the same span) -- deliberately NOT touched here: unlike the
+        # annexe enumeration, tight gaps between DIFFERENT article codes
+        # are also the normal shape of real parent/child headers in this
+        # corpus (e.g. genuine "UG.6.2 Déchets" -> "UG.6.2.1 ..." 14 chars
+        # apart), so the same kind of fix risks nuking real short sections
+        # and needs its own dedicated audit — see SESSION_STATE.md,
+        # 2026-07-14, "known, not fixed" for the tried-and-discarded
+        # dot-leader approach and why it regressed rather than improved
+        # the article side.
         article_matches = list(_ARTICLE_HEADER.finditer(full_text))
         article_starts = [m.start() for m in article_matches]
-        annexe_matches = _titled_annexe_matches(full_text)
+        annexe_matches = _titled_annexe_matches(full_text, document.path)
         annexe_starts = [m.start() for m in annexe_matches]
         if not article_matches:
             # Same condition chunk_text_by_article checks internally (identical

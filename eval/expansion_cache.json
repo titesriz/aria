@@ -99,5 +99,14 @@
       "UG.3.2.1"
     ],
     "expansion_status": "ok"
+  },
+  "quelles sont les règles de gabarit enveloppe ?": {
+    "expansion_query": "UG.3.2 UG.3.2.1 UG.3.2.2",
+    "inferred_articles": [
+      "UG.3.2",
+      "UG.3.2.1",
+      "UG.3.2.2"
+    ],
+    "expansion_status": "ok"
   }
 }

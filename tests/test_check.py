@@ -14,6 +14,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from aria_rag.check import (
+    check_annexe_section_plausibility,
     check_coverage,
     check_dedup_ledger,
     check_encoding,
@@ -453,6 +454,55 @@ def test_referentiel_coverage_does_not_warn_for_non_expected_absent_piece(tmp_pa
     manifest = []
     pieces = [_piece(id="optional-piece", file_match=None, expected=False)]
     result = check_referentiel_coverage(manifest, pieces, settings, tmp_path / "reports")
+    assert result.status == "pass"
+
+
+# ---------------------------------------------------------------------------
+# 10. Annexe section plausibility (2026-07-14 boundary-bug guard)
+# ---------------------------------------------------------------------------
+
+def test_annexe_section_plausibility_passes_with_no_annexe_chunks(tmp_path):
+    chunks = [_chunk(chunk_id=f"X-{i}", section="UG.1.1") for i in range(5)]
+    result = check_annexe_section_plausibility(chunks, tmp_path / "reports")
+    assert result.status == "pass"
+    assert result.count == 0
+
+
+def test_annexe_section_plausibility_passes_for_dedicated_annexe_file(tmp_path):
+    """A genuine annexe-listing file (e.g. REG2A10's Tome 2) is almost
+    entirely annexe content — a large majority must not warn.
+    """
+    chunks = [
+        _chunk(chunk_id=f"A-{i}", source_path="/docs/REG2A10.pdf", section="ANNEXE X - LISTE DES PROTECTIONS")
+        for i in range(9)
+    ] + [_chunk(chunk_id="A-9", source_path="/docs/REG2A10.pdf", section="UG.1.4.1")]
+    result = check_annexe_section_plausibility(chunks, tmp_path / "reports")
+    assert result.status == "pass"
+
+
+def test_annexe_section_plausibility_warns_for_minority_contamination(tmp_path):
+    """The actual bug shape: a handful of a file's chunks claim a real
+    annexe title that's a small minority of that file's total content —
+    REG1_MS1.pdf's 43/666 (~6%) "Annexe X" mislabel before this fix.
+    """
+    chunks = (
+        [_chunk(chunk_id=f"R-{i}", source_path="/docs/REG1_MS1.pdf", section="UG.1.1") for i in range(9)]
+        + [_chunk(chunk_id="R-9", source_path="/docs/REG1_MS1.pdf",
+                   section="Annexe X – Liste des immeubles protégés")]
+    )
+    result = check_annexe_section_plausibility(chunks, tmp_path / "reports")
+    assert result.status == "warn"
+    assert result.count == 1
+    assert "REG1_MS1.pdf" in result.message
+
+
+def test_annexe_section_plausibility_ignores_lowercase_prose_mentions(tmp_path):
+    """A lowercase inline mention ("l'annexe X...") is never a genuine
+    annexe section value in this corpus (see test_annexe_header.py) — this
+    check must not misinterpret one as the contamination signature.
+    """
+    chunks = [_chunk(chunk_id=f"R-{i}", source_path="/docs/REG1_MS1.pdf", section="UG.1.1") for i in range(5)]
+    result = check_annexe_section_plausibility(chunks, tmp_path / "reports")
     assert result.status == "pass"
 
 
