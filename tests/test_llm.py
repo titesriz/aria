@@ -9,10 +9,13 @@ from __future__ import annotations
 
 import sys
 from pathlib import Path
+from unittest.mock import MagicMock, patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from aria_rag.llm import build_prompt, extract_cited_markers
+from aria_rag import llm
+from aria_rag.config import Settings
+from aria_rag.llm import answer_with_ollama, build_prompt, extract_cited_markers
 from aria_rag.retriever import SearchHit
 
 
@@ -30,6 +33,29 @@ def _hit(**overrides) -> SearchHit:
     )
     defaults.update(overrides)
     return SearchHit(**defaults)
+
+
+# ---------------------------------------------------------------------------
+# answer_with_ollama — determinism payload (seed parity with query_expansion's
+# R0 fix, added after a live-session divergence surfaced no other cause)
+# ---------------------------------------------------------------------------
+
+def test_answer_with_ollama_sends_seed_alongside_temperature():
+    settings = Settings(
+        llm_backend="ollama", synthesis_model="ministral-3:8b",
+        ollama_host="http://localhost:11434", num_predict=1280, num_ctx=8192,
+    )
+    response = MagicMock()
+    response.raise_for_status.return_value = None
+    response.json.return_value = {"response": "answer text"}
+    with patch.object(llm.httpx, "post", return_value=response) as mock_post:
+        answer_with_ollama("question?", [_hit()], settings)
+
+    sent_options = mock_post.call_args.kwargs["json"]["options"]
+    assert sent_options["temperature"] == 0
+    assert sent_options["seed"] == 42
+    assert sent_options["num_predict"] == 1280
+    assert sent_options["num_ctx"] == 8192
 
 
 # ---------------------------------------------------------------------------

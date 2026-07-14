@@ -6,6 +6,39 @@
 
 ---
 
+## 2026-07-14 — synthesis determinism audit + seed parity fix (1 commit)
+
+**Done**: audited `answer_with_ollama` (`llm.py:101`) against the R0 determinism fix in `_expand_with_ollama` (`query_expansion.py:97`, which added `seed: 42` alongside `temperature: 0` after a documented CPU-nondeterminism issue). Confirmed `/ask`, `aria-rag ask` CLI, and `eval.py`'s fidelity-grid runner all share one call site (`answer_question` → `answer_with_ollama`) — no divergent path. **Payload diff found**: synthesis's `options` had `temperature: 0` (correctly nested) but **no `seed`**, unlike expansion's `{"temperature": 0, "seed": 42}`.
+
+**Reproduction (pre-fix)**: ran Q7's exact question ("quelles sont les règles de gabarit enveloppe ?") 3× sequentially via `aria-rag ask --backend ollama`, model resident for runs 2–3. **Byte-identical across all 3 runs**, matching Q7's original answer exactly — did **not** reproduce the Q7→Q8 divergence even with `seed` absent. Diagnosis didn't cleanly fit "missing param caused the observed bug" (case 1) since the bug didn't reproduce either way.
+
+**Decision (Anna's call)**: add `seed: 42` anyway — zero-cost, closes the parity gap with the R0 precedent, removes one variable permanently — **but log the live Q7/Q8 divergence as an open, unconfirmed anomaly, not a solved bug**. Added `"seed": 42` to `answer_with_ollama`'s options (`llm.py`). New guard test `test_answer_with_ollama_sends_seed_alongside_temperature` (`test_llm.py`) asserts the payload shape going forward. Re-ran the same 3-generation reproduction post-fix: still byte-identical. Full suite **159 passed** (was 158). `eval.py` untouched, `eval --no-llm` not exercised (no need, not touched).
+
+**Decision rule for the unconfirmed anomaly**: if a same-question divergence recurs in a future Charline session **with `seed` now set**, that's the signal to open the concurrent-GPU-load/platform-nondeterminism investigation (retrieval's embedding model running interleaved with synthesis under real demo load is the leading hypothesis, untested). Until then, it stays a noted anomaly, not a work item — do not proactively chase it.
+
+**Open threads**:
+- All existing fidelity measurements (`eval/results/synthesis_fidelity_*.json`) predate this fix and sampled the seed-less synthesis config. Per instruction, **not re-run now** — flag before trusting them as reproducing exactly, though the practical effect of adding seed with no observed content change in the reproduction suggests low risk of them being wrong, just unconfirmed under the new config.
+- The concurrent-GPU-load hypothesis for the original Q7/Q8 divergence remains untested — see decision rule above for when to revisit.
+
+---
+
+## 2026-07-14 — Charline retest debrief (read-only, 0 commits)
+
+**Done**: audited Charline's actual 2026-07-13 retest (18:36–20:01 UTC, 9 `/ask` calls, `data/sessions/session_2026-07-12_480ffc42.jsonl` — the process I started for the 07-12 serve-hardening verification and never restarted) against `feedback.jsonl`. Full per-question table + classification delivered in chat, not reproduced here. Counts: **4 [R]** (retrieval), **3 [S]** (synthesis organization), **2 [OK]**, **0 [C]**, **0 [C-cch]**.
+
+**Top findings**: (1) `expand_query_requested: false` on **all 9 questions** — the Figma demo never engaged query expansion, so she tested the 80%-retrieval config, not the measured 91.7% one. (2) Synthesis latency **52–105s per question even when the model was resident** (well above CLAUDE.md's ~20s swap-cost baseline) — likely a bigger driver of "not conclusive" than any single content bug. (3) **New bug**: `REG1_MS1.pdf`'s Définitions glossary (page 34, contains the real "prospect" definition) is mislabeled with `section: "Annexe X – Liste des immeubles protégés..."` — a new instance of the magnet-chunk class, distinct from the fixed lowercase-`annexe` case in `check.py`, and a plausible direct cause of her "difficile de se repérer dans les citations" feedback. (4) **Apparent non-determinism**: Q7/Q8 (identical question + identical hits + resident model, 81s apart) produced different synthesis output — contradicts the documented temperature=0 guarantee.
+
+**Sanity gap confirmed real**: session log entries carry no `git_commit` — I could only *infer* (via no server restart) that all 9 ran on `69a7920`-era code, not prove it per-entry. Worth adding `git_commit` to `log_ask_call`'s entry schema.
+
+**Golden-case drafts (not in eval/, pending Charline review)**: Q1/Q4 fold into existing CH-07 (same articles, same [R], third independent confirmation incl. the 07-11 feedback placeholder). New CH-08 draft from Q6–Q9 (gabarit-enveloppe, a synthesis-organization case, not retrieval). Q3 ("façade N") not draftable yet — genuinely ambiguous zone-code-vs-orientation, needs her clarification first.
+
+**Open threads**:
+- The section-mislabeling bug (finding #3) needs its actual scope characterized — how many chunks/how much of the Définitions section is affected — before anyone attempts a fix.
+- The Q7/Q8 non-determinism needs reproduction outside a live demo session to rule out an environmental cause (concurrent request, GPU scheduling) before treating it as a code bug.
+- Next step: this debrief goes to Charline/Anna for review; CH-08 draft and the "turn on expansion by default" recommendation are the two highest-leverage next actions.
+
+---
+
 ## 2026-07-12 — serve hardening: startup retry + version visibility
 
 **Done** (1 commit): two fixes for failure modes hit repeatedly this week, both in `backend_check.py`/`api.py`. (1) **Startup retry**: split `check_model_gpu` into a raising primitive (`_load_and_verify_gpu_once`) and two callers — `check_model_gpu` (unchanged, single-attempt, used where Ollama being down is a fact to report) and new `check_model_gpu_with_retry` (5 attempts, 2/4/8/16s backoff, used by `verify_backend` at startup) — retries **only** on `httpx.ConnectError` (Ollama not listening yet, the cold-boot race), never on a model that's reachable but lands on CPU (that's a real, distinct failure, reported immediately, not retried into a 30s wait). Each retry logs visibly (`logger.warning` + `print`); exhausting all 5 attempts still fails clearly, not an infinite wait. (2) **Version visibility**: new `resolve_git_commit(repo_root)` (`git rev-parse --short HEAD`, "unknown" fallback, never raises) — resolved once at startup, printed (`[startup] git_commit=...`), stored on `app.state.git_commit`, exposed in `/health` as top-level `git_commit` alongside `backend_status`.

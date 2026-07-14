@@ -106,7 +106,16 @@ def answer_with_ollama(question: str, hits: list[SearchHit], settings: Settings)
         "system": prompt.system,
         "stream": False,
         "keep_alive": "10m",
-        "options": {"temperature": 0, "num_predict": settings.num_predict, "num_ctx": settings.num_ctx},
+        # seed pins full reproducibility on top of temperature=0 -- see
+        # query_expansion.py's _expand_with_ollama for the R0 precedent this
+        # mirrors (Ollama's /api/generate only honors params nested under
+        # "options"; a top-level "temperature" key is silently ignored).
+        "options": {
+            "temperature": 0,
+            "seed": 42,
+            "num_predict": settings.num_predict,
+            "num_ctx": settings.num_ctx,
+        },
     }
     url = f"{settings.ollama_host.rstrip('/')}/api/generate"
 
