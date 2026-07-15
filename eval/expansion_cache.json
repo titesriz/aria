@@ -108,5 +108,54 @@
       "UG.3.2.2"
     ],
     "expansion_status": "ok"
+  },
+  "est ce que je peux construire une usine à papier à paris?": {
+    "expansion_query": "UG.1.1 UG.1.4.1 UG.1.4.2",
+    "inferred_articles": [
+      "UG.1.1",
+      "UG.1.4.1",
+      "UG.1.4.2"
+    ],
+    "expansion_status": "ok"
+  },
+  "donnes moi les règles de prospects à l'adresse 20 rue saint sauveur paris 2e pour l'extension du batiment sur cour.": {
+    "expansion_query": "UG.3.1.1 UG.3.1.2 UG.3.2.1 UG.3.2.2",
+    "inferred_articles": [
+      "UG.3.1.1",
+      "UG.3.1.2",
+      "UG.3.2.1",
+      "UG.3.2.2"
+    ],
+    "expansion_status": "ok"
+  },
+  "donnes moi les règles de prospects dans la zone ug pour l'extension d'un batiment existant.": {
+    "expansion_query": "UG.3.1.2 UG.3.1.3 UG.3.1.4",
+    "inferred_articles": [
+      "UG.3.1.2",
+      "UG.3.1.3",
+      "UG.3.1.4"
+    ],
+    "expansion_status": "ok"
+  },
+  "est ce que je peux installer des volets sur mon immeuble?": {
+    "expansion_query": "UG.2.2.3 UG.2.2",
+    "inferred_articles": [
+      "UG.2.2.3",
+      "UG.2.2"
+    ],
+    "expansion_status": "ok"
+  },
+  "quelles sont les règles parasismiques pour un immeuble à tokyo ?": {
+    "expansion_query": "",
+    "inferred_articles": [],
+    "expansion_status": "empty"
+  },
+  "quelle est la hauteur maximale autorisée rue imaginaire-dupont à paris ?": {
+    "expansion_query": "UG.3.2 UG.3.2.1",
+    "inferred_articles": [
+      "UG.3.2",
+      "UG.3.2.1"
+    ],
+    "expansion_status": "ok"
   }
 }
