@@ -6,6 +6,23 @@
 
 ---
 
+## 2026-07-16 — citation truncation fix: send full chunk text (1 commit, restart)
+
+**Fix** (`960f906`'s audit → `6a4377a`): removed `textwrap.shorten(..., width=500, placeholder="...")` at both sites the audit found — `api.py`'s `Citation.excerpt` (the live `/ask` response) and `cli.py:246`'s `format_hits` (`--debug`'s "Retrieved passages" block) — now both send `hit.content`/`h.content` directly. Small, targeted: no other logic touched.
+
+**Sanity check**: `Citation.excerpt` is a plain pydantic `str`, no `max_length` constraint; no test asserts a bounded excerpt length; `sessions.py` doesn't store excerpt/content at all (unaffected); `_FEEDBACK_FIELD_MAX_LEN` is a separate, unrelated cap on `/feedback` fields. No demo code in this repo to check directly — flagged as the one thing that couldn't be verified locally, same caveat as the `expand_query` payload question from 07-14.
+
+**Verified live**: killed the stale server (still on `960f906`), restarted on `6a4377a`, `/health` confirmed. Live `/ask` call (UC-02's question, 10 hits): **all 10 citations carry the full chunk content, byte-for-byte** (9/10 matched an exact `(source, section, page)` chunk directly; the 10th had 3 duplicate-labeled `N.7.2` candidates at that key — one of the three matched byte-for-byte, confirming this is a pre-existing duplicate-section-label artifact, not a new truncation bug). Sample lengths, before → after: UG.3.1.1 chunk 1200 chars, excerpt was ~498 → now **1200**; UG.3.2.1 1200 → **1200**; UG.2.2.3 1153 → **1153**. `eval --no-llm`: **80.0%**, unchanged. Full suite: 170 passed.
+
+**Note**: this closes the [API] half of the 07-16 audit only. Long articles split across multiple chunks (UG.3.1.1 = 7 chunks, UG.3.2.1 = 3 chunks, per the audit) still surface as separate, independently-full-length citations rather than one stitched article — expected, not a regression, and still the open [SPLIT] design task below.
+
+**Open threads** (unchanged from the audit entry):
+- No corpus-wide chunks-per-article census run — still only the 3 audited samples. Needed to scope the [SPLIT] stitching fix.
+- The `marker_index`/`[N]`-to-citation 1:1 mapping is a real design constraint for any future stitching fix — still unresolved.
+- Whether the Figma demo renders a long `excerpt` string acceptably (line wrapping, card height) is unverified — no demo code in this repo to check.
+
+---
+
 ## 2026-07-16 — citation-truncation audit (read-only, 0 commits)
 
 **Context**: Charline — "citations trop courtes vs chunks par section — pourquoi si court alors que les chunks sont par section ?" She expects a citation to show the whole article; sees a snippet. Audited where the truncation happens before deciding any fix (none applied — read-only).
