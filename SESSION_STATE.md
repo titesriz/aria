@@ -6,6 +6,22 @@
 
 ---
 
+## 2026-07-16 — OAP slot count measurement: verdict "don't apply" (read-only, 0 commits)
+
+**Context**: follow-up to the 735984b perimeter investigation. `DEFAULT_FAMILY_SLOTS["oap"]=1` — does raising it improve OAP coverage without regressing the certified reference?
+
+**1. Budget model**: `DEFAULT_FAMILY_SLOTS` = `{reglement_ecrit:6, rapport_presentation:0, annexes:2, oap:1, padd:1}`, sums to **exactly `top_k=10`** (`config.py`'s own comment confirms this is deliberate). `scoped_retrieval_merge` (`retriever.py:132`) allocates each family its slot count as a primary guarantee, redistributes any family's *shortfall* to others' next-best candidates, then hard-truncates the final tier-interleaved list to `total_k` via `merged[:total_k]`. **Mechanical finding**: when the slots dict sums to more than `top_k` (raising oap without lowering anything else), the truncation silently drops the *deepest* rank-tier entries — which are always `reglement_ecrit`'s (the only family allocated beyond rank 2). So oap=2 costs `reglement_ecrit` exactly 1 of its 6 slots; oap=3 costs it 2. **Verdict for item 1: displaces, never additive** — confirmed both by reading the algorithm and empirically (`reglement_ecrit` per-case count measured at 6/5/4 for oap=1/2/3, every single golden case).
+
+**2. Golden-set measurement** (standalone harness, index loaded once, reused `eval.py`'s own scoring functions — not the CLI subprocess path, to avoid reloading the embedding model 30×; results not written to `eval/results/` since this is a scratch measurement, not a certified run): **oap=1: 86.7%, oap=2: 86.7% (byte-identical per-case scores to oap=1), oap=3: 81.7% — REGRESSION on CH-03 (0.5→0.0, loses both `UG.2.2.3` and `Annexe X`)**. oap=1's 86.7% matches the already-documented 07-14 reference exactly (methodology cross-check passed). No other case moved at any oap value.
+
+**3. OAP-targeted coverage** (3 new questions targeting Bercy-Charenton/Portes-Est/Paris-Rive-Gauche, not in the golden set): **decisive negative result**. Portes-Est and Rive-Gauche already surfaced their correct OAP file at oap=1 — raising the slot added zero benefit, only extra wrong-sector filler chunks. Bercy-Charenton was wrong at oap=1 **and stayed wrong at oap=2** (`OAP_BEDIER_OUDINE.pdf` + `OAP_PARIS_RIVE_GAUCHE.pdf`, neither correct) — only fixed at oap=3, and even then bundled with 2 more off-sector chunks in the same 3-slot allocation (net: *more* pollution, not less, alongside the correct file).
+
+**4. Verdict: DO NOT APPLY. Left at oap=1.** oap=2 is reference-neutral but delivers **zero** OAP-coverage improvement (0/1 target-file hits, same failure as oap=1) — no upside to justify the change. oap=3 does surface the one previously-missing target file but at the cost of a real golden-case regression (CH-03) and doesn't reduce pollution, it triples it. This empirically confirms 735984b's own conclusion: **more slots is not the fix; perimeter filtering is.** No code touched, no restart.
+
+**Open threads**: none new — this closes the "should we just raise the slot" side-question the 735984b investigation left open, and points back at the same perimeter-filtering design task (still blocked on the missing arrondissement input at the `AskRequest` layer, per that entry).
+
+---
+
 ## 2026-07-16 — OAP perimeter-filtering investigation (read-only, 0 commits)
 
 **Context**: Charline — when zone/arrondissement is known, retrieval surfaces OAP from unrelated sectors (Bercy-Charenton, Portes, etc.), polluting the answer. Goal: determine IF/HOW to filter before designing a fix. (User's message arrived truncated mid-sentence at step 2a — proceeded on the clear parts and a reasonable read of the rest, confirmed correct once the full message landed.)
