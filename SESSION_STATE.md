@@ -6,6 +6,26 @@
 
 ---
 
+## 2026-07-16 — citation-truncation audit (read-only, 0 commits)
+
+**Context**: Charline — "citations trop courtes vs chunks par section — pourquoi si court alors que les chunks sont par section ?" She expects a citation to show the whole article; sees a snippet. Audited where the truncation happens before deciding any fix (none applied — read-only).
+
+**Verdict: [API] + [SPLIT] combined, [DISPLAY] ruled out.**
+
+**[API] confirmed**: `api.py:388`, `Citation.excerpt=textwrap.shorten(h.content, width=500, placeholder="...")` — the live `/ask` HTTP response itself caps every citation at ~500 chars, regardless of chunk size. Measured on 3 sample `reglement_ecrit` articles (`data/index/chunks.json`): UG.3.1.1 chunk full_len=1200 → excerpt=498; UG.3.2.1 full_len=1200 → excerpt=496; UG.2.2.3 full_len=1153 → excerpt=484. This is baked into the API payload before the demo ever renders it — not a display-side truncation. The identical `textwrap.shorten(..., width=500)` call is duplicated in `cli.py:246`'s `format_hits` (CLI's "Retrieved passages" block) — same truncation, second call site.
+
+**[SPLIT] confirmed, and likely the dominant effect**: even the full 1200-char chunk isn't "the full article" for any article article-aware chunking split across multiple chunks under the same `section` label. UG.3.1.1 = **7 chunks** (pages 61–63, ~7200 chars total); UG.3.2.1 = **3 chunks** (pages 69–70, ~3200 chars); UG.2.2.3 = **1 chunk** (1153 chars, fits whole — not every article splits). Live proof via a real retrieval (`aria-rag ask --no-llm --debug`, UC-02's question): 2 of the top-10 hits are both `section=UG.3.1.1` but different page ranges (61–62 vs 63) — retrieval already surfaces multiple fragments of the same article as **separate, independently-truncated citations**, and neither fragment includes the article's own opening/header text (both start mid-sentence).
+
+**[DISPLAY] ruled out, correcting the task's framing**: the session log (`sessions.py`'s `_build_entry`) stores **no content/excerpt field at all** for hits — nothing to abbreviate. The "~200 chars" figure the task referenced is a different code path: `cli.py:481`'s `ask --debug` per-hit printout (`hit.content[:200]`), which feeds `eval.py`'s `raw_passages` in fidelity-grid results (already documented as a known limitation in `eval/fidelity_method.md`) — a diagnostic-only capture for the eval harness, never in the live demo's request/response path.
+
+**Recommended fix (not applied)**: two layers, both needed for Charline's actual expectation (a full, coherent article) to be met — (a) quick: raise/remove the 500-char cap in `Citation.excerpt`, cheap but only closes the API-layer gap; (b) structural: when building citations, detect sibling chunks sharing `(source_path, section)` among the hits and stitch/merge them into one citation per article instead of N independently-truncated fragments — this interacts with the `marker_index`/`[N]`-to-citation 1:1 mapping (`api.py`'s citations list) and needs design input on how a merged citation reports its marker index.
+
+**Open threads**:
+- No article-chunk-count census run corpus-wide — only 3 samples audited. A full histogram (chunks-per-`(source_path,section)` across all of `reglement_ecrit`) would show how common multi-chunk articles are before scoping the (b) fix.
+- The `marker_index` 1:1 hit-to-citation mapping is a real design constraint for (b) — not resolved here, flagging for whoever picks up the fix.
+
+---
+
 ## 2026-07-16 — synthesis prompt overhaul: contradiction + zone/exceptions + tone (1 commit, restart)
 
 **Context**: Charline's 07-13 user-story session validated retrieval but flagged three coupled defects, all in `SYSTEM_PROMPT` (`llm.py`) — fixed in one coherent rewrite since they share the same prompt surface. (1) **Self-contradiction** (worst): the anti-fabrication clause over-fired — an answer would cite a relevant passage and then declare "no information" for the same point in the same answer. Reproduced live pre-fix on the "volets" question (`session_2026-07-15_94b05ad4.jsonl`): cited OAP_CONSTRUCTION's "volets roulants à lames orientables" `[4]`, then concluded "le contexte ne permet pas de répondre clairement." (2) **Answer shape**: when no specific rule exists, the tool gave a curt refusal instead of the zone's general rule + exceptions to verify. (3) **Tone**: "trop sec, trop court, pas assez documenté" — needed more grounded citation, never more outside knowledge.
