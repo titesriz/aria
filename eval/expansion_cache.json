@@ -157,5 +157,14 @@
       "UG.3.2.1"
     ],
     "expansion_status": "ok"
+  },
+  "je cherche la règle de retrait par rapport à la voie publique pour une construction en zone ug dans le 15e arrondissement de paris.": {
+    "expansion_query": "UG.3.1 UG.3.1.1 UG.3.1.2",
+    "inferred_articles": [
+      "UG.3.1",
+      "UG.3.1.1",
+      "UG.3.1.2"
+    ],
+    "expansion_status": "ok"
   }
 }
