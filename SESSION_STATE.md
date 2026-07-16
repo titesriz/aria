@@ -6,6 +6,30 @@
 
 ---
 
+## 2026-07-16 — OAP perimeter-filtering investigation (read-only, 0 commits)
+
+**Context**: Charline — when zone/arrondissement is known, retrieval surfaces OAP from unrelated sectors (Bercy-Charenton, Portes, etc.), polluting the answer. Goal: determine IF/HOW to filter before designing a fix. (User's message arrived truncated mid-sentence at step 2a — proceeded on the clear parts and a reasonable read of the rest, confirmed correct once the full message landed.)
+
+**1. Inventory**: 19 distinct OAP files, 292 chunks total, split by folder: **13 `Sectorielles/`** (perimeter-specific, 5–31 chunks each) + **6 `Thématiques/`** (citywide, 16–34 chunks each). `corpus_mapping.yaml` has one blanket prefix rule for all 19 (`family: oap, norm_level: local, city: paris`) — no sector/arrondissement field anywhere in that schema. `referentiel.yaml` only adds folder-level `piece_id`s (`oap-sectorielles`/`oap-thematiques`), same granularity, still no per-file field.
+
+**2. Perimeter signal — verdict: case (b), reliably in the text, not (c).** Every one of the 13 Sectorielles OAPs' first chunk has the identical extractable pattern: `Secteur « Name »\n(Xe arrondissement)` — confirmed 13/13 via regex, zero misses. None of the 6 Thématiques OAPs mention an arrondissement in their first chunk (citywide, as expected). **No hand-authored table needed** — the mapping is corpus-derivable.
+
+**3. Granularity**: OAP perimeter = **named sub-arrondissement secteur**, not arrondissement itself (e.g. "Bartholomé-Brancion", "Olympiades / Villa d'Este-Place de Vénétie"). Arrondissement is metadata *about* the secteur, and it's **often multi-valued**: Maine-Montparnasse = 6e+14e+15e (3), Paris Nord Est = 18e+19e (2), Portes de l'Est parisien = 12e+20e (2); most others are single. Confirms the task's premise: zone (UG, city-wide) can't filter OAP — arrondissement/secteur is the only usable key, and it's 1-to-many from OAP to arrondissement.
+
+**Non-obvious finding**: `retriever.py` already has arrondissement-extraction machinery (`_ARRONDISSEMENT_NUMERIC`/`_ARRONDISSEMENT_WORD`/`extract_discriminating_tokens`, built for Annexe-V address-table rows) and it's already invoked over every family's fetch pool via `_apply_lexical_boost` (`lexical_boost_factor=2.0` by default, always on). **It does not currently help here** — empirically verified the line-start regex (`^\s*12e\b`) does not match the OAP title's `(12e arrondissement)` format (leading parenthesis breaks the anchor). Also: `DEFAULT_FAMILY_SLOTS["oap"] = 1` — only **one** OAP chunk is fetched per query total, so "pollution" isn't volume, it's a perimeter-blind lottery across 19 files for that single slot.
+
+**4. Filter options** (sketched, not built):
+- **(A) Hard exclude at retrieval** — extend the existing `allowed: set[int]` index-restriction idiom (already used identically for `family_filter`) with a second filter: intersect the OAP `fam_allowed` set with chunks from OAP files whose arrondissement(s) match the query's. Cleanest guarantee (wrong-sector OAP literally never reaches the 1 slot). Cost: needs the query's arrondissement (see below) + a filename→arrondissement(s) lookup. **Can be a static Python dict, derived from the 13-file regex scan above — no `Chunk` schema change, no re-ingest required**, if keyed by filename rather than added as a per-chunk field. Doesn't touch the certified 80%/91.7% reference as long as it's a no-op when no arrondissement is known (same non-breaking pattern `family_filter` already follows).
+- **(B) Extend the existing boost** — fix `_apply_lexical_boost`'s regex to also match `(Xe arrondissement)`, reusing the machinery that already runs on every OAP fetch. Cheapest change, but it's a *soft* multiplicative nudge, not a hard exclude — doesn't guarantee an unrelated sector never wins the single slot, only makes it less likely. Same no-re-ingest, no-schema-change profile as (A).
+- **(C) Proper long-term metadata** — add arrondissement as a real `Chunk`/`referentiel.yaml` field (parallel to `norm_level`/`city`). More correct, matches the codebase's existing config-driven conventions, but **does** need a re-ingest (of `oap` family only, following the 07-14 scoped-rebuild precedent) and a schema change. Not needed for a first fix.
+- **Blocking gap, all options**: `AskRequest` (`api.py`) has **no arrondissement/zone field at all** — only `question: str`. The architect's zone/arrondissement, if given, is buried in free text. Options A/B need something to filter *against*; today nothing extracts it into a usable value at the `/ask` layer (the retriever's extraction function exists but is only wired into the boost path, not exposed as a value the API could act on directly). **This is the actual precondition for any of the above** — flagging as the real next question for Charline/Anna, not a small detail.
+
+**Open threads**:
+- Whether to solve the missing-arrondissement-input gap via a new structured `AskRequest` field (needs a demo-side change, outside this repo) vs. reusing/exposing `retriever.py`'s existing free-text extraction at the API layer (no demo change, but heuristic — same "1er janvier" false-positive risk the boost regex already guards against) is an open design choice, not resolved here.
+- No corpus-wide validation that EVERY OAP's arrondissement is truly static per file (i.e., no sub-file arrondissement mixing within a single Sectorielle PDF) — the 13/13 first-chunk match is strong evidence but each file's full text wasn't checked chunk-by-chunk for a stray second-arrondissement mention.
+
+---
+
 ## 2026-07-16 — citation truncation fix: send full chunk text (1 commit, restart)
 
 **Fix** (`960f906`'s audit → `6a4377a`): removed `textwrap.shorten(..., width=500, placeholder="...")` at both sites the audit found — `api.py`'s `Citation.excerpt` (the live `/ask` response) and `cli.py:246`'s `format_hits` (`--debug`'s "Retrieved passages" block) — now both send `hit.content`/`h.content` directly. Small, targeted: no other logic touched.
