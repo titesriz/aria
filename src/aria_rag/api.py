@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import logging
 import re
-import textwrap
 import time
 from contextlib import asynccontextmanager
 from datetime import datetime, timezone
@@ -385,7 +384,12 @@ def ask(req: AskRequest) -> AskResponse:
                 source=Path(h.source_path).name,
                 full_path=h.source_path,
                 family=h.doc_family,
-                excerpt=textwrap.shorten(h.content, width=500, placeholder="..."),
+                # Full chunk text, not a truncated preview -- chunks are
+                # already bounded by settings.chunk_size (article-aware
+                # chunking keeps one article per chunk where it fits), so
+                # there's no separate length budget to enforce here. See
+                # SESSION_STATE.md's 2026-07-16 citation-truncation audit.
+                excerpt=h.content,
                 page=h.page,
                 page_end=h.page_end,
                 page_citation=format_page_citation(h.page, h.page_end),

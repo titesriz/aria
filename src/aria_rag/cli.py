@@ -3,7 +3,6 @@ from __future__ import annotations
 import argparse
 import os
 import sys
-import textwrap
 from pathlib import Path
 
 from aria_rag.config import load_settings
@@ -241,10 +240,12 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def format_hits(hits: list[SearchHit]) -> str:
+    # Full chunk text, not a truncated preview -- kept consistent with
+    # api.py's Citation.excerpt (see SESSION_STATE.md's 2026-07-16
+    # citation-truncation audit).
     blocks: list[str] = []
     for hit in hits:
-        excerpt = textwrap.shorten(hit.content, width=500, placeholder="...")
-        blocks.append(f"[score={hit.score:.3f}] [{hit.doc_family}] {hit.source_path}\n{excerpt}")
+        blocks.append(f"[score={hit.score:.3f}] [{hit.doc_family}] {hit.source_path}\n{hit.content}")
     return "\n\n".join(blocks)
 
 
