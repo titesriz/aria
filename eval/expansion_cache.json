@@ -166,5 +166,32 @@
       "UG.3.1.2"
     ],
     "expansion_status": "ok"
+  },
+  "quelles sont les orientations d'aménagement et de programmation pour le secteur bercy-charenton dans le 12e arrondissement ?": {
+    "expansion_query": "UG.3.1.1 UG.3.1.2 UG.3.2.1",
+    "inferred_articles": [
+      "UG.3.1.1",
+      "UG.3.1.2",
+      "UG.3.2.1"
+    ],
+    "expansion_status": "ok"
+  },
+  "quelles sont les orientations d'aménagement pour le secteur des portes de l'est parisien ?": {
+    "expansion_query": "UG.3.1.2 UG.3.1.3 UG.3.1.4",
+    "inferred_articles": [
+      "UG.3.1.2",
+      "UG.3.1.3",
+      "UG.3.1.4"
+    ],
+    "expansion_status": "ok"
+  },
+  "quelles sont les orientations d'aménagement et de programmation du secteur paris rive gauche dans le 13e arrondissement ?": {
+    "expansion_query": "UG.3.1.2 UG.3.1.3 UG.3.1.4",
+    "inferred_articles": [
+      "UG.3.1.2",
+      "UG.3.1.3",
+      "UG.3.1.4"
+    ],
+    "expansion_status": "ok"
   }
 }
