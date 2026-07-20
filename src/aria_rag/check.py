@@ -345,13 +345,14 @@ def check_coverage(
     manifest_paths = {m.source_path for m in manifest}
     on_disk = list(iter_pdf_paths(settings.docs_dir))
     on_disk_paths = {str(p.resolve()) for p in on_disk}
-    # A validity=superseded file (corpus_mapping.yaml) is discovered but
-    # deliberately never indexed — it must not be flagged as missing.
-    superseded_on_disk = {
+    # A non-current file (validity=superseded or excluded, corpus_mapping.yaml)
+    # is discovered but deliberately never indexed — it must not be flagged
+    # as missing.
+    non_current_on_disk = {
         str(p.resolve()) for p in on_disk
-        if classify_path(p, settings.docs_dir, rules).validity == "superseded"
+        if classify_path(p, settings.docs_dir, rules).validity != "current"
     }
-    missing = sorted(on_disk_paths - manifest_paths - superseded_on_disk)
+    missing = sorted(on_disk_paths - manifest_paths - non_current_on_disk)
 
     new_zero_chunk = []
     for m in manifest:
@@ -365,7 +366,7 @@ def check_coverage(
         "on_disk_pdf_count": len(on_disk_paths),
         "manifest_entry_count": len(manifest),
         "missing_from_manifest": missing,
-        "excluded_superseded": sorted(_relative_path(p, settings.docs_dir) for p in superseded_on_disk),
+        "excluded_non_current": sorted(_relative_path(p, settings.docs_dir) for p in non_current_on_disk),
         "known_zero_chunk_count": len(known_zero),
         "new_unexplained_zero_chunk_files": new_zero_chunk,
     })
@@ -373,7 +374,7 @@ def check_coverage(
     message = (
         f"{len(missing)} PDF(s) on disk missing from manifest, {len(new_zero_chunk)} new unexplained "
         f"zero-chunk file(s) ({len(known_zero)} documented in {known_zero_chunk_path.name}), "
-        f"{len(superseded_on_disk)} superseded (excluded, expected)"
+        f"{len(non_current_on_disk)} non-current (superseded/excluded, expected)"
     )
     return InvariantResult("6. Coverage", status, count, message, details_path)
 

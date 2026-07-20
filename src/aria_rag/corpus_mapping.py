@@ -27,7 +27,7 @@ class MappingRule:
     family: str
     norm_level: str | None
     city: str | None
-    validity: str  # "current" | "superseded"
+    validity: str  # "current" | "superseded" | "excluded"
 
 
 @dataclass(frozen=True, slots=True)

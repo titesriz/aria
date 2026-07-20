@@ -4,7 +4,7 @@
 # Each rule maps a folder (or file) PREFIX, relative to Settings.docs_dir
 # (Ressources/), forward-slash, NFC-normalized, to a classification:
 # family, norm_level (national | local), city, and validity
-# (current | superseded — omit for the default, "current").
+# (current | superseded | excluded — omit for the default, "current").
 #
 # Matching: longest matching prefix wins, independent of list order below
 # (order here is just for human readability — file-specific overrides are
@@ -14,13 +14,18 @@
 # and its own documented allowlist as a hard failure, so an unmapped file
 # is loud, not silent.
 #
-# Superseded files: discovered during ingestion (they're still valid PDFs
-# on disk) but never chunked/indexed — the assumption is a byte-identical,
-# legally-current replacement exists under a different filename (verified
-# by full-text diff before adding an entry here; see the MS1-vs-base audit
-# for the REG1/REG2A1 case below). aria_rag.check's coverage invariant
-# knows about this list and does not flag a superseded file as "missing
-# from manifest".
+# Any validity other than "current" is discovered during ingestion (still a
+# valid PDF on disk) but never chunked/indexed — indexer.build_index and
+# aria_rag.check's coverage invariant both treat "not current" uniformly, so
+# neither flags the file as "missing from manifest". Two distinct reasons so
+# far:
+#   - superseded: a byte-identical, legally-current replacement exists under
+#     a different filename (verified by full-text diff before adding an
+#     entry here; see the MS1-vs-base audit for the REG1/REG2A1 case below).
+#   - excluded: no replacement exists — the file itself has no substantive
+#     indexable content (e.g. a map/plate whose extracted "text" is just its
+#     own repeated title banner; see the ANN2A case below), so indexing it
+#     would only add retrieval noise, not signal.
 
 rules:
   # --- File-specific overrides: REG1.pdf, REG2A1.pdf, and REG2A10_1DE2.pdf
@@ -56,6 +61,21 @@ rules:
     norm_level: local
     city: paris
     validity: superseded
+
+  # --- ANN2A_2025_12_19.pdf ("Zonage d'assainissement des eaux usées et
+  # zonage pluvial") is a map/plate document — its 4 pre-fix chunks were
+  # confirmed to be nothing but the same repeated title banner text
+  # ("ZONAGE D'ASSAINISSEMENT DES EAUX USÉES ET ZONAGE PLUVIAL DE LA VILLE
+  # DE PARIS...") extracted from each page; the actual content is graphical
+  # (a map), which pypdf cannot extract as text. No substantive content to
+  # index, and the repeated banner was polluting retrieval as false-signal
+  # noise. Same family/norm_level/city as the annexes rule below — only
+  # validity differs, hence its own file-specific entry.
+  - prefix: "PLU/75 Paris/PLU Bioclimatique/Annexes/Textes et documents illustrés/ANN2A_2025_12_19.pdf"
+    family: annexes
+    norm_level: local
+    city: paris
+    validity: excluded
 
   # --- PLU bioclimatique de Paris (today's corpus) — norm_level: local,
   # city: paris.

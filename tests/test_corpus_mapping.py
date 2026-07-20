@@ -112,6 +112,20 @@ def test_load_rules_reads_real_corpus_mapping_yaml():
     assert all(r.prefix.endswith(".pdf") for r in superseded)
 
 
+def test_load_rules_excludes_ann2a_map_plate():
+    """ANN2A_2025_12_19.pdf's extracted text is nothing but its own repeated
+    title banner (confirmed by direct chunk inspection) -- a map/plate with
+    no substantive indexable content, excluded to stop it polluting
+    retrieval with header-noise chunks.
+    """
+    path = Path(__file__).resolve().parents[1] / "corpus_mapping.yaml"
+    rules = load_rules(path)
+    excluded = [r for r in rules if r.validity == "excluded"]
+    assert len(excluded) == 1
+    assert excluded[0].prefix.endswith("ANN2A_2025_12_19.pdf")
+    assert excluded[0].family == "annexes"
+
+
 def test_load_rules_defaults_validity_to_current():
     rules = load_rules(Path(__file__).resolve().parents[1] / "corpus_mapping.yaml")
     cch_rule = next(r for r in rules if r.family == "cch")

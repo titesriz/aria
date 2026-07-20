@@ -364,6 +364,24 @@ def test_coverage_passes_for_superseded_file_not_in_manifest(tmp_path):
     assert result.count == 0
 
 
+def test_coverage_passes_for_excluded_file_not_in_manifest(tmp_path):
+    """A validity=excluded file (corpus_mapping.yaml, e.g. ANN2A_2025_12_19.pdf
+    -- a map/plate with no substantive extractable text) is discovered on
+    disk but deliberately never indexed -- same treatment as superseded,
+    just a different reason."""
+    settings = _settings(tmp_path)
+    settings.docs_dir.mkdir(parents=True, exist_ok=True)
+    (settings.docs_dir / "ANN2A.pdf").write_bytes(b"%PDF-1.4")
+    empty_known = tmp_path / "known_zero.json"
+    empty_known.write_text(json.dumps({"entries": []}), encoding="utf-8")
+    rules = [MappingRule(prefix="ANN2A.pdf", family="annexes", norm_level="local", city="paris", validity="excluded")]
+    result = check_coverage(
+        [], settings, tmp_path / "reports", known_zero_chunk_path=empty_known, mapping_rules=rules
+    )
+    assert result.status == "pass"
+    assert result.count == 0
+
+
 def test_coverage_still_fails_for_missing_file_not_covered_by_a_superseded_rule(tmp_path):
     """A superseded rule for one file must not blanket-excuse a genuinely
     different missing file.

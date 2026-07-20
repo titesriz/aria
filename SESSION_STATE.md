@@ -6,6 +6,22 @@
 
 ---
 
+## 2026-07-20 — index hygiene: ANN2A exclusion, RP audit, referentiel regen (1 commit, re-ingest, 0 restart)
+
+**Context**: 3-item hygiene task. Audited each claim before acting (two of three didn't hold as stated — see below).
+
+**1. ANN2A_2025_12_19.pdf exclusion — REAL, fixed.** Direct chunk inspection confirmed: all 4 pre-fix chunks were nothing but the same repeated title banner ("ZONAGE D'ASSAINISSEMENT DES EAUX USÉES ET ZONAGE PLUVIAL DE LA VILLE DE PARIS...") — a map/plate with no extractable substantive text. Added `validity: excluded` to `corpus_mapping.yaml` (a new value alongside `current`/`superseded` — reusing `superseded` would have been factually wrong per that value's own documented meaning, "a replacement exists under another name," which isn't true here). Generalized the 3 call sites that special-cased `== "superseded"` (`indexer.build_index`, `check.check_coverage`) to `!= "current"` instead, so any future non-indexable-for-a-new-reason file doesn't need a 4th special case. 3 new tests.
+
+**2. RP_20251017_MC1_HOTEL_DIEU.pdf pollution — claim NOT reproducible, no change made.** Confirmed the file genuinely contains UG.x.y codes in body text (49/131 chunks — it's a modification dossier quoting affected articles), but: (a) "CH-05" doesn't exist in `golden_dataset.json` or anywhere else in this repo; (b) `rapport_presentation` already has **0** retrieval slots under `scoped_retrieval` (the default) — `scoped_retrieval_merge` skips a 0-slot family entirely at fetch time, so this file structurally cannot surface unscoped, confirmed by reading `retriever.py` and by live testing; (c) no session log (`data/sessions/*.jsonl`) has ever mentioned this filename. Task's own option (b) — "keep it addressable only when explicitly asked" — is already exactly today's behavior (`--family rapport_presentation` bypasses slot allocation entirely and finds it fine, confirmed live). The only real gap is `--no-scoped-retrieval` (an explicit debug flag, not a default), too narrow to justify option (a)'s heavier tagging/ranking work. Least invasive = no code change; documented here instead.
+
+**3. Referentiel drift — the named files were NOT stale (false premise), but regenerating found real drift elsewhere.** REG1.pdf/REG2A1.pdf/REG2A10_1DE2.pdf are still on disk (not deleted) and `referentiel.yaml` already correctly shows `validity: superseded, chunk_count: 0` for all three — zero drift there. Running `regenerate_files()` anyway (diffed before writing) found the REAL drift: stale `chunk_count`s for the 3 files T2's table-chunker touched (274→7826, 1636→3205, 1862→2546 — referentiel.yaml hadn't been regenerated since that re-ingest) plus ANN2A's validity update from this session. Regenerated and saved — clean 8-line diff, `git diff referentiel.yaml` reviewed before committing.
+
+**4. Re-ingested** `annexes` family (`--rebuild --family annexes`, scoped — REG*/reglement_ecrit untouched). `aria-rag check`: 0 FAIL / 3 WARN (all pre-existing categories) / 7 PASS. Confirmed live: 0 ANN2A chunks in `chunks.json` (was 4). Full suite 184 passed (was 182). `eval --no-llm`: 80.0% → 80.0%, byte-identical (`results_20260720_142107_8ad6bab2.json` → `results_20260720_173438_568c348f.json`) — expected, ANN2A/RP were never golden-case-relevant.
+
+**Open threads**: none new. Item 2's narrow residual (`--no-scoped-retrieval` bypass) is a known, accepted, debug-only gap — not tracked as a TODO since fixing it would be premature optimization for an unobserved risk.
+
+---
+
 ## 2026-07-20 — structure-aware table chunker: CH-06 root-cause fix (1 commit, re-ingest, 0 restart)
 
 **Context**: file-level diagnostic (Notion, Ontologie documentaire) found `reglement_ecrit` is structurally heterogeneous — `REG1_MS1.pdf` is article prose (existing `chunk_text_by_article` fits), but `REG2A1_MS1.pdf` (Annexes I-IX) and `REG2A10_*.pdf` (Annexe X) are compact tables. The article chunker's char-window fallback (no article headers to split on) cut table rows apart at arbitrary 1200-char boundaries — CH-06's root cause (2/17 addresses retrieved from Annexe V instead of ~17).

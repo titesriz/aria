@@ -720,17 +720,18 @@ def build_index(
 
     # Classify every discovered file once, up front — reused below both for
     # the --family rebuild filter and for extract_chunks_from_pdf. Applies
-    # regardless of incremental vs --rebuild mode: a superseded file (e.g.
-    # REG1.pdf, byte-identical to REG1_MS1.pdf — see corpus_mapping.yaml)
-    # is discovered but never indexed, so its stale manifest/chunks entries
-    # (if any exist from before this file was marked superseded) are simply
-    # never regenerated.
+    # regardless of incremental vs --rebuild mode: a non-current file (e.g.
+    # REG1.pdf, superseded — byte-identical to REG1_MS1.pdf; or
+    # ANN2A_2025_12_19.pdf, excluded — no substantive extractable content;
+    # see corpus_mapping.yaml) is discovered but never indexed, so its stale
+    # manifest/chunks entries (if any exist from before this file's validity
+    # changed) are simply never regenerated.
     mapping_rules = load_rules()
     classifications = {str(p): classify_path(p, settings.docs_dir, mapping_rules) for p in pdf_paths}
-    superseded = [p for p in pdf_paths if classifications[str(p)].validity == "superseded"]
-    if superseded:
-        print(f"Excluding {len(superseded)} superseded file(s) from indexing: {[p.name for p in superseded]}", flush=True)
-    pdf_paths = [p for p in pdf_paths if classifications[str(p)].validity != "superseded"]
+    non_current = [p for p in pdf_paths if classifications[str(p)].validity != "current"]
+    if non_current:
+        print(f"Excluding {len(non_current)} non-current file(s) from indexing: {[p.name for p in non_current]}", flush=True)
+    pdf_paths = [p for p in pdf_paths if classifications[str(p)].validity == "current"]
 
     # With a family filter, always load existing data — files outside the filter are kept as-is.
     force_rebuild_all = rebuild and not family_filter

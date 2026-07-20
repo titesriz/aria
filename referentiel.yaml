@@ -363,7 +363,7 @@ files:
   pages: 140
 - path: PLU/75 Paris/PLU Bioclimatique/Annexes/Textes et documents illustrés/ANN2A_2025_12_19.pdf
   piece_id: annexe-textes-illustres
-  validity: current
+  validity: excluded
   chunk_count: 4
   pages: 20
 - path: PLU/75 Paris/PLU Bioclimatique/Annexes/Textes et documents illustrés/ANN2B_2025_12_19.pdf
@@ -2400,15 +2400,15 @@ files:
 - path: PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 2/REG2A10_1DE2_MS1.pdf
   piece_id: reg-ecrit-t2
   validity: current
-  chunk_count: 1636
+  chunk_count: 3205
   pages: 700
 - path: PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 2/REG2A10_2DE2_MS1.pdf
   piece_id: reg-ecrit-t2
   validity: current
-  chunk_count: 1862
+  chunk_count: 2546
   pages: 889
 - path: PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 2/REG2A1_MS1.pdf
   piece_id: reg-ecrit-t2
   validity: current
-  chunk_count: 274
+  chunk_count: 7826
   pages: 224
