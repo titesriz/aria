@@ -4,6 +4,7 @@ import json
 import logging
 import pickle
 import re
+import unicodedata
 from dataclasses import dataclass
 from typing import Callable
 
@@ -67,6 +68,125 @@ def extract_discriminating_tokens(query_text: str) -> list[tuple[str, str]]:
     for m in _ARTICLE_CODE_IN_QUERY.finditer(query_text):
         tokens.add((m.group(0), "article_code"))
     return sorted(tokens)
+
+
+def _is_table_row(chunk: Chunk) -> bool:
+    return chunk.chunk_type == "table_row"
+
+
+def _strip_accents(s: str) -> str:
+    return "".join(c for c in unicodedata.normalize("NFKD", s) if not unicodedata.combining(c))
+
+
+# Concept -> target annexe, derived from eval/ontology/concept_article_mapping_proposal.csv
+# (T4) and the file-level Annexe I/V/X audits from T2/T3. Each entry is a
+# list of independent stems (accent-stripped, lowercased) that must ALL be
+# present somewhere in the query for that route to fire — narrow and
+# conjunctive on purpose (T6 audit): a single generic word ("secteur",
+# "protege") is common enough in ordinary UG-article questions that using
+# it alone would misroute them away from ordinary retrieval. Requiring
+# every stem of a route keeps false positives low while still catching the
+# natural phrasing of an explicit list-style question (CH-05/CH-06's own
+# wording matches these stem sets directly). No route ever fires on a
+# partial match — see _detect_annexe_route's docstring.
+_ANNEXE_ROUTES: list[tuple[str, list[str]]] = [
+    # "emplacements réservés ... logement" (CH-06) -- NOT the "équipements"
+    # reservation mechanism (UG.1.6, a REG1 article, not an annexe route) --
+    # see eval/ontology/concept_article_mapping_proposal.csv's two separate
+    # "emplacements reserves" rows for why these must not be conflated.
+    ("Annexe V", ["emplacement", "reserv", "logement"]),
+    # "liste des secteurs soumis à des dispositions particulières" (CH-05) --
+    # matches Annexe I's own title near-verbatim; "liste" is required so an
+    # ordinary "quelles dispositions s'appliquent dans le secteur X"
+    # question (about ONE named secteur, not the whole cross-zone list)
+    # doesn't misroute here.
+    ("Annexe I", ["liste", "secteur", "disposition", "particuli"]),
+    # "bâtiment protégé" / "protection patrimoniale" -- deliberately does
+    # NOT include bare "toiture"/"couverture"/"volet" stems (CH-02/CH-03):
+    # those are ordinary UG.2.2-family questions unless the query also
+    # names patrimonial protection explicitly.
+    ("Annexe X", ["proteg", "batiment"]),
+]
+
+
+def _detect_annexe_route(query: str) -> str | None:
+    """Which annexe (if any) this query explicitly targets as a list —
+    None means "no route matched", the caller's signal to fall through to
+    ordinary retrieval. Never returns on a partial/ambiguous match (every
+    stem in a route must be present) — see _ANNEXE_ROUTES.
+    """
+    normalized = _strip_accents(query.lower())
+    for annexe, stems in _ANNEXE_ROUTES:
+        if all(stem in normalized for stem in stems):
+            return annexe
+    return None
+
+
+def _annexe_route(query: str, chunks: list[Chunk], limit: int) -> list[SearchHit] | None:
+    """Deterministic section-filtered lookup for a query that explicitly
+    targets one annexe's list (see _detect_annexe_route) — bypasses FAISS/
+    BM25/RRF ranking entirely.
+
+    Root cause this works around (T5/T6 audit): table_row chunks are
+    short and keyword-dense (addresses, proper nouns) and score
+    competitively against reglement_ecrit prose on BOTH BM25 (literal
+    term overlap) AND FAISS (the embedding model doesn't reliably
+    disambiguate polysemous terms — e.g. "hôtel" the lodging-use category
+    vs. "hôtel particulier" the heritage-building term) — see
+    SESSION_STATE.md's T6 entry for the UC-04 case that surfaced this.
+    Beyond crowding out prose, rows also compete individually against each
+    other, so no single ranked top-k ever captures more than 1-2 of a
+    dozen-plus siblings for the same list (CH-06). For a query this
+    explicit about wanting "the list", section-filtered retrieval is
+    strictly more correct than ranking would ever be — this is a
+    retrieval-class distinction, not a relevance judgment call.
+
+    Returns None (never an empty list) when no route fires, or a route
+    fires but the annexe has zero chunks (shouldn't happen post-T2, but a
+    corpus change could in principle leave one empty) — both cases mean
+    "fall through to the default pool", never "found nothing to answer
+    with". An arrondissement mention (e.g. "1er arrondissement") narrows
+    the result to just that arrondissement's rows and lifts `limit`
+    entirely, since exhaustiveness for that one arrondissement is the
+    whole point (CH-06); without one, the result is capped at `limit` like
+    an ordinary search, just section-filtered instead of ranked.
+    """
+    annexe = _detect_annexe_route(query)
+    if annexe is None:
+        return None
+
+    matching = [c for c in chunks if _is_table_row(c) and c.section == annexe]
+    if not matching:
+        return None
+
+    arrondissement_tokens = [tok for tok, kind in extract_discriminating_tokens(query) if kind == "arrondissement"]
+    exhaustive = bool(arrondissement_tokens)
+    if exhaustive:
+        pattern = re.compile(r"(?m)^\s*(?:" + "|".join(re.escape(t) for t in arrondissement_tokens) + r")\b")
+        matching = [c for c in matching if pattern.search(c.content)]
+        if not matching:
+            return None
+
+    def _doc_order(chunk: Chunk) -> tuple[str, int]:
+        m = re.search(r"-(\d+)$", chunk.chunk_id)
+        return (chunk.source_path, int(m.group(1)) if m else 0)
+
+    matching.sort(key=_doc_order)
+    if not exhaustive:
+        matching = matching[:limit]
+
+    return [
+        SearchHit(
+            source_path=c.source_path,
+            doc_family=c.doc_family,
+            score=1.0,
+            content=c.content,
+            page=c.page,
+            page_end=c.page_end,
+            section=c.section,
+        )
+        for c in matching
+    ]
 
 
 def _apply_lexical_boost(
@@ -340,15 +460,24 @@ def search(
     limit = top_k or settings.top_k
     use_scoped = settings.scoped_retrieval if scoped is None else scoped
 
+    # Annexe route takes priority over everything below — see _annexe_route's
+    # docstring. Only when the caller hasn't explicitly restricted family_filter
+    # to exclude reglement_ecrit (annexes only live there); an explicit,
+    # narrower caller intent is respected, never overridden.
+    if not family_filter or "reglement_ecrit" in family_filter:
+        routed = _annexe_route(query, chunks, limit)
+        if routed is not None:
+            return routed
+
     if family_filter:
-        allowed = {i for i, c in enumerate(chunks) if c.doc_family in family_filter}
+        allowed = {i for i, c in enumerate(chunks) if c.doc_family in family_filter and not _is_table_row(c)}
         return _search_within(
             model, faiss_index, bm25, chunks, query, limit, allowed,
             boost_factor=settings.lexical_boost_factor, debug=debug,
         )
 
     if not use_scoped:
-        allowed = set(range(len(chunks)))
+        allowed = {i for i, c in enumerate(chunks) if not _is_table_row(c)}
         return _search_within(
             model, faiss_index, bm25, chunks, query, limit, allowed,
             boost_factor=settings.lexical_boost_factor, debug=debug,
@@ -357,14 +486,14 @@ def search(
     present_families = {c.doc_family for c in chunks}
     scopes = [f for f in settings.family_slots if f in present_families]
     if not scopes:
-        allowed = set(range(len(chunks)))
+        allowed = {i for i, c in enumerate(chunks) if not _is_table_row(c)}
         return _search_within(
             model, faiss_index, bm25, chunks, query, limit, allowed,
             boost_factor=settings.lexical_boost_factor, debug=debug,
         )
 
     def fetch_fn(family: str, k: int) -> list[SearchHit]:
-        fam_allowed = {i for i, c in enumerate(chunks) if c.doc_family == family}
+        fam_allowed = {i for i, c in enumerate(chunks) if c.doc_family == family and not _is_table_row(c)}
         return _search_within(
             model, faiss_index, bm25, chunks, query, k, fam_allowed,
             boost_factor=settings.lexical_boost_factor, debug=debug,
@@ -460,15 +589,22 @@ def search_weighted(
     limit = top_k or settings.top_k
     use_scoped = settings.scoped_retrieval if scoped is None else scoped
 
+    # See search()'s identical guard — annexe route takes priority, based on
+    # the original (unexpanded) query text only.
+    if not family_filter or "reglement_ecrit" in family_filter:
+        routed = _annexe_route(query_original, chunks, limit)
+        if routed is not None:
+            return routed
+
     if family_filter:
-        allowed = {i for i, c in enumerate(chunks) if c.doc_family in family_filter}
+        allowed = {i for i, c in enumerate(chunks) if c.doc_family in family_filter and not _is_table_row(c)}
         return _search_weighted_within(
             model, faiss_index, bm25, chunks, query_original, query_expansion,
             limit, allowed, alpha, boost_factor=settings.lexical_boost_factor,
         )
 
     if not use_scoped:
-        allowed = set(range(len(chunks)))
+        allowed = {i for i, c in enumerate(chunks) if not _is_table_row(c)}
         return _search_weighted_within(
             model, faiss_index, bm25, chunks, query_original, query_expansion,
             limit, allowed, alpha, boost_factor=settings.lexical_boost_factor,
@@ -477,14 +613,14 @@ def search_weighted(
     present_families = {c.doc_family for c in chunks}
     scopes = [f for f in settings.family_slots if f in present_families]
     if not scopes:
-        allowed = set(range(len(chunks)))
+        allowed = {i for i, c in enumerate(chunks) if not _is_table_row(c)}
         return _search_weighted_within(
             model, faiss_index, bm25, chunks, query_original, query_expansion,
             limit, allowed, alpha, boost_factor=settings.lexical_boost_factor,
         )
 
     def fetch_fn(family: str, k: int) -> list[SearchHit]:
-        fam_allowed = {i for i, c in enumerate(chunks) if c.doc_family == family}
+        fam_allowed = {i for i, c in enumerate(chunks) if c.doc_family == family and not _is_table_row(c)}
         return _search_weighted_within(
             model, faiss_index, bm25, chunks, query_original, query_expansion,
             k, fam_allowed, alpha, boost_factor=settings.lexical_boost_factor,

@@ -141,8 +141,22 @@ def test_ls_rows_never_split_across_chunks():
 def test_all_chunks_tagged_annexe_v():
     chunks = chunk_text_by_table(_ANNEXE_V_1ER, CHUNK_SIZE, source_path="REG2A1_MS1.pdf")
     assert chunks
-    assert all(section == "Annexe V" for _, _, section in chunks)
-    assert all(content.startswith("[Section: Annexe V]\n") for _, content, _ in chunks)
+    assert all(section == "Annexe V" for _, _, section, _ in chunks)
+    assert all(content.startswith("[Section: Annexe V]\n") for _, content, _, _ in chunks)
+
+
+def test_genuine_ls_rows_tagged_table_row():
+    """Every chunk containing a real LS/BRS row is tagged table_row -- note
+    the FIRST such chunk also bundles the section's intro paragraph (by
+    design, see _table_rows_for_segment's LS/BRS branch: row boundaries are
+    "previous row's end -> this row's end", and there is no previous row
+    before the first one), so it's still correctly a table_row chunk, not
+    pure prose.
+    """
+    chunks = chunk_text_by_table(_ANNEXE_V_1ER, CHUNK_SIZE, source_path="REG2A1_MS1.pdf")
+    row_chunks = [c for c in chunks if "LS 100-100" in c[1] or "LS 100-60" in c[1]]
+    assert row_chunks
+    assert all(chunk_type == "table_row" for _, _, _, chunk_type in row_chunks)
 
 
 # Reconstructed shape of a REG2A10 Annexe X page: a running header, then
@@ -169,6 +183,17 @@ def test_patrimoine_rows_never_split_even_when_oversized():
     assert any("BP 25 rue de l'Arbre Sec" in c for c in contents)
 
 
+def test_patrimoine_rows_tagged_table_row():
+    chunks = chunk_text_by_table(_ANNEXE_X_PAGE, CHUNK_SIZE, source_path="REG2A10_1DE2_MS1.pdf")
+    bp_rows = [c for c in chunks if c[1].startswith("[Section: Annexe X]\nBP ")]
+    assert len(bp_rows) == 3
+    assert all(chunk_type == "table_row" for _, _, _, chunk_type in bp_rows)
+    # The running-header preamble (before the first BP entry) is separate
+    # prose here (unlike the LS/BRS branch), and correctly untagged.
+    preamble = next(c for c in chunks if "Type Localisation Motivation" in c[1])
+    assert preamble[3] is None
+
+
 def test_oversized_preamble_still_bounded():
     """A stray incidental row-pattern match deep in an otherwise free-text
     span must not turn the preceding prose into one giant unbounded chunk
@@ -176,11 +201,14 @@ def test_oversized_preamble_still_bounded():
     prose = "Du texte de remplissage sans structure de ligne particulière. " * 40
     text = "Annexe II : Liste des périmètres devant faire l'objet d'un projet\n" + prose
     chunks = chunk_text_by_table(text, CHUNK_SIZE, source_path="REG2A1_MS1.pdf")
-    assert all(len(content) <= CHUNK_SIZE + 200 for _, content, _ in chunks)
+    assert all(len(content) <= CHUNK_SIZE + 200 for _, content, _, _ in chunks)
+    # Fallback char-split prose is never tagged table_row.
+    assert all(chunk_type is None for _, _, _, chunk_type in chunks)
 
 
 def test_no_headers_falls_back_to_fixed_size_split():
     text = "Du texte sans aucun en-tête d'annexe reconnaissable. " * 5
     chunks = chunk_text_by_table(text, CHUNK_SIZE, source_path="REG2A1_MS1.pdf")
     assert chunks
-    assert all(section is None for _, _, section in chunks)
+    assert all(section is None for _, _, section, _ in chunks)
+    assert all(chunk_type is None for _, _, _, chunk_type in chunks)

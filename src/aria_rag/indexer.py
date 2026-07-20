@@ -37,6 +37,13 @@ class Chunk:
     section: str | None = None
     norm_level: str | None = None
     city: str | None = None
+    # "table_row" for a genuine table-chunker row/entry (chunk_text_by_table's
+    # _emit_row output — Annexe III/V reservation rows, Annexe X protected-
+    # building entries); None for ordinary prose, including the same file's
+    # own preamble/fallback text (_emit_bounded). Lets the retriever treat
+    # table rows as a distinct candidate class instead of ordinary prose —
+    # see retriever.py's default-pool exclusion + annexe route (T6).
+    chunk_type: str | None = None
 
 
 @dataclass(slots=True)
@@ -378,41 +385,46 @@ def _merge_same_header_spans(headers: list[re.Match], text_len: int) -> list[tup
     return spans
 
 
-def _emit_bounded(seg_start: int, local_off: int, text: str, section: str, chunk_size: int) -> list[tuple[int, str]]:
+def _emit_bounded(seg_start: int, local_off: int, text: str, section: str, chunk_size: int) -> list[tuple[int, str, None]]:
     """Prose/preamble content — char-split if it exceeds chunk_size, so a
     single stray row-start match deep in an otherwise free-text span can't
     turn everything before it into one oversized chunk. Unlike a genuine
     table row (_emit_row), preamble text has no structural reason to stay
-    whole.
+    whole, and is never tagged chunk_type="table_row" — it's ordinary prose
+    that happens to live in a table-chunked file (e.g. an annexe's intro
+    paragraph), not an individually retrievable row.
     """
     if len(text) > chunk_size:
         return [
-            (seg_start + off, f"[Section: {section}]\n{txt}")
+            (seg_start + off, f"[Section: {section}]\n{txt}", None)
             for off, txt in _split_by_char(text, chunk_size, base_offset=local_off)
         ]
     result = _strip_with_offset(text, local_off)
     if not result:
         return []
     off, txt = result
-    return [(seg_start + off, f"[Section: {section}]\n{txt}")]
+    return [(seg_start + off, f"[Section: {section}]\n{txt}", None)]
 
 
-def _emit_row(seg_start: int, local_off: int, text: str, section: str) -> list[tuple[int, str]]:
+def _emit_row(seg_start: int, local_off: int, text: str, section: str) -> list[tuple[int, str, str]]:
     """One genuine table row/entry — kept whole even past chunk_size (see
     chunk_text_by_table's docstring: splitting a row recreates the bug this
     chunker exists to fix). check.py's size-cap invariant carries a matching,
-    narrowly-scoped exception (TABLE_ROW_MAX_LEN) for this.
+    narrowly-scoped exception (TABLE_ROW_MAX_LEN) for this. Tagged
+    chunk_type="table_row" — retriever.py treats this as a distinct
+    candidate class (excluded from the default ranking pool, retrievable
+    only via the deterministic annexe route — see retriever.py, T6).
     """
     result = _strip_with_offset(text, local_off)
     if not result:
         return []
     off, txt = result
-    return [(seg_start + off, f"[Section: {section}]\n{txt}")]
+    return [(seg_start + off, f"[Section: {section}]\n{txt}", "table_row")]
 
 
 def _rows_from_line_matches(
     segment: str, seg_start: int, matches: list[re.Match], section: str, chunk_size: int
-) -> list[tuple[int, str]]:
+) -> list[tuple[int, str, str | None]]:
     """One row per matched line (Annexe VI-IX address lists: "<arrdt>
     <address>", one entry per source line, no continuation)."""
     out = _emit_bounded(seg_start, 0, segment[: matches[0].start()], section, chunk_size)
@@ -427,7 +439,7 @@ def _rows_from_line_matches(
 
 def _rows_from_start_matches(
     segment: str, seg_start: int, matches: list[re.Match], section: str, chunk_size: int
-) -> list[tuple[int, str]]:
+) -> list[tuple[int, str, str | None]]:
     """One row per matched start-of-entry (Annexe X: "BP"/"EPP" + address +
     a free-text motivation paragraph of unpredictable length, running until
     the next entry's start)."""
@@ -438,7 +450,7 @@ def _rows_from_start_matches(
     return out
 
 
-def _table_rows_for_segment(segment: str, seg_start: int, section: str, chunk_size: int) -> list[tuple[int, str]]:
+def _table_rows_for_segment(segment: str, seg_start: int, section: str, chunk_size: int) -> list[tuple[int, str, str | None]]:
     """Row-split one annexe segment (the span from one real header to the
     next). Row shape depends on which annexe's content this is:
 
@@ -463,7 +475,7 @@ def _table_rows_for_segment(segment: str, seg_start: int, section: str, chunk_si
     """
     row_matches = list(_TABLE_ROW.finditer(segment))
     if row_matches:
-        out: list[tuple[int, str]] = []
+        out: list[tuple[int, str, str | None]] = []
         prev = 0
         for m in row_matches:
             out.extend(_emit_row(seg_start, prev, segment[prev:m.end()], section))
@@ -483,17 +495,19 @@ def _table_rows_for_segment(segment: str, seg_start: int, section: str, chunk_si
     return _emit_bounded(seg_start, 0, segment, section, chunk_size)
 
 
-def chunk_text_by_table(text: str, chunk_size: int, source_path: str = "") -> list[tuple[int, str, str]]:
+def chunk_text_by_table(text: str, chunk_size: int, source_path: str = "") -> list[tuple[int, str, str | None, str | None]]:
     """Row-preserving split for annexe table files (see TABLE_CHUNKED_FILES)
     — REG2A1_MS1.pdf and REG2A10_*.pdf are compact tables, not article
     prose, and chunk_text_by_article's char-window fallback cuts a table row
     apart at an arbitrary 1200-char boundary (the CH-06 bug: 2/17 addresses
     retrieved from Annexe V instead of ~17).
 
-    Returns (start_offset, content, section) triples — unlike
+    Returns (start_offset, content, section, chunk_type) 4-tuples — unlike
     chunk_text_by_article, section is resolved here directly (row detection
     and section-boundary detection share the same header pass; see
-    _table_rows_for_segment for the row shapes handled).
+    _table_rows_for_segment for the row shapes handled). chunk_type is
+    "table_row" for a genuine row/entry (_emit_row), None for prose
+    (preamble, fallback, or the no-headers-found case) — see indexer.Chunk.
     """
     headers = _real_annexe_headers(text)
     if not headers:
@@ -505,17 +519,20 @@ def chunk_text_by_table(text: str, chunk_size: int, source_path: str = "") -> li
         if not result:
             return []
         leading_offset, stripped_text = result
-        return [(off, txt, None) for off, txt in _split_by_char(stripped_text, chunk_size, base_offset=leading_offset)]
+        return [
+            (off, txt, None, None)
+            for off, txt in _split_by_char(stripped_text, chunk_size, base_offset=leading_offset)
+        ]
 
     spans = _merge_same_header_spans(headers, len(text))
-    out: list[tuple[int, str, str]] = []
+    out: list[tuple[int, str, str | None, str | None]] = []
     if spans[0][0] > 0:
         lead = _strip_with_offset(text[: spans[0][0]], 0)
         if lead:
-            out.append((lead[0], lead[1], None))
+            out.append((lead[0], lead[1], None, None))
     for start, end, label in spans:
-        for off, content in _table_rows_for_segment(text[start:end], start, label, chunk_size):
-            out.append((off, content, label))
+        for off, content, chunk_type in _table_rows_for_segment(text[start:end], start, label, chunk_size):
+            out.append((off, content, label, chunk_type))
     return out
 
 
@@ -564,10 +581,12 @@ def extract_chunks_from_pdf(
     # TABLE_CHUNKED_FILES); fall back to sliding window for everything else.
     is_table_chunked = doc_family == "reglement_ecrit" and Path(document.path).name in TABLE_CHUNKED_FILES
     row_sections: list[str | None] | None = None
+    row_chunk_types: list[str | None] | None = None
     if is_table_chunked:
         table_chunks = chunk_text_by_table(full_text, chunk_size, source_path=document.path)
-        raw_chunks = [(off, content) for off, content, _ in table_chunks]
-        row_sections = [section for _, _, section in table_chunks]
+        raw_chunks = [(off, content) for off, content, _, _ in table_chunks]
+        row_sections = [section for _, _, section, _ in table_chunks]
+        row_chunk_types = [chunk_type for _, _, _, chunk_type in table_chunks]
         if not _real_annexe_headers(full_text):
             # Same condition chunk_text_by_table checks internally (identical
             # regex over the identical full_text) to fall back to a fixed-size
@@ -676,6 +695,7 @@ def extract_chunks_from_pdf(
                 section=section,
                 norm_level=classification.norm_level,
                 city=classification.city,
+                chunk_type=row_chunk_types[idx] if row_chunk_types is not None else None,
             )
         )
     return kept, drops

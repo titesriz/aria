@@ -6,6 +6,32 @@
 
 ---
 
+## 2026-07-21 — Scope table_row chunks: fixes 2/6 polluted cases + CH-06 exhaustiveness (1 commit, re-ingest, 0 restart)
+
+**Audit before fix (T5's hypothesis was BM25-only)**: pulled FAISS/BM25 breakdowns for the polluted cases. UC-04's pollution ("hôtel" query surfacing Annexe X) had FAISS 0.62-0.72 (high) AND BM25 30-44 (high) — **both signals**, not BM25-only. Root cause: "hôtel" the lodging-use category (UG.1.3) vs. "hôtel particulier" the heritage-building term (Annexe X) — the embedding model doesn't disambiguate the polysemy either. Confirms the task's core diagnosis (table rows are a different retrieval class) but the mechanism is broader than hypothesized — adapted the fix accordingly (exclusion, not a BM25-specific tweak).
+
+**Changes**: (1) `Chunk.chunk_type` field, `"table_row"` tagged on every `chunk_text_by_table` `_emit_row` output (genuine rows), `None` on preamble/fallback prose — even the first LS/BRS row (which bundles the section's intro paragraph by design, see T2) is correctly `table_row`. (2) `retriever.py`: `chunk_type == "table_row"` excluded from the default candidate pool at all 6 `allowed`-set construction sites (`search`/`search_weighted` × family_filter/unscoped/scoped-fetch_fn). (3) `_annexe_route()`: deterministic section-filtered lookup for a query that explicitly names an annexe's list (Annexe V/I/X — conjunctive keyword-stem detection, e.g. "emplacement"+"reserv"+"logement", never a partial match — see `_ANNEXE_ROUTES`), bypassing FAISS/BM25/RRF entirely; exhaustive (ignores `limit`) when an arrondissement token is present, matching document order. Guard: fires only when `family_filter` doesn't exclude `reglement_ecrit`, returns `None` (never `[]`) on no match — callers always fall through cleanly. 26 new tests (12 table_chunker + 14 `test_annexe_route.py`), 200 passed.
+
+**Re-ingested** `reglement_ecrit`; `chunk_type` confirmed persisted (13,515 `table_row` / 728 prose). `eval --no-llm` on the certified reference: **80.0% → 80.0%, byte-identical** — no regression.
+
+**Full 12-case re-run** (`eval/results/golden_v2_retrieval_20260720.json`), compared directly against T5:
+
+| cas | T5 | T6 | verdict |
+|---|---|---|---|
+| UC-01 | ✗ | ✓ | **FIXED** |
+| UC-05 | ✗ | ✓ | **FIXED** |
+| UC-02/03/16, CH-04 | ✓ | ✓ | unchanged, no regression |
+| CH-05 | ✓ | ✓ (via route) | route fires correctly, but only found 2 chunks — Annexe I's own row-detection was weaker in T2 (fell to char_fallback more than address_row), a pre-existing gap this task didn't touch |
+| CH-06 | ✓ section-level, but 0-1/13 "1er" rows even at top_k=100 | ✓ **13/13 "1er" rows at every top_k (10/20/50/100)** | **primary target — fully fixed** |
+| CH-03 | Annexe X (accidental pollution), UG.2.2.3 missed | UG.2.2.3 matched, Annexe X gone (route doesn't fire without "protégé"/"patrimoniale" wording — by design, not forced) | net improvement, documented trade-off |
+| UC-04, CH-01, CH-02 | ✗ | ✗ **unchanged** | **different root cause — NOT table_row pollution** (verified: their hit lists are 100% prose post-fix, zero Annexe chunks, yet still miss the expected article — this is ordinary UG-sub-article ranking granularity, ~15-20 similarly-shaped codes competing for 6 slots) |
+
+**Open threads** (both are new, separate follow-up candidates, per "one fix at a time"):
+- UC-04/CH-01/CH-02's real cause (article-level ranking granularity among REG1's own prose, unrelated to table rows) is now cleanly isolated but unaddressed — needs its own audit, not a table_row-scoped fix.
+- CH-05/Annexe I exhaustiveness depends on T2's row-detection quality for that specific annexe (weaker than Annexe V/X's) — a future table_chunker refinement, not a retriever-layer fix.
+
+---
+
 ## 2026-07-20 — Corpus fact-checks + fresh golden-v2 runs: post-repair measurement (0 commits, read-only)
 
 **Blocker hit and worked around**: Ollama's `/api/generate` hangs indefinitely for both `gemma3:4b` (expansion) and `ministral-3:8b` (synthesis) — confirmed via a direct `curl -m 60` test (0 bytes received), not just `backend_check`'s own "load failed: timed out". Matches the documented Vulkan/CUDA fix needing a reboot to persist (see memory `ollama_gpu_vulkan_fix`) — **not fixed here**, out of scope for a measurement-only task. Consequence: **no LLM synthesis this session** — "citation active" and "answer summary" columns could not be measured. Ran retrieval-only instead (`scripts/run_golden_v2_retrieval.py`, index loaded once, all 12 cases + CH-06 deep-dive in ~2 min vs. the ~150s/case cold-start the CLI subprocess path pays).
