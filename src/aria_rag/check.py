@@ -22,7 +22,7 @@ from typing import Literal
 
 from aria_rag.config import ROOT_DIR, Settings
 from aria_rag.corpus_mapping import MappingRule, classify_path, load_rules
-from aria_rag.indexer import Chunk, IndexedFile, load_existing_chunks, load_manifest
+from aria_rag.indexer import TABLE_CHUNKED_FILES, TABLE_ROW_MAX_LEN, Chunk, IndexedFile, load_existing_chunks, load_manifest
 from aria_rag.loader import iter_pdf_paths
 from aria_rag.referentiel import Piece, load_referentiel, match_piece
 
@@ -122,21 +122,39 @@ def check_family_coverage(chunks: list[Chunk], settings: Settings, reports_dir: 
 SECTION_PREFIX_MAX_LEN = 112
 
 
+def _size_cap_for(chunk: Chunk, effective_cap: int) -> int:
+    """Table-chunked annexe files (indexer.TABLE_CHUNKED_FILES) intentionally
+    keep a single table row/building entry whole even past chunk_size —
+    Annexe X's free-text "Motivation" descriptions routinely run 1300-3200
+    chars for one protected building (largest observed ~5.2k), and splitting
+    mid-entry would recreate the exact row-destruction bug that chunker
+    exists to fix (CH-06: 2/17 addresses retrieved instead of ~17). Every
+    other file keeps the ordinary cap.
+    """
+    if Path(chunk.source_path).name in TABLE_CHUNKED_FILES:
+        return TABLE_ROW_MAX_LEN
+    return effective_cap
+
+
 def check_size_cap(chunks: list[Chunk], settings: Settings, reports_dir: Path) -> InvariantResult:
     effective_cap = settings.chunk_size + SECTION_PREFIX_MAX_LEN
-    offending = [c for c in chunks if len(c.content) > effective_cap]
+    offending = [c for c in chunks if len(c.content) > _size_cap_for(c, effective_cap)]
 
     details_path = _write_details(reports_dir, "size_cap", {
         "chunk_size": settings.chunk_size,
         "section_prefix_tolerance": SECTION_PREFIX_MAX_LEN,
         "effective_cap": effective_cap,
+        "table_chunked_row_max_len": TABLE_ROW_MAX_LEN,
         "offenders": [
             {"chunk_id": c.chunk_id, "source_path": c.source_path, "length": len(c.content)}
             for c in offending
         ],
     })
     status: Status = "fail" if offending else "pass"
-    message = f"{len(offending)} chunk(s) exceed {effective_cap} chars (cap {settings.chunk_size} + {SECTION_PREFIX_MAX_LEN} documented section-prefix tolerance)"
+    message = (
+        f"{len(offending)} chunk(s) exceed their cap ({effective_cap} chars normally, "
+        f"{TABLE_ROW_MAX_LEN} for table-chunked files: {sorted(TABLE_CHUNKED_FILES)})"
+    )
     return InvariantResult("2. Size cap", status, len(offending), message, details_path)
 
 

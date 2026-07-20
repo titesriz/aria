@@ -6,6 +6,40 @@
 
 ---
 
+## 2026-07-20 — structure-aware table chunker: CH-06 root-cause fix (1 commit, re-ingest, 0 restart)
+
+**Context**: file-level diagnostic (Notion, Ontologie documentaire) found `reglement_ecrit` is structurally heterogeneous — `REG1_MS1.pdf` is article prose (existing `chunk_text_by_article` fits), but `REG2A1_MS1.pdf` (Annexes I-IX) and `REG2A10_*.pdf` (Annexe X) are compact tables. The article chunker's char-window fallback (no article headers to split on) cut table rows apart at arbitrary 1200-char boundaries — CH-06's root cause (2/17 addresses retrieved from Annexe V instead of ~17).
+
+**Fix**: new `chunk_text_by_table` (`indexer.py`) dispatched per-file via `TABLE_CHUNKED_FILES = {REG2A1_MS1.pdf, REG2A10_1DE2_MS1.pdf, REG2A10_2DE2_MS1.pdf}`. Detects real (non-ToC, non-cross-reference) annexe headers, merges consecutive byte-identical repeats (running page headers) into one span, then row-splits each span by whichever signal explains the MOST of it: LS/BRS reservation code (Annexe III/V, trusted outright — near-zero false-positive), else `max(address-line count, BP/EPP entry-start count)` (Annexe VI-IX vs Annexe X) — this max-of-signals tiebreak was necessary because a single incidental address-shaped line inside Annexe X's free-text Motivation prose (e.g. a wrapped continuation line) was hijacking branch selection under a fixed-priority design during dry-run testing. Annexe I/II/IV (no row-boundary signal found) fall back to a chunk_size-bounded char split, still correctly confined to their own annexe span (fixes cross-annexe mislabeling either way, just not row-granular — one fix at a time). A genuine table row is kept whole even past `chunk_size` (never split, per the task's own requirement); preamble/fallback prose is still safety-bounded (`_emit_bounded`) so one stray match can't turn everything before it into an oversized chunk — an early design bug caught and fixed during dry-run validation, before touching the real corpus.
+
+**check.py update**: `check_size_cap` gained a narrow, documented exception (`TABLE_ROW_MAX_LEN=8000`) for `TABLE_CHUNKED_FILES` — Annexe X's Motivation descriptions legitimately run up to ~5.2k chars for one protected building (largest observed in this corpus), and the whole point of the fix is never splitting that row. `checks/known_manifest_desync.json` gained 3 new entries (REG2A1_MS1.pdf, both REG2A10_*.pdf) — same known, already-documented dedup shape (manifest's pre-dedup per-file count vs chunks.json's post-dedup count) as the 25 pre-existing entries, not a new bug class. 12 new tests (`test_table_chunker.py` ×10, `test_check.py` ×2); full suite 182 passed (was 170).
+
+**Re-ingested** `reglement_ecrit` (`--rebuild --family reglement_ecrit`): 4438 → 16 776 chunks for the family (REG2A1_MS1.pdf 274→7826, REG2A10_1DE2 1636→3205, REG2A10_2DE2 1862→2546, REG1_MS1 unchanged at 666), reflecting genuine row-level granularity replacing 1200-char windows. `aria-rag check`: 6 PASS / 3 WARN (all pre-existing accepted categories: encoding, fragment floor, referentiel coverage) / 0 FAIL after the desync allowlist update — size cap and annexe section plausibility both PASS (were previously the two invariants a naive fix could most easily break).
+
+**Verified live** (`aria-rag ask --debug --no-llm`, post re-ingest): Annexe V hit for the CH-06 question is now a single clean row — `1er 15 rue d'Argenteuil LS 100-100` — not the old destroyed multi-row blob. Scoped structural audit (dry-run, pre-ingest) confirmed 13/13 real "1er" Annexe V rows correctly preserved as complete, non-fragmented chunks (~20 addresses across those rows, matching the task's "~17" estimate) — direct fix confirmation, independent of the coarse eval metric below.
+
+**`eval --no-llm` before/after: 80.0% → 80.0%, byte-identical per-case** (results: `results_20260720_131713_39f41c58.json` → `results_20260720_142107_8ad6bab2.json`). Expected, not a null result: the golden retrieval score is a coarse file/section-substring match (`_hit_satisfies`) — CH-06/CH-03 were already 100% at that granularity pre-fix (the *file* was being retrieved, just with its content destroyed inside), so this metric can't show a row-level integrity fix either way. Non-regression confirmed; real signal is the live verification above.
+
+**Open threads**:
+- Exhaustive single-query retrieval of ALL ~17 addresses for one arrondissement is NOT what this fix solves — a `--family reglement_ecrit --top-k 20` query surfaced only 1 genuine "1er" row alongside many other arrondissements' structurally-similar rows (semantic+BM25 ranking has no arrondissement-exclusivity signal). This is a retrieval breadth/ranking concern, same class as the already-open 07-16 OAP perimeter-filtering gap — root cause (row destruction) is fixed; exhaustiveness-via-one-query is separate and still open.
+- Fragment-floor WARN (46 chunks, pre-existing accepted category) includes a handful of new degenerate rows from this fix — bare arrondissement-digit lines (`[Section: Annexe VI]\n1`) and one broken multi-line BP reference (`[Section: Annexe X]\nBP\net`) — where a row's address wrapped across lines in a shape the simpler Annexe VI-IX per-line splitter doesn't handle as gracefully as the LS/BRS and BP/EPP paths. WARN-only, small (<0.2% of corpus), not chased further this session.
+- `eval`'s default `--timeout 120` is too short for this machine's cold embedding-model load (~150s+ per `ask` subprocess) — every case timed out at the default; used `--timeout 300` for both before/after runs here. Environment-specific, unrelated to CH-06, not fixed.
+- Annexe I/II/IV (REG2A1_MS1.pdf) remain char-window-split (no row-boundary signal implemented for their shape) — correctly section-bounded now, not row-granular. Only worth a follow-up if a future golden case needs them.
+
+---
+
+## 2026-07-20 — section-field staleness check: premise false, no re-index run (read-only, 0 commits)
+
+**Context**: incoming task claimed `data/index/chunks.json` predates the article-section-extraction commit, with only `{chunk_id, source_path, doc_family, content}` persisted, and asked for a full corpus re-ingestion to populate `section`.
+
+**Audit before fix**: checked the live index first. `section` is already populated — sampled 10 random `REG1_MS1.pdf` chunks, 10/10 valid codes (`UGSU.3.2.6`, `UG.4.3.5`, `N.7.2`, etc.). Corpus-wide: 4436/4438 `reglement_ecrit` chunks have a non-null `section` (the 2 nulls are both in `REG2A10_*.pdf`, plausibly legitimate unsectioned front matter — not investigated further, low priority). `git log -- src/aria_rag/indexer.py` confirms `3c32025` (scoped section-mislabel fix) already landed, and the 2026-07-14 SESSION_STATE entry already documents a `reglement_ecrit`-scoped re-ingestion *after* that exact commit (`check --strict` → 0 FAIL, `eval --no-llm` 80.0%/86.7%).
+
+**Verdict: premise was stale, task not executed.** The index already reflects current `indexer.py` behavior — no re-ingestion needed. Running a full corpus re-embed (16.8k chunks, touches FAISS/BM25/manifest) on a false premise would be a real-cost, mostly-irreversible-in-time operation with no defect behind it. Declined per the project's own "audit before fix" convention.
+
+**Open threads**: the 2 null-`section` chunks in `REG2A10_*.pdf` are unexplained — worth a quick look if anyone's already touching that file, not worth a dedicated session on its own.
+
+---
+
 ## 2026-07-16 — OAP slot count measurement: verdict "don't apply" (read-only, 0 commits)
 
 **Context**: follow-up to the 735984b perimeter investigation. `DEFAULT_FAMILY_SLOTS["oap"]=1` — does raising it improve OAP coverage without regressing the certified reference?

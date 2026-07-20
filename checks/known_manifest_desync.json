@@ -1,5 +1,5 @@
 {
-  "_description": "Manifest.chunk_count records the PRE-dedup chunk count captured at extraction time; chunks.json reflects the POST-dedup (cross-file, content-hash) final count. build_index() never writes back the post-dedup count to manifest.json, so any file that contributed a cross-file duplicate desyncs permanently. This is a known, accepted debt (not yet fixed) -- aria_rag.check treats exactly these paths as pass, and fails on any NEW desync not in this list. Paths are relative to Settings.docs_dir (Ressources/), forward-slash, for portability. Regenerated after adding REG2A10_1DE2.pdf as validity=superseded (MS1 pair inventory follow-up): REG2A10_1DE2_MS1.pdf is no longer desynced (it now legitimately holds all 1636 chunks, its former competitor REG2A10_1DE2.pdf being excluded from indexing entirely), so its entry -- added during the Stage A ripple-effect fix -- is dropped. No new desync appeared this round.",
+  "_description": "Manifest.chunk_count records the PRE-dedup chunk count captured at extraction time; chunks.json reflects the POST-dedup (cross-file, content-hash) final count. build_index() never writes back the post-dedup count to manifest.json, so any file that contributed a cross-file duplicate desyncs permanently. This is a known, accepted debt (not yet fixed) -- aria_rag.check treats exactly these paths as pass, and fails on any NEW desync not in this list. Paths are relative to Settings.docs_dir (Ressources/), forward-slash, for portability. Regenerated after adding REG2A10_1DE2.pdf as validity=superseded (MS1 pair inventory follow-up): REG2A10_1DE2_MS1.pdf is no longer desynced (it now legitimately holds all 1636 chunks, its former competitor REG2A10_1DE2.pdf being excluded from indexing entirely), so its entry -- added during the Stage A ripple-effect fix -- is dropped. No new desync appeared this round. Regenerated again after the table-chunker fix (CH-06): REG2A1_MS1.pdf and both REG2A10_*.pdf's counts changed (fine-grained row/entry chunks instead of 1200-char windows -- see indexer.chunk_text_by_table) and now contribute a handful of cross-file content-hash duplicates each (e.g. short, identically-worded running-header-only fragments), same known shape as every other entry here.",
   "entries": [
     {
       "source_path": "PLU/75 Paris/PLU Bioclimatique/Annexes/Plans SUP/ASUP4_2025_12_19.pdf",
@@ -125,6 +125,21 @@
       "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 1/REG1_MS1.pdf",
       "manifest_chunk_count": 667,
       "actual_chunk_count": 666
+    },
+    {
+      "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 2/REG2A10_1DE2_MS1.pdf",
+      "manifest_chunk_count": 3210,
+      "actual_chunk_count": 3205
+    },
+    {
+      "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 2/REG2A10_2DE2_MS1.pdf",
+      "manifest_chunk_count": 2564,
+      "actual_chunk_count": 2546
+    },
+    {
+      "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 2/REG2A1_MS1.pdf",
+      "manifest_chunk_count": 8102,
+      "actual_chunk_count": 7826
     }
   ]
 }

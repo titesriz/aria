@@ -111,6 +111,37 @@ def test_size_cap_fails_beyond_tolerance(tmp_path):
     assert result.count == 1
 
 
+def test_size_cap_passes_for_table_chunked_file_beyond_ordinary_cap(tmp_path):
+    """REG2A1_MS1.pdf/REG2A10_*.pdf keep a single table row/building entry
+    whole even past chunk_size (indexer.chunk_text_by_table) -- Annexe X's
+    free-text Motivation descriptions routinely exceed the ordinary cap for
+    one legitimate, indivisible entry."""
+    settings = _settings(tmp_path, chunk_size=1200)
+    chunks = [_chunk(
+        source_path="/docs/REG2A10_1DE2_MS1.pdf",
+        content="a" * 5000,  # well past 1200+112, still under TABLE_ROW_MAX_LEN
+        section="Annexe X",
+    )]
+    result = check_size_cap(chunks, settings, tmp_path / "reports")
+    assert result.status == "pass"
+
+
+def test_size_cap_still_fails_for_table_chunked_file_beyond_row_ceiling(tmp_path):
+    """The table-chunked exception is a bounded ceiling, not an unlimited
+    pass -- a chunk beyond even TABLE_ROW_MAX_LEN signals row-boundary
+    detection silently failing (e.g. dumping a whole page as "one row"),
+    not a legitimate single entry."""
+    settings = _settings(tmp_path, chunk_size=1200)
+    chunks = [_chunk(
+        source_path="/docs/REG2A10_1DE2_MS1.pdf",
+        content="a" * 9000,
+        section="Annexe X",
+    )]
+    result = check_size_cap(chunks, settings, tmp_path / "reports")
+    assert result.status == "fail"
+    assert result.count == 1
+
+
 # ---------------------------------------------------------------------------
 # 3. Metadata integrity
 # ---------------------------------------------------------------------------

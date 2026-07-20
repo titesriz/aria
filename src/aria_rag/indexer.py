@@ -99,6 +99,42 @@ _ANNEXE_HEADER = re.compile(
 # same charset as _ARTICLE_HEADER's group 1, anchored to the whole string.
 _ARTICLE_CODE_PATTERN = re.compile(r'^(?:UG(?:SU)?|UV|N|A|P)\w*\.\d+(?:\.\d+)*$')
 
+# ---------------------------------------------------------------------------
+# Table-structured annexe files: REG2A1_MS1.pdf (Annexes I-IX: reservation
+# lists, address lists, secteur tables) and REG2A10_*.pdf (Annexe X:
+# protected-buildings list, one file pair split by arrondissement range).
+# Unlike REG1_MS1.pdf's article prose, these are compact tables where
+# chunk_text_by_article's char-window fallback (no article headers to
+# split on) cuts a row's arrondissement/address/reference apart from each
+# other at an arbitrary 1200-char boundary — the CH-06 bug (2/17 addresses
+# retrieved from Annexe V instead of ~17). Dispatched to chunk_text_by_table
+# instead — see that function's docstring for the row-detection strategy.
+# ---------------------------------------------------------------------------
+TABLE_CHUNKED_FILES = {"REG2A1_MS1.pdf", "REG2A10_1DE2_MS1.pdf", "REG2A10_2DE2_MS1.pdf"}
+
+# Row start for Annexe X's protected-building entries (REG2A10 files) — every
+# row starts with one of these 2 type codes followed by an address. Corpus-
+# derived: the only two codes present across both REG2A10 files (BP ~5500
+# occurrences, EPP ~140; see the table-chunker design audit).
+_PATRIMOINE_ROW_START = re.compile(r'(?m)^\s*(?:BP|EPP)\s+\S')
+
+# Roman numeral captured from a genuine ANNEXE header — same keyword match as
+# _ANNEXE_HEADER, isolating just group 1 for the Chunk.section value (e.g.
+# "Annexe V", "Annexe X" — never the long descriptive title).
+_ANNEXE_ROMAN = re.compile(r'A\s*(?i:NNEXE)\s+([IVXLCDM]+)')
+
+# Table-chunked files intentionally keep a single table row/building entry
+# whole even past chunk_size (see chunk_text_by_table) — Annexe X's free-text
+# "Motivation" descriptions routinely run 1300-3200 chars for one protected
+# building, and splitting mid-entry would recreate the exact row-destruction
+# bug this chunker exists to fix. This ceiling exists only to still catch a
+# genuine runaway (row-boundary detection silently failing and dumping a
+# whole page as "one row") — generous margin above the largest observed
+# genuine single entry (~5.2k chars; see the design audit). Consumed by
+# check.py's size-cap invariant, not by the chunker itself (which never
+# splits a matched row on its own).
+TABLE_ROW_MAX_LEN = 8000
+
 
 def build_article_whitelist(chunks: list[Chunk]) -> list[str]:
     """Distinct article codes (Chunk.section values matching _ARTICLE_CODE_PATTERN),
@@ -290,6 +326,199 @@ def chunk_text_by_article(text: str, chunk_size: int, source_path: str = "") -> 
     return chunks
 
 
+def _real_annexe_headers(full_text: str) -> list[re.Match]:
+    """ANNEXE headers that open a real section, excluding table-of-contents
+    dot-leader entries (e.g. REG2A1_MS1.pdf's 9-entry front-matter ToC,
+    "Annexe I : ... .......... 3") and inline "(Annexe IV)" cross-references
+    (same exclusion _titled_annexe_matches uses).
+
+    A ToC line always has a run of 3+ dots (leader, then a page number)
+    within ~200 chars of the title — confirmed on REG2A1_MS1.pdf's ToC
+    block, where every one of its 9 entries has this shape and no genuine
+    content-opening header (including the repeated all-caps running page
+    header, which never has trailing dots) does. Deliberately independent
+    of _titled_annexe_matches' enumeration-run heuristic (scoped to
+    REG1_MS1.pdf's different overview-paragraph bug, and known unsafe to
+    apply to REG2A1_MS1.pdf — see that function's docstring); a dedicated,
+    simpler signal for this file's specific ToC shape instead.
+    """
+    out = []
+    for m in _ANNEXE_HEADER.finditer(full_text):
+        if full_text[: m.start()].rstrip().endswith("("):
+            continue
+        window = full_text[m.start(): m.end() + 200]
+        if re.search(r'\.{3,}', window):
+            continue
+        out.append(m)
+    return out
+
+
+def _merge_same_header_spans(headers: list[re.Match], text_len: int) -> list[tuple[int, int, str]]:
+    """Collapse consecutive headers with byte-identical text into one span —
+    a running page header repeating on every page of the same section, not a
+    new one. Merging by resolved roman-numeral label instead would be wrong
+    for REG2A10 (every arrondissement's header resolves to the same "Annexe
+    X"; that would collapse all 20 arrondissements into a single span and
+    lose the per-arrondissement boundary the header text itself encodes).
+    Returns (start, end, section_label) triples.
+    """
+    spans: list[tuple[int, int, str]] = []
+    i, n = 0, len(headers)
+    while i < n:
+        key = headers[i].group(0)
+        j = i
+        while j + 1 < n and headers[j + 1].group(0) == key:
+            j += 1
+        roman = _ANNEXE_ROMAN.search(key)
+        label = f"Annexe {roman.group(1)}" if roman else key[:60]
+        start = headers[i].start()
+        end = headers[j + 1].start() if j + 1 < n else text_len
+        spans.append((start, end, label))
+        i = j + 1
+    return spans
+
+
+def _emit_bounded(seg_start: int, local_off: int, text: str, section: str, chunk_size: int) -> list[tuple[int, str]]:
+    """Prose/preamble content — char-split if it exceeds chunk_size, so a
+    single stray row-start match deep in an otherwise free-text span can't
+    turn everything before it into one oversized chunk. Unlike a genuine
+    table row (_emit_row), preamble text has no structural reason to stay
+    whole.
+    """
+    if len(text) > chunk_size:
+        return [
+            (seg_start + off, f"[Section: {section}]\n{txt}")
+            for off, txt in _split_by_char(text, chunk_size, base_offset=local_off)
+        ]
+    result = _strip_with_offset(text, local_off)
+    if not result:
+        return []
+    off, txt = result
+    return [(seg_start + off, f"[Section: {section}]\n{txt}")]
+
+
+def _emit_row(seg_start: int, local_off: int, text: str, section: str) -> list[tuple[int, str]]:
+    """One genuine table row/entry — kept whole even past chunk_size (see
+    chunk_text_by_table's docstring: splitting a row recreates the bug this
+    chunker exists to fix). check.py's size-cap invariant carries a matching,
+    narrowly-scoped exception (TABLE_ROW_MAX_LEN) for this.
+    """
+    result = _strip_with_offset(text, local_off)
+    if not result:
+        return []
+    off, txt = result
+    return [(seg_start + off, f"[Section: {section}]\n{txt}")]
+
+
+def _rows_from_line_matches(
+    segment: str, seg_start: int, matches: list[re.Match], section: str, chunk_size: int
+) -> list[tuple[int, str]]:
+    """One row per matched line (Annexe VI-IX address lists: "<arrdt>
+    <address>", one entry per source line, no continuation)."""
+    out = _emit_bounded(seg_start, 0, segment[: matches[0].start()], section, chunk_size)
+    for i, m in enumerate(matches):
+        end = matches[i + 1].start() if i + 1 < len(matches) else len(segment)
+        line_end = segment.find("\n", m.start())
+        if line_end == -1 or line_end > end:
+            line_end = end
+        out.extend(_emit_row(seg_start, m.start(), segment[m.start():line_end], section))
+    return out
+
+
+def _rows_from_start_matches(
+    segment: str, seg_start: int, matches: list[re.Match], section: str, chunk_size: int
+) -> list[tuple[int, str]]:
+    """One row per matched start-of-entry (Annexe X: "BP"/"EPP" + address +
+    a free-text motivation paragraph of unpredictable length, running until
+    the next entry's start)."""
+    out = _emit_bounded(seg_start, 0, segment[: matches[0].start()], section, chunk_size)
+    for i, m in enumerate(matches):
+        end = matches[i + 1].start() if i + 1 < len(matches) else len(segment)
+        out.extend(_emit_row(seg_start, m.start(), segment[m.start():end], section))
+    return out
+
+
+def _table_rows_for_segment(segment: str, seg_start: int, section: str, chunk_size: int) -> list[tuple[int, str]]:
+    """Row-split one annexe segment (the span from one real header to the
+    next). Row shape depends on which annexe's content this is:
+
+    - Annexe III/V (reservation lists): a row ends at its LS/BRS code
+      (_TABLE_ROW) — may span several source lines (a multi-address entry).
+      This is a near-zero-false-positive signal — trusted outright whenever
+      present at all.
+    - Annexe X (REG2A10's protected buildings): a row starts at a BP/EPP
+      type code (_PATRIMOINE_ROW_START) and runs until the next one.
+    - Annexe VI-IX (address lists): one row per _ADDRESS_ROW-matching line.
+      A lone incidental ADDRESS_ROW match inside Annexe X's free-text
+      Motivation prose (e.g. a continuation line "3 place du Louvre" that
+      happens to start with a digit + street keyword) must not outrank the
+      dozens of real BP/EPP row starts on the same page — so between
+      address-row and patrimoine-row signals, whichever explains MORE of
+      the segment wins, rather than a fixed priority order.
+    - Content matching none of the above (Annexe I/II/IV — no row-boundary
+      signal found yet) falls back to a chunk_size-bounded char split: still
+      correctly confined to its own annexe (today's cross-annexe
+      mislabeling is fixed either way), just not row-granular. One fix at a
+      time — see chunk_text_by_table's docstring for scope.
+    """
+    row_matches = list(_TABLE_ROW.finditer(segment))
+    if row_matches:
+        out: list[tuple[int, str]] = []
+        prev = 0
+        for m in row_matches:
+            out.extend(_emit_row(seg_start, prev, segment[prev:m.end()], section))
+            prev = m.end()
+        tail = segment[prev:]
+        if tail.strip():
+            out.extend(_emit_bounded(seg_start, prev, tail, section, chunk_size))
+        return out
+
+    addr_matches = list(_ADDRESS_ROW.finditer(segment))
+    patrim_matches = list(_PATRIMOINE_ROW_START.finditer(segment))
+    if len(patrim_matches) > len(addr_matches):
+        return _rows_from_start_matches(segment, seg_start, patrim_matches, section, chunk_size)
+    if addr_matches:
+        return _rows_from_line_matches(segment, seg_start, addr_matches, section, chunk_size)
+
+    return _emit_bounded(seg_start, 0, segment, section, chunk_size)
+
+
+def chunk_text_by_table(text: str, chunk_size: int, source_path: str = "") -> list[tuple[int, str, str]]:
+    """Row-preserving split for annexe table files (see TABLE_CHUNKED_FILES)
+    — REG2A1_MS1.pdf and REG2A10_*.pdf are compact tables, not article
+    prose, and chunk_text_by_article's char-window fallback cuts a table row
+    apart at an arbitrary 1200-char boundary (the CH-06 bug: 2/17 addresses
+    retrieved from Annexe V instead of ~17).
+
+    Returns (start_offset, content, section) triples — unlike
+    chunk_text_by_article, section is resolved here directly (row detection
+    and section-boundary detection share the same header pass; see
+    _table_rows_for_segment for the row shapes handled).
+    """
+    headers = _real_annexe_headers(text)
+    if not headers:
+        logger.warning(
+            "No annexe headers found in %s (%d chars) — falling back to fixed-size split",
+            source_path, len(text),
+        )
+        result = _strip_with_offset(text, 0)
+        if not result:
+            return []
+        leading_offset, stripped_text = result
+        return [(off, txt, None) for off, txt in _split_by_char(stripped_text, chunk_size, base_offset=leading_offset)]
+
+    spans = _merge_same_header_spans(headers, len(text))
+    out: list[tuple[int, str, str]] = []
+    if spans[0][0] > 0:
+        lead = _strip_with_offset(text[: spans[0][0]], 0)
+        if lead:
+            out.append((lead[0], lead[1], None))
+    for start, end, label in spans:
+        for off, content in _table_rows_for_segment(text[start:end], start, label, chunk_size):
+            out.append((off, content, label))
+    return out
+
+
 def extract_chunks_from_pdf(
     path: Path, chunk_size: int, chunk_overlap: int, min_alpha_ratio: float, classification: Classification
 ) -> tuple[list[Chunk], list[dict]]:
@@ -330,8 +559,26 @@ def extract_chunks_from_pdf(
         offset += len(page_text) + 1  # +1 for the "\n" joiner below
     full_text = "\n".join(full_text_parts)
 
-    # Use article-aware chunking for regulatory documents; fall back to sliding window otherwise.
-    if doc_family == "reglement_ecrit":
+    # Use article-aware chunking for regulatory prose; the table chunker for
+    # regulatory documents that are compact tables instead (see
+    # TABLE_CHUNKED_FILES); fall back to sliding window for everything else.
+    is_table_chunked = doc_family == "reglement_ecrit" and Path(document.path).name in TABLE_CHUNKED_FILES
+    row_sections: list[str | None] | None = None
+    if is_table_chunked:
+        table_chunks = chunk_text_by_table(full_text, chunk_size, source_path=document.path)
+        raw_chunks = [(off, content) for off, content, _ in table_chunks]
+        row_sections = [section for _, _, section in table_chunks]
+        if not _real_annexe_headers(full_text):
+            # Same condition chunk_text_by_table checks internally (identical
+            # regex over the identical full_text) to fall back to a fixed-size
+            # split — detected here too, redundantly but harmlessly, purely to
+            # log it without touching that function's own logic.
+            drops.append({
+                "type": "no_header_fallback",
+                "source_path": document.path,
+                "text_length": len(full_text),
+            })
+    elif doc_family == "reglement_ecrit":
         raw_chunks = chunk_text_by_article(full_text, chunk_size, source_path=document.path)
         # Section-label attribution uses the body-only (ToC-filtered) matches
         # -- see _titled_annexe_matches -- so an overview-list entry can
@@ -376,7 +623,13 @@ def extract_chunks_from_pdf(
         page_end = _page_at_offset(page_starts, page_numbers, end_offset)
 
         section: str | None = None
-        if doc_family == "reglement_ecrit":
+        if row_sections is not None:
+            # chunk_text_by_table already resolved section and, when set,
+            # baked the "[Section: ...]" prefix into `chunk` itself (row
+            # detection and section-boundary detection share one header
+            # pass there, unlike the bisect lookup below).
+            section = row_sections[idx]
+        elif doc_family == "reglement_ecrit":
             # Pick whichever structural header (article or annexe) most recently
             # precedes this chunk. Tome 1 zone text only has article headers;
             # Tome 2 annexe text only has annexe headers, so this naturally
