@@ -6,6 +6,37 @@
 
 ---
 
+## 2026-07-20 — Corpus fact-checks + fresh golden-v2 runs: post-repair measurement (0 commits, read-only)
+
+**Blocker hit and worked around**: Ollama's `/api/generate` hangs indefinitely for both `gemma3:4b` (expansion) and `ministral-3:8b` (synthesis) — confirmed via a direct `curl -m 60` test (0 bytes received), not just `backend_check`'s own "load failed: timed out". Matches the documented Vulkan/CUDA fix needing a reboot to persist (see memory `ollama_gpu_vulkan_fix`) — **not fixed here**, out of scope for a measurement-only task. Consequence: **no LLM synthesis this session** — "citation active" and "answer summary" columns could not be measured. Ran retrieval-only instead (`scripts/run_golden_v2_retrieval.py`, index loaded once, all 12 cases + CH-06 deep-dive in ~2 min vs. the ~150s/case cold-start the CLI subprocess path pays).
+
+**Part A (verbatim REG1_MS1.pdf fact-checks)** — 2 of 5 hypotheses contradicted by the text:
+1. No "figure FNE" anywhere (0 matches for "FNE"). Real prospect figure exists: Figure 6 (p.232, "Détermination du prospect* sur voie*").
+2. **UG.3.1.2** (limites séparatives): baie-dependent, not a flat rule — 6m for baies de pièces principales (p.64), 3m for other baies, 3m for blank façades in retrait. **No H/2 formula anywhere in the document** (0 matches) — this PLU bioclimatique uses fixed metric distances, not H/2.
+3. UG.1.4.1: **confirmed**, verbatim — "SPE... supérieure à 4 500 mètres carrés doit comprendre... une surface de plancher* destinée à l'Habitation supérieure à 10 %... avec un minimum de 500 mètres carrés" (p.45). SPE = "surface de plancher* liée à l'activité économique" (p.43). Directly validates UC-05's "sous le seuil" expectation (2000m² < 4500m²).
+4. UG.3.1.1: **contradicted** — the voie-width threshold is **6 mètres**, not 15m (p.62: "voies* de largeur inférieure à 6 mètres..."). "15 mètres" does appear in REG1 but only for unrelated UG.3.3.1/3.3.2 dépassement contexts — don't conflate.
+5. UG.3.3.1 (p.82-83): confirmed list — énergie renouvelable (+3m), protection solaire, acrotères, locaux techniques toiture végétalisée, sport (+5m), agriculture urbaine (+4m), garde-corps (1,20m), pare-vues (1,90m), souches/conduits (+1,50m), édicules circulation verticale (<3,50m×<4m, +1m ascenseur existant), signaux architecturaux (+15m sous conditions), pignon (+1,50m).
+
+**Part B — 12 fresh runs, retrieval-only** (top_k=10, expand_query=OFF — expansion fails anyway given the Ollama blocker, disabling it avoids paying its timeout for a guaranteed failure; scoped_retrieval=True, slots reglement_ecrit=6/annexes=2/oap=1/padd=1, unchanged). Results: `eval/results/golden_v2_retrieval_20260720.json`.
+
+| cas | article_ok | verdict | note |
+|---|---|---|---|
+| UC-02, UC-03, UC-16, CH-04 | ✓ | OK | clean, 0 Annexe-noise in the 6 reglement_ecrit slots |
+| CH-05 | ✓ | OK | Annexe I correctly retrieved — **confirms T3's RP_HOTEL_DIEU finding empirically**: 0/12 cases ever surface rapport_presentation (0 slots, structural) |
+| CH-06 | ✓ (section-level) | [S] | see deep-dive below |
+| UC-01, UC-04, UC-05, CH-01, CH-02 | ✗ | [S] | see crowding finding |
+| CH-03 | partial (Annexe X only, UG.2.2.3 missed) | [S] | UGSU.2.2.3 (wrong zone) surfaced instead |
+
+**Major new finding (not a fix — flagging for a dedicated follow-up)**: every failing/partial case has ≥2/6 reglement_ecrit slots consumed by Annexe V/X row chunks; **UC-04 has 6/6** (zero UG.1.3 prose reached the family budget at all). Every passing UG.x-prose case has 0/6 Annexe-noise. This correlates cleanly with T2's fix — REG2A1_MS1.pdf's row-level re-chunking took Annexe V from ~270 to 817 chunks and REG2A10 from ~3.5k to ~5.75k, hugely increasing the candidate pool competing for reglement_ecrit's fixed 6 slots. **Labeled [S] not [R]**: no direct pre-T2 baseline exists for these v2 questions (they're new), so this is a strong, quantified correlation, not a proven regression — needs its own before/after audit as the next task, not asserted here.
+
+**CH-06 deep-dive (isolates ranking from row-integrity, as requested)**: of 13 genuine "1er"-starting Annexe V rows confirmed present in `chunks.json` (verified directly, independent of retrieval), **0-1 surface in results at top_k=10/20/50/100** (family-scoped) — the 1 that appears is the intro-paragraph chunk that happens to bundle the first "1er" row, not a dedicated hit. Root-cause confirmation: **row-integrity is fixed (T2), rows exist correctly** — this is purely a ranking/breadth gap, same class as the already-open 07-16 OAP perimeter-filtering issue. Embedding+BM25 scoring doesn't discriminate "1er" among ~817 structurally near-identical rows from other arrondissements.
+
+**Open threads** (both need dedicated future sessions, per "one fix at a time"):
+- Annexe-crowding: does T2's finer chunking genuinely regress UG-article retrieval, or is this pre-existing? Needs a controlled before/after (can't do post-hoc, the old index is gone).
+- CH-06/arrondissement-exhaustiveness: same open perimeter-filtering gap as 07-16 — a query needs an explicit arrondissement-boost mechanism to beat the volume of same-shaped sibling rows.
+
+---
+
 ## 2026-07-20 — REG1 sommaire parse + concept→article mapping proposal (1 commit, read-only, 0 restart)
 
 **Context**: prerequisite for a future routing/query-expansion "hinge" that maps architect-facing concepts to article codes. Read-only research task — no pipeline code touched, nothing wired in.

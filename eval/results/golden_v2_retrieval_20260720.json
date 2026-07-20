@@ -1,0 +1,927 @@
+[
+  {
+    "case_id": "UC-01",
+    "question": "Quelle est la hauteur maximale constructible sur une parcelle en zone UG à Paris 11e, rue de la Roquette, pour un projet de logements neufs de 800m² de surface de plancher ?",
+    "expected_family": "reglement_ecrit",
+    "expected_articles": [
+      "UG.3.2"
+    ],
+    "matched_articles": [],
+    "family_hit_count": 6,
+    "family_ok": true,
+    "article_ok": false,
+    "article_partial": false,
+    "hits": [
+      {
+        "source": "OAP_BEAUGRENELLE.pdf",
+        "family": "oap",
+        "section": null,
+        "score": 0.03252247488101534
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UGSU.3.3.4",
+        "score": 0.03200204813108039
+      },
+      {
+        "source": "ANN5_2025_12_19.pdf",
+        "family": "annexes",
+        "section": null,
+        "score": 0.027263007840342125
+      },
+      {
+        "source": "PADD.pdf",
+        "family": "padd",
+        "section": null,
+        "score": 0.01639344262295082
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UG.3.3.8",
+        "score": 0.02964254577157803
+      },
+      {
+        "source": "ANN8_2025_12_19.pdf",
+        "family": "annexes",
+        "section": null,
+        "score": 0.02606951871657754
+      },
+      {
+        "source": "REG2A1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "Annexe V",
+        "score": 0.027809742999616416
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UG.3.3.2",
+        "score": 0.0259915611814346
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UV.3.3",
+        "score": 0.025
+      },
+      {
+        "source": "REG2A1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "Annexe V",
+        "score": 0.024827586206896554
+      }
+    ]
+  },
+  {
+    "case_id": "UC-02",
+    "question": "Ma construction neuve peut-elle être implantée en retrait de 3m par rapport à l'alignement de la voie, en zone UG, programme mixte logements/commerces, Paris 15e ?",
+    "expected_family": "reglement_ecrit",
+    "expected_articles": [
+      "UG.3.1.1"
+    ],
+    "matched_articles": [
+      "UG.3.1.1"
+    ],
+    "family_hit_count": 6,
+    "family_ok": true,
+    "article_ok": true,
+    "article_partial": true,
+    "hits": [
+      {
+        "source": "OAP_GARE_DE_LYON_DAUMESNIL.pdf",
+        "family": "oap",
+        "section": null,
+        "score": 0.03177805800756621
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UG.3.1.1",
+        "score": 0.029726775956284153
+      },
+      {
+        "source": "ANN7.pdf",
+        "family": "annexes",
+        "section": null,
+        "score": 0.01639344262295082
+      },
+      {
+        "source": "PADD.pdf",
+        "family": "padd",
+        "section": null,
+        "score": 0.01639344262295082
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UG.3.1.2",
+        "score": 0.026779422128259338
+      },
+      {
+        "source": "ANN1_2025_12_19.pdf",
+        "family": "annexes",
+        "section": null,
+        "score": 0.01639344262295082
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UGSU.3.3.4",
+        "score": 0.023941532258064516
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UGSU.3.1.2",
+        "score": 0.021335629544584768
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UG.3.1.1",
+        "score": 0.01639344262295082
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UG.3.1.1",
+        "score": 0.016129032258064516
+      }
+    ]
+  },
+  {
+    "case_id": "UC-03",
+    "question": "Quelle règle de prospect dois-je respecter vis-à-vis de la limite séparative droite, avec des baies de pièces principales à 8m de haut, en zone UG ?",
+    "expected_family": "reglement_ecrit",
+    "expected_articles": [
+      "UG.3.1"
+    ],
+    "matched_articles": [
+      "UG.3.1"
+    ],
+    "family_hit_count": 6,
+    "family_ok": true,
+    "article_ok": true,
+    "article_partial": true,
+    "hits": [
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UGSU.3.1.2",
+        "score": 0.030158730158730156
+      },
+      {
+        "source": "ANN1_2025_12_19.pdf",
+        "family": "annexes",
+        "section": null,
+        "score": 0.025827404887101765
+      },
+      {
+        "source": "OAP_BEAUGRENELLE.pdf",
+        "family": "oap",
+        "section": null,
+        "score": 0.022929390335369122
+      },
+      {
+        "source": "PADD.pdf",
+        "family": "padd",
+        "section": null,
+        "score": 0.01639344262295082
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UG.3.1.2",
+        "score": 0.027884615384615386
+      },
+      {
+        "source": "ANN5_2025_12_19.pdf",
+        "family": "annexes",
+        "section": null,
+        "score": 0.01639344262295082
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UG.3.2.5",
+        "score": 0.027417840375586856
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UG.3.3.9",
+        "score": 0.027271052146674038
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UG.3.1.2",
+        "score": 0.026597524255603883
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UG.3.2.7",
+        "score": 0.026540946394272742
+      }
+    ]
+  },
+  {
+    "case_id": "UC-04",
+    "question": "La création d'un hôtel de 40 chambres est-elle autorisée en zone UG Paris 8e sur une parcelle actuellement en bureaux (600m²), et à quelles conditions ?",
+    "expected_family": "reglement_ecrit",
+    "expected_articles": [
+      "UG.1.3"
+    ],
+    "matched_articles": [],
+    "family_hit_count": 6,
+    "family_ok": true,
+    "article_ok": false,
+    "article_partial": false,
+    "hits": [
+      {
+        "source": "ANN1_2025_12_19.pdf",
+        "family": "annexes",
+        "section": null,
+        "score": 0.02821939586645469
+      },
+      {
+        "source": "REG2A10_2DE2_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "Annexe X",
+        "score": 0.027500922849760058
+      },
+      {
+        "source": "OAP_BEDIER_OUDINE.pdf",
+        "family": "oap",
+        "section": null,
+        "score": 0.01639344262295082
+      },
+      {
+        "source": "PADD.pdf",
+        "family": "padd",
+        "section": null,
+        "score": 0.01639344262295082
+      },
+      {
+        "source": "ANN8_2025_12_19.pdf",
+        "family": "annexes",
+        "section": null,
+        "score": 0.02070775811783006
+      },
+      {
+        "source": "REG2A10_2DE2_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "Annexe X",
+        "score": 0.020379338175948343
+      },
+      {
+        "source": "REG2A10_1DE2_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "Annexe X",
+        "score": 0.019960668633235007
+      },
+      {
+        "source": "REG2A10_2DE2_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "Annexe X",
+        "score": 0.016573508384245417
+      },
+      {
+        "source": "REG2A10_2DE2_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "Annexe X",
+        "score": 0.01639344262295082
+      },
+      {
+        "source": "REG2A10_2DE2_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "Annexe X",
+        "score": 0.01639344262295082
+      }
+    ]
+  },
+  {
+    "case_id": "UC-05",
+    "question": "Quelle proportion minimale de surface de plancher doit être affectée au logement dans un programme mixte bureaux+logements de 2000m² en zone UG ?",
+    "expected_family": "reglement_ecrit",
+    "expected_articles": [
+      "UG.1.4.1"
+    ],
+    "matched_articles": [],
+    "family_hit_count": 6,
+    "family_ok": true,
+    "article_ok": false,
+    "article_partial": false,
+    "hits": [
+      {
+        "source": "REG2A1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "Annexe V",
+        "score": 0.03200204813108039
+      },
+      {
+        "source": "OAP_SANTE.pdf",
+        "family": "oap",
+        "section": null,
+        "score": 0.022886949116457313
+      },
+      {
+        "source": "ANN1_2025_12_19.pdf",
+        "family": "annexes",
+        "section": null,
+        "score": 0.01639344262295082
+      },
+      {
+        "source": "PADD.pdf",
+        "family": "padd",
+        "section": null,
+        "score": 0.01639344262295082
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UG.1.5.1",
+        "score": 0.03177805800756621
+      },
+      {
+        "source": "ANN5_2025_12_19.pdf",
+        "family": "annexes",
+        "section": null,
+        "score": 0.016129032258064516
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UG.1.5.1",
+        "score": 0.03125
+      },
+      {
+        "source": "REG2A1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "Annexe V",
+        "score": 0.029418126757516764
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UG.1.5.2",
+        "score": 0.029083245521601686
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UG.8.3",
+        "score": 0.02857142857142857
+      }
+    ]
+  },
+  {
+    "case_id": "UC-16",
+    "question": "Puis-je surélever d'un niveau (R+1) mon immeuble R+4 existant à 17m en zone UG Paris 9e, où le plafond de hauteur DG5 est à 18m ?",
+    "expected_family": "reglement_ecrit",
+    "expected_articles": [
+      "UG.3.2",
+      "UG.3.3"
+    ],
+    "matched_articles": [
+      "UG.3.2",
+      "UG.3.3"
+    ],
+    "family_hit_count": 6,
+    "family_ok": true,
+    "article_ok": true,
+    "article_partial": true,
+    "hits": [
+      {
+        "source": "OAP_BEAUGRENELLE.pdf",
+        "family": "oap",
+        "section": null,
+        "score": 0.03278688524590164
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UG.3.2.4",
+        "score": 0.031099324975891997
+      },
+      {
+        "source": "ANN5_2025_12_19.pdf",
+        "family": "annexes",
+        "section": null,
+        "score": 0.02453239360260233
+      },
+      {
+        "source": "PADD.pdf",
+        "family": "padd",
+        "section": null,
+        "score": 0.01639344262295082
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UG.3.2.1",
+        "score": 0.027650648360030512
+      },
+      {
+        "source": "ANN1_2025_12_19.pdf",
+        "family": "annexes",
+        "section": null,
+        "score": 0.0239010989010989
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UG.2.2.1",
+        "score": 0.027056277056277056
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UG.3.3.3",
+        "score": 0.0265113137453563
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UG.3.2.5",
+        "score": 0.02296037296037296
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UG.3.3.1",
+        "score": 0.02046142603612068
+      }
+    ]
+  },
+  {
+    "case_id": "CH-01",
+    "question": "Je veux faire une surélévation d'un immeuble de bureau à Paris. Quelles sont les restrictions ?",
+    "expected_family": "reglement_ecrit",
+    "expected_articles": [
+      "UG.3.2",
+      "UG.3.3",
+      "UG.1.4.1"
+    ],
+    "matched_articles": [],
+    "family_hit_count": 6,
+    "family_ok": true,
+    "article_ok": false,
+    "article_partial": false,
+    "hits": [
+      {
+        "source": "ANN1_2025_12_19.pdf",
+        "family": "annexes",
+        "section": null,
+        "score": 0.02803921568627451
+      },
+      {
+        "source": "OAP_PORTES_EST.pdf",
+        "family": "oap",
+        "section": null,
+        "score": 0.026129032258064518
+      },
+      {
+        "source": "REG2A10_2DE2_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "Annexe X",
+        "score": 0.025206087507926443
+      },
+      {
+        "source": "PADD.pdf",
+        "family": "padd",
+        "section": null,
+        "score": 0.024868018894137263
+      },
+      {
+        "source": "ANN5_2025_12_19.pdf",
+        "family": "annexes",
+        "section": null,
+        "score": 0.023809523809523808
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UG.2.4.1",
+        "score": 0.01639344262295082
+      },
+      {
+        "source": "REG2A10_2DE2_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "Annexe X",
+        "score": 0.01639344262295082
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UG.1.5.1",
+        "score": 0.016129032258064516
+      },
+      {
+        "source": "REG2A10_1DE2_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "Annexe X",
+        "score": 0.016129032258064516
+      },
+      {
+        "source": "REG2A10_2DE2_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "Annexe X",
+        "score": 0.015873015873015872
+      }
+    ]
+  },
+  {
+    "case_id": "CH-02",
+    "question": "Je souhaite installer des volets, quelles sont les règles à respecter dans le 10e arrondissement ?",
+    "expected_family": "reglement_ecrit",
+    "expected_articles": [
+      "UG.2.2"
+    ],
+    "matched_articles": [],
+    "family_hit_count": 6,
+    "family_ok": true,
+    "article_ok": false,
+    "article_partial": false,
+    "hits": [
+      {
+        "source": "ANN11_2025_12_19.pdf",
+        "family": "annexes",
+        "section": null,
+        "score": 0.03131881575727918
+      },
+      {
+        "source": "OAP_PORTES_EST.pdf",
+        "family": "oap",
+        "section": null,
+        "score": 0.028068137824235385
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "N.3.2.3",
+        "score": 0.025603864734299518
+      },
+      {
+        "source": "PADD.pdf",
+        "family": "padd",
+        "section": null,
+        "score": 0.01639344262295082
+      },
+      {
+        "source": "ANN11_2025_12_19.pdf",
+        "family": "annexes",
+        "section": null,
+        "score": 0.028958333333333336
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UG.3.1.2",
+        "score": 0.020625
+      },
+      {
+        "source": "REG2A1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "Annexe V",
+        "score": 0.01974188058431428
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UV.2.3",
+        "score": 0.019272092398603276
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UV.3.2",
+        "score": 0.017504553734061932
+      },
+      {
+        "source": "REG2A1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "Annexe V",
+        "score": 0.017331339315387172
+      }
+    ]
+  },
+  {
+    "case_id": "CH-03",
+    "question": "Je souhaite remplacer mon toit en zinc par un toit en tuile. Est-ce que c'est possible ?",
+    "expected_family": "reglement_ecrit",
+    "expected_articles": [
+      "UG.2.2.3",
+      "Annexe X"
+    ],
+    "matched_articles": [
+      "Annexe X"
+    ],
+    "family_hit_count": 6,
+    "family_ok": true,
+    "article_ok": false,
+    "article_partial": true,
+    "hits": [
+      {
+        "source": "OAP_HERITAGE.pdf",
+        "family": "oap",
+        "section": null,
+        "score": 0.032266458495966696
+      },
+      {
+        "source": "PADD.pdf",
+        "family": "padd",
+        "section": null,
+        "score": 0.029906956136464335
+      },
+      {
+        "source": "REG2A10_2DE2_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "Annexe X",
+        "score": 0.025645240835114255
+      },
+      {
+        "source": "ANN5_2025_12_19.pdf",
+        "family": "annexes",
+        "section": null,
+        "score": 0.01639344262295082
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UG.4.2.2",
+        "score": 0.01639344262295082
+      },
+      {
+        "source": "ANN3.pdf",
+        "family": "annexes",
+        "section": null,
+        "score": 0.01639344262295082
+      },
+      {
+        "source": "REG2A10_1DE2_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "Annexe X",
+        "score": 0.01639344262295082
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UGSU.2.2.3",
+        "score": 0.016129032258064516
+      },
+      {
+        "source": "REG2A10_1DE2_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "Annexe X",
+        "score": 0.016129032258064516
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UV.4.2.2",
+        "score": 0.015873015873015872
+      }
+    ]
+  },
+  {
+    "case_id": "CH-04",
+    "question": "Donne moi la liste des occupations et utilisations du sol interdites",
+    "expected_family": "reglement_ecrit",
+    "expected_articles": [
+      "UG.1.1",
+      "UGSU.1.1",
+      "UV.1.1",
+      "N.1.1"
+    ],
+    "matched_articles": [
+      "UG.1.1",
+      "UGSU.1.1",
+      "UV.1.1",
+      "N.1.1"
+    ],
+    "family_hit_count": 6,
+    "family_ok": true,
+    "article_ok": true,
+    "article_partial": true,
+    "hits": [
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "N.1.1",
+        "score": 0.03252247488101534
+      },
+      {
+        "source": "OAP_PARIS_NORD_EST.pdf",
+        "family": "oap",
+        "section": null,
+        "score": 0.029726775956284153
+      },
+      {
+        "source": "ANN1_2025_12_19.pdf",
+        "family": "annexes",
+        "section": null,
+        "score": 0.024523523923763828
+      },
+      {
+        "source": "PADD.pdf",
+        "family": "padd",
+        "section": null,
+        "score": 0.01639344262295082
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UG.1.1",
+        "score": 0.032266458495966696
+      },
+      {
+        "source": "ANN5_2025_12_19.pdf",
+        "family": "annexes",
+        "section": null,
+        "score": 0.023391812865497075
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UV.1.1",
+        "score": 0.03128054740957967
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UGSU.1.1",
+        "score": 0.030330882352941176
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "N.1.2",
+        "score": 0.02976190476190476
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UG.1",
+        "score": 0.02919863597612958
+      }
+    ]
+  },
+  {
+    "case_id": "CH-05",
+    "question": "Donne la liste des secteurs soumis à des dispositions particulières",
+    "expected_family": "reglement_ecrit",
+    "expected_articles": [
+      "Annexe I"
+    ],
+    "matched_articles": [
+      "Annexe I"
+    ],
+    "family_hit_count": 6,
+    "family_ok": true,
+    "article_ok": true,
+    "article_partial": true,
+    "hits": [
+      {
+        "source": "REG2A1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "Annexe I",
+        "score": 0.03278688524590164
+      },
+      {
+        "source": "ANN1_2025_12_19.pdf",
+        "family": "annexes",
+        "section": null,
+        "score": 0.03278688524590164
+      },
+      {
+        "source": "OAP_METROPOLE.pdf",
+        "family": "oap",
+        "section": null,
+        "score": 0.03225806451612903
+      },
+      {
+        "source": "PADD.pdf",
+        "family": "padd",
+        "section": null,
+        "score": 0.01639344262295082
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "N.7.2",
+        "score": 0.030834914611005692
+      },
+      {
+        "source": "ANN1_2025_12_19.pdf",
+        "family": "annexes",
+        "section": null,
+        "score": 0.030776515151515152
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "N.7.2",
+        "score": 0.028693528693528692
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "N.7.2",
+        "score": 0.027205882352941177
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UG.1.3",
+        "score": 0.025625000000000002
+      },
+      {
+        "source": "REG2A1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "Annexe I",
+        "score": 0.016129032258064516
+      }
+    ]
+  },
+  {
+    "case_id": "CH-06",
+    "question": "Peux-tu me donner la liste des adresses du 1er arrondissement (emplacements réservés logement) ?",
+    "expected_family": "reglement_ecrit",
+    "expected_articles": [
+      "Annexe V"
+    ],
+    "matched_articles": [
+      "Annexe V"
+    ],
+    "family_hit_count": 6,
+    "family_ok": true,
+    "article_ok": true,
+    "article_partial": true,
+    "hits": [
+      {
+        "source": "ANNAD1_2025_12_19.pdf",
+        "family": "annexes",
+        "section": null,
+        "score": 0.04481792717086835
+      },
+      {
+        "source": "REG2A1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "Annexe V",
+        "score": 0.037583048315446003
+      },
+      {
+        "source": "OAP_SANTE.pdf",
+        "family": "oap",
+        "section": null,
+        "score": 0.01639344262295082
+      },
+      {
+        "source": "PADD.pdf",
+        "family": "padd",
+        "section": null,
+        "score": 0.01639344262295082
+      },
+      {
+        "source": "ANNAD1_2025_12_19.pdf",
+        "family": "annexes",
+        "section": null,
+        "score": 0.031544957774465976
+      },
+      {
+        "source": "REG2A10_2DE2_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "Annexe X",
+        "score": 0.017366656020440754
+      },
+      {
+        "source": "REG1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "UG.1.5.2",
+        "score": 0.017134049920935167
+      },
+      {
+        "source": "REG2A10_2DE2_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "Annexe X",
+        "score": 0.01665925867824056
+      },
+      {
+        "source": "REG2A1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "Annexe III",
+        "score": 0.016476788756388416
+      },
+      {
+        "source": "REG2A1_MS1.pdf",
+        "family": "reglement_ecrit",
+        "section": "Annexe III",
+        "score": 0.0162645519761835
+      }
+    ]
+  }
+]
