@@ -6,6 +6,24 @@
 
 ---
 
+## 2026-07-20 — REG1 sommaire parse + concept→article mapping proposal (1 commit, read-only, 0 restart)
+
+**Context**: prerequisite for a future routing/query-expansion "hinge" that maps architect-facing concepts to article codes. Read-only research task — no pipeline code touched, nothing wired in.
+
+**Part A**: `scripts/parse_reg1_sommaire.py` parses REG1_MS1.pdf's front-matter SOMMAIRE (pages 2-5, confirmed by direct inspection — page 6 is where real content starts) into `{article_code, theme, page}`. First pass had a page-boundary bug: 3 entries whose title wrapped across a page break picked up the *next* page's running-footer year ("2025") as their page number instead of the real one, because the "last number in the segment" heuristic doesn't distinguish a genuine trailing page number from page-boundary noise bleeding into the same regex segment — fixed by anchoring on the number immediately after the *first* dot-leader (or, for the one entry with a single stray dot instead of a leader, the *first* number in the segment) rather than the last number anywhere in it. Verified via page-monotonicity check (0 violations after the fix, was 3 before) and a manual sample cross-check against the task's own worked example (UGSU.3.2 → page 139, matched exactly). Output: `eval/ontology/reg1_sommaire.json` — 119 entries, 119 distinct codes. Coverage diff vs the indexer's live whitelist (`build_article_whitelist()`, 340 codes): 101 in both; 18 "only in sommaire" are all 2-level parent codes (e.g. `UG.2`, `N.1`) that never appear as a chunk's own section since real content always resolves to a more specific child; 239 "only in whitelist" are finer sub-articles (e.g. `N.1.2.1`, `UG.2.2.3`) one level deeper than REG1's own summary lists — the summary's granularity genuinely caps below some real content, a fact Part B had to work around (see below).
+
+**Part B**: `eval/ontology/concept_article_mapping_proposal.csv` — 11 concept rows (10 glossary terms from the task prompt, with "emplacements réservés" split into 2 rows since it turned out to name two unrelated regulatory mechanisms — see below), each proposing article code(s) chosen **only** from Part A's 119-code closed vocabulary (verified programmatically: 0 codes outside that set). Cross-validated every mapping I could against `golden_dataset.json`'s already-Charline-vetted `expected_articles` (UC-02/03/04/05/16, CH-01/03) rather than guessing blind — 6 of 11 rows are gold-confirmed (high confidence), the rest are title-pattern inference (medium) or genuinely ambiguous (low, flagged explicitly for Charline's call).
+
+**Non-obvious finding surfaced in the proposal**: "emplacements réservés" is used in this corpus for two unrelated mechanisms — housing reservations (Annexe V, the CH-06 case, governed by `UG.1.5.2` nested under `UG.1.5 Mixité sociale`) vs. equipment/facility reservations (`UG.1.6`, present near-identically in all 4 zones). A routing hinge that doesn't disambiguate these would misroute one or the other. Also: golden CH-03's real answer needs `UG.2.2.3`, one level deeper than REG1's summary shows for the `UG.2` (aspect extérieur) family — the proposal names the closest available parent (`UG.2.2`) and says so explicitly rather than silently rounding to a plausible-looking but wrong-precision code.
+
+**Not done (out of scope, per the task)**: no pipeline wiring, no re-ingest, no eval run — this is Charline-facing review material, not a shipped change.
+
+**Open threads**:
+- Part B used the concept list given inline in the task prompt (10 terms) — the task says "I will paste the Glossary terms," implying a fuller list may follow; this proposal should be extended, not restarted, when/if that arrives.
+- All "medium"/"low" confidence rows (aspect extérieur/volets, couverture/toiture, emplacements réservés-logement, secteurs particuliers) need Charline's sign-off before any future wiring — flagged in the CSV's own rationale column, not just here.
+
+---
+
 ## 2026-07-20 — index hygiene: ANN2A exclusion, RP audit, referentiel regen (1 commit, re-ingest, 0 restart)
 
 **Context**: 3-item hygiene task. Audited each claim before acting (two of three didn't hold as stated — see below).
