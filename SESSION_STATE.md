@@ -6,7 +6,9 @@
 
 ---
 
-## 2026-07-21 — Faithful Notion export replaces golden_dataset.json (1 commit, 0 re-ingest, 0 restart)
+**Correction (2026-07-21):** the T6/T7 task labels below were briefly swapped in this file's narrative — a29296f (table_row scoping, `_annexe_route`, CH-06 13/13) is **T7**, 79adb0f (faithful Notion→JSON export script) is **T6**. Fixed here; git history/commit messages untouched.
+
+## T6 — 2026-07-21 — Faithful Notion export replaces golden_dataset.json (1 commit, 0 re-ingest, 0 restart)
 
 **Context**: legacy `golden_dataset.json` was hand-simplified and had invented content — confirmed by direct inspection: fabricated `DG_E_HAUTEUR.pdf` document expectation for UC-01, and (per the task's framing, consistent with UC-03's own real Notion text explicitly flagging it as "probablement une invention") a fabricated "H/2 min 6m" prospect rule. Wrote `scripts/export_golden_cases.py`: Notion API (`/v1/data_sources/{id}/query`, stdlib `urllib`, no new dependency) → strict fidelity mapping (verbatim text copy, closed enum maps that raise on drift instead of guessing, comma-split `articles_attendus`, empty→null/[]), consistency guard (refuses to export if any case is `fiabilite='Fabriqué - à refaire'` AND `validated=true`). 25 new unit tests (`tests/test_export_golden_cases.py`); full suite 225 passed.
 
@@ -23,7 +25,7 @@
 
 ---
 
-## 2026-07-21 — Scope table_row chunks: fixes 2/6 polluted cases + CH-06 exhaustiveness (1 commit, re-ingest, 0 restart)
+## T7 — 2026-07-21 — Scope table_row chunks: fixes 2/6 polluted cases + CH-06 exhaustiveness (1 commit, re-ingest, 0 restart)
 
 **Audit before fix (T5's hypothesis was BM25-only)**: pulled FAISS/BM25 breakdowns for the polluted cases. UC-04's pollution ("hôtel" query surfacing Annexe X) had FAISS 0.62-0.72 (high) AND BM25 30-44 (high) — **both signals**, not BM25-only. Root cause: "hôtel" the lodging-use category (UG.1.3) vs. "hôtel particulier" the heritage-building term (Annexe X) — the embedding model doesn't disambiguate the polysemy either. Confirms the task's core diagnosis (table rows are a different retrieval class) but the mechanism is broader than hypothesized — adapted the fix accordingly (exclusion, not a BM25-specific tweak).
 
@@ -33,7 +35,7 @@
 
 **Full 12-case re-run** (`eval/results/golden_v2_retrieval_20260720.json`), compared directly against T5:
 
-| cas | T5 | T6 | verdict |
+| cas | T5 | T7 | verdict |
 |---|---|---|---|
 | UC-01 | ✗ | ✓ | **FIXED** |
 | UC-05 | ✗ | ✓ | **FIXED** |
