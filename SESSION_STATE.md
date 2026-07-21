@@ -6,6 +6,23 @@
 
 ---
 
+## 2026-07-21 — Faithful Notion export replaces golden_dataset.json (1 commit, 0 re-ingest, 0 restart)
+
+**Context**: legacy `golden_dataset.json` was hand-simplified and had invented content — confirmed by direct inspection: fabricated `DG_E_HAUTEUR.pdf` document expectation for UC-01, and (per the task's framing, consistent with UC-03's own real Notion text explicitly flagging it as "probablement une invention") a fabricated "H/2 min 6m" prospect rule. Wrote `scripts/export_golden_cases.py`: Notion API (`/v1/data_sources/{id}/query`, stdlib `urllib`, no new dependency) → strict fidelity mapping (verbatim text copy, closed enum maps that raise on drift instead of guessing, comma-split `articles_attendus`, empty→null/[]), consistency guard (refuses to export if any case is `fiabilite='Fabriqué - à refaire'` AND `validated=true`). 25 new unit tests (`tests/test_export_golden_cases.py`); full suite 225 passed.
+
+**Wired `eval.py`**: `_normalize_expectations` now also accepts `articles_attendus`; `_print_summary` split into two separate tables+averages — certified (`validated==true`) vs. pending — never blended into one headline number. `run_eval` threads `validated` into each result dict.
+
+**Smoke test** (replay of the 12 real Notion rows fetched this session via MCP tools — live `NOTION_API_KEY` not available in this environment, disclosed rather than faked): 12 cases exported (10 legacy IDs + 2 new: CH-02, CH-05; 0 dropped). **0/12 `validated==true`** — contradicts the task's own framing of "4 cases pending" (UC-04/UC-16/CH-02/CH-04): the live "Validé Charline" checkbox is unchecked for **all 12**, not just those 4. No score from this run is a certification. `eval/golden_export_diff.md`: most legacy questions were paraphrased away from Charline's actual wording; `expected_articles`/`articles_attendus` differs in 7/10 common cases.
+
+**Kept `eval/golden_dataset_LEGACY.json`** (frozen pre-export copy) as a diff-only / relative-non-regression sentinel — documented in CLAUDE.md §3/§4 that the 80.0%/91.7% reference scores were never a certified/absolute measure, only a relative delta against a flawed yardstick.
+
+**Open threads**:
+- Live Notion export path is untested end-to-end (no `NOTION_API_KEY` here) — next session with a real key: run live once, diff against this replay-based export (should match modulo Notion page ids).
+- Certification is a separate follow-up: needs the checkbox owner to review and check "Validé Charline" per-case in Notion before any score counts as certified.
+- `expected_keywords` (legacy `_score_answer` input) has no analog in the new schema — degrades gracefully (vacuous 1.0) rather than being synthesized; a real answer-scoring path for the new schema is still open.
+
+---
+
 ## 2026-07-21 — Scope table_row chunks: fixes 2/6 polluted cases + CH-06 exhaustiveness (1 commit, re-ingest, 0 restart)
 
 **Audit before fix (T5's hypothesis was BM25-only)**: pulled FAISS/BM25 breakdowns for the polluted cases. UC-04's pollution ("hôtel" query surfacing Annexe X) had FAISS 0.62-0.72 (high) AND BM25 30-44 (high) — **both signals**, not BM25-only. Root cause: "hôtel" the lodging-use category (UG.1.3) vs. "hôtel particulier" the heritage-building term (Annexe X) — the embedding model doesn't disambiguate the polysemy either. Confirms the task's core diagnosis (table rows are a different retrieval class) but the mechanism is broader than hypothesized — adapted the fix accordingly (exclusion, not a BM25-specific tweak).

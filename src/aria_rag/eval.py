@@ -143,13 +143,17 @@ def _normalize_code(s: str) -> str:
 
 def _normalize_expectations(uc: dict[str, Any]) -> list[dict[str, str]]:
     """Return uc's expected-retrieval items in canonical [{"type", "value"}, ...]
-    form. Supports both the legacy `expected_articles: [str, ...]` field (every
-    item treated as type "article" — unchanged behavior for any case that hasn't
-    been migrated to the new format) and the new `expected: [{"type", "value"},
-    ...]` field. A case must use one or the other, not both.
+    form. Supports the legacy `expected_articles: [str, ...]` field, the legacy
+    `expected: [{"type", "value"}, ...]` field, and the Notion-v2 export's
+    `articles_attendus: [str, ...]` field (scripts/export_golden_cases.py) —
+    every plain-string item is treated as type "article" for scoring, same as
+    `expected_articles` always was. A case is expected to use exactly one of
+    these three.
     """
     if "expected" in uc:
         return uc["expected"]
+    if "articles_attendus" in uc:
+        return [{"type": "article", "value": v} for v in uc["articles_attendus"]]
     return [{"type": "article", "value": v} for v in uc.get("expected_articles", [])]
 
 
@@ -227,21 +231,11 @@ def _bar(score: float, width: int = 8) -> str:
     return "█" * filled + "░" * (width - filled)
 
 
-def _print_summary(results: list[dict[str, Any]]) -> None:
+def _print_result_table(results: list[dict[str, Any]], failed_ids: list[str]) -> None:
     id_w, q_w, score_w = 8, 52, 22
     total_w = id_w + q_w + score_w * 2
     sep = "─" * total_w
 
-    failed_ids = [r["id"] for r in results if r.get("expansion_status") == "failed"]
-    if failed_ids:
-        print(
-            f"\n{_RED}{BOLD}⚠ QUERY EXPANSION FAILED for {len(failed_ids)} case(s): "
-            f"{', '.join(failed_ids)} — scored against a silent fallback to the "
-            f"original query, not a genuine expansion. See ERROR-level logs above.{RESET}"
-        )
-
-    title = "ARIA RAG — Résultats d'évaluation"
-    print(f"\n{BOLD}{title:^{total_w}}{RESET}")
     print(sep)
     print(
         f"{BOLD}{'ID':<{id_w}}"
@@ -279,6 +273,49 @@ def _print_summary(results: list[dict[str, Any]]) -> None:
         f"{_color(avg_ans)}{avg_ans:.0%} {_bar(avg_ans)}{RESET}"
     )
     print(sep)
+
+
+def _print_summary(results: list[dict[str, Any]]) -> None:
+    """Print certified (validated=true) and pending (everything else) results
+    as two SEPARATE tables with their own averages — a pending case's score
+    must never be blended into a "headline" number presented as certified.
+    `validated` is absent entirely on datasets that predate the Notion-v2
+    export (e.g. golden_dataset_LEGACY.json); those cases fall into "pending"
+    by the same rule (missing == not certified), never into "certified" by
+    default.
+    """
+    id_w, q_w, score_w = 8, 52, 22
+    total_w = id_w + q_w + score_w * 2
+
+    failed_ids = [r["id"] for r in results if r.get("expansion_status") == "failed"]
+    if failed_ids:
+        print(
+            f"\n{_RED}{BOLD}⚠ QUERY EXPANSION FAILED for {len(failed_ids)} case(s): "
+            f"{', '.join(failed_ids)} — scored against a silent fallback to the "
+            f"original query, not a genuine expansion. See ERROR-level logs above.{RESET}"
+        )
+
+    certified = [r for r in results if r.get("validated") is True]
+    pending = [r for r in results if r.get("validated") is not True]
+
+    print(f"\n{BOLD}{'ARIA RAG — Résultats d’évaluation — CERTIFIÉ (validated=true)':^{total_w}}{RESET}")
+    if certified:
+        _print_result_table(certified, failed_ids)
+    else:
+        print(
+            f"{_YELLOW}(0 cas certifié — aucun score certifié disponible tant que "
+            f"'Validé Charline' n'est pas coché dans Notion pour au moins un cas){RESET}"
+        )
+
+    print(
+        f"\n{_DIM}{BOLD}"
+        f"{'— cas EN ATTENTE de validation (validated=false / non renseigné) — informatif uniquement, jamais une certification —':^{total_w}}"
+        f"{RESET}"
+    )
+    if pending:
+        _print_result_table(pending, failed_ids)
+    else:
+        print(f"{_DIM}(aucun cas en attente){RESET}")
 
 
 def _make_results_path(out_dir: Path, ts: str | None = None) -> Path:
@@ -404,6 +441,7 @@ def run_eval(
             "id": uc_id,
             "question": uc["question"],
             "complexity": uc.get("complexity", ""),
+            "validated": uc.get("validated"),
             "retrieval_score": round(ret_score, 4),
             "answer_score": round(ans_score, 4),
             "missing_articles": missing_arts,

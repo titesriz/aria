@@ -1,0 +1,2112 @@
+[
+  {
+    "id": "replay-page-0",
+    "properties": {
+      "Cas": {
+        "id": "title",
+        "type": "title",
+        "title": [
+          {
+            "type": "text",
+            "text": {
+              "content": "CH-03"
+            },
+            "plain_text": "CH-03"
+          }
+        ]
+      },
+      "Persona": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Architecte",
+          "color": "default"
+        }
+      },
+      "Question": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Je souhaite remplacer mon toit en zinc par un toit en tuile. Est-ce que c'est possible ?"
+            },
+            "plain_text": "Je souhaite remplacer mon toit en zinc par un toit en tuile. Est-ce que c'est possible ?"
+          }
+        ]
+      },
+      "Contexte": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Aspect extérieur / patrimoine. Éval Charline 02/07 — Q4. Gold standard fourni."
+            },
+            "plain_text": "Aspect extérieur / patrimoine. Éval Charline 02/07 — Q4. Gold standard fourni."
+          }
+        ]
+      },
+      "Type de cas": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Régression",
+          "color": "default"
+        }
+      },
+      "Type d'échec testé": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Retrieval [R]",
+          "color": "default"
+        }
+      },
+      "Famille attendue": {
+        "id": "ms",
+        "type": "multi_select",
+        "multi_select": [
+          {
+            "id": "x0",
+            "name": "Règlement",
+            "color": "default"
+          },
+          {
+            "id": "x1",
+            "name": "Annexe",
+            "color": "default"
+          }
+        ]
+      },
+      "Articles / ressources attendus": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "UG.2.2.3 (couronnement/couverture), Annexe X"
+            },
+            "plain_text": "UG.2.2.3 (couronnement/couverture), Annexe X"
+          }
+        ]
+      },
+      "Answerable": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Oui",
+          "color": "default"
+        }
+      },
+      "Réponse attendue": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "GOLD (structure validée Charline) : UG.2.2.3 fonde l'appréciation d'insertion paysagère. Trois situations : 1) bâtiment protégé PLUb (Annexe X) — tuile quasi refusée ; 2) abords MH (500m) — avis conforme ABF ; 3) cas général — déclaration préalable, appréciation d'insertion. Conclusion : très probablement non. NB : le noyau réglementaire (3 cas + UG.2.2.3 + Annexe X) est la cible ; les enrichissements Claude (80% zinc, Unesco, adresse BASU) sont hors corpus, hors portée MVP."
+            },
+            "plain_text": "GOLD (structure validée Charline) : UG.2.2.3 fonde l'appréciation d'insertion paysagère. Trois situations : 1) bâtiment protégé PLUb (Annexe X) — tuile quasi refusée ; 2) abords MH (500m) — avis conforme ABF ; 3) cas général — déclaration préalable, appréciation d'insertion. Conclusion : très probablement non. NB : le noyau réglementaire (3 cas + UG.2.2.3 + Annexe X) est la cible ; les enrichissements Claude (80% zinc, Unesco, adresse BASU) sont hors corpus, hors portée MVP."
+          }
+        ]
+      },
+      "Ressource à pointer": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Annexe X (liste des bâtiments protégés)"
+            },
+            "plain_text": "Annexe X (liste des bâtiments protégés)"
+          }
+        ]
+      },
+      "Critère de réussite": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Structurer en 3 cas patrimoniaux ; citer UG.2.2.3 + Annexe X depuis Règlement/Annexe. NE PAS répondre sur l'albédo/bioclimatique (piège OAP)."
+            },
+            "plain_text": "Structurer en 3 cas patrimoniaux ; citer UG.2.2.3 + Annexe X depuis Règlement/Annexe. NE PAS répondre sur l'albédo/bioclimatique (piège OAP)."
+          }
+        ]
+      },
+      "Reproche Charline (verbatim)": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Réponse très incomplète. Aucune citation d'article précise du PLU, pas de référence à la protection des bâtiments patrimoniaux. (le run citait OAP_HERITAGE/OAP_CONSTRUCTION — albédo, isolation)"
+            },
+            "plain_text": "Réponse très incomplète. Aucune citation d'article précise du PLU, pas de référence à la protection des bâtiments patrimoniaux. (le run citait OAP_HERITAGE/OAP_CONSTRUCTION — albédo, isolation)"
+          }
+        ]
+      },
+      "Fiabilité référence": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Gold standard",
+          "color": "default"
+        }
+      },
+      "Validé Charline": {
+        "id": "cb",
+        "type": "checkbox",
+        "checkbox": false
+      },
+      "Priorité": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "⭐⭐⭐⭐⭐",
+          "color": "default"
+        }
+      }
+    }
+  },
+  {
+    "id": "replay-page-1",
+    "properties": {
+      "Cas": {
+        "id": "title",
+        "type": "title",
+        "title": [
+          {
+            "type": "text",
+            "text": {
+              "content": "UC-16"
+            },
+            "plain_text": "UC-16"
+          }
+        ]
+      },
+      "Persona": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Architecte",
+          "color": "default"
+        }
+      },
+      "Question": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Puis-je surélever d'un niveau (R+1) mon immeuble R+4 existant à 17m en zone UG Paris 9e, où le plafond de hauteur DG5 est à 18m ? Sous quelles conditions ?"
+            },
+            "plain_text": "Puis-je surélever d'un niveau (R+1) mon immeuble R+4 existant à 17m en zone UG Paris 9e, où le plafond de hauteur DG5 est à 18m ? Sous quelles conditions ?"
+          }
+        ]
+      },
+      "Contexte": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Zone UG | Paris 9e | Immeuble R+4 existant (17m) | Secteur plafond DG5 18m | Surélévation R+1 | Faisabilité"
+            },
+            "plain_text": "Zone UG | Paris 9e | Immeuble R+4 existant (17m) | Secteur plafond DG5 18m | Surélévation R+1 | Faisabilité"
+          }
+        ]
+      },
+      "Type de cas": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Couverture",
+          "color": "default"
+        }
+      },
+      "Type d'échec testé": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Synthèse [S]",
+          "color": "default"
+        }
+      },
+      "Famille attendue": {
+        "id": "ms",
+        "type": "multi_select",
+        "multi_select": [
+          {
+            "id": "x0",
+            "name": "Règlement",
+            "color": "default"
+          }
+        ]
+      },
+      "Articles / ressources attendus": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "UG.3.2, UG.3.3"
+            },
+            "plain_text": "UG.3.2, UG.3.3"
+          }
+        ]
+      },
+      "Answerable": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Oui",
+          "color": "default"
+        }
+      },
+      "Réponse attendue": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Marge de 1m sous le plafond (17→18m). Une surélévation est possible dans la limite du gabarit, mais R+1 complet (~2,5-3m) EXCÈDE la marge d'1m — sauf mécanisme de dépassement admis (UG.3.3) à vérifier. Conditions d'insertion (mitoyenneté, qualité architecturale). Rejeter le '+2m' fabriqué de la fiche."
+            },
+            "plain_text": "Marge de 1m sous le plafond (17→18m). Une surélévation est possible dans la limite du gabarit, mais R+1 complet (~2,5-3m) EXCÈDE la marge d'1m — sauf mécanisme de dépassement admis (UG.3.3) à vérifier. Conditions d'insertion (mitoyenneté, qualité architecturale). Rejeter le '+2m' fabriqué de la fiche."
+          }
+        ]
+      },
+      "Ressource à pointer": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "— (chiffres fournis dans l'énoncé, pas besoin du plan)"
+            },
+            "plain_text": "— (chiffres fournis dans l'énoncé, pas besoin du plan)"
+          }
+        ]
+      },
+      "Critère de réussite": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Calculer la marge (1m) ; signaler que R+1 complet la dépasse sauf dépassement admis. Ne pas inventer +2m."
+            },
+            "plain_text": "Calculer la marge (1m) ; signaler que R+1 complet la dépasse sauf dépassement admis. Ne pas inventer +2m."
+          }
+        ]
+      },
+      "Reproche Charline (verbatim)": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": []
+      },
+      "Fiabilité référence": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Hypothèse à valider",
+          "color": "default"
+        }
+      },
+      "Validé Charline": {
+        "id": "cb",
+        "type": "checkbox",
+        "checkbox": false
+      },
+      "Priorité": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "⭐⭐⭐⭐",
+          "color": "default"
+        }
+      }
+    }
+  },
+  {
+    "id": "replay-page-2",
+    "properties": {
+      "Cas": {
+        "id": "title",
+        "type": "title",
+        "title": [
+          {
+            "type": "text",
+            "text": {
+              "content": "CH-06"
+            },
+            "plain_text": "CH-06"
+          }
+        ]
+      },
+      "Persona": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Architecte",
+          "color": "default"
+        }
+      },
+      "Question": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Peux-tu me donner la liste des adresses du 1er arrondissement (emplacements réservés logement) ?"
+            },
+            "plain_text": "Peux-tu me donner la liste des adresses du 1er arrondissement (emplacements réservés logement) ?"
+          }
+        ]
+      },
+      "Contexte": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Extraction exhaustive depuis Annexe V. Éval Charline 02/07 — Q8. Référence d'exhaustivité connue (tableau Annexe V)."
+            },
+            "plain_text": "Extraction exhaustive depuis Annexe V. Éval Charline 02/07 — Q8. Référence d'exhaustivité connue (tableau Annexe V)."
+          }
+        ]
+      },
+      "Type de cas": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Régression",
+          "color": "default"
+        }
+      },
+      "Type d'échec testé": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Retrieval [R]",
+          "color": "default"
+        }
+      },
+      "Famille attendue": {
+        "id": "ms",
+        "type": "multi_select",
+        "multi_select": [
+          {
+            "id": "x0",
+            "name": "Annexe",
+            "color": "default"
+          }
+        ]
+      },
+      "Articles / ressources attendus": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Annexe V (emplacements réservés logement)"
+            },
+            "plain_text": "Annexe V (emplacements réservés logement)"
+          }
+        ]
+      },
+      "Answerable": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Oui",
+          "color": "default"
+        }
+      },
+      "Réponse attendue": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Liste exhaustive du 1er depuis l'Annexe V (~17 lignes) : 15 rue d'Argenteuil ; 4 Argenteuil/11 Échelle ; 16 Argenteuil/15 av Opéra ; 24 Bons Enfants/9-13 Colonel Driant ; 26 Bouloi ; 4 Jean Lantier ; 2 Molière/6 av Opéra ; 1 Molière/8 av Opéra ; 21 Mont-Thabor ; 7 av Opéra ; 21 Pyramides/19 Argenteuil ; 53 Rivoli/8 Lavandières ; 15-17 Sourdière/2-6 St Hyacinthe (avec type LS 100-100 / 100-60). Le run n'a retourné que 2 adresses depuis de mauvais documents."
+            },
+            "plain_text": "Liste exhaustive du 1er depuis l'Annexe V (~17 lignes) : 15 rue d'Argenteuil ; 4 Argenteuil/11 Échelle ; 16 Argenteuil/15 av Opéra ; 24 Bons Enfants/9-13 Colonel Driant ; 26 Bouloi ; 4 Jean Lantier ; 2 Molière/6 av Opéra ; 1 Molière/8 av Opéra ; 21 Mont-Thabor ; 7 av Opéra ; 21 Pyramides/19 Argenteuil ; 53 Rivoli/8 Lavandières ; 15-17 Sourdière/2-6 St Hyacinthe (avec type LS 100-100 / 100-60). Le run n'a retourné que 2 adresses depuis de mauvais documents."
+          }
+        ]
+      },
+      "Ressource à pointer": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Annexe V — tableau des emplacements réservés, 1er arrondissement"
+            },
+            "plain_text": "Annexe V — tableau des emplacements réservés, 1er arrondissement"
+          }
+        ]
+      },
+      "Critère de réussite": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "EXHAUSTIVITÉ : retourner ~17 lignes depuis l'Annexe V (le bug d'origine en retournait 2). Ne pas sourcer depuis le dossier Hôtel-Dieu / Rapport."
+            },
+            "plain_text": "EXHAUSTIVITÉ : retourner ~17 lignes depuis l'Annexe V (le bug d'origine en retournait 2). Ne pas sourcer depuis le dossier Hôtel-Dieu / Rapport."
+          }
+        ]
+      },
+      "Reproche Charline (verbatim)": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "La réponse est bonne mais est incomplète, voir screenshot de la liste. (2 adresses retournées sur ~17)"
+            },
+            "plain_text": "La réponse est bonne mais est incomplète, voir screenshot de la liste. (2 adresses retournées sur ~17)"
+          }
+        ]
+      },
+      "Fiabilité référence": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Validé Charline",
+          "color": "default"
+        }
+      },
+      "Validé Charline": {
+        "id": "cb",
+        "type": "checkbox",
+        "checkbox": false
+      },
+      "Priorité": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "⭐⭐⭐⭐",
+          "color": "default"
+        }
+      }
+    }
+  },
+  {
+    "id": "replay-page-3",
+    "properties": {
+      "Cas": {
+        "id": "title",
+        "type": "title",
+        "title": [
+          {
+            "type": "text",
+            "text": {
+              "content": "UC-01"
+            },
+            "plain_text": "UC-01"
+          }
+        ]
+      },
+      "Persona": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Architecte",
+          "color": "default"
+        }
+      },
+      "Question": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Connaître la hauteur maximale constructible sur une parcelle en zone UG à Paris 11e, rue de la Roquette, pour un projet de logements neufs de 800m² (surface de plancher)."
+            },
+            "plain_text": "Connaître la hauteur maximale constructible sur une parcelle en zone UG à Paris 11e, rue de la Roquette, pour un projet de logements neufs de 800m² (surface de plancher)."
+          }
+        ]
+      },
+      "Contexte": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Zone UG | Paris 11e | Logements neufs | 800m² SDP | Pas de MH proche | Hauteur plafond à vérifier sur plan"
+            },
+            "plain_text": "Zone UG | Paris 11e | Logements neufs | 800m² SDP | Pas de MH proche | Hauteur plafond à vérifier sur plan"
+          }
+        ]
+      },
+      "Type de cas": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Couverture",
+          "color": "default"
+        }
+      },
+      "Type d'échec testé": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Retrieval [R]",
+          "color": "default"
+        }
+      },
+      "Famille attendue": {
+        "id": "ms",
+        "type": "multi_select",
+        "multi_select": [
+          {
+            "id": "x0",
+            "name": "Règlement",
+            "color": "default"
+          }
+        ]
+      },
+      "Articles / ressources attendus": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "UG.3.2"
+            },
+            "plain_text": "UG.3.2"
+          }
+        ]
+      },
+      "Answerable": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Renvoi doc",
+          "color": "default"
+        }
+      },
+      "Réponse attendue": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "En zone UG la hauteur max est fixée par le Plan général des hauteurs (DG5) ; l'article UG.3.2 pose le principe et renvoie au plan. La valeur opposable ne peut pas être donnée par le texte seul — il faut consulter la planche DG5 du secteur. Vérifier aussi les surcouches (fuseaux de protection, servitudes)."
+            },
+            "plain_text": "En zone UG la hauteur max est fixée par le Plan général des hauteurs (DG5) ; l'article UG.3.2 pose le principe et renvoie au plan. La valeur opposable ne peut pas être donnée par le texte seul — il faut consulter la planche DG5 du secteur. Vérifier aussi les surcouches (fuseaux de protection, servitudes)."
+          }
+        ]
+      },
+      "Ressource à pointer": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Plan général des hauteurs DG5, planche du 11e (document graphique — non indexé). Comportement cible : ouvrir/pointer le bon PDF de plan."
+            },
+            "plain_text": "Plan général des hauteurs DG5, planche du 11e (document graphique — non indexé). Comportement cible : ouvrir/pointer le bon PDF de plan."
+          }
+        ]
+      },
+      "Critère de réussite": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Restituer la règle UG.3.2 + pointer explicitement le Plan des hauteurs DG5. NE PAS halluciner une valeur chiffrée."
+            },
+            "plain_text": "Restituer la règle UG.3.2 + pointer explicitement le Plan des hauteurs DG5. NE PAS halluciner une valeur chiffrée."
+          }
+        ]
+      },
+      "Reproche Charline (verbatim)": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": []
+      },
+      "Fiabilité référence": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Hypothèse à valider",
+          "color": "default"
+        }
+      },
+      "Validé Charline": {
+        "id": "cb",
+        "type": "checkbox",
+        "checkbox": false
+      },
+      "Priorité": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "⭐⭐⭐⭐⭐",
+          "color": "default"
+        }
+      }
+    }
+  },
+  {
+    "id": "replay-page-4",
+    "properties": {
+      "Cas": {
+        "id": "title",
+        "type": "title",
+        "title": [
+          {
+            "type": "text",
+            "text": {
+              "content": "CH-05"
+            },
+            "plain_text": "CH-05"
+          }
+        ]
+      },
+      "Persona": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Architecte",
+          "color": "default"
+        }
+      },
+      "Question": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Donne la liste des secteurs soumis à des dispositions particulières."
+            },
+            "plain_text": "Donne la liste des secteurs soumis à des dispositions particulières."
+          }
+        ]
+      },
+      "Contexte": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Extraction liste depuis Annexe I. Éval Charline (Figma)."
+            },
+            "plain_text": "Extraction liste depuis Annexe I. Éval Charline (Figma)."
+          }
+        ]
+      },
+      "Type de cas": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Régression",
+          "color": "default"
+        }
+      },
+      "Type d'échec testé": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Retrieval [R]",
+          "color": "default"
+        }
+      },
+      "Famille attendue": {
+        "id": "ms",
+        "type": "multi_select",
+        "multi_select": [
+          {
+            "id": "x0",
+            "name": "Annexe",
+            "color": "default"
+          },
+          {
+            "id": "x1",
+            "name": "Règlement",
+            "color": "default"
+          }
+        ]
+      },
+      "Articles / ressources attendus": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Annexe I (liste des secteurs), UG.1.4.1"
+            },
+            "plain_text": "Annexe I (liste des secteurs), UG.1.4.1"
+          }
+        ]
+      },
+      "Answerable": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Oui",
+          "color": "default"
+        }
+      },
+      "Réponse attendue": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Liste des secteurs à dispositions particulières depuis l'Annexe I (Les Halles, Hôtel-Dieu, Val-de-Grâce, Bercy-Charenton, Montmartre, Maisons et villas SMV, etc.). À valider l'exhaustivité contre l'Annexe I réelle. Le run a mis en citation active un dossier de modification (Hôtel-Dieu) au lieu de l'Annexe I."
+            },
+            "plain_text": "Liste des secteurs à dispositions particulières depuis l'Annexe I (Les Halles, Hôtel-Dieu, Val-de-Grâce, Bercy-Charenton, Montmartre, Maisons et villas SMV, etc.). À valider l'exhaustivité contre l'Annexe I réelle. Le run a mis en citation active un dossier de modification (Hôtel-Dieu) au lieu de l'Annexe I."
+          }
+        ]
+      },
+      "Ressource à pointer": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Annexe I — Liste des secteurs à dispositions particulières"
+            },
+            "plain_text": "Annexe I — Liste des secteurs à dispositions particulières"
+          }
+        ]
+      },
+      "Critère de réussite": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Atteindre l'Annexe I (pas le dossier Hôtel-Dieu ni le Rapport) ; liste exhaustive et fidèle à l'Annexe I."
+            },
+            "plain_text": "Atteindre l'Annexe I (pas le dossier Hôtel-Dieu ni le Rapport) ; liste exhaustive et fidèle à l'Annexe I."
+          }
+        ]
+      },
+      "Reproche Charline (verbatim)": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "(citation active = RP_20251017_MC1_HOTEL_DIEU.pdf, dossier de modification, au lieu de l'Annexe I ; exhaustivité à vérifier)"
+            },
+            "plain_text": "(citation active = RP_20251017_MC1_HOTEL_DIEU.pdf, dossier de modification, au lieu de l'Annexe I ; exhaustivité à vérifier)"
+          }
+        ]
+      },
+      "Fiabilité référence": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Hypothèse à valider",
+          "color": "default"
+        }
+      },
+      "Validé Charline": {
+        "id": "cb",
+        "type": "checkbox",
+        "checkbox": false
+      },
+      "Priorité": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "⭐⭐⭐⭐",
+          "color": "default"
+        }
+      }
+    }
+  },
+  {
+    "id": "replay-page-5",
+    "properties": {
+      "Cas": {
+        "id": "title",
+        "type": "title",
+        "title": [
+          {
+            "type": "text",
+            "text": {
+              "content": "UC-02"
+            },
+            "plain_text": "UC-02"
+          }
+        ]
+      },
+      "Persona": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Architecte",
+          "color": "default"
+        }
+      },
+      "Question": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Savoir si ma construction neuve peut être implantée en retrait de 3m par rapport à l'alignement de la voie, en zone UG, pour un programme mixte logements/commerces à Paris 15e."
+            },
+            "plain_text": "Savoir si ma construction neuve peut être implantée en retrait de 3m par rapport à l'alignement de la voie, en zone UG, pour un programme mixte logements/commerces à Paris 15e."
+          }
+        ]
+      },
+      "Contexte": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Zone UG | Paris 15e | Programme mixte | Retrait souhaité 3m | Voie de 12m | Construction neuve"
+            },
+            "plain_text": "Zone UG | Paris 15e | Programme mixte | Retrait souhaité 3m | Voie de 12m | Construction neuve"
+          }
+        ]
+      },
+      "Type de cas": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Couverture",
+          "color": "default"
+        }
+      },
+      "Type d'échec testé": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Retrieval [R]",
+          "color": "default"
+        }
+      },
+      "Famille attendue": {
+        "id": "ms",
+        "type": "multi_select",
+        "multi_select": [
+          {
+            "id": "x0",
+            "name": "Règlement",
+            "color": "default"
+          }
+        ]
+      },
+      "Articles / ressources attendus": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "UG.3.1.1"
+            },
+            "plain_text": "UG.3.1.1"
+          }
+        ]
+      },
+      "Answerable": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Oui",
+          "color": "default"
+        }
+      },
+      "Réponse attendue": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Alignement de principe en zone UG (UG.3.1.1). Un retrait est admissible sous conditions : maintien/création d'espaces libres ou végétalisés, amélioration de l'insertion urbaine/paysagère, recherche architecturale (REG1 p.96). Le retrait de 3m n'est pas automatique."
+            },
+            "plain_text": "Alignement de principe en zone UG (UG.3.1.1). Un retrait est admissible sous conditions : maintien/création d'espaces libres ou végétalisés, amélioration de l'insertion urbaine/paysagère, recherche architecturale (REG1 p.96). Le retrait de 3m n'est pas automatique."
+          }
+        ]
+      },
+      "Ressource à pointer": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "—"
+            },
+            "plain_text": "—"
+          }
+        ]
+      },
+      "Critère de réussite": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Trouver UG.3.1.1 (pas le Rapport) ; énoncer alignement de principe + retrait conditionnel. Ne pas inventer de seuil de largeur de voie (15m) non confirmé."
+            },
+            "plain_text": "Trouver UG.3.1.1 (pas le Rapport) ; énoncer alignement de principe + retrait conditionnel. Ne pas inventer de seuil de largeur de voie (15m) non confirmé."
+          }
+        ]
+      },
+      "Reproche Charline (verbatim)": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": []
+      },
+      "Fiabilité référence": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Run réel",
+          "color": "default"
+        }
+      },
+      "Validé Charline": {
+        "id": "cb",
+        "type": "checkbox",
+        "checkbox": false
+      },
+      "Priorité": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "⭐⭐⭐⭐⭐",
+          "color": "default"
+        }
+      }
+    }
+  },
+  {
+    "id": "replay-page-6",
+    "properties": {
+      "Cas": {
+        "id": "title",
+        "type": "title",
+        "title": [
+          {
+            "type": "text",
+            "text": {
+              "content": "UC-03"
+            },
+            "plain_text": "UC-03"
+          }
+        ]
+      },
+      "Persona": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Architecte",
+          "color": "default"
+        }
+      },
+      "Question": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Comprendre la règle de prospect à respecter vis-à-vis de la limite séparative droite, sachant que la façade projetée comprend des baies de pièces principales à 8m de haut."
+            },
+            "plain_text": "Comprendre la règle de prospect à respecter vis-à-vis de la limite séparative droite, sachant que la façade projetée comprend des baies de pièces principales à 8m de haut."
+          }
+        ]
+      },
+      "Contexte": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Zone UG | Paris indifférencié | Façade avec baies pièces principales (PP) | Hauteur baie 8m | Limite séparative droite | Neuf"
+            },
+            "plain_text": "Zone UG | Paris indifférencié | Façade avec baies pièces principales (PP) | Hauteur baie 8m | Limite séparative droite | Neuf"
+          }
+        ]
+      },
+      "Type de cas": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Couverture",
+          "color": "default"
+        }
+      },
+      "Type d'échec testé": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Mixte [R+S]",
+          "color": "default"
+        }
+      },
+      "Famille attendue": {
+        "id": "ms",
+        "type": "multi_select",
+        "multi_select": [
+          {
+            "id": "x0",
+            "name": "Règlement",
+            "color": "default"
+          }
+        ]
+      },
+      "Articles / ressources attendus": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "UG.3.1.2 (à confirmer), figure FNE (à confirmer)"
+            },
+            "plain_text": "UG.3.1.2 (à confirmer), figure FNE (à confirmer)"
+          }
+        ]
+      },
+      "Answerable": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Oui",
+          "color": "default"
+        }
+      },
+      "Réponse attendue": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Pour des baies de pièces principales, prospect minimal de 6m au droit de la limite séparative, sur la largeur de façade concernée (~2m devant les autres vues). La hauteur (8m) n'abaisse pas la règle. NB : règle issue de sources web — à confirmer dans le corpus. Le JSON 'H/2 min 6m' est probablement une invention."
+            },
+            "plain_text": "Pour des baies de pièces principales, prospect minimal de 6m au droit de la limite séparative, sur la largeur de façade concernée (~2m devant les autres vues). La hauteur (8m) n'abaisse pas la règle. NB : règle issue de sources web — à confirmer dans le corpus. Le JSON 'H/2 min 6m' est probablement une invention."
+          }
+        ]
+      },
+      "Ressource à pointer": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Figure FNE (si confirmée) — illustration géométrique du prospect"
+            },
+            "plain_text": "Figure FNE (si confirmée) — illustration géométrique du prospect"
+          }
+        ]
+      },
+      "Critère de réussite": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Réponse chiffrée 6m pour baies PP ; distinguer vue principale/secondaire ; ne pas appliquer H/2."
+            },
+            "plain_text": "Réponse chiffrée 6m pour baies PP ; distinguer vue principale/secondaire ; ne pas appliquer H/2."
+          }
+        ]
+      },
+      "Reproche Charline (verbatim)": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": []
+      },
+      "Fiabilité référence": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Hypothèse à valider",
+          "color": "default"
+        }
+      },
+      "Validé Charline": {
+        "id": "cb",
+        "type": "checkbox",
+        "checkbox": false
+      },
+      "Priorité": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "⭐⭐⭐⭐⭐",
+          "color": "default"
+        }
+      }
+    }
+  },
+  {
+    "id": "replay-page-7",
+    "properties": {
+      "Cas": {
+        "id": "title",
+        "type": "title",
+        "title": [
+          {
+            "type": "text",
+            "text": {
+              "content": "CH-02"
+            },
+            "plain_text": "CH-02"
+          }
+        ]
+      },
+      "Persona": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Architecte",
+          "color": "default"
+        }
+      },
+      "Question": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Je souhaite installer des volets, quelles sont les règles à respecter dans le 10e arrondissement ?"
+            },
+            "plain_text": "Je souhaite installer des volets, quelles sont les règles à respecter dans le 10e arrondissement ?"
+          }
+        ]
+      },
+      "Contexte": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Aspect extérieur. Éval Charline (Figma) — volets."
+            },
+            "plain_text": "Aspect extérieur. Éval Charline (Figma) — volets."
+          }
+        ]
+      },
+      "Type de cas": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Régression",
+          "color": "default"
+        }
+      },
+      "Type d'échec testé": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Retrieval [R]",
+          "color": "default"
+        }
+      },
+      "Famille attendue": {
+        "id": "ms",
+        "type": "multi_select",
+        "multi_select": [
+          {
+            "id": "x0",
+            "name": "Règlement",
+            "color": "default"
+          }
+        ]
+      },
+      "Articles / ressources attendus": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "UG.2.2 (aspect extérieur)"
+            },
+            "plain_text": "UG.2.2 (aspect extérieur)"
+          }
+        ]
+      },
+      "Answerable": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Oui",
+          "color": "default"
+        }
+      },
+      "Réponse attendue": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Règles d'aspect extérieur (UG.2.2) applicables aux volets/menuiseries. À reconstruire depuis le Règlement. Le run a échoué en allant chercher dans RP_EVAL/RP_CHOIX (Rapport de présentation) et a parlé de zone N et du 7e — hors sujet."
+            },
+            "plain_text": "Règles d'aspect extérieur (UG.2.2) applicables aux volets/menuiseries. À reconstruire depuis le Règlement. Le run a échoué en allant chercher dans RP_EVAL/RP_CHOIX (Rapport de présentation) et a parlé de zone N et du 7e — hors sujet."
+          }
+        ]
+      },
+      "Ressource à pointer": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "—"
+            },
+            "plain_text": "—"
+          }
+        ]
+      },
+      "Critère de réussite": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "LE cas de routing famille : trouver UG.2.2 dans le Règlement, NE PAS aller dans le Rapport de présentation. Ne pas parler de zone N ni du 7e."
+            },
+            "plain_text": "LE cas de routing famille : trouver UG.2.2 dans le Règlement, NE PAS aller dans le Rapport de présentation. Ne pas parler de zone N ni du 7e."
+          }
+        ]
+      },
+      "Reproche Charline (verbatim)": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Difficile de donner une réponse précise... le système cite RP_EVAL.pdf (zone N) et RP_CHOIX.pdf (7e, hors PLU). Ne répond pas au 10e. Nécessaire de consulter le règlement écrit."
+            },
+            "plain_text": "Difficile de donner une réponse précise... le système cite RP_EVAL.pdf (zone N) et RP_CHOIX.pdf (7e, hors PLU). Ne répond pas au 10e. Nécessaire de consulter le règlement écrit."
+          }
+        ]
+      },
+      "Fiabilité référence": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Hypothèse à valider",
+          "color": "default"
+        }
+      },
+      "Validé Charline": {
+        "id": "cb",
+        "type": "checkbox",
+        "checkbox": false
+      },
+      "Priorité": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "⭐⭐⭐⭐⭐",
+          "color": "default"
+        }
+      }
+    }
+  },
+  {
+    "id": "replay-page-8",
+    "properties": {
+      "Cas": {
+        "id": "title",
+        "type": "title",
+        "title": [
+          {
+            "type": "text",
+            "text": {
+              "content": "CH-01"
+            },
+            "plain_text": "CH-01"
+          }
+        ]
+      },
+      "Persona": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Architecte",
+          "color": "default"
+        }
+      },
+      "Question": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Je veux faire une surélévation d'un immeuble de bureau à Paris. Quelles sont les restrictions ?"
+            },
+            "plain_text": "Je veux faire une surélévation d'un immeuble de bureau à Paris. Quelles sont les restrictions ?"
+          }
+        ]
+      },
+      "Contexte": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Question ouverte, sans arrondissement ni chiffres. Éval Charline 02/07 — Q1."
+            },
+            "plain_text": "Question ouverte, sans arrondissement ni chiffres. Éval Charline 02/07 — Q1."
+          }
+        ]
+      },
+      "Type de cas": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Régression",
+          "color": "default"
+        }
+      },
+      "Type d'échec testé": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Mixte [R+S]",
+          "color": "default"
+        }
+      },
+      "Famille attendue": {
+        "id": "ms",
+        "type": "multi_select",
+        "multi_select": [
+          {
+            "id": "x0",
+            "name": "Règlement",
+            "color": "default"
+          }
+        ]
+      },
+      "Articles / ressources attendus": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "UG.3.2, UG.3.3, UG.1.4.1"
+            },
+            "plain_text": "UG.3.2, UG.3.3, UG.1.4.1"
+          }
+        ]
+      },
+      "Answerable": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Oui",
+          "color": "default"
+        }
+      },
+      "Réponse attendue": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Hauteur/gabarit (UG.3.2/3.3) + obligation de mixité fonctionnelle (UG.1.4.1 3°) au-delà de 4500m² SPE (10%, min 500m²) — seuil VALIDÉ par Charline. Secteur dérogatoire Ternes-Maillot/Palais des Congrès (validé). REJETER les inventions du run : 'surélévation doit faire 4500m²' (contresens) et '6 à 8 logements' (calcul inventé)."
+            },
+            "plain_text": "Hauteur/gabarit (UG.3.2/3.3) + obligation de mixité fonctionnelle (UG.1.4.1 3°) au-delà de 4500m² SPE (10%, min 500m²) — seuil VALIDÉ par Charline. Secteur dérogatoire Ternes-Maillot/Palais des Congrès (validé). REJETER les inventions du run : 'surélévation doit faire 4500m²' (contresens) et '6 à 8 logements' (calcul inventé)."
+          }
+        ]
+      },
+      "Ressource à pointer": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "—"
+            },
+            "plain_text": "—"
+          }
+        ]
+      },
+      "Critère de réussite": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Citer les bons articles depuis le Règlement (pas le Rapport) ; la citation active doit correspondre au contenu ; ne pas convertir '10%' en un nombre de logements inventé."
+            },
+            "plain_text": "Citer les bons articles depuis le Règlement (pas le Rapport) ; la citation active doit correspondre au contenu ; ne pas convertir '10%' en un nombre de logements inventé."
+          }
+        ]
+      },
+      "Reproche Charline (verbatim)": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Incomplète voire fausse. Pas d'explication, juste des phrases pas forcément compréhensibles. La citation active ne semble pas correspondre. (annotations : seuil 4500m² ✓, Ternes-Maillot ✓, '6-8 logements' ✗, 'surélévation 4500m²' ✗)"
+            },
+            "plain_text": "Incomplète voire fausse. Pas d'explication, juste des phrases pas forcément compréhensibles. La citation active ne semble pas correspondre. (annotations : seuil 4500m² ✓, Ternes-Maillot ✓, '6-8 logements' ✗, 'surélévation 4500m²' ✗)"
+          }
+        ]
+      },
+      "Fiabilité référence": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Validé Charline",
+          "color": "default"
+        }
+      },
+      "Validé Charline": {
+        "id": "cb",
+        "type": "checkbox",
+        "checkbox": false
+      },
+      "Priorité": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "⭐⭐⭐⭐⭐",
+          "color": "default"
+        }
+      }
+    }
+  },
+  {
+    "id": "replay-page-9",
+    "properties": {
+      "Cas": {
+        "id": "title",
+        "type": "title",
+        "title": [
+          {
+            "type": "text",
+            "text": {
+              "content": "UC-04"
+            },
+            "plain_text": "UC-04"
+          }
+        ]
+      },
+      "Persona": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Promoteur immobilier",
+          "color": "default"
+        }
+      },
+      "Question": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Vérifier si la création d'un hôtel de 40 chambres est autorisée en zone UG Paris 8e, sur une parcelle actuellement à usage de bureaux, et quelles conditions s'appliquent."
+            },
+            "plain_text": "Vérifier si la création d'un hôtel de 40 chambres est autorisée en zone UG Paris 8e, sur une parcelle actuellement à usage de bureaux, et quelles conditions s'appliquent."
+          }
+        ]
+      },
+      "Contexte": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Zone UG | Paris 8e | Hôtel 40 chambres | Parcelle en bureaux | Changement de destination | 600m²"
+            },
+            "plain_text": "Zone UG | Paris 8e | Hôtel 40 chambres | Parcelle en bureaux | Changement de destination | 600m²"
+          }
+        ]
+      },
+      "Type de cas": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Couverture",
+          "color": "default"
+        }
+      },
+      "Type d'échec testé": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Retrieval [R]",
+          "color": "default"
+        }
+      },
+      "Famille attendue": {
+        "id": "ms",
+        "type": "multi_select",
+        "multi_select": [
+          {
+            "id": "x0",
+            "name": "Règlement",
+            "color": "default"
+          }
+        ]
+      },
+      "Articles / ressources attendus": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "UG.1.3 (destinations)"
+            },
+            "plain_text": "UG.1.3 (destinations)"
+          }
+        ]
+      },
+      "Answerable": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Oui",
+          "color": "default"
+        }
+      },
+      "Réponse attendue": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "À RECONSTRUIRE. Le changement de destination bureaux→hébergement hôtelier est encadré par UG.1.3 et conditionné par le plan d'équilibre entre destinations. Rejeter les inventions de la fiche : seuil 1000m², QCA saturé, avis préfecture, 70% refus — tous non sourcés."
+            },
+            "plain_text": "À RECONSTRUIRE. Le changement de destination bureaux→hébergement hôtelier est encadré par UG.1.3 et conditionné par le plan d'équilibre entre destinations. Rejeter les inventions de la fiche : seuil 1000m², QCA saturé, avis préfecture, 70% refus — tous non sourcés."
+          }
+        ]
+      },
+      "Ressource à pointer": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Plan d'équilibre entre destinations (surcouche à vérifier)"
+            },
+            "plain_text": "Plan d'équilibre entre destinations (surcouche à vérifier)"
+          }
+        ]
+      },
+      "Critère de réussite": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Trouver UG.1.3 ; mentionner le plan d'équilibre. Ne pas fabriquer de seuil ni de statistique de refus."
+            },
+            "plain_text": "Trouver UG.1.3 ; mentionner le plan d'équilibre. Ne pas fabriquer de seuil ni de statistique de refus."
+          }
+        ]
+      },
+      "Reproche Charline (verbatim)": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": []
+      },
+      "Fiabilité référence": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Fabriqué - à refaire",
+          "color": "default"
+        }
+      },
+      "Validé Charline": {
+        "id": "cb",
+        "type": "checkbox",
+        "checkbox": false
+      },
+      "Priorité": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "⭐⭐⭐⭐",
+          "color": "default"
+        }
+      }
+    }
+  },
+  {
+    "id": "replay-page-10",
+    "properties": {
+      "Cas": {
+        "id": "title",
+        "type": "title",
+        "title": [
+          {
+            "type": "text",
+            "text": {
+              "content": "CH-04"
+            },
+            "plain_text": "CH-04"
+          }
+        ]
+      },
+      "Persona": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Architecte",
+          "color": "default"
+        }
+      },
+      "Question": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Donne moi la liste des occupations et utilisations du sol interdites."
+            },
+            "plain_text": "Donne moi la liste des occupations et utilisations du sol interdites."
+          }
+        ]
+      },
+      "Contexte": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Question ambiguë (sans zone précisée). Éval Charline 02/07 — Q6."
+            },
+            "plain_text": "Question ambiguë (sans zone précisée). Éval Charline 02/07 — Q6."
+          }
+        ]
+      },
+      "Type de cas": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Régression",
+          "color": "default"
+        }
+      },
+      "Type d'échec testé": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Synthèse [S]",
+          "color": "default"
+        }
+      },
+      "Famille attendue": {
+        "id": "ms",
+        "type": "multi_select",
+        "multi_select": [
+          {
+            "id": "x0",
+            "name": "Règlement",
+            "color": "default"
+          }
+        ]
+      },
+      "Articles / ressources attendus": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "UG.1.1, UGSU.1.1, UV.1.1, N.1.1"
+            },
+            "plain_text": "UG.1.1, UGSU.1.1, UV.1.1, N.1.1"
+          }
+        ]
+      },
+      "Answerable": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Oui",
+          "color": "default"
+        }
+      },
+      "Réponse attendue": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Question ambiguë sans zone : couvrir les interdictions par zone (UG.1.1, UGSU.1.1, UV.1.1, N.1.1) sans les mélanger, OU demander de préciser la zone (doctrine ambiguïté à trancher avec Charline). Le run a mélangé des articles de stationnement (N.7.2.1) avec les interdictions — hors sujet."
+            },
+            "plain_text": "Question ambiguë sans zone : couvrir les interdictions par zone (UG.1.1, UGSU.1.1, UV.1.1, N.1.1) sans les mélanger, OU demander de préciser la zone (doctrine ambiguïté à trancher avec Charline). Le run a mélangé des articles de stationnement (N.7.2.1) avec les interdictions — hors sujet."
+          }
+        ]
+      },
+      "Ressource à pointer": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "—"
+            },
+            "plain_text": "—"
+          }
+        ]
+      },
+      "Critère de réussite": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Ne pas produire de contenu non traçable ; ne pas mélanger stationnement (N.7.2.1) et interdictions (N.1.1) ; séparer les zones. DOCTRINE À TRANCHER : répondre toutes zones vs demander la zone."
+            },
+            "plain_text": "Ne pas produire de contenu non traçable ; ne pas mélanger stationnement (N.7.2.1) et interdictions (N.1.1) ; séparer les zones. DOCTRINE À TRANCHER : répondre toutes zones vs demander la zone."
+          }
+        ]
+      },
+      "Reproche Charline (verbatim)": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Je ne sais pas d'où il sort les trois dernières réponses. (les 3 dernières puces mélangeaient destination/stationnement N.7.2.1)"
+            },
+            "plain_text": "Je ne sais pas d'où il sort les trois dernières réponses. (les 3 dernières puces mélangeaient destination/stationnement N.7.2.1)"
+          }
+        ]
+      },
+      "Fiabilité référence": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Hypothèse à valider",
+          "color": "default"
+        }
+      },
+      "Validé Charline": {
+        "id": "cb",
+        "type": "checkbox",
+        "checkbox": false
+      },
+      "Priorité": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "⭐⭐⭐⭐",
+          "color": "default"
+        }
+      }
+    }
+  },
+  {
+    "id": "replay-page-11",
+    "properties": {
+      "Cas": {
+        "id": "title",
+        "type": "title",
+        "title": [
+          {
+            "type": "text",
+            "text": {
+              "content": "UC-05"
+            },
+            "plain_text": "UC-05"
+          }
+        ]
+      },
+      "Persona": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Architecte",
+          "color": "default"
+        }
+      },
+      "Question": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Savoir quelle proportion minimale de surface de plancher doit être affectée au logement dans un programme mixte bureaux + logements en zone UG, secteur nord-ouest de Paris."
+            },
+            "plain_text": "Savoir quelle proportion minimale de surface de plancher doit être affectée au logement dans un programme mixte bureaux + logements en zone UG, secteur nord-ouest de Paris."
+          }
+        ]
+      },
+      "Contexte": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Zone UG | Secteur nord-ouest | Mixte logements+bureaux | Neuf | Surface totale 2000m²"
+            },
+            "plain_text": "Zone UG | Secteur nord-ouest | Mixte logements+bureaux | Neuf | Surface totale 2000m²"
+          }
+        ]
+      },
+      "Type de cas": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Couverture",
+          "color": "default"
+        }
+      },
+      "Type d'échec testé": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Synthèse [S]",
+          "color": "default"
+        }
+      },
+      "Famille attendue": {
+        "id": "ms",
+        "type": "multi_select",
+        "multi_select": [
+          {
+            "id": "x0",
+            "name": "Règlement",
+            "color": "default"
+          }
+        ]
+      },
+      "Articles / ressources attendus": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "UG.1.4.1 3°"
+            },
+            "plain_text": "UG.1.4.1 3°"
+          }
+        ]
+      },
+      "Answerable": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Oui",
+          "color": "default"
+        }
+      },
+      "Réponse attendue": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Question piège (présuppose une obligation inexistante à 2000m²). La servitude de mixité fonctionnelle (UG.1.4.1 3°) ne se déclenche qu'au-delà de 4500m² SPE. À 2000m² : PAS d'obligation de mixité fonctionnelle. Au-delà du seuil : 10% habitation, min 500m². Ne pas confondre avec mixité sociale. Rejeter tout ratio type 40/60."
+            },
+            "plain_text": "Question piège (présuppose une obligation inexistante à 2000m²). La servitude de mixité fonctionnelle (UG.1.4.1 3°) ne se déclenche qu'au-delà de 4500m² SPE. À 2000m² : PAS d'obligation de mixité fonctionnelle. Au-delà du seuil : 10% habitation, min 500m². Ne pas confondre avec mixité sociale. Rejeter tout ratio type 40/60."
+          }
+        ]
+      },
+      "Ressource à pointer": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "—"
+            },
+            "plain_text": "—"
+          }
+        ]
+      },
+      "Critère de réussite": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": [
+          {
+            "type": "text",
+            "text": {
+              "content": "Répondre 'sous le seuil, pas de servitude' ; ne PAS inventer un pourcentage pour satisfaire la question."
+            },
+            "plain_text": "Répondre 'sous le seuil, pas de servitude' ; ne PAS inventer un pourcentage pour satisfaire la question."
+          }
+        ]
+      },
+      "Reproche Charline (verbatim)": {
+        "id": "rt",
+        "type": "rich_text",
+        "rich_text": []
+      },
+      "Fiabilité référence": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "Validé Charline",
+          "color": "default"
+        }
+      },
+      "Validé Charline": {
+        "id": "cb",
+        "type": "checkbox",
+        "checkbox": false
+      },
+      "Priorité": {
+        "id": "sel",
+        "type": "select",
+        "select": {
+          "id": "x",
+          "name": "⭐⭐⭐",
+          "color": "default"
+        }
+      }
+    }
+  }
+]
