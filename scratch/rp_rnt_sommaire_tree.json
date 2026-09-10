@@ -1,0 +1,339 @@
+{
+  "doc": "RP_RNT.pdf",
+  "chemin_relatif": "Ressources/PLU bioclimatique/Rapport de présentation/RP_RNT.pdf",
+  "sommaire_pages_detected": {
+    "physical_indices_0based": [
+      1
+    ],
+    "printed_page_numbers": [
+      2
+    ]
+  },
+  "numbering_rule_used": "Numbering profiles tried in order: PARTIE n (FLAT), Annexe <roman> (FLAT), <ordinal> partie (FLAT), Axe n (FLAT), a leading code + N dot-digit-groups e.g. UG.1.4/C.1/N.1.2.2 (NESTING, depth=N), a bare digit-dot chain e.g. 1/1.1/2.14 (NESTING, depth=dot-group count), a single letter or roman numeral (FLAT), an ALL-CAPS unnumbered heading (FLAT). LEVEL is relative, not absolute depth: a recurring FLAT profile jumps back to its first-occurrence level regardless of what happened in between; a NESTING profile moves by the signed depth-delta vs. its own last occurrence; an unnumbered/non-caps line inherits the previous level; first entry of the document = level 1. Header length and TOC-page range are discovered per document (title-marker search + shape-based continuation), not assumed from a fixed line count. TOC pages are read in column order (block-level x0 clustering decides 1 vs 2 columns; fragments sharing a block and a y-band are coalesced before grouping, to avoid a wide sentence or a mid-sentence number corrupting the read).",
+  "anchor_check": {
+    "sample_size": 10,
+    "match_rate": 0.9,
+    "dominant_offset_detected": 1,
+    "offset_votes": {
+      "1": 9
+    },
+    "results": [
+      {
+        "numero": "3.4",
+        "titre": "Paysages et patrimoine",
+        "page_debut": 38,
+        "naive_physical_index": 37,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": "3.5",
+        "titre": "Santé environnementale des populations",
+        "page_debut": 43,
+        "naive_physical_index": 42,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": "3.1",
+        "titre": "Incidences sur Natura 2000",
+        "page_debut": 50,
+        "naive_physical_index": 49,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": "2.1.2",
+        "titre": "Le contenu du PLU",
+        "page_debut": 7,
+        "naive_physical_index": 6,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": "4",
+        "titre": "Mesures d’évitement, de réduction et de compensation des incidences notables du projet de PLU révisé sur l’environnement",
+        "page_debut": 54,
+        "naive_physical_index": 53,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": "2.2.1",
+        "titre": "Adaptation de la ville au changement climatique, biodiversité",
+        "page_debut": 9,
+        "naive_physical_index": 8,
+        "matched": false,
+        "offset_detected": null
+      },
+      {
+        "numero": "2.2.3",
+        "titre": "Le quartier du quart d’heure",
+        "page_debut": 12,
+        "naive_physical_index": 11,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": "4.2",
+        "titre": "Bilan des effets du PLU et incidences résiduelles de sa mise en œuvre",
+        "page_debut": 60,
+        "naive_physical_index": 59,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": "5",
+        "titre": "Articulation avec les documents cadre",
+        "page_debut": 67,
+        "naive_physical_index": 66,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": "6",
+        "titre": "Suivi des effets du PLU",
+        "page_debut": 68,
+        "naive_physical_index": 67,
+        "matched": true,
+        "offset_detected": 1
+      }
+    ]
+  },
+  "warnings": [
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='3.4' titre='Paysages et patrimoine' page_debut=38, next entry starts on page 2 (numero='1'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='3.5' titre='Santé environnementale des populations' page_debut=43, next entry starts on page 6 (numero='2'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='3.1' titre='Incidences sur Natura 2000' page_debut=50, next entry starts on page 6 (numero='2.1'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='4' titre='Mesures d’évitement, de réduction et de compensation des incidences notables du projet de PLU révisé sur l’environnement' page_debut=54, next entry starts on page 20 (numero='3'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='4.1' titre='Bilan des mesures intégrées au projet de PLU révisé' page_debut=54, next entry starts on page 9 (numero='2.2'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='4.3' titre='Mesures d’accompagnement au titre des compétences de la Ville autres que l’urbanisme réglementaire' page_debut=62, next entry starts on page 20 (numero='3'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Last entry of its branch, page_fin not reliably derivable — set to doc.page_count (73): numero='6' titre='Suivi des effets du PLU' page_debut=68",
+    "Last entry of its branch, page_fin not reliably derivable — set to doc.page_count (73): numero='3.3' titre='Biodiversité et écosystèmes' page_debut=33",
+    "Anchor check MISMATCH: numero='2.2.1' titre='Adaptation de la ville au changement climatique, biodiversité' page_debut=9 — title not found within +/-3 pages of naive physical index 8"
+  ],
+  "arbre": [
+    {
+      "numero": "3.4",
+      "titre": "Paysages et patrimoine",
+      "niveau": 1,
+      "page_debut": 38,
+      "page_fin": 38,
+      "nb_pages": 1,
+      "enfants": []
+    },
+    {
+      "numero": "1",
+      "titre": "Méthodes",
+      "niveau": 0,
+      "page_debut": 2,
+      "page_fin": 5,
+      "nb_pages": 4,
+      "enfants": [
+        {
+          "numero": "3.5",
+          "titre": "Santé environnementale des populations",
+          "niveau": 1,
+          "page_debut": 43,
+          "page_fin": 43,
+          "nb_pages": 1,
+          "enfants": []
+        }
+      ]
+    },
+    {
+      "numero": "2",
+      "titre": "Le PLU « bioclimatique »",
+      "niveau": 0,
+      "page_debut": 6,
+      "page_fin": 53,
+      "nb_pages": 48,
+      "enfants": [
+        {
+          "numero": "3.1",
+          "titre": "Incidences sur Natura 2000",
+          "niveau": 1,
+          "page_debut": 50,
+          "page_fin": 50,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": "2.1",
+          "titre": "Présentation générale du PLU",
+          "niveau": 1,
+          "page_debut": 6,
+          "page_fin": 53,
+          "nb_pages": 48,
+          "enfants": [
+            {
+              "numero": "2.1.1",
+              "titre": "Vers un urbanisme bioclimatique",
+              "niveau": 2,
+              "page_debut": 6,
+              "page_fin": 6,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "2.1.2",
+              "titre": "Le contenu du PLU",
+              "niveau": 2,
+              "page_debut": 7,
+              "page_fin": 7,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "2.1.3",
+              "titre": "Valoriser les externalités positives et mobiliser les opérations d’aménagement",
+              "niveau": 2,
+              "page_debut": 8,
+              "page_fin": 53,
+              "nb_pages": 46,
+              "enfants": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": "4",
+      "titre": "Mesures d’évitement, de réduction et de compensation des incidences notables du projet de PLU révisé sur l’environnement",
+      "niveau": 0,
+      "page_debut": 54,
+      "page_fin": 54,
+      "nb_pages": 1,
+      "enfants": [
+        {
+          "numero": "4.1",
+          "titre": "Bilan des mesures intégrées au projet de PLU révisé",
+          "niveau": 1,
+          "page_debut": 54,
+          "page_fin": 54,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": "2.2",
+          "titre": "Les thématiques spécifiques du PLU",
+          "niveau": 1,
+          "page_debut": 9,
+          "page_fin": 59,
+          "nb_pages": 51,
+          "enfants": [
+            {
+              "numero": "2.2.1",
+              "titre": "Adaptation de la ville au changement climatique, biodiversité",
+              "niveau": 2,
+              "page_debut": 9,
+              "page_fin": 9,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "2.2.2",
+              "titre": "Le logement et l’habitat",
+              "niveau": 2,
+              "page_debut": 10,
+              "page_fin": 11,
+              "nb_pages": 2,
+              "enfants": []
+            },
+            {
+              "numero": "2.2.3",
+              "titre": "Le quartier du quart d’heure",
+              "niveau": 2,
+              "page_debut": 12,
+              "page_fin": 14,
+              "nb_pages": 3,
+              "enfants": []
+            },
+            {
+              "numero": "2.2.4",
+              "titre": "Patrimoine, formes urbaines et paysage",
+              "niveau": 2,
+              "page_debut": 15,
+              "page_fin": 59,
+              "nb_pages": 45,
+              "enfants": []
+            }
+          ]
+        },
+        {
+          "numero": "4.2",
+          "titre": "Bilan des effets du PLU et incidences résiduelles de sa mise en œuvre",
+          "niveau": 1,
+          "page_debut": 60,
+          "page_fin": 61,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": "4.3",
+          "titre": "Mesures d’accompagnement au titre des compétences de la Ville autres que l’urbanisme réglementaire",
+          "niveau": 1,
+          "page_debut": 62,
+          "page_fin": 62,
+          "nb_pages": 1,
+          "enfants": []
+        }
+      ]
+    },
+    {
+      "numero": "3",
+      "titre": "Analyse de l’état initial de l’environnement et des effets du PLU",
+      "niveau": 0,
+      "page_debut": 20,
+      "page_fin": 66,
+      "nb_pages": 47,
+      "enfants": []
+    },
+    {
+      "numero": "5",
+      "titre": "Articulation avec les documents cadre",
+      "niveau": 0,
+      "page_debut": 67,
+      "page_fin": 67,
+      "nb_pages": 1,
+      "enfants": [
+        {
+          "numero": "3.1",
+          "titre": "Lutte contre le changement climatique",
+          "niveau": 1,
+          "page_debut": 21,
+          "page_fin": 67,
+          "nb_pages": 47,
+          "enfants": []
+        }
+      ]
+    },
+    {
+      "numero": "6",
+      "titre": "Suivi des effets du PLU",
+      "niveau": 0,
+      "page_debut": 68,
+      "page_fin": 73,
+      "nb_pages": 6,
+      "enfants": [
+        {
+          "numero": "3.2",
+          "titre": "Préservation des ressources naturelles",
+          "niveau": 1,
+          "page_debut": 28,
+          "page_fin": 32,
+          "nb_pages": 5,
+          "enfants": []
+        },
+        {
+          "numero": "3.3",
+          "titre": "Biodiversité et écosystèmes",
+          "niveau": 1,
+          "page_debut": 33,
+          "page_fin": 73,
+          "nb_pages": 41,
+          "enfants": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "doc": "RP_PREAMBULE.pdf",
+  "chemin_relatif": "Ressources/PLU bioclimatique/Rapport de présentation/RP_PREAMBULE.pdf",
+  "sommaire_pages_detected": {
+    "physical_indices_0based": [],
+    "printed_page_numbers": []
+  },
+  "numbering_rule_used": "n/a — aucun sommaire détecté",
+  "anchor_check": {
+    "sample_size": 0,
+    "match_rate": null,
+    "dominant_offset_detected": null,
+    "offset_votes": {},
+    "results": []
+  },
+  "warnings": [
+    "aucun sommaire détecté dans ce document"
+  ],
+  "arbre": []
+}

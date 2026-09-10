@@ -1,0 +1,1251 @@
+{
+  "doc": "RP_EIE.pdf",
+  "chemin_relatif": "Ressources/PLU bioclimatique/Rapport de présentation/RP_EIE.pdf",
+  "sommaire_pages_detected": {
+    "physical_indices_0based": [
+      1,
+      2,
+      3
+    ],
+    "printed_page_numbers": [
+      2,
+      3,
+      4
+    ]
+  },
+  "numbering_rule_used": "Numbering profiles tried in order: PARTIE n (FLAT), Annexe <roman> (FLAT), <ordinal> partie (FLAT), Axe n (FLAT), a leading code + N dot-digit-groups e.g. UG.1.4/C.1/N.1.2.2 (NESTING, depth=N), a bare digit-dot chain e.g. 1/1.1/2.14 (NESTING, depth=dot-group count), a single letter or roman numeral (FLAT), an ALL-CAPS unnumbered heading (FLAT). LEVEL is relative, not absolute depth: a recurring FLAT profile jumps back to its first-occurrence level regardless of what happened in between; a NESTING profile moves by the signed depth-delta vs. its own last occurrence; an unnumbered/non-caps line inherits the previous level; first entry of the document = level 1. Header length and TOC-page range are discovered per document (title-marker search + shape-based continuation), not assumed from a fixed line count. TOC pages are read in column order (block-level x0 clustering decides 1 vs 2 columns; fragments sharing a block and a y-band are coalesced before grouping, to avoid a wide sentence or a mid-sentence number corrupting the read).",
+  "anchor_check": {
+    "sample_size": 10,
+    "match_rate": 1.0,
+    "dominant_offset_detected": 1,
+    "offset_votes": {
+      "-2": 1,
+      "1": 9
+    },
+    "results": [
+      {
+        "numero": "1",
+        "titre": "Le milieu physique",
+        "page_debut": 4,
+        "naive_physical_index": 3,
+        "matched": true,
+        "offset_detected": -2
+      },
+      {
+        "numero": "2",
+        "titre": "L’environnement naturel et paysager",
+        "page_debut": 31,
+        "naive_physical_index": 30,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": "2.2.7",
+        "titre": "L’essor d’un nouveau paysage urbain",
+        "page_debut": 92,
+        "naive_physical_index": 91,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": "3.1",
+        "titre": "L’alimentation en eau",
+        "page_debut": 152,
+        "naive_physical_index": 151,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": "3.3.3",
+        "titre": "Les réseaux d’énergie",
+        "page_debut": 182,
+        "naive_physical_index": 181,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": "4.1.1",
+        "titre": "Les risques naturels",
+        "page_debut": 228,
+        "naive_physical_index": 227,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": "4.4.3",
+        "titre": "Stratégie d’Adaptation face au changement climatique",
+        "page_debut": 289,
+        "naive_physical_index": 288,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": "5.2.4",
+        "titre": "L’alimentation",
+        "page_debut": 305,
+        "naive_physical_index": 304,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": "5.5.3",
+        "titre": "La logistique urbaine",
+        "page_debut": 324,
+        "naive_physical_index": 323,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": "6.6",
+        "titre": "OAP Paris Rive Gauche (13e)",
+        "page_debut": 350,
+        "naive_physical_index": 349,
+        "matched": true,
+        "offset_detected": 1
+      }
+    ]
+  },
+  "warnings": [
+    "Entry with no trailing page number found, skipped: \"RAPPORT DE PRÉSENTATION ÉTAT INITIAL DE L'ENVIRONNEMENT\"",
+    "Entry with no trailing page number found, skipped: \"RAPPORT DE PRÉSENTATION ÉTAT INITIAL DE L'ENVIRONNEMENT\"",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tables des illustrations' page_debut=379",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Figures' page_debut=379",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Cartes' page_debut=383",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableaux' page_debut=386",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Photos' page_debut=387",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='3.1.2' titre='La production et la distribution d’eau potable' page_debut=154, next entry starts on page 154 (numero='3.1.3'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='3.2.1' titre='Organisation' page_debut=157, next entry starts on page 157 (numero='3.2.2'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='5.1.4' titre='L’évolution des tempêtes' page_debut=303, next entry starts on page 303 (numero='5.2'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='5.2.3' titre='L’eau' page_debut=305, next entry starts on page 305 (numero='5.2.4'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='5.3.4' titre='La santé publique' page_debut=311, next entry starts on page 311 (numero='5.3.5'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='5.6.3' titre='La capacité d’accueil de la Ville de Paris' page_debut=328, next entry starts on page 328 (numero='5.6.4'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Last entry of its branch, page_fin not reliably derivable — set to doc.page_count (388): numero='6' titre='Zoom sur les périmètres des OAP sectorielles' page_debut=330",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero=None titre='Tables des illustrations' page_debut=379, next entry starts on page 379 (numero=None). page_fin/nb_pages set to a 1-page lower bound.",
+    "Last entry of its branch, page_fin not reliably derivable — set to doc.page_count (388): numero=None titre='Photos' page_debut=387"
+  ],
+  "arbre": [
+    {
+      "numero": "1",
+      "titre": "Le milieu physique",
+      "niveau": 1,
+      "page_debut": 4,
+      "page_fin": 30,
+      "nb_pages": 27,
+      "enfants": [
+        {
+          "numero": "1.1",
+          "titre": "Le relief",
+          "niveau": 2,
+          "page_debut": 4,
+          "page_fin": 7,
+          "nb_pages": 4,
+          "enfants": []
+        },
+        {
+          "numero": "1.2",
+          "titre": "Le sous-sol et les sols",
+          "niveau": 2,
+          "page_debut": 8,
+          "page_fin": 12,
+          "nb_pages": 5,
+          "enfants": []
+        },
+        {
+          "numero": "1.3",
+          "titre": "L’hydrologie et l’hydrogéologie",
+          "niveau": 2,
+          "page_debut": 13,
+          "page_fin": 20,
+          "nb_pages": 8,
+          "enfants": [
+            {
+              "numero": "1.3.1",
+              "titre": "Les eaux superficielles",
+              "niveau": 3,
+              "page_debut": 13,
+              "page_fin": 17,
+              "nb_pages": 5,
+              "enfants": []
+            },
+            {
+              "numero": "1.3.2",
+              "titre": "Les masses d’eau souterraines",
+              "niveau": 3,
+              "page_debut": 18,
+              "page_fin": 20,
+              "nb_pages": 3,
+              "enfants": []
+            }
+          ]
+        },
+        {
+          "numero": "1.4",
+          "titre": "Le climat et les enjeux de réchauffement climatique",
+          "niveau": 2,
+          "page_debut": 21,
+          "page_fin": 29,
+          "nb_pages": 9,
+          "enfants": [
+            {
+              "numero": "1.4.1",
+              "titre": "Le climat actuel",
+              "niveau": 3,
+              "page_debut": 21,
+              "page_fin": 23,
+              "nb_pages": 3,
+              "enfants": []
+            },
+            {
+              "numero": "1.4.2",
+              "titre": "Les effets du changement climatique",
+              "niveau": 3,
+              "page_debut": 24,
+              "page_fin": 27,
+              "nb_pages": 4,
+              "enfants": []
+            },
+            {
+              "numero": "1.4.3",
+              "titre": "Perspectives climatiques à horizon 2100",
+              "niveau": 3,
+              "page_debut": 28,
+              "page_fin": 28,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "1.4.4",
+              "titre": "Contribution du territoire parisien aux émissions de gaz à effet de serre",
+              "niveau": 3,
+              "page_debut": 29,
+              "page_fin": 29,
+              "nb_pages": 1,
+              "enfants": []
+            }
+          ]
+        },
+        {
+          "numero": "1.5",
+          "titre": "Enjeux liés aux milieux physiques",
+          "niveau": 2,
+          "page_debut": 30,
+          "page_fin": 30,
+          "nb_pages": 1,
+          "enfants": []
+        }
+      ]
+    },
+    {
+      "numero": "2",
+      "titre": "L’environnement naturel et paysager",
+      "niveau": 1,
+      "page_debut": 31,
+      "page_fin": 151,
+      "nb_pages": 121,
+      "enfants": [
+        {
+          "numero": "2.1",
+          "titre": "L’occupation du sol",
+          "niveau": 2,
+          "page_debut": 31,
+          "page_fin": 49,
+          "nb_pages": 19,
+          "enfants": [
+            {
+              "numero": "2.1.1",
+              "titre": "La nature des sols",
+              "niveau": 3,
+              "page_debut": 31,
+              "page_fin": 36,
+              "nb_pages": 6,
+              "enfants": []
+            },
+            {
+              "numero": "2.1.2",
+              "titre": "Les usages des sols",
+              "niveau": 3,
+              "page_debut": 37,
+              "page_fin": 40,
+              "nb_pages": 4,
+              "enfants": []
+            },
+            {
+              "numero": "2.1.3",
+              "titre": "Zooms thématiques",
+              "niveau": 3,
+              "page_debut": 41,
+              "page_fin": 49,
+              "nb_pages": 9,
+              "enfants": []
+            }
+          ]
+        },
+        {
+          "numero": "2.2",
+          "titre": "Les paysages naturels et urbains",
+          "niveau": 2,
+          "page_debut": 50,
+          "page_fin": 97,
+          "nb_pages": 48,
+          "enfants": [
+            {
+              "numero": "2.2.1",
+              "titre": "Des grandes composantes paysagères métropolitaines aux petites unités parisiennes",
+              "niveau": 3,
+              "page_debut": 50,
+              "page_fin": 59,
+              "nb_pages": 10,
+              "enfants": []
+            },
+            {
+              "numero": "2.2.2",
+              "titre": "Paris au cœur du paysage métropolitain",
+              "niveau": 3,
+              "page_debut": 60,
+              "page_fin": 65,
+              "nb_pages": 6,
+              "enfants": []
+            },
+            {
+              "numero": "2.2.3",
+              "titre": "Les points d’accroche du paysage parisien",
+              "niveau": 3,
+              "page_debut": 66,
+              "page_fin": 75,
+              "nb_pages": 10,
+              "enfants": []
+            },
+            {
+              "numero": "2.2.4",
+              "titre": "L’offre de nature du territoire",
+              "niveau": 3,
+              "page_debut": 76,
+              "page_fin": 83,
+              "nb_pages": 8,
+              "enfants": []
+            },
+            {
+              "numero": "2.2.5",
+              "titre": "Le patrimoine culturel de Paris ou l’héritage architectural du bâti",
+              "niveau": 3,
+              "page_debut": 84,
+              "page_fin": 86,
+              "nb_pages": 3,
+              "enfants": []
+            },
+            {
+              "numero": "2.2.6",
+              "titre": "Un patrimoine exceptionnel largement reconnu et protégé",
+              "niveau": 3,
+              "page_debut": 87,
+              "page_fin": 91,
+              "nb_pages": 5,
+              "enfants": []
+            },
+            {
+              "numero": "2.2.7",
+              "titre": "L’essor d’un nouveau paysage urbain",
+              "niveau": 3,
+              "page_debut": 92,
+              "page_fin": 97,
+              "nb_pages": 6,
+              "enfants": []
+            }
+          ]
+        },
+        {
+          "numero": "2.3",
+          "titre": "Un système de parcs et de promenades publics qui continue de s’enrichir",
+          "niveau": 2,
+          "page_debut": 98,
+          "page_fin": 109,
+          "nb_pages": 12,
+          "enfants": [
+            {
+              "numero": "2.3.1",
+              "titre": "Un patrimoine marqué par une histoire forte et des évolutions récentes",
+              "niveau": 3,
+              "page_debut": 98,
+              "page_fin": 98,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "2.3.2",
+              "titre": "Une bonne desserte mais inégale et de taille parfois limitée",
+              "niveau": 3,
+              "page_debut": 99,
+              "page_fin": 101,
+              "nb_pages": 3,
+              "enfants": []
+            },
+            {
+              "numero": "2.3.3",
+              "titre": "L’animal domestique ou commensal dans l’espace public",
+              "niveau": 3,
+              "page_debut": 102,
+              "page_fin": 103,
+              "nb_pages": 2,
+              "enfants": []
+            },
+            {
+              "numero": "2.3.4",
+              "titre": "Les actions récentes de renforcement de la végétation sur l’espace public et dans les équipements ouverts au public",
+              "niveau": 3,
+              "page_debut": 104,
+              "page_fin": 109,
+              "nb_pages": 6,
+              "enfants": []
+            }
+          ]
+        },
+        {
+          "numero": "2.4",
+          "titre": "Le patrimoine naturel",
+          "niveau": 2,
+          "page_debut": 110,
+          "page_fin": 148,
+          "nb_pages": 39,
+          "enfants": [
+            {
+              "numero": "2.4.1",
+              "titre": "Les zonages officiels d’inventaire et de protection des milieux naturels",
+              "niveau": 3,
+              "page_debut": 110,
+              "page_fin": 112,
+              "nb_pages": 3,
+              "enfants": []
+            },
+            {
+              "numero": "2.4.2",
+              "titre": "Les continuités écologiques régionales",
+              "niveau": 3,
+              "page_debut": 113,
+              "page_fin": 117,
+              "nb_pages": 5,
+              "enfants": []
+            },
+            {
+              "numero": "2.4.3",
+              "titre": "Les Chemins de la Nature",
+              "niveau": 3,
+              "page_debut": 118,
+              "page_fin": 148,
+              "nb_pages": 31,
+              "enfants": []
+            }
+          ]
+        },
+        {
+          "numero": "2.5",
+          "titre": "Enjeux liés à la nature et aux paysages",
+          "niveau": 2,
+          "page_debut": 149,
+          "page_fin": 151,
+          "nb_pages": 3,
+          "enfants": []
+        }
+      ]
+    },
+    {
+      "numero": "3",
+      "titre": "L’environnement urbain",
+      "niveau": 1,
+      "page_debut": 152,
+      "page_fin": 227,
+      "nb_pages": 76,
+      "enfants": [
+        {
+          "numero": "3.1",
+          "titre": "L’alimentation en eau",
+          "niveau": 2,
+          "page_debut": 152,
+          "page_fin": 156,
+          "nb_pages": 5,
+          "enfants": [
+            {
+              "numero": "3.1.1",
+              "titre": "La ressource en eau brute",
+              "niveau": 3,
+              "page_debut": 152,
+              "page_fin": 153,
+              "nb_pages": 2,
+              "enfants": []
+            },
+            {
+              "numero": "3.1.2",
+              "titre": "La production et la distribution d’eau potable",
+              "niveau": 3,
+              "page_debut": 154,
+              "page_fin": 154,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "3.1.3",
+              "titre": "La qualité de l’eau potable distribuée",
+              "niveau": 3,
+              "page_debut": 154,
+              "page_fin": 155,
+              "nb_pages": 2,
+              "enfants": []
+            },
+            {
+              "numero": "3.1.4",
+              "titre": "La consommation d’eau potable",
+              "niveau": 3,
+              "page_debut": 156,
+              "page_fin": 156,
+              "nb_pages": 1,
+              "enfants": []
+            }
+          ]
+        },
+        {
+          "numero": "3.2",
+          "titre": "L’assainissement",
+          "niveau": 2,
+          "page_debut": 157,
+          "page_fin": 161,
+          "nb_pages": 5,
+          "enfants": [
+            {
+              "numero": "3.2.1",
+              "titre": "Organisation",
+              "niveau": 3,
+              "page_debut": 157,
+              "page_fin": 157,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "3.2.2",
+              "titre": "Le réseau parisien",
+              "niveau": 3,
+              "page_debut": 157,
+              "page_fin": 157,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "3.2.3",
+              "titre": "Les performances des réseaux",
+              "niveau": 3,
+              "page_debut": 158,
+              "page_fin": 161,
+              "nb_pages": 4,
+              "enfants": []
+            }
+          ]
+        },
+        {
+          "numero": "3.3",
+          "titre": "L’énergie",
+          "niveau": 2,
+          "page_debut": 162,
+          "page_fin": 205,
+          "nb_pages": 44,
+          "enfants": [
+            {
+              "numero": "3.3.1",
+              "titre": "La consommation d’énergie du parc bâti",
+              "niveau": 3,
+              "page_debut": 164,
+              "page_fin": 174,
+              "nb_pages": 11,
+              "enfants": []
+            },
+            {
+              "numero": "3.3.2",
+              "titre": "La consommation d’énergie liée aux déplacements",
+              "niveau": 3,
+              "page_debut": 175,
+              "page_fin": 181,
+              "nb_pages": 7,
+              "enfants": []
+            },
+            {
+              "numero": "3.3.3",
+              "titre": "Les réseaux d’énergie",
+              "niveau": 3,
+              "page_debut": 182,
+              "page_fin": 190,
+              "nb_pages": 9,
+              "enfants": []
+            },
+            {
+              "numero": "3.3.4",
+              "titre": "Le potentiel d’économie lié à la rénovation énergétique du bâti",
+              "niveau": 3,
+              "page_debut": 191,
+              "page_fin": 196,
+              "nb_pages": 6,
+              "enfants": []
+            },
+            {
+              "numero": "3.3.5",
+              "titre": "Le potentiel de production d’énergies renouvelables",
+              "niveau": 3,
+              "page_debut": 197,
+              "page_fin": 205,
+              "nb_pages": 9,
+              "enfants": []
+            }
+          ]
+        },
+        {
+          "numero": "3.4",
+          "titre": "Objectif Carbone",
+          "niveau": 2,
+          "page_debut": 206,
+          "page_fin": 208,
+          "nb_pages": 3,
+          "enfants": []
+        },
+        {
+          "numero": "3.5",
+          "titre": "Flux de matériaux et économie circulaire",
+          "niveau": 2,
+          "page_debut": 209,
+          "page_fin": 222,
+          "nb_pages": 14,
+          "enfants": [
+            {
+              "numero": "3.5.1",
+              "titre": "L’alimentation durable",
+              "niveau": 3,
+              "page_debut": 209,
+              "page_fin": 216,
+              "nb_pages": 8,
+              "enfants": []
+            },
+            {
+              "numero": "3.5.2",
+              "titre": "La gestion des déchets",
+              "niveau": 3,
+              "page_debut": 217,
+              "page_fin": 219,
+              "nb_pages": 3,
+              "enfants": []
+            },
+            {
+              "numero": "3.5.3",
+              "titre": "Le stock de matériaux / Gisement",
+              "niveau": 3,
+              "page_debut": 220,
+              "page_fin": 220,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "3.5.4",
+              "titre": "La recherche de développement de l’économie circulaire",
+              "niveau": 3,
+              "page_debut": 221,
+              "page_fin": 222,
+              "nb_pages": 2,
+              "enfants": []
+            }
+          ]
+        },
+        {
+          "numero": "3.6",
+          "titre": "Les réseaux de communication numérique",
+          "niveau": 2,
+          "page_debut": 223,
+          "page_fin": 225,
+          "nb_pages": 3,
+          "enfants": []
+        },
+        {
+          "numero": "3.7",
+          "titre": "Enjeux liés à l’environnement urbain",
+          "niveau": 2,
+          "page_debut": 226,
+          "page_fin": 227,
+          "nb_pages": 2,
+          "enfants": []
+        }
+      ]
+    },
+    {
+      "numero": "4",
+      "titre": "La santé environnementale des populations",
+      "niveau": 1,
+      "page_debut": 228,
+      "page_fin": 293,
+      "nb_pages": 66,
+      "enfants": [
+        {
+          "numero": "4.1",
+          "titre": "Les risques",
+          "niveau": 2,
+          "page_debut": 228,
+          "page_fin": 248,
+          "nb_pages": 21,
+          "enfants": [
+            {
+              "numero": "4.1.1",
+              "titre": "Les risques naturels",
+              "niveau": 3,
+              "page_debut": 228,
+              "page_fin": 246,
+              "nb_pages": 19,
+              "enfants": []
+            },
+            {
+              "numero": "4.1.2",
+              "titre": "Les risques technologiques",
+              "niveau": 3,
+              "page_debut": 247,
+              "page_fin": 248,
+              "nb_pages": 2,
+              "enfants": []
+            }
+          ]
+        },
+        {
+          "numero": "4.2",
+          "titre": "Les pollutions",
+          "niveau": 2,
+          "page_debut": 249,
+          "page_fin": 263,
+          "nb_pages": 15,
+          "enfants": [
+            {
+              "numero": "4.2.1",
+              "titre": "La pollution des sols",
+              "niveau": 3,
+              "page_debut": 249,
+              "page_fin": 251,
+              "nb_pages": 3,
+              "enfants": []
+            },
+            {
+              "numero": "4.2.2",
+              "titre": "La pollution de l’air",
+              "niveau": 3,
+              "page_debut": 252,
+              "page_fin": 261,
+              "nb_pages": 10,
+              "enfants": []
+            },
+            {
+              "numero": "4.2.3",
+              "titre": "La pollution lumineuse",
+              "niveau": 3,
+              "page_debut": 262,
+              "page_fin": 263,
+              "nb_pages": 2,
+              "enfants": []
+            }
+          ]
+        },
+        {
+          "numero": "4.3",
+          "titre": "Les nuisances",
+          "niveau": 2,
+          "page_debut": 264,
+          "page_fin": 279,
+          "nb_pages": 16,
+          "enfants": [
+            {
+              "numero": "4.3.1",
+              "titre": "Les nuisances sonores",
+              "niveau": 3,
+              "page_debut": 264,
+              "page_fin": 277,
+              "nb_pages": 14,
+              "enfants": []
+            },
+            {
+              "numero": "4.3.2",
+              "titre": "Les nuisances électromagnétiques",
+              "niveau": 3,
+              "page_debut": 278,
+              "page_fin": 279,
+              "nb_pages": 2,
+              "enfants": []
+            }
+          ]
+        },
+        {
+          "numero": "4.4",
+          "titre": "Les îlots de chaleur urbains (ICU)",
+          "niveau": 2,
+          "page_debut": 280,
+          "page_fin": 291,
+          "nb_pages": 12,
+          "enfants": [
+            {
+              "numero": "4.4.1",
+              "titre": "L’ICU à Paris",
+              "niveau": 3,
+              "page_debut": 280,
+              "page_fin": 281,
+              "nb_pages": 2,
+              "enfants": []
+            },
+            {
+              "numero": "4.4.2",
+              "titre": "ICU et tissus urbains",
+              "niveau": 3,
+              "page_debut": 282,
+              "page_fin": 288,
+              "nb_pages": 7,
+              "enfants": []
+            },
+            {
+              "numero": "4.4.3",
+              "titre": "Stratégie d’Adaptation face au changement climatique",
+              "niveau": 3,
+              "page_debut": 289,
+              "page_fin": 291,
+              "nb_pages": 3,
+              "enfants": []
+            }
+          ]
+        },
+        {
+          "numero": "4.5",
+          "titre": "Enjeux liés à la santé",
+          "niveau": 2,
+          "page_debut": 292,
+          "page_fin": 293,
+          "nb_pages": 2,
+          "enfants": []
+        }
+      ]
+    },
+    {
+      "numero": "5",
+      "titre": "La vulnérabilité du territoire parisien face aux changements climatiques",
+      "niveau": 1,
+      "page_debut": 294,
+      "page_fin": 329,
+      "nb_pages": 36,
+      "enfants": [
+        {
+          "numero": "5.1",
+          "titre": "Les perspectives d’évolution du climat",
+          "niveau": 2,
+          "page_debut": 294,
+          "page_fin": 302,
+          "nb_pages": 9,
+          "enfants": [
+            {
+              "numero": "5.1.1",
+              "titre": "L’évolution des aléas liés aux températures",
+              "niveau": 3,
+              "page_debut": 294,
+              "page_fin": 298,
+              "nb_pages": 5,
+              "enfants": []
+            },
+            {
+              "numero": "5.1.2",
+              "titre": "Les évolutions des aléas liés aux précipitations",
+              "niveau": 3,
+              "page_debut": 299,
+              "page_fin": 301,
+              "nb_pages": 3,
+              "enfants": []
+            },
+            {
+              "numero": "5.1.3",
+              "titre": "L’évolution des aléas liés aux mouvements de terrain",
+              "niveau": 3,
+              "page_debut": 302,
+              "page_fin": 302,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "5.1.4",
+              "titre": "L’évolution des tempêtes",
+              "niveau": 3,
+              "page_debut": 303,
+              "page_fin": 303,
+              "nb_pages": 1,
+              "enfants": []
+            }
+          ]
+        },
+        {
+          "numero": "5.2",
+          "titre": "Les perspectives d’évolution des ressources",
+          "niveau": 2,
+          "page_debut": 303,
+          "page_fin": 306,
+          "nb_pages": 4,
+          "enfants": [
+            {
+              "numero": "5.2.1",
+              "titre": "L’air",
+              "niveau": 3,
+              "page_debut": 303,
+              "page_fin": 303,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "5.2.2",
+              "titre": "L’énergie",
+              "niveau": 3,
+              "page_debut": 304,
+              "page_fin": 304,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "5.2.3",
+              "titre": "L’eau",
+              "niveau": 3,
+              "page_debut": 305,
+              "page_fin": 305,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "5.2.4",
+              "titre": "L’alimentation",
+              "niveau": 3,
+              "page_debut": 305,
+              "page_fin": 305,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "5.2.5",
+              "titre": "La biodiversité",
+              "niveau": 3,
+              "page_debut": 306,
+              "page_fin": 306,
+              "nb_pages": 1,
+              "enfants": []
+            }
+          ]
+        },
+        {
+          "numero": "5.3",
+          "titre": "Les perspectives d’évolution des risques",
+          "niveau": 2,
+          "page_debut": 307,
+          "page_fin": 312,
+          "nb_pages": 6,
+          "enfants": [
+            {
+              "numero": "5.3.1",
+              "titre": "Les réseaux de distribution énergétique",
+              "niveau": 3,
+              "page_debut": 307,
+              "page_fin": 307,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "5.3.2",
+              "titre": "Le cycle urbain de l’eau",
+              "niveau": 3,
+              "page_debut": 308,
+              "page_fin": 308,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "5.3.3",
+              "titre": "Le cadre urbain",
+              "niveau": 3,
+              "page_debut": 309,
+              "page_fin": 310,
+              "nb_pages": 2,
+              "enfants": []
+            },
+            {
+              "numero": "5.3.4",
+              "titre": "La santé publique",
+              "niveau": 3,
+              "page_debut": 311,
+              "page_fin": 311,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "5.3.5",
+              "titre": "L’attractivité économique et sociale",
+              "niveau": 3,
+              "page_debut": 311,
+              "page_fin": 312,
+              "nb_pages": 2,
+              "enfants": []
+            }
+          ]
+        },
+        {
+          "numero": "5.4",
+          "titre": "Les perspectives d’évolution des émissions de carbone",
+          "niveau": 2,
+          "page_debut": 313,
+          "page_fin": 314,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": "5.5",
+          "titre": "Les perspectives d’évolution du système de déplacement",
+          "niveau": 2,
+          "page_debut": 315,
+          "page_fin": 325,
+          "nb_pages": 11,
+          "enfants": [
+            {
+              "numero": "5.5.1",
+              "titre": "Les mobilités",
+              "niveau": 3,
+              "page_debut": 315,
+              "page_fin": 321,
+              "nb_pages": 7,
+              "enfants": []
+            },
+            {
+              "numero": "5.5.2",
+              "titre": "Le stationnement",
+              "niveau": 3,
+              "page_debut": 322,
+              "page_fin": 323,
+              "nb_pages": 2,
+              "enfants": []
+            },
+            {
+              "numero": "5.5.3",
+              "titre": "La logistique urbaine",
+              "niveau": 3,
+              "page_debut": 324,
+              "page_fin": 325,
+              "nb_pages": 2,
+              "enfants": []
+            }
+          ]
+        },
+        {
+          "numero": "5.6",
+          "titre": "Focus sur les migrations climatiques",
+          "niveau": 2,
+          "page_debut": 326,
+          "page_fin": 329,
+          "nb_pages": 4,
+          "enfants": [
+            {
+              "numero": "5.6.1",
+              "titre": "Les migrations depuis l’international",
+              "niveau": 3,
+              "page_debut": 326,
+              "page_fin": 326,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "5.6.2",
+              "titre": "Les migrations internes",
+              "niveau": 3,
+              "page_debut": 327,
+              "page_fin": 327,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "5.6.3",
+              "titre": "La capacité d’accueil de la Ville de Paris",
+              "niveau": 3,
+              "page_debut": 328,
+              "page_fin": 328,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "5.6.4",
+              "titre": "Perspectives",
+              "niveau": 3,
+              "page_debut": 328,
+              "page_fin": 329,
+              "nb_pages": 2,
+              "enfants": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": "6",
+      "titre": "Zoom sur les périmètres des OAP sectorielles",
+      "niveau": 1,
+      "page_debut": 330,
+      "page_fin": 388,
+      "nb_pages": 59,
+      "enfants": [
+        {
+          "numero": "6.1",
+          "titre": "OAP Bercy – Charenton (12e)",
+          "niveau": 2,
+          "page_debut": 330,
+          "page_fin": 335,
+          "nb_pages": 6,
+          "enfants": []
+        },
+        {
+          "numero": "6.2",
+          "titre": "OAP Gare de Lyon-Daumesnil – Les Messageries (12e)",
+          "niveau": 2,
+          "page_debut": 336,
+          "page_fin": 337,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": "6.3",
+          "titre": "OAP Portes de l’Est parisien (12e et 20e)",
+          "niveau": 2,
+          "page_debut": 338,
+          "page_fin": 344,
+          "nb_pages": 7,
+          "enfants": []
+        },
+        {
+          "numero": "6.4",
+          "titre": "OAP Paul Bourget (13e)",
+          "niveau": 2,
+          "page_debut": 345,
+          "page_fin": 346,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": "6.5",
+          "titre": "OAP Olympiades / Villa d’Este – Place de Vénétie (13e)",
+          "niveau": 2,
+          "page_debut": 347,
+          "page_fin": 349,
+          "nb_pages": 3,
+          "enfants": []
+        },
+        {
+          "numero": "6.6",
+          "titre": "OAP Paris Rive Gauche (13e)",
+          "niveau": 2,
+          "page_debut": 350,
+          "page_fin": 355,
+          "nb_pages": 6,
+          "enfants": []
+        },
+        {
+          "numero": "6.7",
+          "titre": "OAP Bédier – Oudiné (13e)",
+          "niveau": 2,
+          "page_debut": 356,
+          "page_fin": 357,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": "6.8",
+          "titre": "OAP Saint-Vincent-de-Paul (14e)",
+          "niveau": 2,
+          "page_debut": 358,
+          "page_fin": 360,
+          "nb_pages": 3,
+          "enfants": []
+        },
+        {
+          "numero": "6.9",
+          "titre": "OAP Maine-Montparnasse (6e, 14e et 15e)",
+          "niveau": 2,
+          "page_debut": 361,
+          "page_fin": 363,
+          "nb_pages": 3,
+          "enfants": []
+        },
+        {
+          "numero": "6.10",
+          "titre": "OAP Bartholomé – Brancion (15e)",
+          "niveau": 2,
+          "page_debut": 364,
+          "page_fin": 366,
+          "nb_pages": 3,
+          "enfants": []
+        },
+        {
+          "numero": "6.11",
+          "titre": "OAP Beaugrenelle – Front de Seine (15e)",
+          "niveau": 2,
+          "page_debut": 367,
+          "page_fin": 369,
+          "nb_pages": 3,
+          "enfants": []
+        },
+        {
+          "numero": "6.12",
+          "titre": "OAP Héliport, Suzanne Lenglen, Frères Voisins, Aquaboulevard (15e)",
+          "niveau": 2,
+          "page_debut": 370,
+          "page_fin": 372,
+          "nb_pages": 3,
+          "enfants": []
+        },
+        {
+          "numero": "6.13",
+          "titre": "OAP Paris nord-est (18e et 19e)",
+          "niveau": 2,
+          "page_debut": 373,
+          "page_fin": 378,
+          "nb_pages": 6,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tables des illustrations",
+          "niveau": 2,
+          "page_debut": 379,
+          "page_fin": 379,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figures",
+          "niveau": 2,
+          "page_debut": 379,
+          "page_fin": 382,
+          "nb_pages": 4,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Cartes",
+          "niveau": 2,
+          "page_debut": 383,
+          "page_fin": 385,
+          "nb_pages": 3,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableaux",
+          "niveau": 2,
+          "page_debut": 386,
+          "page_fin": 386,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Photos",
+          "niveau": 2,
+          "page_debut": 387,
+          "page_fin": 388,
+          "nb_pages": 2,
+          "enfants": []
+        }
+      ]
+    }
+  ]
+}

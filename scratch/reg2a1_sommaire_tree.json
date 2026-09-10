@@ -1,0 +1,221 @@
+{
+  "doc": "REG2A1_MS1.pdf",
+  "chemin_relatif": "Ressources/PLU bioclimatique/Règlement/Pièces écrites/Tome 2/REG2A1_MS1.pdf",
+  "sommaire_pages_detected": {
+    "physical_indices_0based": [
+      1
+    ],
+    "printed_page_numbers": [
+      2
+    ]
+  },
+  "numbering_rule_used": "REG2-SPECIFIC numbering (unrelated to REG1's PARTIE/lettered/zone-code scheme): 'Annexe <roman numeral> :' -> level 1 (e.g. Annexe I, Annexe III, Annexe IX). '<ordinal> partie :' (French ordinals '1ère partie', '2ème partie') -> level 2, nested under whichever Annexe is currently open. Any unnumbered line is nested one level below whatever node is currently open on the stack (same generic fallback rule as REG1's UNNUMBERED_OTHER) — in this document that fires exactly once, for a stray descriptive paragraph under Annexe III that happens to end in a leader-dot run + page number (flagged separately in warnings, not trusted as real structure).",
+  "anchor_check": {
+    "sample_size": 10,
+    "match_rate": 1.0,
+    "dominant_offset_detected": 0,
+    "offset_votes": {
+      "-2": 1,
+      "0": 8,
+      "-1": 1
+    },
+    "results": [
+      {
+        "numero": "Annexe I",
+        "titre": "Liste des secteurs soumis à des dispositions particulières",
+        "page_debut": 3,
+        "naive_physical_index": 2,
+        "matched": true,
+        "offset_detected": -2
+      },
+      {
+        "numero": "Annexe II",
+        "titre": "Liste des périmètres devant faire l’objet d’un projet d’aménagement global",
+        "page_debut": 7,
+        "naive_physical_index": 6,
+        "matched": true,
+        "offset_detected": 0
+      },
+      {
+        "numero": "Annexe III",
+        "titre": "Liste des emplacements réservés aux voies*, ouvrages publics, installations d’intérêt général et espaces verts",
+        "page_debut": 9,
+        "naive_physical_index": 8,
+        "matched": true,
+        "offset_detected": 0
+      },
+      {
+        "numero": "1e partie",
+        "titre": "les emplacements réservés pour équipements : ouvrages publics, installations d’intérêt général et espaces verts publics",
+        "page_debut": 10,
+        "naive_physical_index": 9,
+        "matched": true,
+        "offset_detected": -1
+      },
+      {
+        "numero": "2e partie",
+        "titre": "les emplacements réservés pour élargissement ou création de voie* publique communale",
+        "page_debut": 14,
+        "naive_physical_index": 13,
+        "matched": true,
+        "offset_detected": 0
+      },
+      {
+        "numero": "Annexe IV",
+        "titre": "Périmètres de localisation d’équipements",
+        "page_debut": 15,
+        "naive_physical_index": 14,
+        "matched": true,
+        "offset_detected": 0
+      },
+      {
+        "numero": "Annexe V",
+        "titre": "Liste des emplacements réservés en vue de la réalisation de certains types de logements",
+        "page_debut": 42,
+        "naive_physical_index": 41,
+        "matched": true,
+        "offset_detected": 0
+      },
+      {
+        "numero": "Annexe VI",
+        "titre": "Liste des espaces verts protégés",
+        "page_debut": 77,
+        "naive_physical_index": 76,
+        "matched": true,
+        "offset_detected": 0
+      },
+      {
+        "numero": "Annexe VII",
+        "titre": "Liste des sites de protection de l’agriculture urbaine",
+        "page_debut": 205,
+        "naive_physical_index": 204,
+        "matched": true,
+        "offset_detected": 0
+      },
+      {
+        "numero": "Annexe VIII",
+        "titre": "Liste des arbres remarquables protégés",
+        "page_debut": 207,
+        "naive_physical_index": 206,
+        "matched": true,
+        "offset_detected": 0
+      }
+    ]
+  },
+  "warnings": [
+    "Suspected body-text paragraph mis-captured as a TOC entry (long, unnumbered, starts with a determiner rather than a heading noun): titre='Les emplacements réservés pour création ou élargissement de voies* sont indiqués aux documents graphiques du règlement conformément à la légende. Ils sont énumérés dans la liste ci-après' page_debut=14. Needs human review, not auto-trusted as a real structural node.",
+    "Last entry of its branch, page_fin not reliably derivable: numero='Annexe IX' titre='Liste des arbres et arbustes d’espèces régionales adaptées au climat' page_debut=223"
+  ],
+  "arbre": [
+    {
+      "numero": "Annexe I",
+      "titre": "Liste des secteurs soumis à des dispositions particulières",
+      "niveau": 1,
+      "page_debut": 3,
+      "page_fin": 6,
+      "nb_pages": 4,
+      "enfants": []
+    },
+    {
+      "numero": "Annexe II",
+      "titre": "Liste des périmètres devant faire l’objet d’un projet d’aménagement global",
+      "niveau": 1,
+      "page_debut": 7,
+      "page_fin": 8,
+      "nb_pages": 2,
+      "enfants": []
+    },
+    {
+      "numero": "Annexe III",
+      "titre": "Liste des emplacements réservés aux voies*, ouvrages publics, installations d’intérêt général et espaces verts",
+      "niveau": 1,
+      "page_debut": 9,
+      "page_fin": 14,
+      "nb_pages": 6,
+      "enfants": [
+        {
+          "numero": "1e partie",
+          "titre": "les emplacements réservés pour équipements : ouvrages publics, installations d’intérêt général et espaces verts publics",
+          "niveau": 2,
+          "page_debut": 10,
+          "page_fin": 13,
+          "nb_pages": 4,
+          "enfants": []
+        },
+        {
+          "numero": "2e partie",
+          "titre": "les emplacements réservés pour élargissement ou création de voie* publique communale",
+          "niveau": 2,
+          "page_debut": 14,
+          "page_fin": 14,
+          "nb_pages": 1,
+          "enfants": [
+            {
+              "numero": null,
+              "titre": "Les emplacements réservés pour création ou élargissement de voies* sont indiqués aux documents graphiques du règlement conformément à la légende. Ils sont énumérés dans la liste ci-après",
+              "niveau": 3,
+              "page_debut": 14,
+              "page_fin": 14,
+              "nb_pages": 1,
+              "enfants": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": "Annexe IV",
+      "titre": "Périmètres de localisation d’équipements",
+      "niveau": 1,
+      "page_debut": 15,
+      "page_fin": 41,
+      "nb_pages": 27,
+      "enfants": []
+    },
+    {
+      "numero": "Annexe V",
+      "titre": "Liste des emplacements réservés en vue de la réalisation de certains types de logements",
+      "niveau": 1,
+      "page_debut": 42,
+      "page_fin": 76,
+      "nb_pages": 35,
+      "enfants": []
+    },
+    {
+      "numero": "Annexe VI",
+      "titre": "Liste des espaces verts protégés",
+      "niveau": 1,
+      "page_debut": 77,
+      "page_fin": 204,
+      "nb_pages": 128,
+      "enfants": []
+    },
+    {
+      "numero": "Annexe VII",
+      "titre": "Liste des sites de protection de l’agriculture urbaine",
+      "niveau": 1,
+      "page_debut": 205,
+      "page_fin": 206,
+      "nb_pages": 2,
+      "enfants": []
+    },
+    {
+      "numero": "Annexe VIII",
+      "titre": "Liste des arbres remarquables protégés",
+      "niveau": 1,
+      "page_debut": 207,
+      "page_fin": 222,
+      "nb_pages": 16,
+      "enfants": []
+    },
+    {
+      "numero": "Annexe IX",
+      "titre": "Liste des arbres et arbustes d’espèces régionales adaptées au climat",
+      "niveau": 1,
+      "page_debut": 223,
+      "page_fin": null,
+      "nb_pages": null,
+      "enfants": []
+    }
+  ]
+}

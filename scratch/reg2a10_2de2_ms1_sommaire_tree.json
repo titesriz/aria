@@ -1,0 +1,209 @@
+{
+  "doc": "REG2A10_2DE2_MS1.pdf",
+  "chemin_relatif": "Ressources/PLU bioclimatique/Règlement/Pièces écrites/Tome 2/REG2A10_2DE2_MS1.pdf",
+  "sommaire_pages_detected": {
+    "physical_indices_0based": [
+      2
+    ],
+    "printed_page_numbers": [
+      3
+    ]
+  },
+  "numbering_rule_used": "Same REG2A1 numbering vocabulary tried first ('Annexe <roman> :' -> level 1, '<ordinal> partie :' -> level 2) — neither fires in this document (0 numbered entries found; every entry is an unnumbered ALL-CAPS arrondissement heading). FIXED rule for unnumbered entries (generalized from REG2A1's fallback, which broke on this document — see warnings/FINDINGS): an unnumbered entry nests one level below the most recently seen NUMBERED entry (level 1 / root if none seen yet in the document), NOT below whatever is currently on top of the build stack. This makes consecutive unnumbered entries siblings of each other instead of a runaway nesting chain — in this document, all 10 'LISTE DES PROTECTIONS PATRIMONIALES DU Nème ARRONDISSEMENT' entries come out as flat level-1 siblings.",
+  "anchor_check": {
+    "sample_size": 10,
+    "match_rate": 1.0,
+    "dominant_offset_detected": 1,
+    "offset_votes": {
+      "0": 1,
+      "1": 9
+    },
+    "results": [
+      {
+        "numero": null,
+        "titre": "LISTE DES PROTECTIONS PATRIMONIALES DU 11ÈME ARRONDISSEMENT",
+        "page_debut": 3,
+        "naive_physical_index": 2,
+        "matched": true,
+        "offset_detected": 0
+      },
+      {
+        "numero": null,
+        "titre": "LISTE DES PROTECTIONS PATRIMONIALES DU 12ÈME ARRONDISSEMENT",
+        "page_debut": 98,
+        "naive_physical_index": 97,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": null,
+        "titre": "LISTE DES PROTECTIONS PATRIMONIALES DU 13ÈME ARRONDISSEMENT",
+        "page_debut": 166,
+        "naive_physical_index": 165,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": null,
+        "titre": "LISTE DES PROTECTIONS PATRIMONIALES DU 14ÈME ARRONDISSEMENT",
+        "page_debut": 225,
+        "naive_physical_index": 224,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": null,
+        "titre": "LISTE DES PROTECTIONS PATRIMONIALES DU 15ÈME ARRONDISSEMENT",
+        "page_debut": 281,
+        "naive_physical_index": 280,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": null,
+        "titre": "LISTE DES PROTECTIONS PATRIMONIALES DU 16ÈME ARRONDISSEMENT",
+        "page_debut": 398,
+        "naive_physical_index": 397,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": null,
+        "titre": "LISTE DES PROTECTIONS PATRIMONIALES DU 17ÈME ARRONDISSEMENT",
+        "page_debut": 505,
+        "naive_physical_index": 504,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": null,
+        "titre": "LISTE DES PROTECTIONS PATRIMONIALES DU 18ÈME ARRONDISSEMENT",
+        "page_debut": 661,
+        "naive_physical_index": 660,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": null,
+        "titre": "LISTE DES PROTECTIONS PATRIMONIALES DU 19ÈME ARRONDISSEMENT",
+        "page_debut": 759,
+        "naive_physical_index": 758,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": null,
+        "titre": "LISTE DES PROTECTIONS PATRIMONIALES DU 20ÈME ARRONDISSEMENT",
+        "page_debut": 841,
+        "naive_physical_index": 840,
+        "matched": true,
+        "offset_detected": 1
+      }
+    ]
+  },
+  "warnings": [
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='LISTE DES PROTECTIONS PATRIMONIALES DU 11ÈME ARRONDISSEMENT' page_debut=3",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='LISTE DES PROTECTIONS PATRIMONIALES DU 12ÈME ARRONDISSEMENT' page_debut=98",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='LISTE DES PROTECTIONS PATRIMONIALES DU 13ÈME ARRONDISSEMENT' page_debut=166",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='LISTE DES PROTECTIONS PATRIMONIALES DU 14ÈME ARRONDISSEMENT' page_debut=225",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='LISTE DES PROTECTIONS PATRIMONIALES DU 15ÈME ARRONDISSEMENT' page_debut=281",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='LISTE DES PROTECTIONS PATRIMONIALES DU 16ÈME ARRONDISSEMENT' page_debut=398",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='LISTE DES PROTECTIONS PATRIMONIALES DU 17ÈME ARRONDISSEMENT' page_debut=505",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='LISTE DES PROTECTIONS PATRIMONIALES DU 18ÈME ARRONDISSEMENT' page_debut=661",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='LISTE DES PROTECTIONS PATRIMONIALES DU 19ÈME ARRONDISSEMENT' page_debut=759",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='LISTE DES PROTECTIONS PATRIMONIALES DU 20ÈME ARRONDISSEMENT' page_debut=841",
+    "Last entry of its branch, page_fin not reliably derivable from a following entry — set to doc.page_count (889): numero=None titre='LISTE DES PROTECTIONS PATRIMONIALES DU 20ÈME ARRONDISSEMENT' page_debut=841"
+  ],
+  "arbre": [
+    {
+      "numero": null,
+      "titre": "LISTE DES PROTECTIONS PATRIMONIALES DU 11ÈME ARRONDISSEMENT",
+      "niveau": 1,
+      "page_debut": 3,
+      "page_fin": 97,
+      "nb_pages": 95,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "LISTE DES PROTECTIONS PATRIMONIALES DU 12ÈME ARRONDISSEMENT",
+      "niveau": 1,
+      "page_debut": 98,
+      "page_fin": 165,
+      "nb_pages": 68,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "LISTE DES PROTECTIONS PATRIMONIALES DU 13ÈME ARRONDISSEMENT",
+      "niveau": 1,
+      "page_debut": 166,
+      "page_fin": 224,
+      "nb_pages": 59,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "LISTE DES PROTECTIONS PATRIMONIALES DU 14ÈME ARRONDISSEMENT",
+      "niveau": 1,
+      "page_debut": 225,
+      "page_fin": 280,
+      "nb_pages": 56,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "LISTE DES PROTECTIONS PATRIMONIALES DU 15ÈME ARRONDISSEMENT",
+      "niveau": 1,
+      "page_debut": 281,
+      "page_fin": 397,
+      "nb_pages": 117,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "LISTE DES PROTECTIONS PATRIMONIALES DU 16ÈME ARRONDISSEMENT",
+      "niveau": 1,
+      "page_debut": 398,
+      "page_fin": 504,
+      "nb_pages": 107,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "LISTE DES PROTECTIONS PATRIMONIALES DU 17ÈME ARRONDISSEMENT",
+      "niveau": 1,
+      "page_debut": 505,
+      "page_fin": 660,
+      "nb_pages": 156,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "LISTE DES PROTECTIONS PATRIMONIALES DU 18ÈME ARRONDISSEMENT",
+      "niveau": 1,
+      "page_debut": 661,
+      "page_fin": 758,
+      "nb_pages": 98,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "LISTE DES PROTECTIONS PATRIMONIALES DU 19ÈME ARRONDISSEMENT",
+      "niveau": 1,
+      "page_debut": 759,
+      "page_fin": 840,
+      "nb_pages": 82,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "LISTE DES PROTECTIONS PATRIMONIALES DU 20ÈME ARRONDISSEMENT",
+      "niveau": 1,
+      "page_debut": 841,
+      "page_fin": 889,
+      "nb_pages": 49,
+      "enfants": []
+    }
+  ]
+}

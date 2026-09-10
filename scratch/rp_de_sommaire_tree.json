@@ -1,0 +1,311 @@
+{
+  "doc": "RP_DE.pdf",
+  "chemin_relatif": "Ressources/PLU bioclimatique/Rapport de présentation/RP_DE.pdf",
+  "sommaire_pages_detected": {
+    "physical_indices_0based": [
+      1
+    ],
+    "printed_page_numbers": [
+      2
+    ]
+  },
+  "numbering_rule_used": "Numbering profiles tried in order: PARTIE n (FLAT), Annexe <roman> (FLAT), <ordinal> partie (FLAT), Axe n (FLAT), a leading code + N dot-digit-groups e.g. UG.1.4/C.1/N.1.2.2 (NESTING, depth=N), a bare digit-dot chain e.g. 1/1.1/2.14 (NESTING, depth=dot-group count), a single letter or roman numeral (FLAT), an ALL-CAPS unnumbered heading (FLAT). LEVEL is relative, not absolute depth: a recurring FLAT profile jumps back to its first-occurrence level regardless of what happened in between; a NESTING profile moves by the signed depth-delta vs. its own last occurrence; an unnumbered/non-caps line inherits the previous level; first entry of the document = level 1. Header length and TOC-page range are discovered per document (title-marker search + shape-based continuation), not assumed from a fixed line count. TOC pages are read in column order (block-level x0 clustering decides 1 vs 2 columns; fragments sharing a block and a y-band are coalesced before grouping, to avoid a wide sentence or a mid-sentence number corrupting the read).",
+  "anchor_check": {
+    "sample_size": 10,
+    "match_rate": 1.0,
+    "dominant_offset_detected": 1,
+    "offset_votes": {
+      "0": 2,
+      "-1": 1,
+      "-2": 1,
+      "1": 6
+    },
+    "results": [
+      {
+        "numero": "1",
+        "titre": "Les motifs qui ont fondé les choix du PLU bioclimatique",
+        "page_debut": 2,
+        "naive_physical_index": 1,
+        "matched": true,
+        "offset_detected": 0
+      },
+      {
+        "numero": "1.1.1",
+        "titre": "L’émergence de nouveaux enjeux depuis l’approbation du PLU de 2006",
+        "page_debut": 2,
+        "naive_physical_index": 1,
+        "matched": true,
+        "offset_detected": 0
+      },
+      {
+        "numero": "1.2",
+        "titre": "Les motifs ayant fondé les choix opérés dans le PLU bioclimatique",
+        "page_debut": 3,
+        "naive_physical_index": 2,
+        "matched": true,
+        "offset_detected": -1
+      },
+      {
+        "numero": "1.2.2",
+        "titre": "Les motifs des choix opérés pour l’élaboration du PLU",
+        "page_debut": 4,
+        "naive_physical_index": 3,
+        "matched": true,
+        "offset_detected": -2
+      },
+      {
+        "numero": "2.1",
+        "titre": "Prise en compte de l’évaluation environnementale",
+        "page_debut": 11,
+        "naive_physical_index": 10,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": "2.1.2",
+        "titre": "Bilan de l’évaluation environnementale",
+        "page_debut": 11,
+        "naive_physical_index": 10,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": "2.2.1",
+        "titre": "L’avis de l’Autorité environnementale",
+        "page_debut": 14,
+        "naive_physical_index": 13,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": "2.2.3",
+        "titre": "Les avis des PPA et autres entités ayant demandé à être consultées",
+        "page_debut": 20,
+        "naive_physical_index": 19,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": "3",
+        "titre": "Mesures destinées à évaluer les incidences de la mise en œuvre du PLU sur l’environnement",
+        "page_debut": 23,
+        "naive_physical_index": 22,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": "3.2",
+        "titre": "Préservation des ressources naturelles",
+        "page_debut": 27,
+        "naive_physical_index": 26,
+        "matched": true,
+        "offset_detected": 1
+      }
+    ]
+  },
+  "warnings": [
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='1.1.2' titre='L’adaptation aux évolutions réglementaires et aux nouveaux documents cadres' page_debut=3, next entry starts on page 3 (numero='1.2'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='2.1.1' titre='Une démarche itérative' page_debut=11, next entry starts on page 11 (numero='2.1.2'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='2.2.2' titre='L’avis de la CIPENAF' page_debut=20, next entry starts on page 20 (numero='2.2.3'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Last entry of its branch, page_fin not reliably derivable — set to doc.page_count (38): numero='3' titre='Mesures destinées à évaluer les incidences de la mise en œuvre du PLU sur l’environnement' page_debut=23",
+    "Last entry of its branch, page_fin not reliably derivable — set to doc.page_count (38): numero='3.4' titre='Santé environnementale des populations' page_debut=33"
+  ],
+  "arbre": [
+    {
+      "numero": "1",
+      "titre": "Les motifs qui ont fondé les choix du PLU bioclimatique",
+      "niveau": 1,
+      "page_debut": 2,
+      "page_fin": 10,
+      "nb_pages": 9,
+      "enfants": [
+        {
+          "numero": "1.1",
+          "titre": "Les motifs de la révision du PLU",
+          "niveau": 2,
+          "page_debut": 2,
+          "page_fin": 2,
+          "nb_pages": 1,
+          "enfants": [
+            {
+              "numero": "1.1.1",
+              "titre": "L’émergence de nouveaux enjeux depuis l’approbation du PLU de 2006",
+              "niveau": 3,
+              "page_debut": 2,
+              "page_fin": 2,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "1.1.2",
+              "titre": "L’adaptation aux évolutions réglementaires et aux nouveaux documents cadres",
+              "niveau": 3,
+              "page_debut": 3,
+              "page_fin": 3,
+              "nb_pages": 1,
+              "enfants": []
+            }
+          ]
+        },
+        {
+          "numero": "1.2",
+          "titre": "Les motifs ayant fondé les choix opérés dans le PLU bioclimatique",
+          "niveau": 2,
+          "page_debut": 3,
+          "page_fin": 10,
+          "nb_pages": 8,
+          "enfants": [
+            {
+              "numero": "1.2.1",
+              "titre": "Les objectifs de la procédure de révision",
+              "niveau": 3,
+              "page_debut": 3,
+              "page_fin": 3,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "1.2.2",
+              "titre": "Les motifs des choix opérés pour l’élaboration du PLU",
+              "niveau": 3,
+              "page_debut": 4,
+              "page_fin": 10,
+              "nb_pages": 7,
+              "enfants": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": "2",
+      "titre": "La prise en compte de l’évaluation environnementale et des consultations",
+      "niveau": 1,
+      "page_debut": 11,
+      "page_fin": 22,
+      "nb_pages": 12,
+      "enfants": [
+        {
+          "numero": "2.1",
+          "titre": "Prise en compte de l’évaluation environnementale",
+          "niveau": 2,
+          "page_debut": 11,
+          "page_fin": 13,
+          "nb_pages": 3,
+          "enfants": [
+            {
+              "numero": "2.1.1",
+              "titre": "Une démarche itérative",
+              "niveau": 3,
+              "page_debut": 11,
+              "page_fin": 11,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "2.1.2",
+              "titre": "Bilan de l’évaluation environnementale",
+              "niveau": 3,
+              "page_debut": 11,
+              "page_fin": 13,
+              "nb_pages": 3,
+              "enfants": []
+            }
+          ]
+        },
+        {
+          "numero": "2.2",
+          "titre": "Prise en compte des consultations auxquelles il a été procédé",
+          "niveau": 2,
+          "page_debut": 14,
+          "page_fin": 22,
+          "nb_pages": 9,
+          "enfants": [
+            {
+              "numero": "2.2.1",
+              "titre": "L’avis de l’Autorité environnementale",
+              "niveau": 3,
+              "page_debut": 14,
+              "page_fin": 19,
+              "nb_pages": 6,
+              "enfants": []
+            },
+            {
+              "numero": "2.2.2",
+              "titre": "L’avis de la CIPENAF",
+              "niveau": 3,
+              "page_debut": 20,
+              "page_fin": 20,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "2.2.3",
+              "titre": "Les avis des PPA et autres entités ayant demandé à être consultées",
+              "niveau": 3,
+              "page_debut": 20,
+              "page_fin": 20,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "2.2.4",
+              "titre": "Les observations formulées à l’enquête publique et le rapport de la Commission d’Enquête",
+              "niveau": 3,
+              "page_debut": 21,
+              "page_fin": 22,
+              "nb_pages": 2,
+              "enfants": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": "3",
+      "titre": "Mesures destinées à évaluer les incidences de la mise en œuvre du PLU sur l’environnement",
+      "niveau": 1,
+      "page_debut": 23,
+      "page_fin": 38,
+      "nb_pages": 16,
+      "enfants": [
+        {
+          "numero": "3.1",
+          "titre": "Lutte contre le changement climatique",
+          "niveau": 2,
+          "page_debut": 23,
+          "page_fin": 26,
+          "nb_pages": 4,
+          "enfants": []
+        },
+        {
+          "numero": "3.2",
+          "titre": "Préservation des ressources naturelles",
+          "niveau": 2,
+          "page_debut": 27,
+          "page_fin": 29,
+          "nb_pages": 3,
+          "enfants": []
+        },
+        {
+          "numero": "3.3",
+          "titre": "Patrimoine naturel et paysager",
+          "niveau": 2,
+          "page_debut": 30,
+          "page_fin": 32,
+          "nb_pages": 3,
+          "enfants": []
+        },
+        {
+          "numero": "3.4",
+          "titre": "Santé environnementale des populations",
+          "niveau": 2,
+          "page_debut": 33,
+          "page_fin": 38,
+          "nb_pages": 6,
+          "enfants": []
+        }
+      ]
+    }
+  ]
+}

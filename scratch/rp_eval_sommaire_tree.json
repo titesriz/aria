@@ -1,0 +1,2163 @@
+{
+  "doc": "RP_EVAL.pdf",
+  "chemin_relatif": "Ressources/PLU bioclimatique/Rapport de présentation/RP_EVAL.pdf",
+  "sommaire_pages_detected": {
+    "physical_indices_0based": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "printed_page_numbers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ]
+  },
+  "numbering_rule_used": "Numbering profiles tried in order: PARTIE n (FLAT), Annexe <roman> (FLAT), <ordinal> partie (FLAT), Axe n (FLAT), a leading code + N dot-digit-groups e.g. UG.1.4/C.1/N.1.2.2 (NESTING, depth=N), a bare digit-dot chain e.g. 1/1.1/2.14 (NESTING, depth=dot-group count), a single letter or roman numeral (FLAT), an ALL-CAPS unnumbered heading (FLAT). LEVEL is relative, not absolute depth: a recurring FLAT profile jumps back to its first-occurrence level regardless of what happened in between; a NESTING profile moves by the signed depth-delta vs. its own last occurrence; an unnumbered/non-caps line inherits the previous level; first entry of the document = level 1. Header length and TOC-page range are discovered per document (title-marker search + shape-based continuation), not assumed from a fixed line count. TOC pages are read in column order (block-level x0 clustering decides 1 vs 2 columns; fragments sharing a block and a y-band are coalesced before grouping, to avoid a wide sentence or a mid-sentence number corrupting the read).",
+  "anchor_check": {
+    "sample_size": 10,
+    "match_rate": 0.9,
+    "dominant_offset_detected": 1,
+    "offset_votes": {
+      "1": 9
+    },
+    "results": [
+      {
+        "numero": "1",
+        "titre": "Démarche d’évaluation environnementale",
+        "page_debut": 8,
+        "naive_physical_index": 7,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": null,
+        "titre": "L’urbanisme bioclimatique, une méthode au service de la transition écologique du territoire",
+        "page_debut": 61,
+        "naive_physical_index": 60,
+        "matched": false,
+        "offset_detected": null
+      },
+      {
+        "numero": null,
+        "titre": "OAP Paris Rive Gauche",
+        "page_debut": 129,
+        "naive_physical_index": 128,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": "4.2",
+        "titre": "Incidences directes et indirectes",
+        "page_debut": 247,
+        "naive_physical_index": 246,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": null,
+        "titre": "Manière dont le PLU répond aux enjeux environnementaux",
+        "page_debut": 334,
+        "naive_physical_index": 333,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": null,
+        "titre": "Tableau 14. Variation de la superficie d’espaces verts rapportée à la population",
+        "page_debut": 171,
+        "naive_physical_index": 170,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": null,
+        "titre": "Tableau 34. Liste des espèces d’oiseaux inscrite au DOCOB du parc de des Beaumonts",
+        "page_debut": 237,
+        "naive_physical_index": 236,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": null,
+        "titre": "Figure 10. Évolution des emplois entre 1999 et 2019 (APUR d’après INSEE)",
+        "page_debut": 38,
+        "naive_physical_index": 37,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": null,
+        "titre": "Figure 30. Profil environnemental du règlement",
+        "page_debut": 226,
+        "naive_physical_index": 225,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": null,
+        "titre": "Carte 10. Les parcs et jardins publics (APUR, novembre 2022)",
+        "page_debut": 171,
+        "naive_physical_index": 170,
+        "matched": true,
+        "offset_detected": 1
+      }
+    ]
+  },
+  "warnings": [
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Approche générale de l’évaluation' page_debut=9",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Cadre réglementaire applicable à Paris' page_debut=9",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Esprit de la démarche' page_debut=10",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Autoévaluation du PLU' page_debut=14",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Développement méthodologique' page_debut=14",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Grilles d’analyse' page_debut=19",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Enjeux environnementaux auxquels le PLU doit répondre' page_debut=23",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Enjeux globaux' page_debut=23",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Enjeux locaux' page_debut=24",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Perspectives d’évolution de l’environnement' page_debut=29",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Composantes du scénario tendanciel' page_debut=29",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Effets potentiels sur l’environnement du scénario tendanciel' page_debut=44",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Démarche d’intégration des enjeux environnementaux' page_debut=51",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Principales étapes de la révision' page_debut=51",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Explication des choix retenus' page_debut=53",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Alternatives raisonnables' page_debut=54",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Évaluation du Projet d’Aménagement et de Développement Durables (PADD)' page_debut=61",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='L’urbanisme bioclimatique, une méthode au service de la transition écologique du territoire' page_debut=61",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Axe I. Une ville en transition vertueuse et résiliente' page_debut=62",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Axe II. Une ville inclusive, productive et solidaire' page_debut=68",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Axe III. Une ville qui considère et valorise ses identités urbaines' page_debut=74",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Synthèse de l’évaluation environnementale du PADD' page_debut=77",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Évaluation des OAP thématiques' page_debut=80",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='OAP biodiversité et adaptation' page_debut=80",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='OAP espace public' page_debut=88",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='OAP liens métropolitains' page_debut=91",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='OAP quartier du quart d’heure' page_debut=102",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='OAP héritage transformation' page_debut=105",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='OAP construction neuve' page_debut=110",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='OAP santé publique et environnementale' page_debut=114",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Synthèse de l’évaluation environnementale des OAP thématiques' page_debut=116",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Évaluation des OAP sectorielles' page_debut=121",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='RAPPORT DE PRÉSENTATIONÉVALUATION ENVIRONNEMENTALE ÉVALUATION ENVIRONNEMENTALE OAP Bercy – Charenton' page_debut=122",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='OAP Gare de Lyon-Daumesnil – Les Messageries' page_debut=124",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='OAP Portes de l’Est parisien' page_debut=125",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='OAP Paul Bourget' page_debut=127",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='OAP Olympiades / Villa d’Este – Place de Vénétie' page_debut=128",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='OAP Paris Rive Gauche' page_debut=129",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='OAP Bédier – Oudiné' page_debut=132",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='OAP Saint-Vincent-de-Paul' page_debut=133",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='OAP Maine-Montparnasse' page_debut=133",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='OAP Bartholomé – Brancion' page_debut=135",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='OAP Beaugrenelle – Front de Seine' page_debut=136",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='OAP Héliport, Suzanne Lenglen, Frères Voisins, Aquaboulevard' page_debut=137",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='OAP Paris nord-est' page_debut=138",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Synthèse de l’évaluation environnementale des OAP sectorielles' page_debut=147",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Évaluation de la partie réglementaire' page_debut=151",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Vocation des différents espaces parisiens' page_debut=151",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Espaces verts et qualité paysagère' page_debut=169",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Caractéristiques du bâti et développements urbains à venir' page_debut=185",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Optimisation de la qualité environnementale des projets' page_debut=213",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Autres dispositions réglementaires' page_debut=220",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Synthèse de l’évaluation environnementale du règlement' page_debut=226",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='SCOT de la métropole du Grand Paris' page_debut=250",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='PDU de la région Île-de-France' page_debut=277",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='PLH de Paris' page_debut=284",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='PCAEM de la métropole du Grand Paris' page_debut=291",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='PCAET de Paris' page_debut=296",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Schéma directeur de la région Île-de-France' page_debut=300",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Documents cadre relatifs à l’eau et aux milieux aquatiques' page_debut=308",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='SDAGE « Seine-Normandie »' page_debut=308",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='SAGE de la Bièvre' page_debut=311",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='SAGE Marne Confluence' page_debut=313",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='PGRI Seine-Normandie' page_debut=315",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='PEB de l’héliport de Paris – Issy-les-Moulineaux' page_debut=320",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Le Schéma régional de cohérence écologique' page_debut=321",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Article 42 de la loi n° 85-729 du 18 juillet 1985' page_debut=323",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='RAPPORT DE PRÉSENTATIONÉVALUATION ENVIRONNEMENTALE ÉVALUATION ENVIRONNEMENTALE Rappel des mesures d’évitement, de réduction et de compensation incluses dans les dispositions du PLU' page_debut=325",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Bilan des évolutions du projet de PLU révisé pour une moindre incidence sur l’environnement' page_debut=325",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Dispositions PLU constituant des mesures au regard des effets sur l’environnement d’autres dispositions' page_debut=331",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Manière dont le PLU répond aux enjeux environnementaux' page_debut=334",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Lutte contre le changement climatique' page_debut=335",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Préservation des ressources naturelles' page_debut=336",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Biodiversité et écosystèmes' page_debut=338",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Paysages et patrimoine' page_debut=339",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Santé environnementale des populations' page_debut=340",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Bilan des effets et incidences résiduelles de la mise en œuvre du PLU' page_debut=342",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Mesures d’accompagnement au titre des compétences de la Ville autres que la planification urbaine réglementaire' page_debut=344",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='RAPPORT DE PRÉSENTATIONÉVALUATION ENVIRONNEMENTALE ÉVALUATION ENVIRONNEMENTALE T A B L E A U X Tableau 1. Codification des thématiques environnementales' page_debut=19",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 2. Codification des niveaux d’effet sur l’environnement' page_debut=20",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 3. Évolution du nombre d’emplois par arrondissement (INSEE)' page_debut=37",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 4. Les grandes étapes de la révision du PLU' page_debut=53",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 5. Synthèse des effets du PADD sur l’environnement' page_debut=78",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 6. Synthèse des effets des OAP thématiques sur l’environnement' page_debut=118",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 7. Calendrier de réalisation pressenti des OAP sectorielles' page_debut=122",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 8. Synthèse des effets des OAP sectorielles sur l’environnement' page_debut=148",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 9. Superficie des zones et secteurs « fonctionnels » du PLU' page_debut=152",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 10. Coefficient d’emprise au sol maximal admissible dans les STECAL du bois de Boulogne' page_debut=159",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 11. Coefficient d’emprise au sol maximal admissible dans les STECAL du bois de Vincennes' page_debut=162",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 12. Évolution de la protection des espaces boisés et végétalisés' page_debut=166",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 13. Potentiel de création d’espaces verts publics' page_debut=169",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 14. Variation de la superficie d’espaces verts rapportée à la population' page_debut=171",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 15. Évolution de la protection des espaces au titre de l’article L. 151-23' page_debut=172",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 16. Taux d’espaces libres de construction' page_debut=174",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 17. Unités de plantations et principe d’équivalence d’arbre en zone UG' page_debut=176",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 18. Coefficient de pondération des surfaces bâties végétalisées' page_debut=177",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 19. Indice de végétalisation du bâti selon la nature et la situation des projets' page_debut=177",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 20. « Reste à bâtir » dans les parcelles de la zone UG, hors équipements selon les règles du PLU de 2006 (d’après APUR, décembre 2022)' page_debut=180",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 21. « Reste à bâtir » dans les parcelles de la zone UG, hors équipements selon les règles du PLU (d’après APUR, décembre 2022)' page_debut=181",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 22. Dispositifs de protection du patrimoine bâti' page_debut=192",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 23. Bilan de l’évolution des surfaces de plancher (d’après APUR, septembre 2024)' page_debut=197",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 24. Variation de la population projetée (d’après APUR, septembre 2024)' page_debut=199",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 25. Programmation de logement dans les opérations d’aménagement' page_debut=200",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 26. Variation de la population exposée à une qualité de l’air dégradée' page_debut=205",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 27. Variation de la population soumise au bruit des transports' page_debut=205",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 28. Variation de la population exposée à un risque d’inondation' page_debut=208",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 29. Variation de la population exposée à un risque géologique' page_debut=208",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 30. Variation de la population exposée à un risque géologique' page_debut=211",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 31. Seuils de surperformances selon les catégories de construction' page_debut=216",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 32. Répartition des nouvelles surfaces de plancher selon leur mode de production et émissions de GES induites (d’après APUR, octobre 2024)' page_debut=217",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 33. Synthèse des effets du règlement sur l’environnement' page_debut=227",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 34. Liste des espèces d’oiseaux inscrite au DOCOB du parc de des Beaumonts' page_debut=237",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 35. Liste des espèces d’oiseaux inscrite au DOCOB du parc de l’Ile-Saint-Denis' page_debut=238",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 36. Liste des espèces d’oiseaux inscrite au DOCOB du parc de la Haute Ile' page_debut=240",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 37. Synthèse des enjeux par sous-entités (DOCOB)' page_debut=242",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 38. Normes minimales de stationnement cycles prévues par le PDUIF' page_debut=280",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 39. Dimensions recommandées du stationnement cycle pour les établissements d’enseignement' page_debut=280",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 40. Objectif quantitatifs du SRHH concernant Paris' page_debut=284",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 41. Estimation de la densité' page_debut=302",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='RAPPORT DE PRÉSENTATIONÉVALUATION ENVIRONNEMENTALE ÉVALUATION ENVIRONNEMENTALE Tableau 42. Superficies des espaces verts, et des espaces naturels, agricoles et forestiers' page_debut=304",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 43. Suivi de l’occupation des sols de la zone des anciennes fortifications, en hectares par arrondissement' page_debut=323",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='F I G U R E S Figure 1. Total du nombre de permis de construire et des surfaces créées selon l’ampleur des surfaces créées (APUR d’après Ville de Paris)' page_debut=30",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Figure 2. Évolution des surfaces de plancher d’habitation entre septembre 2006 et novembre 2020 (APUR, base transformation)' page_debut=31",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Figure 3. Évolution des surfaces de plancher de bureaux entre septembre 2006 et novembre 2020 (APUR, base transformation)' page_debut=31",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Figure 4. Évolution de l’emprise des bâtiments en élévation entre 2006 et 2020 (APUR d’après Ville)' page_debut=32",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Figure 5. Évolution du parc de logements de 1968 à 2019 (APUR d’après INSEE)' page_debut=33",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Figure 6. Constructions de logements à Paris entre 2006et 2017 (APUR d’après SITADEL)' page_debut=34",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Figure 7. Évolution de la population parisienne 1968-2020 (APUR, d’après INSEE)' page_debut=35",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Figure 8. Évolution annuelle moyenne de la population par arrondissement 1999-' page_debut=2020",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='(APUR, d’après INSEE)' page_debut=36",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Figure 9. Évolution de l’emploi de 2000 à 2020 et de l’emploi salarié de 2011 à 2022 (APUR)' page_debut=37",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Figure 10. Évolution des emplois entre 1999 et 2019 (APUR d’après INSEE)' page_debut=38",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Figure 11. Répartition des emplois salariés par secteurs d’activités et évolution des emplois entre 2006 et 2019 (APUR, d’après Estel)' page_debut=39",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Figure 12. Évolution annuelle du nombre de voyages effectués en transports en commun depuis 2010' page_debut=40",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Figure 13. Indice dévolution annuel du nombre de vélos entre 2003 et 2020' page_debut=41",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Figure 14. Évolution annuelle de la circulation automobile dans paris intra-muros' page_debut=41",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Figure 15. Évolution annuelle de la circulation sur le boulevard périphérique' page_debut=41",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Figure 16. Nombre moyen de voiture par ménage (APUR d’après Ville de Paris)' page_debut=42",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Figure 17. Évolution du nombre de stationnements vélos entre 2009 et 2020 (APUR d’après Ville de Paris)' page_debut=43",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Figure 18. Profil environnemental du PADD' page_debut=77",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Figure 19. Profil environnemental des OAP thématiques' page_debut=116",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Figure 20. Profil environnemental des OAP sectorielles' page_debut=147",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre=\"Figure 21. Surface d'espaces verts publics programmée dans les opérations d’aménagement\" page_debut=169",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Figure 22. Variation du taux d’espaces libres selon la superficie de la parcelle (APUR, décembre 2022)' page_debut=174",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Figure 23. Nature des surfaces parisiennes (APUR, décembre 2022)' page_debut=179",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre=\"Figure 24. Surface de plancher de logements programmée à l'horizon 2031 dans les opérations d’aménagement (APUR, septembre 2024)\" page_debut=196",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre=\"Figure 25. Surface de plancher de bureau programmée à l'horizon 2031 dans les opérations d’aménagement (APUR, septembre 2024)\" page_debut=196",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Figure 26. Variation de la surface de plancher logement à l’horizon 2035 sous l’effet du PLU (APUR, septembre 2024)' page_debut=197",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Figure 27. Variation de la surface de plancher bureaux à l’horizon 2035 sous l’effet du PLU (APUR, septembre 2024)' page_debut=197",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='RAPPORT DE PRÉSENTATIONÉVALUATION ENVIRONNEMENTALE ÉVALUATION ENVIRONNEMENTALE Figure 28. Évolution du taux de logement inoccupés (APUR, septembre 2024)' page_debut=198",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Figure 29. Évolution de la taille des ménages (APUR, septembre 2024)' page_debut=198",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Figure 30. Profil environnemental du règlement' page_debut=226",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Figure 31. Démarche d’évaluation des incidences Natura 2000 (Préfecture de la Loire)' page_debut=233",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Figure 32. Le site Natura 2000 ZPS FR1112013 « Sites de la Seine-Saint-Denis »' page_debut=235",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Figure 33. Localisation des sous-entités du site Natura 2000 vis-à-vis de Paris' page_debut=236",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Figure 34. Carte du SRCE Ile-de-France pour la petite couronne' page_debut=243",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Figure 35. Continuités existantes entre le site Natura 2000 de Seine-Saint-Denis et la ville de Paris' page_debut=244",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Figure 36. Extraits du PDUIF : coupure urbaine et réseau cyclable structurant' page_debut=279",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Figure 37. Extrait du PDUIF : armature logistique régionale à Paris, cœur de métropole et agglomération des pôles de centralité' page_debut=282",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Figure 38. Extrait de la carte d’orientations générales du SDRIF' page_debut=304",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Figure 39. Extrait de la carte de la composante publique de la Trame verte d’agglomération du SDRIF' page_debut=305",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Figure 43. Extrait du plan d’exposition au bruit de l’’héliport' page_debut=320",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='C A R T E S Carte 1. Croisement des orientations sur le boulevard périphérique avec la trame écologique' page_debut=98",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Carte 2. Croisement des orientations sur la Seine et ses berges avec la trame écologique' page_debut=99",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Carte 3. Croisement des orientations sur les Bois parisiens avec la trame écologique' page_debut=101",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Carte 4. Répartition spatiale des fonctions dans le PLU' page_debut=154",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Carte 5. « Zonage vert » du PLU' page_debut=156",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Carte 6. Évolution des zones N et UV' page_debut=157",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Carte 7. Prise en compte des ZNIEFF par le PLU' page_debut=164",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Carte 8. Prise en compte des continuités écologiques par le PLU' page_debut=168",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Carte 9. Création de parcs et jardins publics dans le PLU' page_debut=170",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Carte 10. Les parcs et jardins publics (APUR, novembre 2022)' page_debut=171",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Carte 11. Évolution des espaces verts protégés (APUR, novembre 2022)' page_debut=173",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Carte 12. Évolution des espaces libres protégés à végétaliser (APUR, novembre 2022)' page_debut=173",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Carte 13. Emprises non bâties réelles dans les parcelles parisiennes (APUR, décembre 2022)' page_debut=179",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Carte 14. Taux d’espace libre réglementaire du PLU de 2006 (APUR, décembre 2022)' page_debut=180",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Carte 15. « Reste à bâtir » selon la règle des espaces libres du PLU de 2006 (APUR, décembre 2022)' page_debut=181",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Carte 16. Le taux d’espace libre de construction du PLU (APUR, décembre 2022)' page_debut=182",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Carte 17. « Reste à bâtir » selon la règle des espaces libres du PLU (APUR, décembre 2022)' page_debut=182",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Carte 18. « Reste à bâtir »et espaces protégés au titre de l’article L. 15123 (APUR, décembre 2022)' page_debut=183",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Carte 19. Règles morphologiques du PLU' page_debut=189",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Carte 20. Préservation du patrimoine architectural et paysager par le PLU' page_debut=194",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Carte 21. Projets pris en compte pour simuler l’exposition future de la population aux nuisances' page_debut=201",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Carte 22. Densité de population en 2019' page_debut=203",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Carte 23. Densité de population à l’horizon 2035' page_debut=204",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='RAPPORT DE PRÉSENTATIONÉVALUATION ENVIRONNEMENTALE ÉVALUATION ENVIRONNEMENTALE Carte 24. Carte stratégique air, en 3 classes (d’après AIRPARIF, 2022)' page_debut=206",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Carte 25. « Carte stratégique bruit » en 3 classes (d’après BRUITPARIF, 2017)' page_debut=207",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Carte 26. Risque d’inondation (d’après Géorisque)' page_debut=209",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Carte 27. Risques géologique (Ville)' page_debut=210",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Carte 27. Cumul des nuisances (Urban-Éco, d’après Airparif, Bruitparif, Géorisque et Ville)' page_debut=212",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Carte 28. Dispositions du PLU en faveur des mobilités et de la logistique urbaine' page_debut=222",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Carte 29. Prise en compte du SRCE par le PLU' page_debut=322",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero=None titre='Approche générale de l’évaluation' page_debut=9, next entry starts on page 9 (numero=None). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero=None titre='Autoévaluation du PLU' page_debut=14, next entry starts on page 14 (numero=None). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero=None titre='Enjeux environnementaux auxquels le PLU doit répondre' page_debut=23, next entry starts on page 23 (numero=None). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero=None titre='Perspectives d’évolution de l’environnement' page_debut=29, next entry starts on page 29 (numero=None). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero=None titre='Démarche d’intégration des enjeux environnementaux' page_debut=51, next entry starts on page 51 (numero=None). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero=None titre='Évaluation du Projet d’Aménagement et de Développement Durables (PADD)' page_debut=61, next entry starts on page 61 (numero=None). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero=None titre='Évaluation des OAP thématiques' page_debut=80, next entry starts on page 80 (numero=None). page_fin/nb_pages set to a 1-page lower bound.",
+    "Last entry of its branch, page_fin not reliably derivable — set to doc.page_count (352): numero=None titre='Évaluation des OAP sectorielles' page_debut=121",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero=None titre='OAP Saint-Vincent-de-Paul' page_debut=133, next entry starts on page 133 (numero=None). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero=None titre='Évaluation de la partie réglementaire' page_debut=151, next entry starts on page 151 (numero=None). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero=None titre='Documents cadre relatifs à l’eau et aux milieux aquatiques' page_debut=308, next entry starts on page 308 (numero=None). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero=None titre='RAPPORT DE PRÉSENTATIONÉVALUATION ENVIRONNEMENTALE ÉVALUATION ENVIRONNEMENTALE Rappel des mesures d’évitement, de réduction et de compensation incluses dans les dispositions du PLU' page_debut=325, next entry starts on page 325 (numero=None). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero=None titre='Mesures d’accompagnement au titre des compétences de la Ville autres que la planification urbaine réglementaire' page_debut=344, next entry starts on page 19 (numero=None). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero=None titre='Tableau 18. Coefficient de pondération des surfaces bâties végétalisées' page_debut=177, next entry starts on page 177 (numero=None). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero=None titre='Tableau 26. Variation de la population exposée à une qualité de l’air dégradée' page_debut=205, next entry starts on page 205 (numero=None). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero=None titre='Tableau 28. Variation de la population exposée à un risque d’inondation' page_debut=208, next entry starts on page 208 (numero=None). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero=None titre='Tableau 38. Normes minimales de stationnement cycles prévues par le PDUIF' page_debut=280, next entry starts on page 280 (numero=None). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero=None titre='Tableau 43. Suivi de l’occupation des sols de la zone des anciennes fortifications, en hectares par arrondissement' page_debut=323, next entry starts on page 30 (numero=None). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero=None titre='Figure 2. Évolution des surfaces de plancher d’habitation entre septembre 2006 et novembre 2020 (APUR, base transformation)' page_debut=31, next entry starts on page 31 (numero=None). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero=None titre='Figure 8. Évolution annuelle moyenne de la population par arrondissement 1999-' page_debut=2020, next entry starts on page 36 (numero=None). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero=None titre='Figure 13. Indice dévolution annuel du nombre de vélos entre 2003 et 2020' page_debut=41, next entry starts on page 41 (numero=None). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero=None titre='Figure 14. Évolution annuelle de la circulation automobile dans paris intra-muros' page_debut=41, next entry starts on page 41 (numero=None). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero=None titre=\"Figure 24. Surface de plancher de logements programmée à l'horizon 2031 dans les opérations d’aménagement (APUR, septembre 2024)\" page_debut=196, next entry starts on page 196 (numero=None). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero=None titre='Figure 26. Variation de la surface de plancher logement à l’horizon 2035 sous l’effet du PLU (APUR, septembre 2024)' page_debut=197, next entry starts on page 197 (numero=None). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero=None titre='RAPPORT DE PRÉSENTATIONÉVALUATION ENVIRONNEMENTALE ÉVALUATION ENVIRONNEMENTALE Figure 28. Évolution du taux de logement inoccupés (APUR, septembre 2024)' page_debut=198, next entry starts on page 198 (numero=None). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero=None titre='Figure 43. Extrait du plan d’exposition au bruit de l’’héliport' page_debut=320, next entry starts on page 98 (numero=None). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero=None titre='Carte 11. Évolution des espaces verts protégés (APUR, novembre 2022)' page_debut=173, next entry starts on page 173 (numero=None). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero=None titre='Carte 16. Le taux d’espace libre de construction du PLU (APUR, décembre 2022)' page_debut=182, next entry starts on page 182 (numero=None). page_fin/nb_pages set to a 1-page lower bound.",
+    "Last entry of its branch, page_fin not reliably derivable — set to doc.page_count (352): numero=None titre='Carte 29. Prise en compte du SRCE par le PLU' page_debut=322",
+    "Anchor check MISMATCH: numero=None titre='L’urbanisme bioclimatique, une méthode au service de la transition écologique du territoire' page_debut=61 — title not found within +/-3 pages of naive physical index 60"
+  ],
+  "arbre": [
+    {
+      "numero": "1",
+      "titre": "Démarche d’évaluation environnementale",
+      "niveau": 1,
+      "page_debut": 8,
+      "page_fin": 8,
+      "nb_pages": 1,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "Approche générale de l’évaluation",
+      "niveau": 1,
+      "page_debut": 9,
+      "page_fin": 9,
+      "nb_pages": 1,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "Cadre réglementaire applicable à Paris",
+      "niveau": 1,
+      "page_debut": 9,
+      "page_fin": 9,
+      "nb_pages": 1,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "Esprit de la démarche",
+      "niveau": 1,
+      "page_debut": 10,
+      "page_fin": 13,
+      "nb_pages": 4,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "Autoévaluation du PLU",
+      "niveau": 1,
+      "page_debut": 14,
+      "page_fin": 14,
+      "nb_pages": 1,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "Développement méthodologique",
+      "niveau": 1,
+      "page_debut": 14,
+      "page_fin": 18,
+      "nb_pages": 5,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "Grilles d’analyse",
+      "niveau": 1,
+      "page_debut": 19,
+      "page_fin": 21,
+      "nb_pages": 3,
+      "enfants": []
+    },
+    {
+      "numero": "2",
+      "titre": "Analyse de l’état initial de l’environnement",
+      "niveau": 1,
+      "page_debut": 22,
+      "page_fin": 22,
+      "nb_pages": 1,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "Enjeux environnementaux auxquels le PLU doit répondre",
+      "niveau": 1,
+      "page_debut": 23,
+      "page_fin": 23,
+      "nb_pages": 1,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "Enjeux globaux",
+      "niveau": 1,
+      "page_debut": 23,
+      "page_fin": 23,
+      "nb_pages": 1,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "Enjeux locaux",
+      "niveau": 1,
+      "page_debut": 24,
+      "page_fin": 28,
+      "nb_pages": 5,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "Perspectives d’évolution de l’environnement",
+      "niveau": 1,
+      "page_debut": 29,
+      "page_fin": 29,
+      "nb_pages": 1,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "Composantes du scénario tendanciel",
+      "niveau": 1,
+      "page_debut": 29,
+      "page_fin": 43,
+      "nb_pages": 15,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "Effets potentiels sur l’environnement du scénario tendanciel",
+      "niveau": 1,
+      "page_debut": 44,
+      "page_fin": 49,
+      "nb_pages": 6,
+      "enfants": []
+    },
+    {
+      "numero": "3",
+      "titre": "Analyse des incidences notables du PLU sur l’environnement",
+      "niveau": 1,
+      "page_debut": 50,
+      "page_fin": 50,
+      "nb_pages": 1,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "Démarche d’intégration des enjeux environnementaux",
+      "niveau": 1,
+      "page_debut": 51,
+      "page_fin": 51,
+      "nb_pages": 1,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "Principales étapes de la révision",
+      "niveau": 1,
+      "page_debut": 51,
+      "page_fin": 52,
+      "nb_pages": 2,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "Explication des choix retenus",
+      "niveau": 1,
+      "page_debut": 53,
+      "page_fin": 53,
+      "nb_pages": 1,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "Alternatives raisonnables",
+      "niveau": 1,
+      "page_debut": 54,
+      "page_fin": 60,
+      "nb_pages": 7,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "Évaluation du Projet d’Aménagement et de Développement Durables (PADD)",
+      "niveau": 1,
+      "page_debut": 61,
+      "page_fin": 61,
+      "nb_pages": 1,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "L’urbanisme bioclimatique, une méthode au service de la transition écologique du territoire",
+      "niveau": 1,
+      "page_debut": 61,
+      "page_fin": 61,
+      "nb_pages": 1,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "Axe I. Une ville en transition vertueuse et résiliente",
+      "niveau": 1,
+      "page_debut": 62,
+      "page_fin": 67,
+      "nb_pages": 6,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "Axe II. Une ville inclusive, productive et solidaire",
+      "niveau": 1,
+      "page_debut": 68,
+      "page_fin": 73,
+      "nb_pages": 6,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "Axe III. Une ville qui considère et valorise ses identités urbaines",
+      "niveau": 1,
+      "page_debut": 74,
+      "page_fin": 76,
+      "nb_pages": 3,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "Synthèse de l’évaluation environnementale du PADD",
+      "niveau": 1,
+      "page_debut": 77,
+      "page_fin": 79,
+      "nb_pages": 3,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "Évaluation des OAP thématiques",
+      "niveau": 1,
+      "page_debut": 80,
+      "page_fin": 80,
+      "nb_pages": 1,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "OAP biodiversité et adaptation",
+      "niveau": 1,
+      "page_debut": 80,
+      "page_fin": 87,
+      "nb_pages": 8,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "OAP espace public",
+      "niveau": 1,
+      "page_debut": 88,
+      "page_fin": 90,
+      "nb_pages": 3,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "OAP liens métropolitains",
+      "niveau": 1,
+      "page_debut": 91,
+      "page_fin": 101,
+      "nb_pages": 11,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "OAP quartier du quart d’heure",
+      "niveau": 1,
+      "page_debut": 102,
+      "page_fin": 104,
+      "nb_pages": 3,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "OAP héritage transformation",
+      "niveau": 1,
+      "page_debut": 105,
+      "page_fin": 109,
+      "nb_pages": 5,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "OAP construction neuve",
+      "niveau": 1,
+      "page_debut": 110,
+      "page_fin": 113,
+      "nb_pages": 4,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "OAP santé publique et environnementale",
+      "niveau": 1,
+      "page_debut": 114,
+      "page_fin": 115,
+      "nb_pages": 2,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "Synthèse de l’évaluation environnementale des OAP thématiques",
+      "niveau": 1,
+      "page_debut": 116,
+      "page_fin": 120,
+      "nb_pages": 5,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "Évaluation des OAP sectorielles",
+      "niveau": 1,
+      "page_debut": 121,
+      "page_fin": 352,
+      "nb_pages": 232,
+      "enfants": [
+        {
+          "numero": null,
+          "titre": "RAPPORT DE PRÉSENTATIONÉVALUATION ENVIRONNEMENTALE ÉVALUATION ENVIRONNEMENTALE OAP Bercy – Charenton",
+          "niveau": 2,
+          "page_debut": 122,
+          "page_fin": 123,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "OAP Gare de Lyon-Daumesnil – Les Messageries",
+          "niveau": 2,
+          "page_debut": 124,
+          "page_fin": 124,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "OAP Portes de l’Est parisien",
+          "niveau": 2,
+          "page_debut": 125,
+          "page_fin": 126,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "OAP Paul Bourget",
+          "niveau": 2,
+          "page_debut": 127,
+          "page_fin": 127,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "OAP Olympiades / Villa d’Este – Place de Vénétie",
+          "niveau": 2,
+          "page_debut": 128,
+          "page_fin": 128,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "OAP Paris Rive Gauche",
+          "niveau": 2,
+          "page_debut": 129,
+          "page_fin": 131,
+          "nb_pages": 3,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "OAP Bédier – Oudiné",
+          "niveau": 2,
+          "page_debut": 132,
+          "page_fin": 132,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "OAP Saint-Vincent-de-Paul",
+          "niveau": 2,
+          "page_debut": 133,
+          "page_fin": 133,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "OAP Maine-Montparnasse",
+          "niveau": 2,
+          "page_debut": 133,
+          "page_fin": 134,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "OAP Bartholomé – Brancion",
+          "niveau": 2,
+          "page_debut": 135,
+          "page_fin": 135,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "OAP Beaugrenelle – Front de Seine",
+          "niveau": 2,
+          "page_debut": 136,
+          "page_fin": 136,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "OAP Héliport, Suzanne Lenglen, Frères Voisins, Aquaboulevard",
+          "niveau": 2,
+          "page_debut": 137,
+          "page_fin": 137,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "OAP Paris nord-est",
+          "niveau": 2,
+          "page_debut": 138,
+          "page_fin": 146,
+          "nb_pages": 9,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Synthèse de l’évaluation environnementale des OAP sectorielles",
+          "niveau": 2,
+          "page_debut": 147,
+          "page_fin": 150,
+          "nb_pages": 4,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Évaluation de la partie réglementaire",
+          "niveau": 2,
+          "page_debut": 151,
+          "page_fin": 151,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Vocation des différents espaces parisiens",
+          "niveau": 2,
+          "page_debut": 151,
+          "page_fin": 168,
+          "nb_pages": 18,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Espaces verts et qualité paysagère",
+          "niveau": 2,
+          "page_debut": 169,
+          "page_fin": 184,
+          "nb_pages": 16,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Caractéristiques du bâti et développements urbains à venir",
+          "niveau": 2,
+          "page_debut": 185,
+          "page_fin": 212,
+          "nb_pages": 28,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Optimisation de la qualité environnementale des projets",
+          "niveau": 2,
+          "page_debut": 213,
+          "page_fin": 219,
+          "nb_pages": 7,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Autres dispositions réglementaires",
+          "niveau": 2,
+          "page_debut": 220,
+          "page_fin": 225,
+          "nb_pages": 6,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Synthèse de l’évaluation environnementale du règlement",
+          "niveau": 2,
+          "page_debut": 226,
+          "page_fin": 324,
+          "nb_pages": 99,
+          "enfants": [
+            {
+              "numero": "4",
+              "titre": "Évaluation des incidences prévisibles du PLU sur Natura 2000",
+              "niveau": 3,
+              "page_debut": 233,
+              "page_fin": 247,
+              "nb_pages": 15,
+              "enfants": [
+                {
+                  "numero": "4.1",
+                  "titre": "État des lieux et enjeux écologiques susceptibles d’être touchés par la mise en œuvre du PLU de Paris",
+                  "niveau": 4,
+                  "page_debut": 234,
+                  "page_fin": 246,
+                  "nb_pages": 13,
+                  "enfants": [
+                    {
+                      "numero": "4.1.1",
+                      "titre": "Présentation du site de Seine-Saint-Denis dans son ensemble",
+                      "niveau": 5,
+                      "page_debut": 234,
+                      "page_fin": 244,
+                      "nb_pages": 11,
+                      "enfants": []
+                    },
+                    {
+                      "numero": "4.1.2",
+                      "titre": "Synthèse des enjeux environnementaux du site Natura 2000",
+                      "niveau": 5,
+                      "page_debut": 245,
+                      "page_fin": 246,
+                      "nb_pages": 2,
+                      "enfants": []
+                    }
+                  ]
+                },
+                {
+                  "numero": "4.2",
+                  "titre": "Incidences directes et indirectes",
+                  "niveau": 4,
+                  "page_debut": 247,
+                  "page_fin": 247,
+                  "nb_pages": 1,
+                  "enfants": []
+                }
+              ]
+            },
+            {
+              "numero": "5",
+              "titre": "Articulation avec les documents-cadres",
+              "niveau": 3,
+              "page_debut": 248,
+              "page_fin": 249,
+              "nb_pages": 2,
+              "enfants": []
+            },
+            {
+              "numero": null,
+              "titre": "SCOT de la métropole du Grand Paris",
+              "niveau": 3,
+              "page_debut": 250,
+              "page_fin": 276,
+              "nb_pages": 27,
+              "enfants": []
+            },
+            {
+              "numero": null,
+              "titre": "PDU de la région Île-de-France",
+              "niveau": 3,
+              "page_debut": 277,
+              "page_fin": 283,
+              "nb_pages": 7,
+              "enfants": []
+            },
+            {
+              "numero": null,
+              "titre": "PLH de Paris",
+              "niveau": 3,
+              "page_debut": 284,
+              "page_fin": 290,
+              "nb_pages": 7,
+              "enfants": []
+            },
+            {
+              "numero": null,
+              "titre": "PCAEM de la métropole du Grand Paris",
+              "niveau": 3,
+              "page_debut": 291,
+              "page_fin": 295,
+              "nb_pages": 5,
+              "enfants": []
+            },
+            {
+              "numero": null,
+              "titre": "PCAET de Paris",
+              "niveau": 3,
+              "page_debut": 296,
+              "page_fin": 299,
+              "nb_pages": 4,
+              "enfants": []
+            },
+            {
+              "numero": null,
+              "titre": "Schéma directeur de la région Île-de-France",
+              "niveau": 3,
+              "page_debut": 300,
+              "page_fin": 307,
+              "nb_pages": 8,
+              "enfants": []
+            },
+            {
+              "numero": null,
+              "titre": "Documents cadre relatifs à l’eau et aux milieux aquatiques",
+              "niveau": 3,
+              "page_debut": 308,
+              "page_fin": 308,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": null,
+              "titre": "SDAGE « Seine-Normandie »",
+              "niveau": 3,
+              "page_debut": 308,
+              "page_fin": 310,
+              "nb_pages": 3,
+              "enfants": []
+            },
+            {
+              "numero": null,
+              "titre": "SAGE de la Bièvre",
+              "niveau": 3,
+              "page_debut": 311,
+              "page_fin": 312,
+              "nb_pages": 2,
+              "enfants": []
+            },
+            {
+              "numero": null,
+              "titre": "SAGE Marne Confluence",
+              "niveau": 3,
+              "page_debut": 313,
+              "page_fin": 314,
+              "nb_pages": 2,
+              "enfants": []
+            },
+            {
+              "numero": null,
+              "titre": "PGRI Seine-Normandie",
+              "niveau": 3,
+              "page_debut": 315,
+              "page_fin": 319,
+              "nb_pages": 5,
+              "enfants": []
+            },
+            {
+              "numero": null,
+              "titre": "PEB de l’héliport de Paris – Issy-les-Moulineaux",
+              "niveau": 3,
+              "page_debut": 320,
+              "page_fin": 320,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": null,
+              "titre": "Le Schéma régional de cohérence écologique",
+              "niveau": 3,
+              "page_debut": 321,
+              "page_fin": 322,
+              "nb_pages": 2,
+              "enfants": []
+            },
+            {
+              "numero": null,
+              "titre": "Article 42 de la loi n° 85-729 du 18 juillet 1985",
+              "niveau": 3,
+              "page_debut": 323,
+              "page_fin": 323,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "6",
+              "titre": "Bilan des incidences, mesures « ERC » et suivi",
+              "niveau": 3,
+              "page_debut": 324,
+              "page_fin": 324,
+              "nb_pages": 1,
+              "enfants": []
+            }
+          ]
+        },
+        {
+          "numero": null,
+          "titre": "RAPPORT DE PRÉSENTATIONÉVALUATION ENVIRONNEMENTALE ÉVALUATION ENVIRONNEMENTALE Rappel des mesures d’évitement, de réduction et de compensation incluses dans les dispositions du PLU",
+          "niveau": 2,
+          "page_debut": 325,
+          "page_fin": 325,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Bilan des évolutions du projet de PLU révisé pour une moindre incidence sur l’environnement",
+          "niveau": 2,
+          "page_debut": 325,
+          "page_fin": 330,
+          "nb_pages": 6,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Dispositions PLU constituant des mesures au regard des effets sur l’environnement d’autres dispositions",
+          "niveau": 2,
+          "page_debut": 331,
+          "page_fin": 333,
+          "nb_pages": 3,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Manière dont le PLU répond aux enjeux environnementaux",
+          "niveau": 2,
+          "page_debut": 334,
+          "page_fin": 334,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Lutte contre le changement climatique",
+          "niveau": 2,
+          "page_debut": 335,
+          "page_fin": 335,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Préservation des ressources naturelles",
+          "niveau": 2,
+          "page_debut": 336,
+          "page_fin": 337,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Biodiversité et écosystèmes",
+          "niveau": 2,
+          "page_debut": 338,
+          "page_fin": 338,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Paysages et patrimoine",
+          "niveau": 2,
+          "page_debut": 339,
+          "page_fin": 339,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Santé environnementale des populations",
+          "niveau": 2,
+          "page_debut": 340,
+          "page_fin": 341,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Bilan des effets et incidences résiduelles de la mise en œuvre du PLU",
+          "niveau": 2,
+          "page_debut": 342,
+          "page_fin": 343,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Mesures d’accompagnement au titre des compétences de la Ville autres que la planification urbaine réglementaire",
+          "niveau": 2,
+          "page_debut": 344,
+          "page_fin": 344,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "RAPPORT DE PRÉSENTATIONÉVALUATION ENVIRONNEMENTALE ÉVALUATION ENVIRONNEMENTALE T A B L E A U X Tableau 1. Codification des thématiques environnementales",
+          "niveau": 2,
+          "page_debut": 19,
+          "page_fin": 19,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 2. Codification des niveaux d’effet sur l’environnement",
+          "niveau": 2,
+          "page_debut": 20,
+          "page_fin": 36,
+          "nb_pages": 17,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 3. Évolution du nombre d’emplois par arrondissement (INSEE)",
+          "niveau": 2,
+          "page_debut": 37,
+          "page_fin": 52,
+          "nb_pages": 16,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 4. Les grandes étapes de la révision du PLU",
+          "niveau": 2,
+          "page_debut": 53,
+          "page_fin": 77,
+          "nb_pages": 25,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 5. Synthèse des effets du PADD sur l’environnement",
+          "niveau": 2,
+          "page_debut": 78,
+          "page_fin": 117,
+          "nb_pages": 40,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 6. Synthèse des effets des OAP thématiques sur l’environnement",
+          "niveau": 2,
+          "page_debut": 118,
+          "page_fin": 121,
+          "nb_pages": 4,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 7. Calendrier de réalisation pressenti des OAP sectorielles",
+          "niveau": 2,
+          "page_debut": 122,
+          "page_fin": 147,
+          "nb_pages": 26,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 8. Synthèse des effets des OAP sectorielles sur l’environnement",
+          "niveau": 2,
+          "page_debut": 148,
+          "page_fin": 151,
+          "nb_pages": 4,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 9. Superficie des zones et secteurs « fonctionnels » du PLU",
+          "niveau": 2,
+          "page_debut": 152,
+          "page_fin": 158,
+          "nb_pages": 7,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 10. Coefficient d’emprise au sol maximal admissible dans les STECAL du bois de Boulogne",
+          "niveau": 2,
+          "page_debut": 159,
+          "page_fin": 161,
+          "nb_pages": 3,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 11. Coefficient d’emprise au sol maximal admissible dans les STECAL du bois de Vincennes",
+          "niveau": 2,
+          "page_debut": 162,
+          "page_fin": 165,
+          "nb_pages": 4,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 12. Évolution de la protection des espaces boisés et végétalisés",
+          "niveau": 2,
+          "page_debut": 166,
+          "page_fin": 168,
+          "nb_pages": 3,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 13. Potentiel de création d’espaces verts publics",
+          "niveau": 2,
+          "page_debut": 169,
+          "page_fin": 170,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 14. Variation de la superficie d’espaces verts rapportée à la population",
+          "niveau": 2,
+          "page_debut": 171,
+          "page_fin": 171,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 15. Évolution de la protection des espaces au titre de l’article L. 151-23",
+          "niveau": 2,
+          "page_debut": 172,
+          "page_fin": 173,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 16. Taux d’espaces libres de construction",
+          "niveau": 2,
+          "page_debut": 174,
+          "page_fin": 175,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 17. Unités de plantations et principe d’équivalence d’arbre en zone UG",
+          "niveau": 2,
+          "page_debut": 176,
+          "page_fin": 176,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 18. Coefficient de pondération des surfaces bâties végétalisées",
+          "niveau": 2,
+          "page_debut": 177,
+          "page_fin": 177,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 19. Indice de végétalisation du bâti selon la nature et la situation des projets",
+          "niveau": 2,
+          "page_debut": 177,
+          "page_fin": 179,
+          "nb_pages": 3,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 20. « Reste à bâtir » dans les parcelles de la zone UG, hors équipements selon les règles du PLU de 2006 (d’après APUR, décembre 2022)",
+          "niveau": 2,
+          "page_debut": 180,
+          "page_fin": 180,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 21. « Reste à bâtir » dans les parcelles de la zone UG, hors équipements selon les règles du PLU (d’après APUR, décembre 2022)",
+          "niveau": 2,
+          "page_debut": 181,
+          "page_fin": 191,
+          "nb_pages": 11,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 22. Dispositifs de protection du patrimoine bâti",
+          "niveau": 2,
+          "page_debut": 192,
+          "page_fin": 196,
+          "nb_pages": 5,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 23. Bilan de l’évolution des surfaces de plancher (d’après APUR, septembre 2024)",
+          "niveau": 2,
+          "page_debut": 197,
+          "page_fin": 198,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 24. Variation de la population projetée (d’après APUR, septembre 2024)",
+          "niveau": 2,
+          "page_debut": 199,
+          "page_fin": 199,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 25. Programmation de logement dans les opérations d’aménagement",
+          "niveau": 2,
+          "page_debut": 200,
+          "page_fin": 204,
+          "nb_pages": 5,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 26. Variation de la population exposée à une qualité de l’air dégradée",
+          "niveau": 2,
+          "page_debut": 205,
+          "page_fin": 205,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 27. Variation de la population soumise au bruit des transports",
+          "niveau": 2,
+          "page_debut": 205,
+          "page_fin": 207,
+          "nb_pages": 3,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 28. Variation de la population exposée à un risque d’inondation",
+          "niveau": 2,
+          "page_debut": 208,
+          "page_fin": 208,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 29. Variation de la population exposée à un risque géologique",
+          "niveau": 2,
+          "page_debut": 208,
+          "page_fin": 210,
+          "nb_pages": 3,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 30. Variation de la population exposée à un risque géologique",
+          "niveau": 2,
+          "page_debut": 211,
+          "page_fin": 215,
+          "nb_pages": 5,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 31. Seuils de surperformances selon les catégories de construction",
+          "niveau": 2,
+          "page_debut": 216,
+          "page_fin": 216,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 32. Répartition des nouvelles surfaces de plancher selon leur mode de production et émissions de GES induites (d’après APUR, octobre 2024)",
+          "niveau": 2,
+          "page_debut": 217,
+          "page_fin": 226,
+          "nb_pages": 10,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 33. Synthèse des effets du règlement sur l’environnement",
+          "niveau": 2,
+          "page_debut": 227,
+          "page_fin": 236,
+          "nb_pages": 10,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 34. Liste des espèces d’oiseaux inscrite au DOCOB du parc de des Beaumonts",
+          "niveau": 2,
+          "page_debut": 237,
+          "page_fin": 237,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 35. Liste des espèces d’oiseaux inscrite au DOCOB du parc de l’Ile-Saint-Denis",
+          "niveau": 2,
+          "page_debut": 238,
+          "page_fin": 239,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 36. Liste des espèces d’oiseaux inscrite au DOCOB du parc de la Haute Ile",
+          "niveau": 2,
+          "page_debut": 240,
+          "page_fin": 241,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 37. Synthèse des enjeux par sous-entités (DOCOB)",
+          "niveau": 2,
+          "page_debut": 242,
+          "page_fin": 279,
+          "nb_pages": 38,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 38. Normes minimales de stationnement cycles prévues par le PDUIF",
+          "niveau": 2,
+          "page_debut": 280,
+          "page_fin": 280,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 39. Dimensions recommandées du stationnement cycle pour les établissements d’enseignement",
+          "niveau": 2,
+          "page_debut": 280,
+          "page_fin": 283,
+          "nb_pages": 4,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 40. Objectif quantitatifs du SRHH concernant Paris",
+          "niveau": 2,
+          "page_debut": 284,
+          "page_fin": 301,
+          "nb_pages": 18,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 41. Estimation de la densité",
+          "niveau": 2,
+          "page_debut": 302,
+          "page_fin": 303,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "RAPPORT DE PRÉSENTATIONÉVALUATION ENVIRONNEMENTALE ÉVALUATION ENVIRONNEMENTALE Tableau 42. Superficies des espaces verts, et des espaces naturels, agricoles et forestiers",
+          "niveau": 2,
+          "page_debut": 304,
+          "page_fin": 322,
+          "nb_pages": 19,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Tableau 43. Suivi de l’occupation des sols de la zone des anciennes fortifications, en hectares par arrondissement",
+          "niveau": 2,
+          "page_debut": 323,
+          "page_fin": 323,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "F I G U R E S Figure 1. Total du nombre de permis de construire et des surfaces créées selon l’ampleur des surfaces créées (APUR d’après Ville de Paris)",
+          "niveau": 2,
+          "page_debut": 30,
+          "page_fin": 30,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 2. Évolution des surfaces de plancher d’habitation entre septembre 2006 et novembre 2020 (APUR, base transformation)",
+          "niveau": 2,
+          "page_debut": 31,
+          "page_fin": 31,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 3. Évolution des surfaces de plancher de bureaux entre septembre 2006 et novembre 2020 (APUR, base transformation)",
+          "niveau": 2,
+          "page_debut": 31,
+          "page_fin": 31,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 4. Évolution de l’emprise des bâtiments en élévation entre 2006 et 2020 (APUR d’après Ville)",
+          "niveau": 2,
+          "page_debut": 32,
+          "page_fin": 32,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 5. Évolution du parc de logements de 1968 à 2019 (APUR d’après INSEE)",
+          "niveau": 2,
+          "page_debut": 33,
+          "page_fin": 33,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 6. Constructions de logements à Paris entre 2006et 2017 (APUR d’après SITADEL)",
+          "niveau": 2,
+          "page_debut": 34,
+          "page_fin": 34,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 7. Évolution de la population parisienne 1968-2020 (APUR, d’après INSEE)",
+          "niveau": 2,
+          "page_debut": 35,
+          "page_fin": 2019,
+          "nb_pages": 1985,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 8. Évolution annuelle moyenne de la population par arrondissement 1999-",
+          "niveau": 2,
+          "page_debut": 2020,
+          "page_fin": 2020,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "(APUR, d’après INSEE)",
+          "niveau": 2,
+          "page_debut": 36,
+          "page_fin": 36,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 9. Évolution de l’emploi de 2000 à 2020 et de l’emploi salarié de 2011 à 2022 (APUR)",
+          "niveau": 2,
+          "page_debut": 37,
+          "page_fin": 37,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 10. Évolution des emplois entre 1999 et 2019 (APUR d’après INSEE)",
+          "niveau": 2,
+          "page_debut": 38,
+          "page_fin": 38,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 11. Répartition des emplois salariés par secteurs d’activités et évolution des emplois entre 2006 et 2019 (APUR, d’après Estel)",
+          "niveau": 2,
+          "page_debut": 39,
+          "page_fin": 39,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 12. Évolution annuelle du nombre de voyages effectués en transports en commun depuis 2010",
+          "niveau": 2,
+          "page_debut": 40,
+          "page_fin": 40,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 13. Indice dévolution annuel du nombre de vélos entre 2003 et 2020",
+          "niveau": 2,
+          "page_debut": 41,
+          "page_fin": 41,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 14. Évolution annuelle de la circulation automobile dans paris intra-muros",
+          "niveau": 2,
+          "page_debut": 41,
+          "page_fin": 41,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 15. Évolution annuelle de la circulation sur le boulevard périphérique",
+          "niveau": 2,
+          "page_debut": 41,
+          "page_fin": 41,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 16. Nombre moyen de voiture par ménage (APUR d’après Ville de Paris)",
+          "niveau": 2,
+          "page_debut": 42,
+          "page_fin": 42,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 17. Évolution du nombre de stationnements vélos entre 2009 et 2020 (APUR d’après Ville de Paris)",
+          "niveau": 2,
+          "page_debut": 43,
+          "page_fin": 76,
+          "nb_pages": 34,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 18. Profil environnemental du PADD",
+          "niveau": 2,
+          "page_debut": 77,
+          "page_fin": 115,
+          "nb_pages": 39,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 19. Profil environnemental des OAP thématiques",
+          "niveau": 2,
+          "page_debut": 116,
+          "page_fin": 146,
+          "nb_pages": 31,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 20. Profil environnemental des OAP sectorielles",
+          "niveau": 2,
+          "page_debut": 147,
+          "page_fin": 168,
+          "nb_pages": 22,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 21. Surface d'espaces verts publics programmée dans les opérations d’aménagement",
+          "niveau": 2,
+          "page_debut": 169,
+          "page_fin": 173,
+          "nb_pages": 5,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 22. Variation du taux d’espaces libres selon la superficie de la parcelle (APUR, décembre 2022)",
+          "niveau": 2,
+          "page_debut": 174,
+          "page_fin": 178,
+          "nb_pages": 5,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 23. Nature des surfaces parisiennes (APUR, décembre 2022)",
+          "niveau": 2,
+          "page_debut": 179,
+          "page_fin": 195,
+          "nb_pages": 17,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 24. Surface de plancher de logements programmée à l'horizon 2031 dans les opérations d’aménagement (APUR, septembre 2024)",
+          "niveau": 2,
+          "page_debut": 196,
+          "page_fin": 196,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 25. Surface de plancher de bureau programmée à l'horizon 2031 dans les opérations d’aménagement (APUR, septembre 2024)",
+          "niveau": 2,
+          "page_debut": 196,
+          "page_fin": 196,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 26. Variation de la surface de plancher logement à l’horizon 2035 sous l’effet du PLU (APUR, septembre 2024)",
+          "niveau": 2,
+          "page_debut": 197,
+          "page_fin": 197,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 27. Variation de la surface de plancher bureaux à l’horizon 2035 sous l’effet du PLU (APUR, septembre 2024)",
+          "niveau": 2,
+          "page_debut": 197,
+          "page_fin": 197,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "RAPPORT DE PRÉSENTATIONÉVALUATION ENVIRONNEMENTALE ÉVALUATION ENVIRONNEMENTALE Figure 28. Évolution du taux de logement inoccupés (APUR, septembre 2024)",
+          "niveau": 2,
+          "page_debut": 198,
+          "page_fin": 198,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 29. Évolution de la taille des ménages (APUR, septembre 2024)",
+          "niveau": 2,
+          "page_debut": 198,
+          "page_fin": 225,
+          "nb_pages": 28,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 30. Profil environnemental du règlement",
+          "niveau": 2,
+          "page_debut": 226,
+          "page_fin": 232,
+          "nb_pages": 7,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 31. Démarche d’évaluation des incidences Natura 2000 (Préfecture de la Loire)",
+          "niveau": 2,
+          "page_debut": 233,
+          "page_fin": 234,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 32. Le site Natura 2000 ZPS FR1112013 « Sites de la Seine-Saint-Denis »",
+          "niveau": 2,
+          "page_debut": 235,
+          "page_fin": 235,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 33. Localisation des sous-entités du site Natura 2000 vis-à-vis de Paris",
+          "niveau": 2,
+          "page_debut": 236,
+          "page_fin": 242,
+          "nb_pages": 7,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 34. Carte du SRCE Ile-de-France pour la petite couronne",
+          "niveau": 2,
+          "page_debut": 243,
+          "page_fin": 243,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 35. Continuités existantes entre le site Natura 2000 de Seine-Saint-Denis et la ville de Paris",
+          "niveau": 2,
+          "page_debut": 244,
+          "page_fin": 278,
+          "nb_pages": 35,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 36. Extraits du PDUIF : coupure urbaine et réseau cyclable structurant",
+          "niveau": 2,
+          "page_debut": 279,
+          "page_fin": 281,
+          "nb_pages": 3,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 37. Extrait du PDUIF : armature logistique régionale à Paris, cœur de métropole et agglomération des pôles de centralité",
+          "niveau": 2,
+          "page_debut": 282,
+          "page_fin": 303,
+          "nb_pages": 22,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 38. Extrait de la carte d’orientations générales du SDRIF",
+          "niveau": 2,
+          "page_debut": 304,
+          "page_fin": 304,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 39. Extrait de la carte de la composante publique de la Trame verte d’agglomération du SDRIF",
+          "niveau": 2,
+          "page_debut": 305,
+          "page_fin": 319,
+          "nb_pages": 15,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Figure 43. Extrait du plan d’exposition au bruit de l’’héliport",
+          "niveau": 2,
+          "page_debut": 320,
+          "page_fin": 320,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "C A R T E S Carte 1. Croisement des orientations sur le boulevard périphérique avec la trame écologique",
+          "niveau": 2,
+          "page_debut": 98,
+          "page_fin": 98,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Carte 2. Croisement des orientations sur la Seine et ses berges avec la trame écologique",
+          "niveau": 2,
+          "page_debut": 99,
+          "page_fin": 100,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Carte 3. Croisement des orientations sur les Bois parisiens avec la trame écologique",
+          "niveau": 2,
+          "page_debut": 101,
+          "page_fin": 153,
+          "nb_pages": 53,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Carte 4. Répartition spatiale des fonctions dans le PLU",
+          "niveau": 2,
+          "page_debut": 154,
+          "page_fin": 155,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Carte 5. « Zonage vert » du PLU",
+          "niveau": 2,
+          "page_debut": 156,
+          "page_fin": 156,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Carte 6. Évolution des zones N et UV",
+          "niveau": 2,
+          "page_debut": 157,
+          "page_fin": 163,
+          "nb_pages": 7,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Carte 7. Prise en compte des ZNIEFF par le PLU",
+          "niveau": 2,
+          "page_debut": 164,
+          "page_fin": 167,
+          "nb_pages": 4,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Carte 8. Prise en compte des continuités écologiques par le PLU",
+          "niveau": 2,
+          "page_debut": 168,
+          "page_fin": 169,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Carte 9. Création de parcs et jardins publics dans le PLU",
+          "niveau": 2,
+          "page_debut": 170,
+          "page_fin": 170,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Carte 10. Les parcs et jardins publics (APUR, novembre 2022)",
+          "niveau": 2,
+          "page_debut": 171,
+          "page_fin": 172,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Carte 11. Évolution des espaces verts protégés (APUR, novembre 2022)",
+          "niveau": 2,
+          "page_debut": 173,
+          "page_fin": 173,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Carte 12. Évolution des espaces libres protégés à végétaliser (APUR, novembre 2022)",
+          "niveau": 2,
+          "page_debut": 173,
+          "page_fin": 178,
+          "nb_pages": 6,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Carte 13. Emprises non bâties réelles dans les parcelles parisiennes (APUR, décembre 2022)",
+          "niveau": 2,
+          "page_debut": 179,
+          "page_fin": 179,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Carte 14. Taux d’espace libre réglementaire du PLU de 2006 (APUR, décembre 2022)",
+          "niveau": 2,
+          "page_debut": 180,
+          "page_fin": 180,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Carte 15. « Reste à bâtir » selon la règle des espaces libres du PLU de 2006 (APUR, décembre 2022)",
+          "niveau": 2,
+          "page_debut": 181,
+          "page_fin": 181,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Carte 16. Le taux d’espace libre de construction du PLU (APUR, décembre 2022)",
+          "niveau": 2,
+          "page_debut": 182,
+          "page_fin": 182,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Carte 17. « Reste à bâtir » selon la règle des espaces libres du PLU (APUR, décembre 2022)",
+          "niveau": 2,
+          "page_debut": 182,
+          "page_fin": 182,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Carte 18. « Reste à bâtir »et espaces protégés au titre de l’article L. 15123 (APUR, décembre 2022)",
+          "niveau": 2,
+          "page_debut": 183,
+          "page_fin": 188,
+          "nb_pages": 6,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Carte 19. Règles morphologiques du PLU",
+          "niveau": 2,
+          "page_debut": 189,
+          "page_fin": 193,
+          "nb_pages": 5,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Carte 20. Préservation du patrimoine architectural et paysager par le PLU",
+          "niveau": 2,
+          "page_debut": 194,
+          "page_fin": 200,
+          "nb_pages": 7,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Carte 21. Projets pris en compte pour simuler l’exposition future de la population aux nuisances",
+          "niveau": 2,
+          "page_debut": 201,
+          "page_fin": 202,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Carte 22. Densité de population en 2019",
+          "niveau": 2,
+          "page_debut": 203,
+          "page_fin": 203,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Carte 23. Densité de population à l’horizon 2035",
+          "niveau": 2,
+          "page_debut": 204,
+          "page_fin": 205,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "RAPPORT DE PRÉSENTATIONÉVALUATION ENVIRONNEMENTALE ÉVALUATION ENVIRONNEMENTALE Carte 24. Carte stratégique air, en 3 classes (d’après AIRPARIF, 2022)",
+          "niveau": 2,
+          "page_debut": 206,
+          "page_fin": 206,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Carte 25. « Carte stratégique bruit » en 3 classes (d’après BRUITPARIF, 2017)",
+          "niveau": 2,
+          "page_debut": 207,
+          "page_fin": 208,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Carte 26. Risque d’inondation (d’après Géorisque)",
+          "niveau": 2,
+          "page_debut": 209,
+          "page_fin": 209,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Carte 27. Risques géologique (Ville)",
+          "niveau": 2,
+          "page_debut": 210,
+          "page_fin": 211,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Carte 27. Cumul des nuisances (Urban-Éco, d’après Airparif, Bruitparif, Géorisque et Ville)",
+          "niveau": 2,
+          "page_debut": 212,
+          "page_fin": 221,
+          "nb_pages": 10,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Carte 28. Dispositions du PLU en faveur des mobilités et de la logistique urbaine",
+          "niveau": 2,
+          "page_debut": 222,
+          "page_fin": 321,
+          "nb_pages": 100,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Carte 29. Prise en compte du SRCE par le PLU",
+          "niveau": 2,
+          "page_debut": 322,
+          "page_fin": 352,
+          "nb_pages": 31,
+          "enfants": []
+        }
+      ]
+    }
+  ]
+}

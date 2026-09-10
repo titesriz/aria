@@ -6,6 +6,115 @@
 
 ---
 
+## 2026-09-09c — scratch/ fix: Rapport_presentation_MS1 2-column anchor match 90%→100% (0 commits, read-only, scratch/ only)
+
+**Done**: fixed the residual column-boundary bug in `scratch/extract_sommaire_tree_rp.py` (edited in place, not rewritten — narrow fix per instruction) without touching the column-detection decision itself (block-level split, unchanged). Root cause was NOT column mis-assignment as first assumed — PyMuPDF splits a single visual text row into multiple word-level "line" objects (confirmed: `"Correction d'une erreur de saisie concernant les"` came back as 7 separate fragments at slightly different x0, some crossing the split point purely because a wide left-column sentence extends past it). Two-part fix: (1) bucket by the BLOCK's own x0 (clean, reliable) instead of each line-fragment's own x0, so a whole sentence travels with its column regardless of individual word x-positions; (2) coalesce fragments sharing a block AND a y-band (±1.5pt) back into one logical line before grouping — needed because a leftover mid-sentence house number (e.g. "79" in "...couleur au 79 Jean-Pierre Timbaud...") was still falsely triggering "entry closed" once column-bucketing alone was fixed.
+
+**Result**: Rapport_presentation_MS1 anchor match 90%→**100%** (10/10), warnings 15→7 (all now the expected structural categories, zero corrupted/garbled entries), entries 26→27. Non-regression: RP_CHOIX stayed 100% anchor throughout (110→103 entries — a genuine side-effect of the same coalescing fix removing previously-fragmented spurious pseudo-entries, not a loss; no corruption found on inspection). REG2A1_MS1 byte-identical to its prior validated result (12 entries, 100% anchor, same 2 warnings verbatim).
+
+**Open threads**:
+- The coalescing fix (part 2) is generic (block+y-band based) but was only exercised on this one document — worth keeping in mind if a future document shows the same word-fragmentation pattern, to confirm it still helps rather than over-merges.
+- `scratch/extract_sommaire_tree_relative.py` (the relative-level rework script) has its OWN copy of the column logic, now stale relative to this fix — not updated here since this task scoped the fix to `extract_sommaire_tree_rp.py` specifically; flag if the relative-level tree for Rapport_presentation_MS1 is needed again with 100% anchor.
+
+---
+
+## 2026-09-09b — scratch/ study: transverse rework — RELATIVE level rule replaces absolute-depth (0 commits, read-only, scratch/ only)
+
+**Done**: replaced "level = absolute depth of numbering code" with a line-by-line RELATIVE rule (`scratch/relative_level_engine.py`, driven by `scratch/extract_sommaire_tree_relative.py`) across all 6 documents studied so far. Rule: a brand-new numbering profile after a different one goes one level deeper; a NESTING profile (digit-dot chains, lettered zone-codes) moves by signed depth-delta vs. its own last occurrence; a FLAT profile (PARTIE n, Annexe, Axe n, single letter/roman, ALL-CAPS heading) that recurs ANYWHERE jumps back to its first-occurrence level regardless of what happened in between; unnumbered/non-caps lines inherit the previous level. Each family's line-extraction (REG1 header-based, REG2/REG2A10 title-search, RP column/margin-band) reused byte-for-byte, unchanged.
+
+**Non-regression (checked first, per instruction)**: all 4 prior docs — **extraction itself byte-identical** (same entry count, same numero/titre/page_debut sequence/order) for REG1 (161), REG2A1 (12), REG2A10×2 (10 each). REG2A10's flat-level-1 invariant holds exactly. Only `niveau` redistributed, and every shift traces to a named rule: REG1's 4 zone-header "Caractère de la zone..." lines moved 3→2 (now inherit their ALL-CAPS header's level instead of nesting under it); REG2A1's 1 stray unnumbered paragraph moved 3→2 (same reason). **Flagged, not resolved**: task said "REG1_MS1 (58 kept sections)" — the saved tree has 161, both before and after; didn't force a match, reported the real number.
+
+**RP_CHOIX Axe check (the task's explicit target) — passed**: `"1."`→level2, `"Axe 1/2/3"`→level3 **all three**, confirming the FLAT-recurring-jump rule works as specified (Axe2/3 snap back to Axe1's anchor regardless of the digit-dot chain's depth wandering in between). RP_CHOIX: 110 entries, `{1:1,2:4,3:10,4:47,5:25,6:23}`, 100% anchor. Rapport_presentation_MS1: 26 entries, `{1:4,2:21,3:1}`, 90% anchor (same pre-existing residual mismatch, unrelated to this change).
+
+**Notable side-effect flagged for review**: because "La démarche de construction du PADD" (unnumbered) inherits level2 same as "1.", and "Axe 1" computes to level3, "Axe 1" ends up nested as a CHILD of "La démarche..." rather than a sibling under "1." — correct per the specified rule, but not how a human would read the document. Full write-up: `scratch/RELATIVE_LEVEL_FINDINGS.md`.
+
+**Open threads**:
+- REG1's "58 kept sections" figure needs clarification — doesn't match any tree produced in this study.
+- The Axe-1-nests-under-La-démarche side effect should go to the domain expert before this feeds anything downstream — it's a real, disclosed consequence of "position not meaning," not a bug, but worth a second look.
+
+---
+
+## 2026-09-09 — scratch/ study: sommaire extractor on RP_CHOIX (control) + Rapport_presentation_MS1 (2-column hard case) — 4 real bugs found+fixed (0 commits, read-only, scratch/ only)
+
+**Done**: ran the validated REG2A10 extractor **unchanged** on both targets first. Neither behaved as expected: RP_CHOIX (assumed 1-column "control") was badly broken (120 warnings) — its numbering tokens ("1.", "1.1.") sit alone on their own line, title on the next, a shape never seen before (old grouping only knows "continuation of preceding entry"). Rapport_presentation_MS1's sommaire wasn't detected at all — correctly triggered the loud "aucun sommaire détecté" warning, but root cause was a hardcoded `HEADER_BLOCK_LINES=5` (this doc's header is only 3 lines); its TOC pages are confirmed genuinely 2-column landscape.
+
+**Fixed generically**, in a fork `scratch/extract_sommaire_tree_rp.py`: (1) merge isolated numbering-token lines with their title line — **mandatory trailing dot** required (without it, a bare page number like "26" was ambiguous with a real token "2." and got glued onto the next entry, producing a bogus level-1 node). (2) header length now *discovered* per document (marker search + next-line-content disambiguation) instead of a constant — reproduces REG1's original 5 exactly, finds 4 for RP_CHOIX, 2 for the hard case. (3) new `DIGIT_DOT` numbering type, same mandatory-dot fix needed again (a wrapped street address "14 rue René Villermé..." was misread as entry `numero="14"` without it). (4) column detection: first attempt clustered *lines* by x0 and broke twice — RP_CHOIX's decorative right-aligned header/footer created a false 2nd cluster (fixed: require ≥20% of content each side, not just "several lines"); the hard case's real 2-column page had noisy line-level x0 with no clean gap even though *block*-level x0 was clean (fixed: decide the split from blocks, apply it to lines). Also needed a 90pt absolute margin band excluding header/footer from column clustering — the footer must be **dropped outright, not repositioned** (repositioning caused a real bug: a footer line parsed as a bogus entry with page_debut=103, the doc's own total page count).
+
+**Results**: RP_CHOIX 110 entries, 100% anchor match (was the "easy" one, ended up needing the most new rules). Rapport_presentation_MS1 (genuine hard case) 26 entries, 90% anchor match (9/10) — **not fully clean, disclosed not hidden**: a few entries still mix wrapped text across the column boundary on its densest page (full list in `scratch/REG2_RP_FINDINGS.md`), judged diminishing-returns to chase further this pass. Non-regression: REG2A1_MS1 re-run with this same hardened script — 12 entries, 100% anchor, byte-identical to its original validated result.
+
+**Open threads**:
+- Rapport_presentation_MS1's residual ~10% anchor miss and 2 garbled `numero=None` entries are real, unresolved — a future pass could try per-entry (not per-page) column assignment for lines that wrap across the boundary.
+- The mandatory-trailing-dot fix (applied twice now, isolated-numbering and DIGIT_DOT) suggests a general principle worth promoting: any "bare numbering token" rule in this family should require the terminal punctuation that distinguishes it from incidental digits (page numbers, house numbers) — worth stating explicitly if a shared/generic extractor is ever built from these forks.
+
+---
+
+## 2026-09-08e — scratch/ study: sommaire extractor on REG2A10_1DE2/2DE2 (Annexe X, arr. 1-10/11-20) — 2 real generalizable bugs found+fixed (0 commits, read-only, scratch/ only)
+
+**Done**: ran the validated REG2A1 extractor (`scratch/extract_sommaire_tree_reg2.py`) **unchanged** against `REG2A10_1DE2_MS1.pdf` (700p) first, per method. TOC detection and parsing worked (10 entries found), but the output was wrong in two ways — both are REG2A1 assumptions breaking on a new shape, not REG2A10-specific quirks: (1) **runaway nesting** (level 2→11 instead of 10 flat siblings) — REG2A1's "unnumbered entry nests under whatever's on the stack" rule assumed unnumbered entries are rare exceptions; here **all 10** entries are unnumbered (no "Annexe"/"partie" prefix at all — just ALL-CAPS "LISTE DES PROTECTIONS PATRIMONIALES DU Nème ARRONDISSEMENT" headings), so each nested under the previous one instead of being its sibling. (2) **false anchor-check offset** (-3, votes {0:1,-3:9}) — REG2A1's anchor matcher only checked the first 4 normalized words; all 10 titles here share those same first 4 words (identical to the running page header repeated on every page), so it kept matching neighbouring arrondissements' pages instead of the right one. Manually verified via `doc[47:52].get_text()` that the real per-document offset is **+1** (printed page N = physical index N), not -1 like REG1/REG2A1.
+
+**Fixed generically** in a fork, `scratch/extract_sommaire_tree_reg2_a10.py` (REG2A1 script untouched): (1) unnumbered entries now nest under the last **numbered** ancestor (tracked separately), defaulting to level 1 — verified this doesn't change REG2A1's own result by hand-tracing it. (2) anchor check now matches the full normalized title, not a word-count prefix. Also wired in this task's robustness rules: loud "aucun sommaire détecté" path (unused here, real TOC found both times), last-branch-entry `page_fin` set to `doc.page_count` instead of null, every `numero=None` node flagged in warnings.
+
+**Result (both files)**: 10 flat level-1 entries each, 100% anchor match, dominant offset +1 (9/10 votes). Outputs: `scratch/reg2a10_1de2_ms1_sommaire_tree.json`, `scratch/reg2a10_2de2_ms1_sommaire_tree.json`. Full write-up: `scratch/REG2A10_FINDINGS.md`.
+
+**Open threads**:
+- Flagged, not resolved: the task's "`numero=None` = fused into parent, not standalone" convention doesn't semantically fit here — these 10 unnumbered nodes ARE the document's real primary structure (one ~40-130 page arrondissement table each), not incidental text like REG2A1's stray paragraph. Needs a human call before Notion injection: keep the "fused" label as-is, or add a distinct category for "unnumbered but structurally primary."
+- The per-document offset (+1 here vs -1 for REG1/REG2A1) is real and undocumented anywhere else — worth carrying as an explicit per-family field if/when this feeds a shared extractor, rather than assuming one offset convention repo-wide.
+
+---
+
+## 2026-09-08d — scratch/ study: page-1 title-layout survey across all 409 PDFs of "PLU bioclimatique" (0 commits, read-only, scratch/ only)
+
+**Done**: `scratch/survey_page1_titles.py` — fast first-pass classifier (get_text + get_image_info only, no get_drawings, ~2min for 409 files) over the whole `Ressources/PLU bioclimatique/` tree. For each PDF: page-1 layout type + a title-extraction feasibility verdict based only on methods already validated this session (gap-Y for linéaire pages; a lightweight font-size-outlier proxy, NOT the full vector-frame detector, for graphic pages). Output: `scratch/page1_title_survey.csv` (409 rows).
+
+**Bug caught before trusting results**: initial version misclassified `OAP_BARTHOLOME_BRANCION.pdf` — validated EARLIER THIS SESSION as a clean "couverture linéaire, OUI" case — as "planche graphique/INCERTAIN", purely because its full-bleed cover photo gives `image_area_ratio=1.0`, same as a real map plan. Fixed by checking span-count (≤20) BEFORE the image-ratio branch, since a short title over a background photo and a map with hundreds of labels are structurally different even at the same image coverage. Re-ran; `OAP_BARTHOLOME_BRANCION.pdf` now correctly lands back in "couverture / OUI".
+
+**Final counts (post-fix)**: types — 216 "planche graphique avec encart", 107 "aucun texte exploitable (scan pur, e.g. all PPRI plans — spot-checked, genuinely 0 chars)", 49 "couverture/titre linéaire", 28 "sommaire dense", 9 "linéaire courant". Feasibility — 214 PROBABLE (graphic pages, font-outlier proxy only, **not** the heavier frame detector), 107 NON (no text at all), 65 OUI (linéaire/sommaire, methods already validated), 23 INCERTAIN (mostly short-span couverture pages with no dominant font size, 2 graphic pages with no size outlier at all — the ASUP2AD5 pattern).
+
+**Open threads**:
+- The "PROBABLE" bucket (214 files) is NOT frame-verified — it's the cheap proxy only. `scratch/detect_encart_rect.py` (the real `get_drawings()` check) has so far only run on 2 of these 216 files, with mixed results (1 legend frame found, 0 title-cartouche matches) — don't treat PROBABLE as validated at scale.
+- `ASUP1_2025_12_19.pdf` (contains real "Annexe" text, flagged 2 entries ago) is still the best candidate to actually confirm the vector-frame hypothesis — not yet run.
+- The 21 "couverture/INCERTAIN" files are worth a manual skim — could be a distinct sub-pattern (e.g. two same-size title lines, no dominant outlier) needing its own small rule.
+
+---
+
+## 2026-09-08c — scratch/ study: encart detector, 2nd file (A15152_01A04) — legend box found, title cartouche still not (0 commits, read-only, scratch/ only)
+
+**Done**: added `A15152_01A04_2025_12_19.pdf` (`Ressources/.../Annexes/Plans autres périmètres/`) to `scratch/detect_encart_rect.py`'s `PDF_PATHS` and re-ran (still read-only, still no threshold coded). Only 57 spans on page 1; only 1 matches the anchor vocabulary at all, and it's a buried parenthetical ("(liste détaillée en annexe au PLU)"), not a title. **New positive signal though**: the script cleanly isolated a real vector-framed box — `bbox (0,842,595,1684)`, white fill + gray stroke, containing exactly 26 spans starting with "Légende" ("Le droit de préemption...", "et du 7ème arrondissement...", "Fond de plan..."). That's a genuine **legend** box, frame-detectable exactly as hoped — just not the "Annexes" **title** cartouche the original task specified. Declared conclusion for this file: same `⚠️ "rectangles présents mais aucun ne correspond à l'encart titre"` bucket as ASUP2AD5, but for a different reason (title text nearly absent here, vs. present-but-unframed there).
+
+**Read across 2 files now tested**: neither contains the described "Annexes / Servitudes d'utilité publique / II. Utilisation..." title cartouche. But the mechanism itself (vector rect containing a dense, coherent text cluster) is validated once, on a legend box — encouraging for "frame detection works when a frame exists," independent of whether the *specific* title text shows up.
+
+**Open threads**:
+- Still haven't tested the vector-frame hypothesis on a file that actually contains the "Annexes" title text — `ASUP1_2025_12_19.pdf` (flagged previous entry) remains the best lead, not yet run.
+- Legend-box detection (this session's actual positive result) could itself become a separate, useful "encart" sub-type worth its own rule, distinct from title-inset detection — not scoped/decided here.
+
+---
+
+## 2026-09-08b — scratch/ study: encart (title-inset) detector on ASUP2AD5 — vector-frame hypothesis rejected (0 commits, read-only, scratch/ only)
+
+**Done**: `scratch/detect_encart_rect.py` (read-only, `get_drawings()` + `get_text("dict")`, no threshold coded) tests whether ASUP2AD5's assumed title inset ("Annexes", "Servitudes d'utilité publique", "II. Utilisation…", black frame/white fill) is isolable as a vector-drawn rectangle. **Finding, checked before running the full script**: the described anchor text does not exist anywhere on ASUP2AD5's page 1 at all (`get_text` has zero spans matching annexe/servitude/utilisation/énergie/circulation-aérienne beyond unrelated "SERVITUDES CONCERNANT..." labels) — this file is a single-page raster map mosaic (5 embedded images, up to 21480×15188px) with ~1670 plausible vector rectangles, but they're page borders and colored arrondissement/zone outlines, not a title cartouche. **Conclusion: ⚠️ "rectangles présents mais aucun ne correspond à l'encart titre"** — the top candidate by span-count is the whole-page border (200/200 spans), not a small title box.
+
+**Lead for next step (not chased, out of scope for this task)**: `ASUP1_2025_12_19.pdf` (same folder, `Ressources/PLU bioclimatique/Annexes/Plans SUP/`) does contain 108 spans matching "Annexe(s)" — likely the actual legend/index sheet the task's description was drawn from, distinct from ASUP2AD5 (a specific geographic plan tile). The task said "commencer par ASUP2AD5" implying more files to follow; this is the natural next candidate.
+
+**Open threads**:
+- Vector-frame hypothesis is untested on a file that actually has the described cartouche — re-run `detect_encart_rect.py` against `ASUP1_2025_12_19.pdf` before concluding "frame detector doesn't work" vs. "wrong file was picked."
+- If ASUP1 also has no matching frame, the fallback (text-anchor "Annexes" + proximity) becomes the working hypothesis for the "planche à encart" layout class — not yet validated either way.
+
+---
+
+## 2026-09-08 — scratch/ study: sommaire-tree extraction (REG1→REG2) + page-1 line-gap diagnostic (0 commits, read-only, scratch/ only)
+
+**Done**: three disposable studies, no production code touched, no PDFs split/modified. (1) `scratch/extract_sommaire_tree.py`: outline extractor validated on REG1_MS1 (161 entries, 5 levels, two numbering systems, 100% anchor-check match after fixing an ALL-CAPS-wrap grouping bug and a `page_fin < page_debut` dense-page clamp bug). (2) Extended to REG2A1 (Tome 2, annex/table type): ran the REG1 script **unchanged** first — silent total failure (0 pages, 0 entries, no error) because REG2's header never says "SOMMAIRE" and its numbering vocabulary (`Annexe I :`, `1ère partie :`) shares zero regexes with REG1. Wrote `scratch/extract_sommaire_tree_reg2.py` (generalized TOC-page detection via body-content title search + line-shape continuation, instead of header-text match) — 12 entries, 3 levels, 100% anchor match. Full generic-vs-specific breakdown in `scratch/REG2_FINDINGS.md`. (3) `scratch/dump_page1_line_gaps.py`: read-only span-gap dump (page 1 only) across 4 PDFs to observe the `gap_y/font_size` ratio distribution ahead of a future title-extraction threshold — **no threshold coded, observation only**.
+
+**Finding worth flagging**: `ASUP2AD5.pdf` (expected to be "the richest multi-level case") turned out to be a graphic map plan (servitudes/street-name labels scattered across a plan, not linear prose) — its page-1 span y-ordering is largely non-monotonic with reading order, producing mostly noisy negative ratios; it does **not** exhibit the "II. Utilisation… → ressources et équipements" wrap-vs-section pattern the task described. `PADD.pdf` and `OAP_BARTHOLOME_BRANCION.pdf` did show the expected two-cluster shape (small ratios ≈ [-0.85, 1.09] for wraps, one large outlier ≈ 15–25 for the real block break to the legal boilerplate line). `ANNAD1_2025_12_19.pdf` has only one transition, ratio -15.44, too little signal to judge either way.
+
+**Open threads**:
+- ASUP2AD5 needs a different diagnostic (or exclusion from the page-1-title heuristic entirely) — it's a plan/legend page, not a titled document; don't assume it validates the ratio threshold.
+- The generalized TOC-detection rule from REG2 (body-content title search + shape-based continuation) is a candidate to replace REG1's header-text rule as the shared/generic version — untested against REG1 itself, flagged for a follow-up pass before promoting it.
+- REG2A1's one heuristically-flagged "body text mis-shaped as TOC entry" (Annexe III, page 14) still needs a human call: keep as a tree node or drop.
+- Threshold itself (ratio cutoff separating wrap from section-break) is intentionally undecided — next step is picking it with the domain expert once more PDFs are dumped, per the task's own instruction not to hardcode a decision here.
+
+---
+
 **Correction (2026-07-21):** the T6/T7 task labels below were briefly swapped in this file's narrative — a29296f (table_row scoping, `_annexe_route`, CH-06 13/13) is **T7**, 79adb0f (faithful Notion→JSON export script) is **T6**. Fixed here; git history/commit messages untouched.
 
 ## T6 — 2026-07-21 — Faithful Notion export replaces golden_dataset.json (1 commit, 0 re-ingest, 0 restart)

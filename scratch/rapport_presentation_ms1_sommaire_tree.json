@@ -1,0 +1,375 @@
+{
+  "doc": "Rapport_presentation_MS1.pdf",
+  "chemin_relatif": "Ressources/PLU bioclimatique/Rapport de présentation/Rapport_presentation_MS1.pdf",
+  "sommaire_pages_detected": {
+    "physical_indices_0based": [
+      2,
+      3
+    ],
+    "printed_page_numbers": [
+      3,
+      4
+    ]
+  },
+  "numbering_rule_used": "Numbering profiles tried in order: PARTIE n (FLAT), Annexe <roman> (FLAT), <ordinal> partie (FLAT), Axe n (FLAT), a leading code + N dot-digit-groups e.g. UG.1.4/C.1/N.1.2.2 (NESTING, depth=N), a bare digit-dot chain e.g. 1/1.1/2.14 (NESTING, depth=dot-group count), a single letter or roman numeral (FLAT), an ALL-CAPS unnumbered heading (FLAT). LEVEL is relative, not absolute depth: a recurring FLAT profile jumps back to its first-occurrence level regardless of what happened in between; a NESTING profile moves by the signed depth-delta vs. its own last occurrence; an unnumbered/non-caps line inherits the previous level; first entry of the document = level 1. Header length and TOC-page range are discovered per document (title-marker search + shape-based continuation), not assumed from a fixed line count. TOC pages are read in column order (block-level x0 clustering decides 1 vs 2 columns; fragments sharing a block and a y-band are coalesced before grouping, to avoid a wide sentence or a mid-sentence number corrupting the read).",
+  "anchor_check": {
+    "sample_size": 10,
+    "match_rate": 1.0,
+    "dominant_offset_detected": 0,
+    "offset_votes": {
+      "-2": 2,
+      "0": 8
+    },
+    "results": [
+      {
+        "numero": "1",
+        "titre": "Avertissement",
+        "page_debut": 5,
+        "naive_physical_index": 4,
+        "matched": true,
+        "offset_detected": -2
+      },
+      {
+        "numero": "1.2",
+        "titre": "Évaluation environnementale",
+        "page_debut": 5,
+        "naive_physical_index": 4,
+        "matched": true,
+        "offset_detected": -2
+      },
+      {
+        "numero": "2.1",
+        "titre": "Déplacement d’un filet de couleur au droit de la piscine municipale de la Butte aux Cailles, 50-52 rue du Moulinet, 13e arrondissement [atlas n° 2 du règlement]",
+        "page_debut": 10,
+        "naive_physical_index": 9,
+        "matched": true,
+        "offset_detected": 0
+      },
+      {
+        "numero": "2.4",
+        "titre": "Correction d’une erreur de saisie concernant l’emplacement réservé en vue de la réalisation de certains types de logements au 8bis rue de Châteaudun (9e arrondissement) [Annexe V du règlement]",
+        "page_debut": 15,
+        "naive_physical_index": 14,
+        "matched": true,
+        "offset_detected": 0
+      },
+      {
+        "numero": "2.7",
+        "titre": "Modification du filet de couleur au 79 Jean-Pierre Timbaud/2 rue Morand (11e arrdt) [Atlas n° 2 du règlement]",
+        "page_debut": 20,
+        "naive_physical_index": 19,
+        "matched": true,
+        "offset_detected": 0
+      },
+      {
+        "numero": "2.10",
+        "titre": "Gabarit-enveloppe applicable au lot n°5 de la ZAC Python- Duvernois [Atlas n°2]",
+        "page_debut": 80,
+        "naive_physical_index": 79,
+        "matched": true,
+        "offset_detected": 0
+      },
+      {
+        "numero": "2.12",
+        "titre": "Suppression de l’emplacement réservé en vue de la réalisation de certains types de logements et du périmètre de localisation pour équipement de petite enfance au 80-82 rue de Longchamp (16e arrondissement) [Annexes IV et V du règlement et atlas n° 2]",
+        "page_debut": 84,
+        "naive_physical_index": 83,
+        "matched": true,
+        "offset_detected": 0
+      },
+      {
+        "numero": "2.15",
+        "titre": "Suppression de l’emplacement réservé en vue de la réalisation de certains types de logements au 26 rue Clément Marot / 1-3 rue des Cerisoles (8e arrondissement) [Annexe V du règlement et atlas n° 2]",
+        "page_debut": 90,
+        "naive_physical_index": 89,
+        "matched": true,
+        "offset_detected": 0
+      },
+      {
+        "numero": "4.1",
+        "titre": "Schéma de cohérence territoriale (SCoT) de la métropole du Grand Paris",
+        "page_debut": 98,
+        "naive_physical_index": 97,
+        "matched": true,
+        "offset_detected": 0
+      },
+      {
+        "numero": "4.4",
+        "titre": "Plan climat air énergie métropolitain et Plan climat de Paris",
+        "page_debut": 100,
+        "naive_physical_index": 99,
+        "matched": true,
+        "offset_detected": 0
+      }
+    ]
+  },
+  "warnings": [
+    "Entry with no trailing page number found, skipped: '2.9. Application de la règle de mixité sociale (UG.1.5.1) à la Cité internationale universitaire de Paris [Règlement, sous-section'",
+    "Entry with no trailing page number found, skipped: 'Plan local d’urbanisme de Paris'",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='1.1' titre='Nature du présent document' page_debut=5, next entry starts on page 5 (numero='1.2'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='1.2' titre='Évaluation environnementale' page_debut=5, next entry starts on page 5 (numero='1.3'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Last entry of its branch, page_fin not reliably derivable — set to doc.page_count (103): numero='4' titre='Articulation du PLU avec les documents cadres' page_debut=98",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='4.1' titre='Schéma de cohérence territoriale (SCoT) de la métropole du Grand Paris' page_debut=98, next entry starts on page 98 (numero='4.2'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='4.3' titre='Programme local de l’habitat (PLH) de Paris' page_debut=100, next entry starts on page 100 (numero='4.4'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='4.5' titre='PEB de l’héliport de Paris – Issy-les-Moulineaux' page_debut=103, next entry starts on page 103 (numero='4.6'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Last entry of its branch, page_fin not reliably derivable — set to doc.page_count (103): numero='4.6' titre='Article 42 de la loi n° 85-729 du 18 juillet 1985' page_debut=103"
+  ],
+  "arbre": [
+    {
+      "numero": "1",
+      "titre": "Avertissement",
+      "niveau": 1,
+      "page_debut": 5,
+      "page_fin": 9,
+      "nb_pages": 5,
+      "enfants": [
+        {
+          "numero": "1.1",
+          "titre": "Nature du présent document",
+          "niveau": 2,
+          "page_debut": 5,
+          "page_fin": 5,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": "1.2",
+          "titre": "Évaluation environnementale",
+          "niveau": 2,
+          "page_debut": 5,
+          "page_fin": 5,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": "1.3",
+          "titre": "Contenu du rapport de présentation",
+          "niveau": 2,
+          "page_debut": 5,
+          "page_fin": 9,
+          "nb_pages": 5,
+          "enfants": []
+        }
+      ]
+    },
+    {
+      "numero": "2",
+      "titre": "Les dispositions du PLU modifiées",
+      "niveau": 1,
+      "page_debut": 10,
+      "page_fin": 91,
+      "nb_pages": 82,
+      "enfants": [
+        {
+          "numero": "2.1",
+          "titre": "Déplacement d’un filet de couleur au droit de la piscine municipale de la Butte aux Cailles, 50-52 rue du Moulinet, 13e arrondissement [atlas n° 2 du règlement]",
+          "niveau": 2,
+          "page_debut": 10,
+          "page_fin": 11,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": "2.2",
+          "titre": "Suppression de deux espaces libres protégés à végétaliser au 14 rue René Villermé (11e arrdt) et au 1 villa de l’Ermitage (20e arrdt) [atlas n° 2 du règlement]",
+          "niveau": 2,
+          "page_debut": 12,
+          "page_fin": 13,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": "2.3",
+          "titre": "Correction d’une erreur de saisie concernant les caractéristiques d’un emplacement réservé en vue de la réalisation de certains types de logements au 40 rue Notre-Dame des Victoires (2e arrdt) [Annexe V du règlement]",
+          "niveau": 2,
+          "page_debut": 14,
+          "page_fin": 14,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": "2.4",
+          "titre": "Correction d’une erreur de saisie concernant l’emplacement réservé en vue de la réalisation de certains types de logements au 8bis rue de Châteaudun (9e arrondissement) [Annexe V du règlement]",
+          "niveau": 2,
+          "page_debut": 15,
+          "page_fin": 15,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": "2.5",
+          "titre": "Suppression de l’emplacement réservé en vue de la réalisation de certains types de logements au 6 rue Cambacérès (8e arrondissement) [Annexe V du règlement et atlas n° 2]",
+          "niveau": 2,
+          "page_debut": 16,
+          "page_fin": 17,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": "2.6",
+          "titre": "Ajout d’un périmètre de localisation pour espace vert ouvert au public au 29 rue de la Santé (13e arrondissement) par la mise en cohérence du document graphique et de l’annexe IV [Atlas n° 2]",
+          "niveau": 2,
+          "page_debut": 18,
+          "page_fin": 19,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": "2.7",
+          "titre": "Modification du filet de couleur au 79 Jean-Pierre Timbaud/2 rue Morand (11e arrdt) [Atlas n° 2 du règlement]",
+          "niveau": 2,
+          "page_debut": 20,
+          "page_fin": 20,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": "2.8",
+          "titre": "Correction de 60 erreurs concernant des bâtiments et éléments particuliers protégés [Annexe X et atlas n° 2 du règlement]",
+          "niveau": 2,
+          "page_debut": 21,
+          "page_fin": 79,
+          "nb_pages": 59,
+          "enfants": [
+            {
+              "numero": "UG.1.5.1",
+              "titre": "et fond de plan de l’Atlas n°2]",
+              "niveau": 3,
+              "page_debut": 79,
+              "page_fin": 79,
+              "nb_pages": 1,
+              "enfants": []
+            }
+          ]
+        },
+        {
+          "numero": "2.10",
+          "titre": "Gabarit-enveloppe applicable au lot n°5 de la ZAC Python- Duvernois [Atlas n°2]",
+          "niveau": 2,
+          "page_debut": 80,
+          "page_fin": 80,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": "2.11",
+          "titre": "Application des règles de mixité sociale (UG.1.5.1) et de mixité fonctionnelle (UG1.4.1) aux emplacements réservés logements ayant fait l’objet d’une renonciation à acquérir suite à mise en œuvre du droit de délaissement [Règlement sous-sections UG.1.5.1 et UG.1.4.1]",
+          "niveau": 2,
+          "page_debut": 81,
+          "page_fin": 83,
+          "nb_pages": 3,
+          "enfants": []
+        },
+        {
+          "numero": "2.12",
+          "titre": "Suppression de l’emplacement réservé en vue de la réalisation de certains types de logements et du périmètre de localisation pour équipement de petite enfance au 80-82 rue de Longchamp (16e arrondissement) [Annexes IV et V du règlement et atlas n° 2]",
+          "niveau": 2,
+          "page_debut": 84,
+          "page_fin": 85,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": "2.13",
+          "titre": "Suppression de l’emplacement réservé en vue de la réalisation de certains types de logements au 30 rue Rennequin (17e arrondissement) [Annexe V du règlement et atlas n° 2]",
+          "niveau": 2,
+          "page_debut": 86,
+          "page_fin": 87,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": "2.14",
+          "titre": "Suppression de l’emplacement réservé en vue de la réalisation de certains types de logements au 7 rue du Boccador / 10-12 rue de La Trémoille (8e arrondissement) [Annexe V du règlement et atlas n° 2]",
+          "niveau": 2,
+          "page_debut": 88,
+          "page_fin": 89,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": "2.15",
+          "titre": "Suppression de l’emplacement réservé en vue de la réalisation de certains types de logements au 26 rue Clément Marot / 1-3 rue des Cerisoles (8e arrondissement) [Annexe V du règlement et atlas n° 2]",
+          "niveau": 2,
+          "page_debut": 90,
+          "page_fin": 91,
+          "nb_pages": 2,
+          "enfants": []
+        }
+      ]
+    },
+    {
+      "numero": "3",
+      "titre": "Incidences environnementales du PLU modifié",
+      "niveau": 1,
+      "page_debut": 92,
+      "page_fin": 97,
+      "nb_pages": 6,
+      "enfants": []
+    },
+    {
+      "numero": "4",
+      "titre": "Articulation du PLU avec les documents cadres",
+      "niveau": 1,
+      "page_debut": 98,
+      "page_fin": 103,
+      "nb_pages": 6,
+      "enfants": [
+        {
+          "numero": "4.1",
+          "titre": "Schéma de cohérence territoriale (SCoT) de la métropole du Grand Paris",
+          "niveau": 2,
+          "page_debut": 98,
+          "page_fin": 98,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": "4.2",
+          "titre": "Le plan de déplacements urbains d’île de France (PDUIF)",
+          "niveau": 2,
+          "page_debut": 98,
+          "page_fin": 99,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": "4.3",
+          "titre": "Programme local de l’habitat (PLH) de Paris",
+          "niveau": 2,
+          "page_debut": 100,
+          "page_fin": 100,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": "4.4",
+          "titre": "Plan climat air énergie métropolitain et Plan climat de Paris",
+          "niveau": 2,
+          "page_debut": 100,
+          "page_fin": 102,
+          "nb_pages": 3,
+          "enfants": []
+        },
+        {
+          "numero": "4.5",
+          "titre": "PEB de l’héliport de Paris – Issy-les-Moulineaux",
+          "niveau": 2,
+          "page_debut": 103,
+          "page_fin": 103,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": "4.6",
+          "titre": "Article 42 de la loi n° 85-729 du 18 juillet 1985",
+          "niveau": 2,
+          "page_debut": 103,
+          "page_fin": 103,
+          "nb_pages": 1,
+          "enfants": []
+        }
+      ]
+    }
+  ]
+}

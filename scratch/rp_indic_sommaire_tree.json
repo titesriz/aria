@@ -1,0 +1,296 @@
+{
+  "doc": "RP_INDIC.pdf",
+  "chemin_relatif": "Ressources/PLU bioclimatique/Rapport de présentation/RP_INDIC.pdf",
+  "sommaire_pages_detected": {
+    "physical_indices_0based": [
+      1
+    ],
+    "printed_page_numbers": [
+      2
+    ]
+  },
+  "numbering_rule_used": "Numbering profiles tried in order: PARTIE n (FLAT), Annexe <roman> (FLAT), <ordinal> partie (FLAT), Axe n (FLAT), a leading code + N dot-digit-groups e.g. UG.1.4/C.1/N.1.2.2 (NESTING, depth=N), a bare digit-dot chain e.g. 1/1.1/2.14 (NESTING, depth=dot-group count), a single letter or roman numeral (FLAT), an ALL-CAPS unnumbered heading (FLAT). LEVEL is relative, not absolute depth: a recurring FLAT profile jumps back to its first-occurrence level regardless of what happened in between; a NESTING profile moves by the signed depth-delta vs. its own last occurrence; an unnumbered/non-caps line inherits the previous level; first entry of the document = level 1. Header length and TOC-page range are discovered per document (title-marker search + shape-based continuation), not assumed from a fixed line count. TOC pages are read in column order (block-level x0 clustering decides 1 vs 2 columns; fragments sharing a block and a y-band are coalesced before grouping, to avoid a wide sentence or a mid-sentence number corrupting the read).",
+  "anchor_check": {
+    "sample_size": 10,
+    "match_rate": 0.9,
+    "dominant_offset_detected": 1,
+    "offset_votes": {
+      "1": 6,
+      "0": 2,
+      "-1": 1
+    },
+    "results": [
+      {
+        "numero": null,
+        "titre": "T A B L E A U X Tableau 1. Indicateurs « Un développement urbain équilibré »",
+        "page_debut": 13,
+        "naive_physical_index": 12,
+        "matched": false,
+        "offset_detected": null
+      },
+      {
+        "numero": null,
+        "titre": "Tableau 2. Indicateurs « Lutte contre le changement climatique »",
+        "page_debut": 16,
+        "naive_physical_index": 15,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": null,
+        "titre": "Tableau 4. Indicateurs « Patrimoine naturel et paysager »",
+        "page_debut": 22,
+        "naive_physical_index": 21,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": null,
+        "titre": "Tableau 6. Nombre, typologie et vacance des locaux commerciaux",
+        "page_debut": 28,
+        "naive_physical_index": 27,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": "1",
+        "titre": "Procédure de suivi et d’actualisation",
+        "page_debut": 2,
+        "naive_physical_index": 1,
+        "matched": true,
+        "offset_detected": 0
+      },
+      {
+        "numero": "1.2",
+        "titre": "Actualisation des indicateurs",
+        "page_debut": 2,
+        "naive_physical_index": 1,
+        "matched": true,
+        "offset_detected": 0
+      },
+      {
+        "numero": "2.1",
+        "titre": "Un développement urbain équilibré",
+        "page_debut": 3,
+        "naive_physical_index": 2,
+        "matched": true,
+        "offset_detected": -1
+      },
+      {
+        "numero": "2.3",
+        "titre": "Préservation des ressources naturelles",
+        "page_debut": 17,
+        "naive_physical_index": 16,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": "2.5",
+        "titre": "Santé environnementale des populations",
+        "page_debut": 22,
+        "naive_physical_index": 21,
+        "matched": true,
+        "offset_detected": 1
+      },
+      {
+        "numero": "3.1",
+        "titre": "État des lieux à partir de la BD COM 2023",
+        "page_debut": 27,
+        "naive_physical_index": 26,
+        "matched": true,
+        "offset_detected": 1
+      }
+    ]
+  },
+  "warnings": [
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='T A B L E A U X Tableau 1. Indicateurs « Un développement urbain équilibré »' page_debut=13",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 2. Indicateurs « Lutte contre le changement climatique »' page_debut=16",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 3. Indicateurs « Préservation des ressources naturelles »' page_debut=19",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 4. Indicateurs « Patrimoine naturel et paysager »' page_debut=22",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 5. Indicateurs « Santé environnementale des populations »' page_debut=26",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 6. Nombre, typologie et vacance des locaux commerciaux' page_debut=28",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Tableau 7. Protection des locaux commerciaux' page_debut=30",
+    "Last entry of its branch, page_fin not reliably derivable — set to doc.page_count (31): numero=None titre='Tableau 7. Protection des locaux commerciaux' page_debut=30",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='1.1' titre='Définition des indicateurs' page_debut=2, next entry starts on page 2 (numero='1.2'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Last entry of its branch, page_fin not reliably derivable — set to doc.page_count (31): numero='3' titre='Annexe : détail du suivi des locaux commerciaux' page_debut=27",
+    "Last entry of its branch, page_fin not reliably derivable — set to doc.page_count (31): numero='3.2' titre='Croisement de la BD COM 2023 avec les linéaires de protection des commerces' page_debut=28",
+    "Anchor check MISMATCH: numero=None titre='T A B L E A U X Tableau 1. Indicateurs « Un développement urbain équilibré »' page_debut=13 — title not found within +/-3 pages of naive physical index 12"
+  ],
+  "arbre": [
+    {
+      "numero": null,
+      "titre": "T A B L E A U X Tableau 1. Indicateurs « Un développement urbain équilibré »",
+      "niveau": 1,
+      "page_debut": 13,
+      "page_fin": 15,
+      "nb_pages": 3,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "Tableau 2. Indicateurs « Lutte contre le changement climatique »",
+      "niveau": 1,
+      "page_debut": 16,
+      "page_fin": 18,
+      "nb_pages": 3,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "Tableau 3. Indicateurs « Préservation des ressources naturelles »",
+      "niveau": 1,
+      "page_debut": 19,
+      "page_fin": 21,
+      "nb_pages": 3,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "Tableau 4. Indicateurs « Patrimoine naturel et paysager »",
+      "niveau": 1,
+      "page_debut": 22,
+      "page_fin": 25,
+      "nb_pages": 4,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "Tableau 5. Indicateurs « Santé environnementale des populations »",
+      "niveau": 1,
+      "page_debut": 26,
+      "page_fin": 27,
+      "nb_pages": 2,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "Tableau 6. Nombre, typologie et vacance des locaux commerciaux",
+      "niveau": 1,
+      "page_debut": 28,
+      "page_fin": 29,
+      "nb_pages": 2,
+      "enfants": []
+    },
+    {
+      "numero": null,
+      "titre": "Tableau 7. Protection des locaux commerciaux",
+      "niveau": 1,
+      "page_debut": 30,
+      "page_fin": 31,
+      "nb_pages": 2,
+      "enfants": [
+        {
+          "numero": "1",
+          "titre": "Procédure de suivi et d’actualisation",
+          "niveau": 2,
+          "page_debut": 2,
+          "page_fin": 2,
+          "nb_pages": 1,
+          "enfants": [
+            {
+              "numero": "1.1",
+              "titre": "Définition des indicateurs",
+              "niveau": 3,
+              "page_debut": 2,
+              "page_fin": 2,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "1.2",
+              "titre": "Actualisation des indicateurs",
+              "niveau": 3,
+              "page_debut": 2,
+              "page_fin": 2,
+              "nb_pages": 1,
+              "enfants": []
+            }
+          ]
+        },
+        {
+          "numero": "2",
+          "titre": "Présentation des indicateurs de suivi",
+          "niveau": 2,
+          "page_debut": 3,
+          "page_fin": 26,
+          "nb_pages": 24,
+          "enfants": [
+            {
+              "numero": "2.1",
+              "titre": "Un développement urbain équilibré",
+              "niveau": 3,
+              "page_debut": 3,
+              "page_fin": 12,
+              "nb_pages": 10,
+              "enfants": []
+            },
+            {
+              "numero": "2.2",
+              "titre": "Lutte contre le changement climatique",
+              "niveau": 3,
+              "page_debut": 13,
+              "page_fin": 16,
+              "nb_pages": 4,
+              "enfants": []
+            },
+            {
+              "numero": "2.3",
+              "titre": "Préservation des ressources naturelles",
+              "niveau": 3,
+              "page_debut": 17,
+              "page_fin": 18,
+              "nb_pages": 2,
+              "enfants": []
+            },
+            {
+              "numero": "2.4",
+              "titre": "Patrimoine naturel et paysager",
+              "niveau": 3,
+              "page_debut": 19,
+              "page_fin": 21,
+              "nb_pages": 3,
+              "enfants": []
+            },
+            {
+              "numero": "2.5",
+              "titre": "Santé environnementale des populations",
+              "niveau": 3,
+              "page_debut": 22,
+              "page_fin": 26,
+              "nb_pages": 5,
+              "enfants": []
+            }
+          ]
+        },
+        {
+          "numero": "3",
+          "titre": "Annexe : détail du suivi des locaux commerciaux",
+          "niveau": 2,
+          "page_debut": 27,
+          "page_fin": 31,
+          "nb_pages": 5,
+          "enfants": [
+            {
+              "numero": "3.1",
+              "titre": "État des lieux à partir de la BD COM 2023",
+              "niveau": 3,
+              "page_debut": 27,
+              "page_fin": 27,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "3.2",
+              "titre": "Croisement de la BD COM 2023 avec les linéaires de protection des commerces",
+              "niveau": 3,
+              "page_debut": 28,
+              "page_fin": 31,
+              "nb_pages": 4,
+              "enfants": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

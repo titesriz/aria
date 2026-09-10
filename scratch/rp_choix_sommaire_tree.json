@@ -1,0 +1,1203 @@
+{
+  "doc": "RP_CHOIX.pdf",
+  "chemin_relatif": "Ressources/PLU bioclimatique/Rapport de présentation/RP_CHOIX.pdf",
+  "sommaire_pages_detected": {
+    "physical_indices_0based": [
+      1,
+      2,
+      3
+    ],
+    "printed_page_numbers": [
+      2,
+      3,
+      4
+    ]
+  },
+  "numbering_rule_used": "Numbering profiles tried in order: PARTIE n (FLAT), Annexe <roman> (FLAT), <ordinal> partie (FLAT), Axe n (FLAT), a leading code + N dot-digit-groups e.g. UG.1.4/C.1/N.1.2.2 (NESTING, depth=N), a bare digit-dot chain e.g. 1/1.1/2.14 (NESTING, depth=dot-group count), a single letter or roman numeral (FLAT), an ALL-CAPS unnumbered heading (FLAT). LEVEL is relative, not absolute depth: a recurring FLAT profile jumps back to its first-occurrence level regardless of what happened in between; a NESTING profile moves by the signed depth-delta vs. its own last occurrence; an unnumbered/non-caps line inherits the previous level; first entry of the document = level 1. Header length and TOC-page range are discovered per document (title-marker search + shape-based continuation), not assumed from a fixed line count. TOC pages are read in column order (block-level x0 clustering decides 1 vs 2 columns; fragments sharing a block and a y-band are coalesced before grouping, to avoid a wide sentence or a mid-sentence number corrupting the read).",
+  "anchor_check": {
+    "sample_size": 10,
+    "match_rate": 1.0,
+    "dominant_offset_detected": 0,
+    "offset_votes": {
+      "-3": 1,
+      "0": 8,
+      "-1": 1
+    },
+    "results": [
+      {
+        "numero": null,
+        "titre": "Introduction - le contenu du rapport de présentation dans le code de l’urbanisme",
+        "page_debut": 5,
+        "naive_physical_index": 4,
+        "matched": true,
+        "offset_detected": -3
+      },
+      {
+        "numero": "1.3.1",
+        "titre": "Vers une ville pensée pour la santé et le bien-être de ses habitants, adaptée à l’évolution des modes de vie",
+        "page_debut": 15,
+        "naive_physical_index": 14,
+        "matched": true,
+        "offset_detected": 0
+      },
+      {
+        "numero": "1.6",
+        "titre": "Maintenir et faire revenir les activités de fabrication en ville",
+        "page_debut": 21,
+        "naive_physical_index": 20,
+        "matched": true,
+        "offset_detected": 0
+      },
+      {
+        "numero": "1.7.2",
+        "titre": "Les équipements publics, socles de la vie de quartier",
+        "page_debut": 25,
+        "naive_physical_index": 24,
+        "matched": true,
+        "offset_detected": 0
+      },
+      {
+        "numero": "1.1",
+        "titre": "Les OAP thématiques",
+        "page_debut": 31,
+        "naive_physical_index": 30,
+        "matched": true,
+        "offset_detected": -1
+      },
+      {
+        "numero": "1.2.3",
+        "titre": "Liste des OAP sectorielles",
+        "page_debut": 68,
+        "naive_physical_index": 67,
+        "matched": true,
+        "offset_detected": 0
+      },
+      {
+        "numero": "1.4.2",
+        "titre": "Chapitre UG.2 : Caractéristiques architecturales et urbaines des constructions, aspect extérieur",
+        "page_debut": 133,
+        "naive_physical_index": 132,
+        "matched": true,
+        "offset_detected": 0
+      },
+      {
+        "numero": "UGSU",
+        "titre": "2.2 Dispositions applicables aux constructions neuves",
+        "page_debut": 249,
+        "naive_physical_index": 248,
+        "matched": true,
+        "offset_detected": 0
+      },
+      {
+        "numero": "1.6",
+        "titre": "Zone urbaine verte (UV)",
+        "page_debut": 256,
+        "naive_physical_index": 255,
+        "matched": true,
+        "offset_detected": 0
+      },
+      {
+        "numero": "1.7.2",
+        "titre": "Chapitre N.2 : Caractéristiques des constructions",
+        "page_debut": 263,
+        "naive_physical_index": 262,
+        "matched": true,
+        "offset_detected": 0
+      }
+    ]
+  },
+  "warnings": [
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Introduction - le contenu du rapport de présentation dans le code de l’urbanisme' page_debut=5",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='La démarche de construction du PADD' page_debut=5",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Le constat du diagnostic territorial et de l’état initial de l’environnement' page_debut=19",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='La réponse du projet d’aménagement et de développement durables' page_debut=20",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Le constat du diagnostic territorial et de l’état initial de l’environnement' page_debut=21",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='La réponse du projet d’aménagement et de développement durables' page_debut=22",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Le constat du diagnostic territorial et de l’état initial de l’environnement' page_debut=24",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='La réponse du projet d’aménagement et de développement durables' page_debut=24",
+    "Entry with no trailing page number found, skipped: 'RAPPORT DE PRÉSENTATION 6e PARTIE INTRODUCTION - LE CONTENU DU RAPPORT DE PRÉSENTATION DANS LE CODE DE L’URBANISME'",
+    "Entry with no trailing page number found, skipped: 'RAPPORT DE PRÉSENTATION 6e PARTIE INTRODUCTION - LE CONTENU DU RAPPORT DE PRÉSENTATION DANS LE CODE DE L’URBANISME'",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Rappel des obligations juridiques' page_debut=271",
+    "Last entry of its branch, page_fin not reliably derivable — set to doc.page_count (283): numero=None titre='Introduction - le contenu du rapport de présentation dans le code de l’urbanisme' page_debut=5",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='1' titre='Les choix retenus pour établir le PADD' page_debut=5, next entry starts on page 5 (numero=None). page_fin/nb_pages set to a 1-page lower bound.",
+    "Last entry of its branch, page_fin not reliably derivable — set to doc.page_count (283): numero=None titre='La démarche de construction du PADD' page_debut=5",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='1.1.1' titre='Donner sa place à la nature en ville' page_debut=8, next entry starts on page 8 (numero='1.1.2'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='1.3.1' titre='Vers une ville pensée pour la santé et le bien-être de ses habitants, adaptée à l’évolution des modes de vie' page_debut=15, next entry starts on page 15 (numero='1.3.2'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='1.5' titre='La centralité de Paris au service de ses habitants et de la métropole' page_debut=19, next entry starts on page 19 (numero=None). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='1.5.1' titre='Paris au défi de l’économie de la connaissance' page_debut=20, next entry starts on page 20 (numero='1.5.2'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='1.6' titre='Maintenir et faire revenir les activités de fabrication en ville' page_debut=21, next entry starts on page 21 (numero=None). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='1.6.1' titre='L’économie de l’innovation au service de l’emploi et la société' page_debut=22, next entry starts on page 22 (numero='1.6.2'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='1.6.3' titre='Réduire et valoriser les déchets : l’économie circulaire' page_debut=23, next entry starts on page 23 (numero='1.6.4'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='1.7' titre='Le « quartier du quart d’heure », un nouvel horizon pour l’aménagement urbain' page_debut=24, next entry starts on page 24 (numero=None). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero=None titre='Le constat du diagnostic territorial et de l’état initial de l’environnement' page_debut=24, next entry starts on page 24 (numero=None). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='1.7.2' titre='Les équipements publics, socles de la vie de quartier' page_debut=25, next entry starts on page 25 (numero='1.7.3'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='1.7.3' titre='Protéger et intégrer les commerces de proximité' page_debut=25, next entry starts on page 25 (numero='Axe 3'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='1.8.1' titre='Le grand paysage parisien, vecteur d’une identité exceptionnelle' page_debut=26, next entry starts on page 26 (numero='1.8.2'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='1.8.3' titre='Penser la nature comme un patrimoine intégré dans le paysage parisien' page_debut=27, next entry starts on page 27 (numero='1.9'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='1.9.1' titre='Transformer et adapter plutôt que démolir et reconstruire' page_debut=28, next entry starts on page 28 (numero='1.9.2'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='1.2.2' titre='Le contenu des OAP sectorielles' page_debut=68, next entry starts on page 68 (numero='1.2.3'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Last entry of its branch, page_fin not reliably derivable — set to doc.page_count (283): numero='3' titre='Les choix retenus pour établir les dispositions réglementaires' page_debut=76",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='1.3.4' titre='Application du règlement aux divisions foncières' page_debut=90, next entry starts on page 90 (numero='1.3.5'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Last entry of its branch, page_fin not reliably derivable — set to doc.page_count (283): numero='1.5' titre='Zone urbaine de grands services urbains' page_debut=245",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='UGSU' titre='2.2 Dispositions applicables aux constructions neuves' page_debut=249, next entry starts on page 249 (numero='UGSU'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='1.5.3' titre='Chapitre UGSU.3. : Implantation, hauteur et volumétrie des constructions' page_debut=250, next entry starts on page 250 (numero='UGSU'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='1.5.5' titre='Chapitre UGSU.5. : Conception bioclimatique et performances environnementales' page_debut=254, next entry starts on page 254 (numero='1.5.6'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='1.5.6' titre='Chapitre UGSU.6. : Réseaux et assainissement, déchets' page_debut=254, next entry starts on page 254 (numero='1.5.7'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='1.6.5' titre='Chapitre UV.5. : Conception bioclimatique et performances environnementales' page_debut=260, next entry starts on page 260 (numero='1.6.6'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='1.6.6' titre='Chapitre UV.6. Réseaux et assainissement, déchets' page_debut=260, next entry starts on page 260 (numero='1.6.7'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='1.7.5' titre='Chapitre N.5 : Conception bioclimatique et performances environnementales des constructions' page_debut=269, next entry starts on page 269 (numero='1.7.6'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='1.7.6' titre='Chapitre N.6 : Réseaux, assainissement et déchets' page_debut=269, next entry starts on page 269 (numero='1.7.7'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='4' titre='Analyse de la consommation d’espaces naturels, agricoles et forestiers et de la capacité de densification de Paris' page_debut=271, next entry starts on page 271 (numero=None). page_fin/nb_pages set to a 1-page lower bound.",
+    "Last entry of its branch, page_fin not reliably derivable — set to doc.page_count (283): numero=None titre='Rappel des obligations juridiques' page_debut=271",
+    "Last entry of its branch, page_fin not reliably derivable — set to doc.page_count (283): numero='1.9' titre='Analyse de la capacité de densification de Paris et de mutation des espaces bâtis, en tenant compte des formes urbaines et architecturales' page_debut=273",
+    "Last entry of its branch, page_fin not reliably derivable — set to doc.page_count (283): numero='1.9.2' titre='L’évolution future des tissus urbains parisiens' page_debut=278"
+  ],
+  "arbre": [
+    {
+      "numero": null,
+      "titre": "Introduction - le contenu du rapport de présentation dans le code de l’urbanisme",
+      "niveau": 1,
+      "page_debut": 5,
+      "page_fin": 283,
+      "nb_pages": 279,
+      "enfants": [
+        {
+          "numero": "1",
+          "titre": "Les choix retenus pour établir le PADD",
+          "niveau": 2,
+          "page_debut": 5,
+          "page_fin": 5,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "La démarche de construction du PADD",
+          "niveau": 2,
+          "page_debut": 5,
+          "page_fin": 283,
+          "nb_pages": 279,
+          "enfants": [
+            {
+              "numero": "Axe 1",
+              "titre": "Une ville en transition vertueuse et résiliente",
+              "niveau": 3,
+              "page_debut": 7,
+              "page_fin": 15,
+              "nb_pages": 9,
+              "enfants": [
+                {
+                  "numero": "1.1",
+                  "titre": "La nature en ville : atout majeur du cadre de vie et de l’adaptation au changement climatique",
+                  "niveau": 4,
+                  "page_debut": 7,
+                  "page_fin": 10,
+                  "nb_pages": 4,
+                  "enfants": [
+                    {
+                      "numero": "1.1.1",
+                      "titre": "Donner sa place à la nature en ville",
+                      "niveau": 5,
+                      "page_debut": 8,
+                      "page_fin": 8,
+                      "nb_pages": 1,
+                      "enfants": []
+                    },
+                    {
+                      "numero": "1.1.2",
+                      "titre": "Faire du sol, du végétal et de l’eau des éléments structurants du cadre urbain",
+                      "niveau": 5,
+                      "page_debut": 8,
+                      "page_fin": 10,
+                      "nb_pages": 3,
+                      "enfants": []
+                    }
+                  ]
+                },
+                {
+                  "numero": "1.2",
+                  "titre": "La réduction de l’empreinte carbone de la ville",
+                  "niveau": 4,
+                  "page_debut": 11,
+                  "page_fin": 13,
+                  "nb_pages": 3,
+                  "enfants": [
+                    {
+                      "numero": "1.2.1",
+                      "titre": "Les bâtiments comme supports privilégiés de la lutte contre le changement climatique",
+                      "niveau": 5,
+                      "page_debut": 12,
+                      "page_fin": 12,
+                      "nb_pages": 1,
+                      "enfants": []
+                    },
+                    {
+                      "numero": "1.2.2",
+                      "titre": "Promouvoir une mobilité faiblement émettrice de carbone",
+                      "niveau": 5,
+                      "page_debut": 13,
+                      "page_fin": 13,
+                      "nb_pages": 1,
+                      "enfants": []
+                    }
+                  ]
+                },
+                {
+                  "numero": "1.3",
+                  "titre": "La santé environnementale, enjeu majeur de la résilience",
+                  "niveau": 4,
+                  "page_debut": 14,
+                  "page_fin": 15,
+                  "nb_pages": 2,
+                  "enfants": [
+                    {
+                      "numero": "1.3.1",
+                      "titre": "Vers une ville pensée pour la santé et le bien-être de ses habitants, adaptée à l’évolution des modes de vie",
+                      "niveau": 5,
+                      "page_debut": 15,
+                      "page_fin": 15,
+                      "nb_pages": 1,
+                      "enfants": []
+                    },
+                    {
+                      "numero": "1.3.2",
+                      "titre": "Une démarche de prévention des risques et d’atténuation des pollutions pour favoriser l’amélioration de la qualité de vie",
+                      "niveau": 5,
+                      "page_debut": 15,
+                      "page_fin": 15,
+                      "nb_pages": 1,
+                      "enfants": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "numero": "Axe 2",
+              "titre": "Une ville inclusive, productive et solidaire",
+              "niveau": 3,
+              "page_debut": 16,
+              "page_fin": 24,
+              "nb_pages": 9,
+              "enfants": [
+                {
+                  "numero": "1.4",
+                  "titre": "Le logement, premier moteur de l’inclusion",
+                  "niveau": 4,
+                  "page_debut": 16,
+                  "page_fin": 18,
+                  "nb_pages": 3,
+                  "enfants": [
+                    {
+                      "numero": "1.4.1",
+                      "titre": "Offrir à tous les publics un accès à l’hébergement et à un logement digne, abordable et adapté",
+                      "niveau": 5,
+                      "page_debut": 17,
+                      "page_fin": 17,
+                      "nb_pages": 1,
+                      "enfants": []
+                    },
+                    {
+                      "numero": "1.4.2",
+                      "titre": "Développer un parc de logements qualitatif et non excluant",
+                      "niveau": 5,
+                      "page_debut": 18,
+                      "page_fin": 18,
+                      "nb_pages": 1,
+                      "enfants": []
+                    }
+                  ]
+                },
+                {
+                  "numero": "1.5",
+                  "titre": "La centralité de Paris au service de ses habitants et de la métropole",
+                  "niveau": 4,
+                  "page_debut": 19,
+                  "page_fin": 19,
+                  "nb_pages": 1,
+                  "enfants": []
+                },
+                {
+                  "numero": null,
+                  "titre": "Le constat du diagnostic territorial et de l’état initial de l’environnement",
+                  "niveau": 4,
+                  "page_debut": 19,
+                  "page_fin": 19,
+                  "nb_pages": 1,
+                  "enfants": []
+                },
+                {
+                  "numero": null,
+                  "titre": "La réponse du projet d’aménagement et de développement durables",
+                  "niveau": 4,
+                  "page_debut": 20,
+                  "page_fin": 20,
+                  "nb_pages": 1,
+                  "enfants": [
+                    {
+                      "numero": "1.5.1",
+                      "titre": "Paris au défi de l’économie de la connaissance",
+                      "niveau": 5,
+                      "page_debut": 20,
+                      "page_fin": 20,
+                      "nb_pages": 1,
+                      "enfants": []
+                    },
+                    {
+                      "numero": "1.5.2",
+                      "titre": "Partager au service de tous les richesses engendrées par une « ville- monde »",
+                      "niveau": 5,
+                      "page_debut": 20,
+                      "page_fin": 20,
+                      "nb_pages": 1,
+                      "enfants": []
+                    }
+                  ]
+                },
+                {
+                  "numero": "1.6",
+                  "titre": "Maintenir et faire revenir les activités de fabrication en ville",
+                  "niveau": 4,
+                  "page_debut": 21,
+                  "page_fin": 21,
+                  "nb_pages": 1,
+                  "enfants": []
+                },
+                {
+                  "numero": null,
+                  "titre": "Le constat du diagnostic territorial et de l’état initial de l’environnement",
+                  "niveau": 4,
+                  "page_debut": 21,
+                  "page_fin": 21,
+                  "nb_pages": 1,
+                  "enfants": []
+                },
+                {
+                  "numero": null,
+                  "titre": "La réponse du projet d’aménagement et de développement durables",
+                  "niveau": 4,
+                  "page_debut": 22,
+                  "page_fin": 23,
+                  "nb_pages": 2,
+                  "enfants": [
+                    {
+                      "numero": "1.6.1",
+                      "titre": "L’économie de l’innovation au service de l’emploi et la société",
+                      "niveau": 5,
+                      "page_debut": 22,
+                      "page_fin": 22,
+                      "nb_pages": 1,
+                      "enfants": []
+                    },
+                    {
+                      "numero": "1.6.2",
+                      "titre": "Les activités de production, patrimoine et socle de l’emploi de demain",
+                      "niveau": 5,
+                      "page_debut": 22,
+                      "page_fin": 22,
+                      "nb_pages": 1,
+                      "enfants": []
+                    },
+                    {
+                      "numero": "1.6.3",
+                      "titre": "Réduire et valoriser les déchets : l’économie circulaire",
+                      "niveau": 5,
+                      "page_debut": 23,
+                      "page_fin": 23,
+                      "nb_pages": 1,
+                      "enfants": []
+                    },
+                    {
+                      "numero": "1.6.4",
+                      "titre": "Vers une agriculture urbaine durable",
+                      "niveau": 5,
+                      "page_debut": 23,
+                      "page_fin": 23,
+                      "nb_pages": 1,
+                      "enfants": []
+                    }
+                  ]
+                },
+                {
+                  "numero": "1.7",
+                  "titre": "Le « quartier du quart d’heure », un nouvel horizon pour l’aménagement urbain",
+                  "niveau": 4,
+                  "page_debut": 24,
+                  "page_fin": 24,
+                  "nb_pages": 1,
+                  "enfants": []
+                },
+                {
+                  "numero": null,
+                  "titre": "Le constat du diagnostic territorial et de l’état initial de l’environnement",
+                  "niveau": 4,
+                  "page_debut": 24,
+                  "page_fin": 24,
+                  "nb_pages": 1,
+                  "enfants": []
+                },
+                {
+                  "numero": null,
+                  "titre": "La réponse du projet d’aménagement et de développement durables",
+                  "niveau": 4,
+                  "page_debut": 24,
+                  "page_fin": 24,
+                  "nb_pages": 1,
+                  "enfants": [
+                    {
+                      "numero": "1.7.1",
+                      "titre": "Une ville pour toutes et tous : les enjeux de genre, d’âge et de handicap dans la ville et l’espace public",
+                      "niveau": 5,
+                      "page_debut": 24,
+                      "page_fin": 24,
+                      "nb_pages": 1,
+                      "enfants": []
+                    },
+                    {
+                      "numero": "1.7.2",
+                      "titre": "Les équipements publics, socles de la vie de quartier",
+                      "niveau": 5,
+                      "page_debut": 25,
+                      "page_fin": 25,
+                      "nb_pages": 1,
+                      "enfants": []
+                    },
+                    {
+                      "numero": "1.7.3",
+                      "titre": "Protéger et intégrer les commerces de proximité",
+                      "niveau": 5,
+                      "page_debut": 25,
+                      "page_fin": 25,
+                      "nb_pages": 1,
+                      "enfants": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "numero": "Axe 3",
+              "titre": "Une ville qui considère et valorise ses identités urbaines",
+              "niveau": 3,
+              "page_debut": 25,
+              "page_fin": 29,
+              "nb_pages": 5,
+              "enfants": [
+                {
+                  "numero": "1.8",
+                  "titre": "Valoriser le grand paysage et l’identité de quartier",
+                  "niveau": 4,
+                  "page_debut": 25,
+                  "page_fin": 26,
+                  "nb_pages": 2,
+                  "enfants": [
+                    {
+                      "numero": "1.8.1",
+                      "titre": "Le grand paysage parisien, vecteur d’une identité exceptionnelle",
+                      "niveau": 5,
+                      "page_debut": 26,
+                      "page_fin": 26,
+                      "nb_pages": 1,
+                      "enfants": []
+                    },
+                    {
+                      "numero": "1.8.2",
+                      "titre": "Préserver les multiples identités de Paris et valoriser son patrimoine urbain",
+                      "niveau": 5,
+                      "page_debut": 26,
+                      "page_fin": 26,
+                      "nb_pages": 1,
+                      "enfants": []
+                    },
+                    {
+                      "numero": "1.8.3",
+                      "titre": "Penser la nature comme un patrimoine intégré dans le paysage parisien",
+                      "niveau": 5,
+                      "page_debut": 27,
+                      "page_fin": 27,
+                      "nb_pages": 1,
+                      "enfants": []
+                    }
+                  ]
+                },
+                {
+                  "numero": "1.9",
+                  "titre": "La transformation du tissu urbain pour concilier préservation patrimoniale, transition écologique et inclusion sociale",
+                  "niveau": 4,
+                  "page_debut": 27,
+                  "page_fin": 29,
+                  "nb_pages": 3,
+                  "enfants": [
+                    {
+                      "numero": "1.9.1",
+                      "titre": "Transformer et adapter plutôt que démolir et reconstruire",
+                      "niveau": 5,
+                      "page_debut": 28,
+                      "page_fin": 28,
+                      "nb_pages": 1,
+                      "enfants": []
+                    },
+                    {
+                      "numero": "1.9.2",
+                      "titre": "Faire évoluer les projets urbains et leur conception dans une approche bioclimatique",
+                      "niveau": 5,
+                      "page_debut": 28,
+                      "page_fin": 28,
+                      "nb_pages": 1,
+                      "enfants": []
+                    },
+                    {
+                      "numero": "1.9.3",
+                      "titre": "Promouvoir une approche transversale et globale de l’espace public",
+                      "niveau": 5,
+                      "page_debut": 29,
+                      "page_fin": 29,
+                      "nb_pages": 1,
+                      "enfants": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "numero": "2",
+              "titre": "Les choix retenus pour établir les OAP",
+              "niveau": 3,
+              "page_debut": 30,
+              "page_fin": 75,
+              "nb_pages": 46,
+              "enfants": [
+                {
+                  "numero": "1.1",
+                  "titre": "Les OAP thématiques",
+                  "niveau": 4,
+                  "page_debut": 31,
+                  "page_fin": 66,
+                  "nb_pages": 36,
+                  "enfants": [
+                    {
+                      "numero": "1.1.1",
+                      "titre": "OAP Biodiversité et adaptation au changement climatique",
+                      "niveau": 5,
+                      "page_debut": 31,
+                      "page_fin": 39,
+                      "nb_pages": 9,
+                      "enfants": []
+                    },
+                    {
+                      "numero": "1.1.2",
+                      "titre": "OAP Héritage et transformation",
+                      "niveau": 5,
+                      "page_debut": 40,
+                      "page_fin": 43,
+                      "nb_pages": 4,
+                      "enfants": []
+                    },
+                    {
+                      "numero": "1.1.3",
+                      "titre": "OAP Construction neuve",
+                      "niveau": 5,
+                      "page_debut": 44,
+                      "page_fin": 47,
+                      "nb_pages": 4,
+                      "enfants": []
+                    },
+                    {
+                      "numero": "1.1.4",
+                      "titre": "OAP Quartier du quart d’heure",
+                      "niveau": 5,
+                      "page_debut": 48,
+                      "page_fin": 53,
+                      "nb_pages": 6,
+                      "enfants": []
+                    },
+                    {
+                      "numero": "1.1.5",
+                      "titre": "OAP Espace public",
+                      "niveau": 5,
+                      "page_debut": 54,
+                      "page_fin": 57,
+                      "nb_pages": 4,
+                      "enfants": []
+                    },
+                    {
+                      "numero": "1.1.6",
+                      "titre": "OAP Liens métropolitains",
+                      "niveau": 5,
+                      "page_debut": 58,
+                      "page_fin": 60,
+                      "nb_pages": 3,
+                      "enfants": []
+                    },
+                    {
+                      "numero": "1.1.7",
+                      "titre": "OAP Santé environnementale",
+                      "niveau": 5,
+                      "page_debut": 61,
+                      "page_fin": 66,
+                      "nb_pages": 6,
+                      "enfants": []
+                    }
+                  ]
+                },
+                {
+                  "numero": "1.2",
+                  "titre": "Les OAP sectorielles",
+                  "niveau": 4,
+                  "page_debut": 67,
+                  "page_fin": 75,
+                  "nb_pages": 9,
+                  "enfants": [
+                    {
+                      "numero": "1.2.1",
+                      "titre": "OAP sectorielles : principes généraux",
+                      "niveau": 5,
+                      "page_debut": 67,
+                      "page_fin": 67,
+                      "nb_pages": 1,
+                      "enfants": []
+                    },
+                    {
+                      "numero": "1.2.2",
+                      "titre": "Le contenu des OAP sectorielles",
+                      "niveau": 5,
+                      "page_debut": 68,
+                      "page_fin": 68,
+                      "nb_pages": 1,
+                      "enfants": []
+                    },
+                    {
+                      "numero": "1.2.3",
+                      "titre": "Liste des OAP sectorielles",
+                      "niveau": 5,
+                      "page_debut": 68,
+                      "page_fin": 68,
+                      "nb_pages": 1,
+                      "enfants": []
+                    },
+                    {
+                      "numero": "1.2.4",
+                      "titre": "La cohérence des OAP sectorielles avec le PADD",
+                      "niveau": 5,
+                      "page_debut": 69,
+                      "page_fin": 75,
+                      "nb_pages": 7,
+                      "enfants": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "numero": "3",
+              "titre": "Les choix retenus pour établir les dispositions réglementaires",
+              "niveau": 3,
+              "page_debut": 76,
+              "page_fin": 283,
+              "nb_pages": 208,
+              "enfants": [
+                {
+                  "numero": "1.3",
+                  "titre": "Modalités d’application du règlement et dispositions générales applicables à l’ensemble du territoire parisien",
+                  "niveau": 4,
+                  "page_debut": 76,
+                  "page_fin": 91,
+                  "nb_pages": 16,
+                  "enfants": [
+                    {
+                      "numero": "1.3.1",
+                      "titre": "Division du territoire en zones et secteurs",
+                      "niveau": 5,
+                      "page_debut": 76,
+                      "page_fin": 85,
+                      "nb_pages": 10,
+                      "enfants": []
+                    },
+                    {
+                      "numero": "1.3.2",
+                      "titre": "Statut réglementaire des voies",
+                      "niveau": 5,
+                      "page_debut": 86,
+                      "page_fin": 86,
+                      "nb_pages": 1,
+                      "enfants": []
+                    },
+                    {
+                      "numero": "1.3.3",
+                      "titre": "Application du règlement aux constructions existantes",
+                      "niveau": 5,
+                      "page_debut": 87,
+                      "page_fin": 89,
+                      "nb_pages": 3,
+                      "enfants": []
+                    },
+                    {
+                      "numero": "1.3.4",
+                      "titre": "Application du règlement aux divisions foncières",
+                      "niveau": 5,
+                      "page_debut": 90,
+                      "page_fin": 90,
+                      "nb_pages": 1,
+                      "enfants": []
+                    },
+                    {
+                      "numero": "1.3.5",
+                      "titre": "Définitions",
+                      "niveau": 5,
+                      "page_debut": 90,
+                      "page_fin": 91,
+                      "nb_pages": 2,
+                      "enfants": []
+                    }
+                  ]
+                },
+                {
+                  "numero": "1.4",
+                  "titre": "Zone urbaine générale (UG)",
+                  "niveau": 4,
+                  "page_debut": 92,
+                  "page_fin": 244,
+                  "nb_pages": 153,
+                  "enfants": [
+                    {
+                      "numero": "1.4.1",
+                      "titre": "Chapitre UG.1 : Occupation et utilisation des sols, destinations des constructions",
+                      "niveau": 5,
+                      "page_debut": 94,
+                      "page_fin": 132,
+                      "nb_pages": 39,
+                      "enfants": []
+                    },
+                    {
+                      "numero": "1.4.2",
+                      "titre": "Chapitre UG.2 : Caractéristiques architecturales et urbaines des constructions, aspect extérieur",
+                      "niveau": 5,
+                      "page_debut": 133,
+                      "page_fin": 139,
+                      "nb_pages": 7,
+                      "enfants": []
+                    },
+                    {
+                      "numero": "1.4.3",
+                      "titre": "Chapitre UG.3 : Implantation, hauteur et volumétrie des constructions",
+                      "niveau": 5,
+                      "page_debut": 140,
+                      "page_fin": 172,
+                      "nb_pages": 33,
+                      "enfants": []
+                    },
+                    {
+                      "numero": "1.4.4",
+                      "titre": "Chapitre UG.4 : Espaces libres, végétalisation, abords des constructions",
+                      "niveau": 5,
+                      "page_debut": 173,
+                      "page_fin": 193,
+                      "nb_pages": 21,
+                      "enfants": []
+                    },
+                    {
+                      "numero": "1.4.5",
+                      "titre": "Chapitre UG.5 : Conception bioclimatique et performances environnementales",
+                      "niveau": 5,
+                      "page_debut": 194,
+                      "page_fin": 201,
+                      "nb_pages": 8,
+                      "enfants": []
+                    },
+                    {
+                      "numero": "1.4.6",
+                      "titre": "Chapitre UG.6 : Réseaux et assainissement, déchets",
+                      "niveau": 5,
+                      "page_debut": 202,
+                      "page_fin": 205,
+                      "nb_pages": 4,
+                      "enfants": []
+                    },
+                    {
+                      "numero": "1.4.7",
+                      "titre": "Chapitre UG.7 : Desserte, stationnement",
+                      "niveau": 5,
+                      "page_debut": 206,
+                      "page_fin": 213,
+                      "nb_pages": 8,
+                      "enfants": []
+                    },
+                    {
+                      "numero": "1.4.8",
+                      "titre": "Chapitre UG.8 : Valorisation des externalités positives des projets",
+                      "niveau": 5,
+                      "page_debut": 214,
+                      "page_fin": 221,
+                      "nb_pages": 8,
+                      "enfants": []
+                    },
+                    {
+                      "numero": "1.4.9",
+                      "titre": "Secteurs de dispositions particulières",
+                      "niveau": 5,
+                      "page_debut": 222,
+                      "page_fin": 244,
+                      "nb_pages": 23,
+                      "enfants": []
+                    }
+                  ]
+                },
+                {
+                  "numero": "1.5",
+                  "titre": "Zone urbaine de grands services urbains",
+                  "niveau": 4,
+                  "page_debut": 245,
+                  "page_fin": 283,
+                  "nb_pages": 39,
+                  "enfants": [
+                    {
+                      "numero": "1.5.1",
+                      "titre": "Chapitre UGSU.1. : Occupation et utilisation des sols, destinations des constructions",
+                      "niveau": 5,
+                      "page_debut": 245,
+                      "page_fin": 247,
+                      "nb_pages": 3,
+                      "enfants": []
+                    },
+                    {
+                      "numero": "1.5.2",
+                      "titre": "Chapitre UGSU.2 : Caractéristiques architecturales et urbaines des constructions, aspect extérieur",
+                      "niveau": 5,
+                      "page_debut": 248,
+                      "page_fin": 270,
+                      "nb_pages": 23,
+                      "enfants": [
+                        {
+                          "numero": "UGSU",
+                          "titre": "2.1 Dispositions Générales",
+                          "niveau": 6,
+                          "page_debut": 248,
+                          "page_fin": 248,
+                          "nb_pages": 1,
+                          "enfants": []
+                        },
+                        {
+                          "numero": "UGSU",
+                          "titre": "2.2 Dispositions applicables aux constructions neuves",
+                          "niveau": 6,
+                          "page_debut": 249,
+                          "page_fin": 249,
+                          "nb_pages": 1,
+                          "enfants": []
+                        },
+                        {
+                          "numero": "UGSU",
+                          "titre": "2.3. Dispositions applicables interventions sur les constructions existantes",
+                          "niveau": 6,
+                          "page_debut": 249,
+                          "page_fin": 249,
+                          "nb_pages": 1,
+                          "enfants": [
+                            {
+                              "numero": "1.5.3",
+                              "titre": "Chapitre UGSU.3. : Implantation, hauteur et volumétrie des constructions",
+                              "niveau": 7,
+                              "page_debut": 250,
+                              "page_fin": 250,
+                              "nb_pages": 1,
+                              "enfants": []
+                            }
+                          ]
+                        },
+                        {
+                          "numero": "UGSU",
+                          "titre": "3.1. Implantation des constructions",
+                          "niveau": 6,
+                          "page_debut": 250,
+                          "page_fin": 252,
+                          "nb_pages": 3,
+                          "enfants": [
+                            {
+                              "numero": "UGSU.3.2",
+                              "titre": "Hauteur et volumétrie des constructions",
+                              "niveau": 7,
+                              "page_debut": 251,
+                              "page_fin": 252,
+                              "nb_pages": 2,
+                              "enfants": []
+                            }
+                          ]
+                        },
+                        {
+                          "numero": "UGSU",
+                          "titre": "3.3. Dépassements admis par rapport à la hauteur et à la volumétrie maximales des constructions",
+                          "niveau": 6,
+                          "page_debut": 253,
+                          "page_fin": 255,
+                          "nb_pages": 3,
+                          "enfants": [
+                            {
+                              "numero": "1.5.4",
+                              "titre": "Chapitre UGSU.4. : Espaces libres, végétalisations des abords des constructions et du bâti",
+                              "niveau": 7,
+                              "page_debut": 253,
+                              "page_fin": 253,
+                              "nb_pages": 1,
+                              "enfants": []
+                            },
+                            {
+                              "numero": "1.5.5",
+                              "titre": "Chapitre UGSU.5. : Conception bioclimatique et performances environnementales",
+                              "niveau": 7,
+                              "page_debut": 254,
+                              "page_fin": 254,
+                              "nb_pages": 1,
+                              "enfants": []
+                            },
+                            {
+                              "numero": "1.5.6",
+                              "titre": "Chapitre UGSU.6. : Réseaux et assainissement, déchets",
+                              "niveau": 7,
+                              "page_debut": 254,
+                              "page_fin": 254,
+                              "nb_pages": 1,
+                              "enfants": []
+                            },
+                            {
+                              "numero": "1.5.7",
+                              "titre": "Chapitre UGSU.7. : Desserte, stationnement",
+                              "niveau": 7,
+                              "page_debut": 254,
+                              "page_fin": 254,
+                              "nb_pages": 1,
+                              "enfants": []
+                            },
+                            {
+                              "numero": "1.5.8",
+                              "titre": "Secteurs de dispositions particulières",
+                              "niveau": 7,
+                              "page_debut": 255,
+                              "page_fin": 255,
+                              "nb_pages": 1,
+                              "enfants": []
+                            }
+                          ]
+                        },
+                        {
+                          "numero": "1.6",
+                          "titre": "Zone urbaine verte (UV)",
+                          "niveau": 6,
+                          "page_debut": 256,
+                          "page_fin": 261,
+                          "nb_pages": 6,
+                          "enfants": [
+                            {
+                              "numero": "1.6.1",
+                              "titre": "Chapitre UV.1 : Occupation et utilisation des sols, destinations des constructions",
+                              "niveau": 7,
+                              "page_debut": 256,
+                              "page_fin": 256,
+                              "nb_pages": 1,
+                              "enfants": []
+                            },
+                            {
+                              "numero": "1.6.2",
+                              "titre": "Chapitre UV.2. : Caractéristiques urbaines et architecturales des constructions",
+                              "niveau": 7,
+                              "page_debut": 257,
+                              "page_fin": 257,
+                              "nb_pages": 1,
+                              "enfants": []
+                            },
+                            {
+                              "numero": "1.6.3",
+                              "titre": "Chapitre UV.3. : Implantation et volumétrie",
+                              "niveau": 7,
+                              "page_debut": 258,
+                              "page_fin": 258,
+                              "nb_pages": 1,
+                              "enfants": []
+                            },
+                            {
+                              "numero": "1.6.4",
+                              "titre": "Chapitre UV.4. : Espaces libres, végétalisation des abords des constructions et du bâti",
+                              "niveau": 7,
+                              "page_debut": 259,
+                              "page_fin": 259,
+                              "nb_pages": 1,
+                              "enfants": []
+                            },
+                            {
+                              "numero": "1.6.5",
+                              "titre": "Chapitre UV.5. : Conception bioclimatique et performances environnementales",
+                              "niveau": 7,
+                              "page_debut": 260,
+                              "page_fin": 260,
+                              "nb_pages": 1,
+                              "enfants": []
+                            },
+                            {
+                              "numero": "1.6.6",
+                              "titre": "Chapitre UV.6. Réseaux et assainissement, déchets",
+                              "niveau": 7,
+                              "page_debut": 260,
+                              "page_fin": 260,
+                              "nb_pages": 1,
+                              "enfants": []
+                            },
+                            {
+                              "numero": "1.6.7",
+                              "titre": "Chapitre UV.7. Desserte et stationnement",
+                              "niveau": 7,
+                              "page_debut": 260,
+                              "page_fin": 260,
+                              "nb_pages": 1,
+                              "enfants": []
+                            },
+                            {
+                              "numero": "1.6.8",
+                              "titre": "Secteurs de dispositions particulières",
+                              "niveau": 7,
+                              "page_debut": 261,
+                              "page_fin": 261,
+                              "nb_pages": 1,
+                              "enfants": []
+                            }
+                          ]
+                        },
+                        {
+                          "numero": "1.7",
+                          "titre": "Zone naturelle et forestière",
+                          "niveau": 6,
+                          "page_debut": 262,
+                          "page_fin": 270,
+                          "nb_pages": 9,
+                          "enfants": [
+                            {
+                              "numero": "1.7.1",
+                              "titre": "Chapitre N.1 : Occupation et utilisation des sols",
+                              "niveau": 7,
+                              "page_debut": 262,
+                              "page_fin": 262,
+                              "nb_pages": 1,
+                              "enfants": []
+                            },
+                            {
+                              "numero": "1.7.2",
+                              "titre": "Chapitre N.2 : Caractéristiques des constructions",
+                              "niveau": 7,
+                              "page_debut": 263,
+                              "page_fin": 263,
+                              "nb_pages": 1,
+                              "enfants": []
+                            },
+                            {
+                              "numero": "1.7.3",
+                              "titre": "Chapitre N.3 : Implantation et volumétrie",
+                              "niveau": 7,
+                              "page_debut": 264,
+                              "page_fin": 267,
+                              "nb_pages": 4,
+                              "enfants": []
+                            },
+                            {
+                              "numero": "1.7.4",
+                              "titre": "Chapitre N.4 : Espaces libres, végétalisation, abord de constructions",
+                              "niveau": 7,
+                              "page_debut": 268,
+                              "page_fin": 268,
+                              "nb_pages": 1,
+                              "enfants": []
+                            },
+                            {
+                              "numero": "1.7.5",
+                              "titre": "Chapitre N.5 : Conception bioclimatique et performances environnementales des constructions",
+                              "niveau": 7,
+                              "page_debut": 269,
+                              "page_fin": 269,
+                              "nb_pages": 1,
+                              "enfants": []
+                            },
+                            {
+                              "numero": "1.7.6",
+                              "titre": "Chapitre N.6 : Réseaux, assainissement et déchets",
+                              "niveau": 7,
+                              "page_debut": 269,
+                              "page_fin": 269,
+                              "nb_pages": 1,
+                              "enfants": []
+                            },
+                            {
+                              "numero": "1.7.7",
+                              "titre": "Chapitre N.7 : Desserte et stationnement",
+                              "niveau": 7,
+                              "page_debut": 269,
+                              "page_fin": 270,
+                              "nb_pages": 2,
+                              "enfants": []
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "numero": "4",
+                      "titre": "Analyse de la consommation d’espaces naturels, agricoles et forestiers et de la capacité de densification de Paris",
+                      "niveau": 5,
+                      "page_debut": 271,
+                      "page_fin": 271,
+                      "nb_pages": 1,
+                      "enfants": []
+                    },
+                    {
+                      "numero": null,
+                      "titre": "Rappel des obligations juridiques",
+                      "niveau": 5,
+                      "page_debut": 271,
+                      "page_fin": 283,
+                      "nb_pages": 13,
+                      "enfants": [
+                        {
+                          "numero": "1.8",
+                          "titre": "Analyse de la consommation d’espaces naturels, agricoles et forestiers – dispositions favorisant sa limitation",
+                          "niveau": 6,
+                          "page_debut": 271,
+                          "page_fin": 272,
+                          "nb_pages": 2,
+                          "enfants": []
+                        },
+                        {
+                          "numero": "1.9",
+                          "titre": "Analyse de la capacité de densification de Paris et de mutation des espaces bâtis, en tenant compte des formes urbaines et architecturales",
+                          "niveau": 6,
+                          "page_debut": 273,
+                          "page_fin": 283,
+                          "nb_pages": 11,
+                          "enfants": [
+                            {
+                              "numero": "1.9.1",
+                              "titre": "Paris, une ville historiquement dense qui se renouvelle sur elle-même",
+                              "niveau": 7,
+                              "page_debut": 273,
+                              "page_fin": 277,
+                              "nb_pages": 5,
+                              "enfants": []
+                            },
+                            {
+                              "numero": "1.9.2",
+                              "titre": "L’évolution future des tissus urbains parisiens",
+                              "niveau": 7,
+                              "page_debut": 278,
+                              "page_fin": 283,
+                              "nb_pages": 6,
+                              "enfants": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

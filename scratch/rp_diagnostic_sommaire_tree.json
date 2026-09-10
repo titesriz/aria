@@ -1,0 +1,845 @@
+{
+  "doc": "RP_DIAGNOSTIC.pdf",
+  "chemin_relatif": "Ressources/PLU bioclimatique/Rapport de présentation/RP_DIAGNOSTIC.pdf",
+  "sommaire_pages_detected": {
+    "physical_indices_0based": [
+      4,
+      5,
+      6
+    ],
+    "printed_page_numbers": [
+      5,
+      6,
+      7
+    ]
+  },
+  "numbering_rule_used": "Numbering profiles tried in order: PARTIE n (FLAT), Annexe <roman> (FLAT), <ordinal> partie (FLAT), Axe n (FLAT), a leading code + N dot-digit-groups e.g. UG.1.4/C.1/N.1.2.2 (NESTING, depth=N), a bare digit-dot chain e.g. 1/1.1/2.14 (NESTING, depth=dot-group count), a single letter or roman numeral (FLAT), an ALL-CAPS unnumbered heading (FLAT). LEVEL is relative, not absolute depth: a recurring FLAT profile jumps back to its first-occurrence level regardless of what happened in between; a NESTING profile moves by the signed depth-delta vs. its own last occurrence; an unnumbered/non-caps line inherits the previous level; first entry of the document = level 1. Header length and TOC-page range are discovered per document (title-marker search + shape-based continuation), not assumed from a fixed line count. TOC pages are read in column order (block-level x0 clustering decides 1 vs 2 columns; fragments sharing a block and a y-band are coalesced before grouping, to avoid a wide sentence or a mid-sentence number corrupting the read).",
+  "anchor_check": {
+    "sample_size": 10,
+    "match_rate": 0.9,
+    "dominant_offset_detected": 2,
+    "offset_votes": {
+      "-1": 1,
+      "2": 8
+    },
+    "results": [
+      {
+        "numero": null,
+        "titre": "PRÉAMBULE\b.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�",
+        "page_debut": 6,
+        "naive_physical_index": 5,
+        "matched": true,
+        "offset_detected": -1
+      },
+      {
+        "numero": null,
+        "titre": "Évolution de la population",
+        "page_debut": 32,
+        "naive_physical_index": 31,
+        "matched": true,
+        "offset_detected": 2
+      },
+      {
+        "numero": null,
+        "titre": "Les spécificités du parc de logements parisien . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 76 18,1% de logements inoccupés à Paris",
+        "page_debut": 82,
+        "naive_physical_index": 81,
+        "matched": false,
+        "offset_detected": null
+      },
+      {
+        "numero": null,
+        "titre": "De nouvelles formes d’économies accompagnées par la Ville de Paris",
+        "page_debut": 134,
+        "naive_physical_index": 133,
+        "matched": true,
+        "offset_detected": 2
+      },
+      {
+        "numero": null,
+        "titre": "Des pratiques et des attentes qui évoluent",
+        "page_debut": 176,
+        "naive_physical_index": 175,
+        "matched": true,
+        "offset_detected": 2
+      },
+      {
+        "numero": null,
+        "titre": "L’exposition au phénomène d’îlots de chaleur urbain",
+        "page_debut": 202,
+        "naive_physical_index": 201,
+        "matched": true,
+        "offset_detected": 2
+      },
+      {
+        "numero": null,
+        "titre": "Le système énergétique et les capacités de production d’ENR&R en présence",
+        "page_debut": 246,
+        "naive_physical_index": 245,
+        "matched": true,
+        "offset_detected": 2
+      },
+      {
+        "numero": null,
+        "titre": "Les bois et la ceinture verte : deux grands sites paysagers métropolitains",
+        "page_debut": 278,
+        "naive_physical_index": 277,
+        "matched": true,
+        "offset_detected": 2
+      },
+      {
+        "numero": null,
+        "titre": "Les inégalités territoriales en santé environnementale",
+        "page_debut": 302,
+        "naive_physical_index": 301,
+        "matched": true,
+        "offset_detected": 2
+      },
+      {
+        "numero": null,
+        "titre": "Les grandes transformations récentes et les mutations de l’espace public",
+        "page_debut": 322,
+        "naive_physical_index": 321,
+        "matched": true,
+        "offset_detected": 2
+      }
+    ]
+  },
+  "warnings": [
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='PRÉAMBULE\\x08.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�' page_debut=6",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Paris et la Métropole du Grand Paris, de nouveaux équilibres' page_debut=10",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Des disparités fonctionnelles, économiques et sociales' page_debut=12",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Des mobilités imbriquées entre Paris et la Métropole du Grand Paris' page_debut=20",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Une métropole qui se transforme avec l’arrivée du métro du Grand Paris Express' page_debut=26",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Évolution de la population' page_debut=32",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Une population résidente spécifique à Paris, cœur de métropole internationale' page_debut=42",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Les autres usagers de Paris' page_debut=48",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Une forte mixité sociale et des inégalités territoriales marquées' page_debut=52",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Évolution du parc de logements et des résidences principales' page_debut=64",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Une offre d’hébergement importante' page_debut=72",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Les spécificités du parc de logements parisien . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 76 18,1% de logements inoccupés à Paris' page_debut=82",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Les tensions et la pression de la demande de logement' page_debut=86",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Les parcours résidentiels des Parisiens' page_debut=92",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Une concentration d’emplois et d’établissements exceptionnelle' page_debut=98",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Un tissu économique polyvalent qui conjugue fonctions métropolitaines et offres de proximité' page_debut=106",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Un parc immobilier d’entreprise exceptionnel à l’échelle nationale' page_debut=112",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Des secteurs particuliers de l’économie parisienne' page_debut=118",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='De nouvelles formes d’économies accompagnées par la Ville de Paris' page_debut=134",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Paris : des besoins liés à la population présente' page_debut=146",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Un maillage dense, mais des équipements très sollicités et des inégalités qui subsistent' page_debut=148",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Les équipements de proximité et les services publics du quotidien' page_debut=150",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Les équipements de rayonnement métropolitain' page_debut=166",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Quels accessibilité et usages des équipements ?' page_debut=174",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Des pratiques et des attentes qui évoluent' page_debut=176",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Paris, des centralités d’échelles différentes' page_debut=184",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='La proximité entre habitat et travail, une relation qui évolue' page_debut=188",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Maillage et accessibilité aux équipements et services' page_debut=190",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='La qualité du cadre de vie' page_debut=192",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='L’adaptation de Paris aux changements climatiques' page_debut=200",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='L’exposition au phénomène d’îlots de chaleur urbain' page_debut=202",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='La nature des sols' page_debut=212",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Qualité de l’air, bruit, et autres risques environnementaux' page_debut=218",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Un territoire en situation de dépendance en ressources' page_debut=228",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Les objectifs du PCAET' page_debut=236",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='La consommation d’énergie du bâti parisien' page_debut=238",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Le système énergétique et les capacités de production d’ENR&R en présence' page_debut=246",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='L’apparition de nouveaux services urbains…' page_debut=254",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Rôle et bienfaits de la biodiversité et de la nature en ville' page_debut=262",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Un système de parcs et promenades qui continue de s’enrichir' page_debut=268",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='La nature en cœur d’ilot' page_debut=274",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='La végétalisationdes bâtiments' page_debut=276",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Les bois et la ceinture verte : deux grands sites paysagers métropolitains' page_debut=278",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Des eaux de surfaces peu présentes mais deux sites majeurs métropolitains : la Seine et les Canaux' page_debut=282",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='L’émergence de l’agriculture urbaine' page_debut=286",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Vulnérabilité de la population : niveau de revenu, âge, situation d’occupation' page_debut=292",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Exposition de la population aux pollutions atmosphériques, air et bruit' page_debut=296",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Accès aux espaces verts' page_debut=298",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Accès aux équipements de santé' page_debut=300",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Les inégalités territoriales en santé environnementale' page_debut=302",
+    "Entry with no trailing page number found, skipped: 'DIAGNOSTIC'",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='L’espace public, bien commun intemporel du paysage parisien' page_debut=306",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='La baisse de la motorisation des ménages permettant des usages diversifiés' page_debut=310",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Paris ville marchable' page_debut=314",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Paris ville cyclable' page_debut=316",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Paris, ville inclusive pour les personnes en situation de handicap' page_debut=320",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Les grandes transformations récentes et les mutations de l’espace public' page_debut=322",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Paris, des paysages iconiques au cœur des paysages métropolitains' page_debut=328",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Une ville ancienne avec des qualités urbaines exceptionnelles' page_debut=334",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Les caractéristiques des tissus urbains parisiens' page_debut=344",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Paris est une ville en perpétuelle transformation' page_debut=350",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Les évolutions des espaces extérieurs et les pratiques de végétalisation' page_debut=376",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Un bâti entretenu et qui change d’usage' page_debut=382",
+    "Last entry of its branch, page_fin not reliably derivable — set to doc.page_count (390): numero=None titre='PRÉAMBULE\\x08.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�' page_debut=6",
+    "Last entry of its branch, page_fin not reliably derivable — set to doc.page_count (390): numero=None titre='Un bâti entretenu et qui change d’usage' page_debut=382",
+    "Anchor check MISMATCH: numero=None titre='Les spécificités du parc de logements parisien . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 76 18,1% de logements inoccupés à Paris' page_debut=82 — title not found within +/-3 pages of naive physical index 81"
+  ],
+  "arbre": [
+    {
+      "numero": null,
+      "titre": "PRÉAMBULE\b.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�",
+      "niveau": 1,
+      "page_debut": 6,
+      "page_fin": 390,
+      "nb_pages": 385,
+      "enfants": [
+        {
+          "numero": "1",
+          "titre": "\u0007Une ville au cœur d’un système métropolitain",
+          "niveau": 2,
+          "page_debut": 9,
+          "page_fin": 9,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Paris et la Métropole du Grand Paris, de nouveaux équilibres",
+          "niveau": 2,
+          "page_debut": 10,
+          "page_fin": 11,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Des disparités fonctionnelles, économiques et sociales",
+          "niveau": 2,
+          "page_debut": 12,
+          "page_fin": 19,
+          "nb_pages": 8,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Des mobilités imbriquées entre Paris et la Métropole du Grand Paris",
+          "niveau": 2,
+          "page_debut": 20,
+          "page_fin": 25,
+          "nb_pages": 6,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Une métropole qui se transforme avec l’arrivée du métro du Grand Paris Express",
+          "niveau": 2,
+          "page_debut": 26,
+          "page_fin": 30,
+          "nb_pages": 5,
+          "enfants": []
+        },
+        {
+          "numero": "2",
+          "titre": "La population",
+          "niveau": 2,
+          "page_debut": 31,
+          "page_fin": 31,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Évolution de la population",
+          "niveau": 2,
+          "page_debut": 32,
+          "page_fin": 41,
+          "nb_pages": 10,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Une population résidente spécifique à Paris, cœur de métropole internationale",
+          "niveau": 2,
+          "page_debut": 42,
+          "page_fin": 47,
+          "nb_pages": 6,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Les autres usagers de Paris",
+          "niveau": 2,
+          "page_debut": 48,
+          "page_fin": 51,
+          "nb_pages": 4,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Une forte mixité sociale et des inégalités territoriales marquées",
+          "niveau": 2,
+          "page_debut": 52,
+          "page_fin": 62,
+          "nb_pages": 11,
+          "enfants": []
+        },
+        {
+          "numero": "3",
+          "titre": "\u0007Le logement",
+          "niveau": 2,
+          "page_debut": 63,
+          "page_fin": 63,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Évolution du parc de logements et des résidences principales",
+          "niveau": 2,
+          "page_debut": 64,
+          "page_fin": 71,
+          "nb_pages": 8,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Une offre d’hébergement importante",
+          "niveau": 2,
+          "page_debut": 72,
+          "page_fin": 81,
+          "nb_pages": 10,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Les spécificités du parc de logements parisien . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 76 18,1% de logements inoccupés à Paris",
+          "niveau": 2,
+          "page_debut": 82,
+          "page_fin": 85,
+          "nb_pages": 4,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Les tensions et la pression de la demande de logement",
+          "niveau": 2,
+          "page_debut": 86,
+          "page_fin": 91,
+          "nb_pages": 6,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Les parcours résidentiels des Parisiens",
+          "niveau": 2,
+          "page_debut": 92,
+          "page_fin": 96,
+          "nb_pages": 5,
+          "enfants": []
+        },
+        {
+          "numero": "4",
+          "titre": "\u0007Emploi et attractivité pour les entreprises",
+          "niveau": 2,
+          "page_debut": 97,
+          "page_fin": 97,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Une concentration d’emplois et d’établissements exceptionnelle",
+          "niveau": 2,
+          "page_debut": 98,
+          "page_fin": 105,
+          "nb_pages": 8,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Un tissu économique polyvalent qui conjugue fonctions métropolitaines et offres de proximité",
+          "niveau": 2,
+          "page_debut": 106,
+          "page_fin": 111,
+          "nb_pages": 6,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Un parc immobilier d’entreprise exceptionnel à l’échelle nationale",
+          "niveau": 2,
+          "page_debut": 112,
+          "page_fin": 117,
+          "nb_pages": 6,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Des secteurs particuliers de l’économie parisienne",
+          "niveau": 2,
+          "page_debut": 118,
+          "page_fin": 133,
+          "nb_pages": 16,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "De nouvelles formes d’économies accompagnées par la Ville de Paris",
+          "niveau": 2,
+          "page_debut": 134,
+          "page_fin": 144,
+          "nb_pages": 11,
+          "enfants": []
+        },
+        {
+          "numero": "5",
+          "titre": "Les équipements",
+          "niveau": 2,
+          "page_debut": 145,
+          "page_fin": 145,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Paris : des besoins liés à la population présente",
+          "niveau": 2,
+          "page_debut": 146,
+          "page_fin": 147,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Un maillage dense, mais des équipements très sollicités et des inégalités qui subsistent",
+          "niveau": 2,
+          "page_debut": 148,
+          "page_fin": 149,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Les équipements de proximité et les services publics du quotidien",
+          "niveau": 2,
+          "page_debut": 150,
+          "page_fin": 165,
+          "nb_pages": 16,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Les équipements de rayonnement métropolitain",
+          "niveau": 2,
+          "page_debut": 166,
+          "page_fin": 173,
+          "nb_pages": 8,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Quels accessibilité et usages des équipements ?",
+          "niveau": 2,
+          "page_debut": 174,
+          "page_fin": 175,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Des pratiques et des attentes qui évoluent",
+          "niveau": 2,
+          "page_debut": 176,
+          "page_fin": 182,
+          "nb_pages": 7,
+          "enfants": []
+        },
+        {
+          "numero": "6",
+          "titre": "\u0007La vie locale : les multiples lieux de la vie urbaine, leur caractère et leur rôle",
+          "niveau": 2,
+          "page_debut": 183,
+          "page_fin": 183,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Paris, des centralités d’échelles différentes",
+          "niveau": 2,
+          "page_debut": 184,
+          "page_fin": 187,
+          "nb_pages": 4,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "La proximité entre habitat et travail, une relation qui évolue",
+          "niveau": 2,
+          "page_debut": 188,
+          "page_fin": 189,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Maillage et accessibilité aux équipements et services",
+          "niveau": 2,
+          "page_debut": 190,
+          "page_fin": 191,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "La qualité du cadre de vie",
+          "niveau": 2,
+          "page_debut": 192,
+          "page_fin": 196,
+          "nb_pages": 5,
+          "enfants": []
+        },
+        {
+          "numero": "7",
+          "titre": "\u0007Une ville exposée aux effets du changement climatique, aux risques et aux nuisances",
+          "niveau": 2,
+          "page_debut": 197,
+          "page_fin": 199,
+          "nb_pages": 3,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "L’adaptation de Paris aux changements climatiques",
+          "niveau": 2,
+          "page_debut": 200,
+          "page_fin": 201,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "L’exposition au phénomène d’îlots de chaleur urbain",
+          "niveau": 2,
+          "page_debut": 202,
+          "page_fin": 211,
+          "nb_pages": 10,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "La nature des sols",
+          "niveau": 2,
+          "page_debut": 212,
+          "page_fin": 217,
+          "nb_pages": 6,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Qualité de l’air, bruit, et autres risques environnementaux",
+          "niveau": 2,
+          "page_debut": 218,
+          "page_fin": 227,
+          "nb_pages": 10,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Un territoire en situation de dépendance en ressources",
+          "niveau": 2,
+          "page_debut": 228,
+          "page_fin": 234,
+          "nb_pages": 7,
+          "enfants": []
+        },
+        {
+          "numero": "8",
+          "titre": "\u0007Paris, engagée vers le 0 carbone en 2050",
+          "niveau": 2,
+          "page_debut": 235,
+          "page_fin": 235,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Les objectifs du PCAET",
+          "niveau": 2,
+          "page_debut": 236,
+          "page_fin": 237,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "La consommation d’énergie du bâti parisien",
+          "niveau": 2,
+          "page_debut": 238,
+          "page_fin": 245,
+          "nb_pages": 8,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Le système énergétique et les capacités de production d’ENR&R en présence",
+          "niveau": 2,
+          "page_debut": 246,
+          "page_fin": 253,
+          "nb_pages": 8,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "L’apparition de nouveaux services urbains…",
+          "niveau": 2,
+          "page_debut": 254,
+          "page_fin": 260,
+          "nb_pages": 7,
+          "enfants": []
+        },
+        {
+          "numero": "9",
+          "titre": "\u0007La nature en ville, un bien commun essentiel et très sollicité",
+          "niveau": 2,
+          "page_debut": 261,
+          "page_fin": 261,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Rôle et bienfaits de la biodiversité et de la nature en ville",
+          "niveau": 2,
+          "page_debut": 262,
+          "page_fin": 267,
+          "nb_pages": 6,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Un système de parcs et promenades qui continue de s’enrichir",
+          "niveau": 2,
+          "page_debut": 268,
+          "page_fin": 273,
+          "nb_pages": 6,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "La nature en cœur d’ilot",
+          "niveau": 2,
+          "page_debut": 274,
+          "page_fin": 275,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "La végétalisationdes bâtiments",
+          "niveau": 2,
+          "page_debut": 276,
+          "page_fin": 277,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Les bois et la ceinture verte : deux grands sites paysagers métropolitains",
+          "niveau": 2,
+          "page_debut": 278,
+          "page_fin": 281,
+          "nb_pages": 4,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Des eaux de surfaces peu présentes mais deux sites majeurs métropolitains : la Seine et les Canaux",
+          "niveau": 2,
+          "page_debut": 282,
+          "page_fin": 285,
+          "nb_pages": 4,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "L’émergence de l’agriculture urbaine",
+          "niveau": 2,
+          "page_debut": 286,
+          "page_fin": 290,
+          "nb_pages": 5,
+          "enfants": []
+        },
+        {
+          "numero": "10",
+          "titre": "\u0007La réduction des nuisances et des inégalités, un enjeu de santé environnementale",
+          "niveau": 2,
+          "page_debut": 291,
+          "page_fin": 291,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Vulnérabilité de la population : niveau de revenu, âge, situation d’occupation",
+          "niveau": 2,
+          "page_debut": 292,
+          "page_fin": 295,
+          "nb_pages": 4,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Exposition de la population aux pollutions atmosphériques, air et bruit",
+          "niveau": 2,
+          "page_debut": 296,
+          "page_fin": 297,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Accès aux espaces verts",
+          "niveau": 2,
+          "page_debut": 298,
+          "page_fin": 299,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Accès aux équipements de santé",
+          "niveau": 2,
+          "page_debut": 300,
+          "page_fin": 301,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Les inégalités territoriales en santé environnementale",
+          "niveau": 2,
+          "page_debut": 302,
+          "page_fin": 304,
+          "nb_pages": 3,
+          "enfants": []
+        },
+        {
+          "numero": "11",
+          "titre": "\u0007Le système d’espaces publics, un patrimoine en constante adaptation",
+          "niveau": 2,
+          "page_debut": 305,
+          "page_fin": 305,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "L’espace public, bien commun intemporel du paysage parisien",
+          "niveau": 2,
+          "page_debut": 306,
+          "page_fin": 309,
+          "nb_pages": 4,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "La baisse de la motorisation des ménages permettant des usages diversifiés",
+          "niveau": 2,
+          "page_debut": 310,
+          "page_fin": 313,
+          "nb_pages": 4,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Paris ville marchable",
+          "niveau": 2,
+          "page_debut": 314,
+          "page_fin": 315,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Paris ville cyclable",
+          "niveau": 2,
+          "page_debut": 316,
+          "page_fin": 319,
+          "nb_pages": 4,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Paris, ville inclusive pour les personnes en situation de handicap",
+          "niveau": 2,
+          "page_debut": 320,
+          "page_fin": 321,
+          "nb_pages": 2,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Les grandes transformations récentes et les mutations de l’espace public",
+          "niveau": 2,
+          "page_debut": 322,
+          "page_fin": 326,
+          "nb_pages": 5,
+          "enfants": []
+        },
+        {
+          "numero": "12",
+          "titre": "\u0007Les tissus urbains parisiens, un héritage commun et un renouvellement permanent",
+          "niveau": 2,
+          "page_debut": 327,
+          "page_fin": 327,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Paris, des paysages iconiques au cœur des paysages métropolitains",
+          "niveau": 2,
+          "page_debut": 328,
+          "page_fin": 333,
+          "nb_pages": 6,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Une ville ancienne avec des qualités urbaines exceptionnelles",
+          "niveau": 2,
+          "page_debut": 334,
+          "page_fin": 343,
+          "nb_pages": 10,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Les caractéristiques des tissus urbains parisiens",
+          "niveau": 2,
+          "page_debut": 344,
+          "page_fin": 349,
+          "nb_pages": 6,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Paris est une ville en perpétuelle transformation",
+          "niveau": 2,
+          "page_debut": 350,
+          "page_fin": 375,
+          "nb_pages": 26,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Les évolutions des espaces extérieurs et les pratiques de végétalisation",
+          "niveau": 2,
+          "page_debut": 376,
+          "page_fin": 381,
+          "nb_pages": 6,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Un bâti entretenu et qui change d’usage",
+          "niveau": 2,
+          "page_debut": 382,
+          "page_fin": 390,
+          "nb_pages": 9,
+          "enfants": []
+        }
+      ]
+    }
+  ]
+}
