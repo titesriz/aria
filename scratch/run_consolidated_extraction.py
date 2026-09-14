@@ -17,7 +17,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from extract_sommaire import REPO_ROOT, SCRATCH_DIR, process, tree_level_summary  # noqa: E402
 
-RES = REPO_ROOT / "Ressources" / "PLU bioclimatique"
+RES = REPO_ROOT / "Ressources" / "PLU" / "75 Paris" / "PLU Bioclimatique"
 RP_DIR = RES / "Rapport de présentation"
 
 NON_REGRESSION = [

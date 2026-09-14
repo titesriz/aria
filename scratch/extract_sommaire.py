@@ -64,6 +64,28 @@ def is_toc_marker_line(line: str) -> bool:
     own spaced form and isn't accidentally loosened."""
     key = strip_accents(line).lower().strip(" :")
     return key in TOC_TITLE_MARKERS or key.replace(" ", "") in TOC_TITLE_MARKERS
+
+
+DOT_LEADER_RE = re.compile(r"\.(?:\s?\.){2,}")
+# Matches a TOC ellipsis run in either rendering: consecutive dots ("....")
+# or individually SPACED dots (". . . ."), the latter confirmed necessary on
+# RP_DIAGNOSTIC.pdf (see looks_like_standalone_toc_entry). Shared here as a
+# module-level constant since discover_toc_shape_start (below) needs the
+# exact same shape test.
+
+
+def looks_like_dense_toc_line(line: str) -> bool:
+    """A STRICTER shape test than looks_like_toc_line (which also accepts a
+    bare trailing digit alone, too loose for marker-independent detection):
+    requires an actual dot-leader run AND the line's own trailing page
+    number, together — "text ... <dot-leader> ... <page number>". A dot-
+    leader is a distinctive typographic feature essentially unique to TOC
+    rows; it almost never appears in ordinary running prose, which is what
+    makes this safe to use as a PRIMARY (marker-independent) signal rather
+    than just a continuation-page heuristic."""
+    return bool(DOT_LEADER_RE.search(line)) and bool(re.search(r"\d\s*$", line.strip()))
+
+
 # Running header/footer bands, excluded from column clustering. Top and
 # bottom are tuned SEPARATELY, not one shared constant — confirmed they need
 # different sizes: the top band must be wide enough to catch a title/marker
@@ -86,6 +108,15 @@ def strip_accents(s: str) -> str:
 
 def normalize(s: str) -> str:
     s = strip_accents(s.lower())
+    # De-hyphenate a PDF line-wrap ("cli-\nmatique" -> "climatique") before the
+    # generic non-alnum strip below would otherwise turn it into "cli matique"
+    # (two words) — confirmed necessary for anchor_check: RP_RNT.pdf's real
+    # target pages wrap "climatique" and "reglementaire" exactly at a mid-word
+    # hyphen, so the exact-substring match silently failed even though the
+    # title genuinely appears on the page. Only a hyphen immediately followed
+    # by a newline (not any same-line hyphen, e.g. a real compound word) is
+    # treated as a wrap.
+    s = re.sub(r"(\w)-\s*\n\s*(\w)", r"\1\2", s)
     s = re.sub(r"[^a-z0-9 ]", " ", s)
     return re.sub(r"\s+", " ", s).strip()
 
@@ -107,7 +138,25 @@ RE_PARTIE = re.compile(r"^PARTIE\s+(\d+)\s*:?\s*(.*)$")
 RE_ANNEXE = re.compile(r"^Annexe\s+([IVXLCDM]+)\s*:\s*(.*)$")
 RE_PARTIE_ORDINAL = re.compile(r"^(\d+)(?:ère|ere|ème|eme|er|e)\s+partie\s*:\s*(.*)$", re.IGNORECASE)
 RE_AXE = re.compile(r"^Axe\s+(\d+)\s*:\s*(.*)$", re.IGNORECASE)
+RE_TABLEAU = re.compile(r"^Tableau\s+(\d+)\.\s*(.*)$")  # "Tableau 1. ..." — RP_INDIC/RP_EVAL's list-of-tables
 RE_CODE_DOTGROUPS = re.compile(r"^([A-Z]{1,10}(?:\.\d+)+)\.?\s+(.*)$")  # UG.1.4, C.1, N.1.2.2
+RE_ZONE_SUBCODE = re.compile(r"^([A-Z]{1,10})\.\s+(\d+(?:\.\d+)*)\.?\s+(.*)$")
+# "UGSU. 2.1 ..." / "UGSU. 2.3. ..." — same zone-code family as RE_CODE_DOTGROUPS
+# (UG.1.4, N.1.2.2), but the source PDF sometimes inserts a SPACE between the
+# zone prefix's dot and its sub-number, inconsistently even within the same
+# document (confirmed on RP_CHOIX.pdf: "UGSU. 2.1 Dispositions..." and "UGSU.
+# 2.3. Dispositions..." both have the space; "UGSU.3.2. Hauteur..." doesn't
+# and already matches RE_CODE_DOTGROUPS). Without this, RE_CODE_DOTGROUPS's
+# `(?:\.\d+)+` can't match past the space, so parse_prefix fell through all
+# the way to RE_LETTERS_DOT, which greedily captured just the zone prefix
+# ("UGSU") as the whole code and left the real differentiating sub-number
+# ("2.1"/"2.2"/"2.3"/"3.1"/"3.3") sitting in the title text — the cause of 5
+# sibling entries all wrongly sharing numero='UGSU' under section 1.5.2. Must
+# be tried BEFORE RE_LETTERS_DOT (which would otherwise win first, since
+# "UGSU" also fits its 1-4-letter cap) and must require a mandatory digit
+# after the space (never optional) so a genuine no-code header like "UGSU.
+# Zone urbaine générale sud" (no following digits) still correctly falls
+# through to RE_LETTERS_DOT exactly as before.
 RE_DIGIT_DOT = re.compile(r"^(\d+(?:\.\d+)*)\.\s+(.*)$")  # 1., 1.1., 2.14. — trailing dot mandatory
 RE_LETTERS_DOT = re.compile(r"^([A-Z]{1,4})\.\s+(.*)$")  # single letter or roman numeral
 RE_ISOLATED_NUMBERING = re.compile(r"^\d+(?:\.\d+)*\.\s*$")  # bare "1." / "2.14." alone on its own line
@@ -128,11 +177,19 @@ def parse_prefix(line: str):
     m = RE_AXE.match(line)
     if m:
         return ("AXE", "FLAT", f"Axe {m.group(1)}", 1, m.group(2))
+    m = RE_TABLEAU.match(line)
+    if m:
+        return ("TABLEAU", "FLAT", f"Tableau {m.group(1)}", 1, m.group(2))
     m = RE_CODE_DOTGROUPS.match(line)
     if m:
         raw = m.group(1)
         depth = sum(1 for p in raw.split(".")[1:] if p.isdigit())
         return ("DOTCHAIN", "NESTING", raw, depth, m.group(2))
+    m = RE_ZONE_SUBCODE.match(line)
+    if m:
+        raw = f"{m.group(1)}.{m.group(2)}"
+        depth = sum(1 for p in raw.split(".")[1:] if p.isdigit())
+        return ("DOTCHAIN", "NESTING", raw, depth, m.group(3))
     m = RE_DIGIT_DOT.match(line)
     if m:
         raw = m.group(1)
@@ -357,52 +414,66 @@ def get_page_lines_by_block(page):
     return out
 
 
-def get_page_block_x0s(page):
+def get_page_block_geometry(page):
+    """(x0, n_lines) per non-empty text BLOCK — n_lines is the column-balance
+    signal used by _decide_column_split. Raw block COUNT is unreliable as a
+    balance signal when one column happens to be authored as one large
+    flowing text frame (few blocks, many lines) versus the other as several
+    small boxes (confirmed necessary on RP_INDIC.pdf: its whole right column
+    — an 8-entry "Tableau N." list — is a single ~10-line block, which a
+    block-count floor rejected outright even though it plainly carries as
+    much content as the left column's several smaller blocks)."""
     out = []
     d = page.get_text("dict")
     for block in d.get("blocks", []):
         if block.get("type") != 0:
             continue
-        text = "".join(s.get("text", "") for line in block.get("lines", []) for s in line.get("spans", []))
-        if text.strip():
-            out.append(block["bbox"][0])
+        n_lines = sum(
+            1
+            for line in block.get("lines", [])
+            if "".join(s.get("text", "") for s in line.get("spans", [])).strip()
+        )
+        if n_lines:
+            out.append((block["bbox"][0], n_lines))
     return out
 
 
-def _decide_column_split(block_x0s, page_width):
+def _decide_column_split(block_geometry, page_width):
     """1-vs-2-column decision from BLOCK-level x0 (single source of truth,
-    used both by real reordering and the console report). 2 columns only
-    when the largest x0 gap is wide (>15% of page width), lands away from the
-    edges (25%-75% of page width), AND both sides carry a substantial,
-    comparable share of the page's blocks (>=20%, floor 5) — distinguishes a
-    real 2-column body from decorative header/footer text on one side.
-    Landscape orientation is a WEAK hint only — decided purely by this
-    geometry, never by page rotation/aspect. Returns (is_two_column, split_at)."""
-    if len(block_x0s) < 6:
+    used both by real reordering and the console report). Tries every x0
+    gap, LARGEST FIRST — not just the single largest, which is what the
+    original version did. A decorative one-off block sitting between the
+    two real columns (e.g. a "SOMMAIRE" title placed at an x0 between them)
+    can fragment the true column gap into two smaller ones, each of which
+    individually fails the position/balance checks below even though the
+    real split is obviously there once that block is looked past (confirmed
+    necessary on RP_RNT.pdf). So: accept the first candidate gap, in
+    descending size order, where the split lands away from the edges
+    (25%-75% of page width) AND both sides carry a substantial, comparable
+    LINE count (>=20% of the page's total lines, floor 5 — line count, not
+    block count, see get_page_block_geometry's docstring). Landscape
+    orientation is a WEAK hint only — decided purely by this geometry, never
+    by page rotation/aspect. Returns (is_two_column, split_at)."""
+    if len(block_geometry) < 6:
         return False, None
 
-    xs = sorted(set(round(x0) for x0 in block_x0s))
-    best_gap, split_at = 0, None
-    for a, b in zip(xs, xs[1:]):
-        gap = b - a
-        if gap > best_gap:
-            best_gap, split_at = gap, (a + b) / 2
+    total_lines = sum(n for _, n in block_geometry)
+    min_side = max(5, int(0.2 * total_lines))
 
-    gap_looks_two_column = (
-        split_at is not None
-        and best_gap > 0.15 * page_width
-        and 0.25 * page_width < split_at < 0.75 * page_width
-    )
-    if not gap_looks_two_column:
-        return False, None
+    xs = sorted(set(round(x0) for x0, _ in block_geometry))
+    gaps = sorted(((b - a, (a + b) / 2) for a, b in zip(xs, xs[1:])), key=lambda g: -g[0])
 
-    left_n = sum(1 for x0 in block_x0s if x0 <= split_at)
-    right_n = len(block_x0s) - left_n
-    min_side = max(5, int(0.2 * len(block_x0s)))
-    if left_n < min_side or right_n < min_side:
-        return False, None
+    for gap, split_at in gaps:
+        if gap <= 0.15 * page_width:
+            break  # sorted descending — no smaller gap left is worth trying either
+        if not (0.25 * page_width < split_at < 0.75 * page_width):
+            continue
+        left_n = sum(n for x0, n in block_geometry if x0 <= split_at)
+        right_n = total_lines - left_n
+        if left_n >= min_side and right_n >= min_side:
+            return True, split_at
 
-    return True, split_at
+    return False, None
 
 
 def get_ordered_page_lines(page, is_start_page=True):
@@ -451,7 +522,7 @@ def _read_page(page, is_start_page):
         return [], ordered
 
     page_h = page.rect.height
-    is_two_column, split_at = _decide_column_split(get_page_block_x0s(page), page.rect.width)
+    is_two_column, split_at = _decide_column_split(get_page_block_geometry(page), page.rect.width)
     top_margin = TOP_MARGIN_PT if is_start_page else 0
 
     if not is_two_column:
@@ -501,7 +572,7 @@ def get_page_body_lines(page, is_start_page):
 
 
 def page_is_two_column(page):
-    is_two_column, _ = _decide_column_split(get_page_block_x0s(page), page.rect.width)
+    is_two_column, _ = _decide_column_split(get_page_block_geometry(page), page.rect.width)
     return is_two_column
 
 
@@ -516,6 +587,38 @@ def discover_toc_start(doc):
         for l in candidate_lines:
             if is_toc_marker_line(l):
                 return i
+    return None
+
+
+TOC_SHAPE_DENSITY_THRESHOLD = 0.5
+
+
+def discover_toc_shape_start(doc):
+    """Marker-INDEPENDENT fallback: returns the physical page index of the
+    first page whose own lines are DENSELY TOC-shaped (dot-leader + own
+    trailing page number — see looks_like_dense_toc_line), or None. Only
+    called when discover_toc_start (the marker search) already failed —
+    this is an ADDITIONAL signal, not a replacement, so a document with a
+    real "sommaire"/"table des matières" marker is always found by the
+    (unchanged) marker path first and never reaches this function at all.
+
+    Confirmed necessary on RP_20251017_MC1_HOTEL_DIEU.pdf: its real TOC
+    ("1. Préambule ... 3", "1.1. Rappel du projet ... 3", ...) never
+    contains either marker word anywhere in the document, so
+    discover_toc_start always returns None for it — yet its TOC page has a
+    94% dot-leader-shaped-line density (30/32), a real content page has 0%
+    (checked across RP_20251017_MC1_HOTEL_DIEU's and RP_PREAMBULE.pdf's
+    first 15 pages), so a 50% floor has wide margin on both sides and won't
+    mistake an ordinary page with "a couple of numbers" for a sommaire.
+    """
+    for i in range(min(15, doc.page_count)):
+        header_lines, body_ordered = _read_page(doc[i], is_start_page=True)
+        lines = header_lines + body_ordered
+        if not lines:
+            continue
+        shaped = sum(1 for l in lines if looks_like_dense_toc_line(l))
+        if shaped / len(lines) >= TOC_SHAPE_DENSITY_THRESHOLD:
+            return i
     return None
 
 
@@ -573,7 +676,7 @@ class Entry:
         self.enfants = []
 
 
-def group_raw_lines(raw_lines):
+def group_raw_lines(raw_lines, warnings):
     def starts_uppercase(line: str) -> bool:
         letters = [c for c in line if c.isalpha()]
         return bool(letters) and letters[0].isupper()
@@ -582,26 +685,110 @@ def group_raw_lines(raw_lines):
         text = re.sub(r"\.{2,}", " ", line).strip()
         return bool(re.search(r"\d\s*$", text))
 
+    def is_genuine_close(line: str) -> bool:
+        """True if `line` has a trailing page number AND carries some real
+        (non-digit) content of its own beyond just that number — a
+        complete, self-evident TOC row (e.g. "...Evolution du Plan C ...
+        30" or "...effets du PLU ... 20"), as opposed to a BARE,
+        content-free digit-only line that merely happens to end in a digit.
+        Used only to decide whether a CLOSE was "strong" enough to make a
+        later bare-digit-only line into pure noise (see is_signal_free_
+        noise's docstring) — NOT used for the has_trailing_page_number-
+        based closing decision itself, which must stay exactly as before:
+        RP_EVAL.pdf's "Bilan des effets ... du PLU" / "342" / "Mesures
+        d'accompagnement..." needs "342" alone to close the entry
+        immediately (has_trailing_page_number's existing behavior), so that
+        the next, unnumbered, uppercase-starting entry is still recognized
+        as new — requiring real content on "342" itself here would leave
+        the entry open and wrongly fuse the next one into it."""
+        if not has_trailing_page_number(line):
+            return False
+        stripped = re.sub(r"\.(?:\s?\.){2,}", " ", line).strip()
+        return any(c.isalpha() for c in stripped)
+
+    def is_signal_free_noise(line: str) -> bool:
+        """True if `line` has NO alphabetic content at all once dot-leaders
+        are stripped — bare digits/punctuation with no title text
+        whatsoever (confirmed on RP_20251017_MC1_HOTEL_DIEU.pdf: a lone
+        stray "2" sitting between two real TOC rows, a PDF rendering
+        artifact, not real content). A line like this can never
+        legitimately be either a new entry (no title text to give it one)
+        or genuine closing text of a still-open wrap (a real closing line
+        always carries actual prose too, e.g. "...effets du PLU ... 20") —
+        it is pure noise and must be dropped, never silently absorbed into
+        whatever group happens to be open. Only checked once the current
+        group is already CLOSED: a still-open wrap's own intermediate lines
+        are left exactly as before (untouched, no new behavior introduced
+        there), since no bug was observed or reported for that branch and
+        the fix should stay scoped to what's actually broken."""
+        stripped = re.sub(r"\.(?:\s?\.){2,}", " ", line)
+        return not any(c.isalpha() for c in stripped)
+
+    def looks_like_standalone_toc_entry(line: str) -> bool:
+        """A dot-leader run (the classic TOC ellipsis filler to a page
+        number — either consecutive dots "...." or, as rendered in this
+        document, individually SPACED dots ". . . ." — a dot followed by
+        2+ repeats of an optional space then another dot) ending in the
+        line's OWN trailing page number is a strong, shape-based signal
+        that this line is a complete entry in its own right, regardless of
+        what it starts with. Needed because `starts_uppercase` only
+        recognizes a leading LETTER — a title that opens with a statistic
+        ("18,1% de logements inoccupés à Paris ... 82") has no leading
+        letter at all, so without this it got silently swallowed into the
+        PRECEDING, already-closed entry (confirmed on RP_DIAGNOSTIC.pdf;
+        the line sits in the exact same block/column as its neighbors, so
+        this was never a position/column issue). Only checked once the
+        current group is already CLOSED: a still-open multi-line wrap's own
+        closing line legitimately has this same dot-leader-plus-page-number
+        shape (e.g. RP_RNT.pdf's "...effets du PLU ........... 20"), so
+        this must never gate the not-yet-closed branch or it would re-break
+        that join."""
+        return bool(re.search(r"\.(?:\s?\.){2,}", line)) and has_trailing_page_number(line)
+
     groups = []
     current: list[str] = []
     current_closed = False
+    current_closed_strong = False
     for line in raw_lines:
         if current:
             if current_closed:
-                starts_new = parse_prefix(line) is not None or starts_uppercase(line)
+                starts_new = (
+                    parse_prefix(line) is not None
+                    or starts_uppercase(line)
+                    or looks_like_standalone_toc_entry(line)
+                )
             else:
                 starts_new = parse_prefix(line) is not None
         else:
             starts_new = False
 
+        # Only a STRONG close (the closing line itself had real content, not
+        # just a bare digit) makes a later bare-digit-only line into pure
+        # noise. A WEAK close (current_closed but NOT current_closed_strong
+        # — the group only looks closed because some earlier line happened
+        # to end in a digit with no other content, e.g. RP_INDIC.pdf's
+        # "2023") must keep absorbing what comes next exactly as before:
+        # the real page number ("27") still needs to be appended so
+        # clean_title_and_extract_page can correctly pick IT as the
+        # trailing digit, not the coincidental "2023".
+        if not starts_new and current and current_closed_strong and is_signal_free_noise(line):
+            warnings.append(
+                f"ligne sans aucun signal d'entrée (ni numérotation, ni majuscule, ni "
+                f"points de suite, ni texte) ignorée après une entrée déjà close : {line!r}"
+            )
+            continue
+
         if starts_new:
             groups.append(current)
             current = [line]
             current_closed = has_trailing_page_number(line)
+            current_closed_strong = is_genuine_close(line)
         else:
             current.append(line)
             if has_trailing_page_number(line):
                 current_closed = True
+                if is_genuine_close(line):
+                    current_closed_strong = True
     if current:
         groups.append(current)
     return groups
@@ -696,6 +883,76 @@ def compute_page_fin(flat_order, n_pages, warnings):
             entry.nb_pages = entry.page_fin - entry.page_debut + 1
 
 
+def validate_levels(flat_order, warnings):
+    """Guard net, not a fix: niveau < 1 is structurally impossible (the first
+    entry of any document is always level 1, see compute_relative_levels) —
+    if the relative-level engine ever produces one anyway (e.g. a NESTING
+    entry whose depth-delta is computed against an unrelated entry because
+    reading order was wrong), ship the entry as-is but flag it loudly rather
+    than silently passing off a broken tree as clean."""
+    for entry in flat_order:
+        if entry.niveau < 1:
+            warnings.append(
+                f"NIVEAU INVALIDE (< 1), entrée conservée telle quelle mais probablement mal "
+                f"placée dans l'arbre : numero={entry.numero!r} titre={entry.titre!r} "
+                f"page_debut={entry.page_debut} niveau={entry.niveau}"
+            )
+
+
+def detect_duplicate_codes(root_children, warnings):
+    """Flags (never auto-corrects) a numbering code that appears twice among
+    the DIRECT children of the same parent — a genuine error in the source
+    PLU document (e.g. RP_RNT.pdf's section 3 restarting at "3.1" instead of
+    continuing to "3.6"), not an extraction bug. Both entries are kept as
+    distinct tree nodes; this only records the collision so it isn't
+    silently lost, and calls out that any code-derived key downstream (e.g.
+    a lookup keyed by numero) will collide and needs disambiguating at
+    injection time. Human call, not ours: do not renumber or merge."""
+
+    def walk(siblings, parent_label):
+        by_code: dict[str, list[Entry]] = {}
+        for e in siblings:
+            if e.numero is not None:
+                by_code.setdefault(e.numero, []).append(e)
+        for code, entries in by_code.items():
+            if len(entries) > 1:
+                pages = " et ".join(f"p.{e.page_debut}" for e in entries)
+                warnings.append(
+                    f"code dupliqué dans le document source : '{code}' apparaît {len(entries)}x "
+                    f"sous {parent_label} ({pages}) — conservé tel quel, non renuméroté (décision "
+                    f"humaine à prendre) ; toute clé dérivée du code '{code}' sous {parent_label} "
+                    f"entrera en collision, à désambiguïser à l'injection"
+                )
+        for e in siblings:
+            child_label = f"la section {e.numero}" if e.numero else f"« {e.titre} »"
+            walk(e.enfants, child_label)
+
+    walk(root_children, "la racine du document")
+
+
+def detect_sequence_gaps(root_children, warnings):
+    """Flags (never invents/renumbers) a missing integer among the DIRECT
+    children of the same parent when their numero values are BARE integers
+    (e.g. root-level sections "1", "2", "4" with no "3" —
+    RP_20251017_MC1_HOTEL_DIEU.pdf) — a genuine gap in the source document,
+    not an extraction bug. Deliberately narrow: only bare-integer numero
+    values are checked, since "the next expected value" is unambiguous only
+    for that shape; a dotted code (UGSU.2.1, Annexe II, PARTIE 3, Tableau N)
+    has no well-defined "next expected sub-code" and is left alone."""
+
+    def walk(siblings, parent_label):
+        integers = sorted({int(e.numero) for e in siblings if e.numero is not None and re.fullmatch(r"\d+", e.numero)})
+        for a, b in zip(integers, integers[1:]):
+            if b - a > 1:
+                missing = ", ".join(str(x) for x in range(a + 1, b))
+                warnings.append(f"trou de séquence : section {missing} absente sous {parent_label} ({a} → {b})")
+        for e in siblings:
+            child_label = f"la section {e.numero}" if e.numero else f"« {e.titre} »"
+            walk(e.enfants, child_label)
+
+    walk(root_children, "la racine")
+
+
 def anchor_check(doc, flat_order, n_pages):
     sample_n = min(10, len(flat_order))
     if sample_n == 0:
@@ -766,10 +1023,17 @@ def process(pdf_path: Path, out_path: Path | None):
 
     toc_start = discover_toc_start(doc)
     if toc_start is None:
+        toc_start = discover_toc_shape_start(doc)
+        if toc_start is not None:
+            warnings.append(
+                f"sommaire détecté sans marqueur \"sommaire\"/\"table des matières\" — "
+                f"repéré par densité de lignes en forme de table des matières (page {toc_start + 1})"
+            )
+    if toc_start is None:
         warnings.append("aucun sommaire détecté dans ce document")
         output = dict(
             doc=pdf_path.name,
-            chemin_relatif=str(pdf_path.relative_to(REPO_ROOT)),
+            chemin_relatif=pdf_path.relative_to(REPO_ROOT).as_posix(),
             sommaire_pages_detected=dict(physical_indices_0based=[], printed_page_numbers=[]),
             numbering_rule_used="n/a — aucun sommaire détecté",
             anchor_check=dict(sample_size=0, match_rate=None, dominant_offset_detected=None, offset_votes={}, results=[]),
@@ -790,17 +1054,20 @@ def process(pdf_path: Path, out_path: Path | None):
     raw_lines = split_fused_pagenum_and_next_numbering(raw_lines)
     raw_lines = merge_isolated_numbering_lines(raw_lines)
 
-    groups = group_raw_lines(raw_lines)
+    groups = group_raw_lines(raw_lines, warnings)
     parsed = parse_groups(groups, warnings)
     levels = compute_relative_levels(parsed)
     root_children, flat_order = build_tree(parsed, levels)
+    validate_levels(flat_order, warnings)
+    detect_duplicate_codes(root_children, warnings)
+    detect_sequence_gaps(root_children, warnings)
     compute_page_fin(flat_order, n_pages, warnings)
     anchor, anchor_warnings = anchor_check(doc, flat_order, n_pages)
     warnings.extend(anchor_warnings)
 
     output = dict(
         doc=pdf_path.name,
-        chemin_relatif=str(pdf_path.relative_to(REPO_ROOT)),
+        chemin_relatif=pdf_path.relative_to(REPO_ROOT).as_posix(),
         sommaire_pages_detected=dict(physical_indices_0based=toc_pages, printed_page_numbers=[p + 1 for p in toc_pages]),
         numbering_rule_used=NUMBERING_RULE_USED,
         anchor_check=anchor,

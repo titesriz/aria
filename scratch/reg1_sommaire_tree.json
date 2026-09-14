@@ -1,6 +1,6 @@
 {
   "doc": "REG1_MS1.pdf",
-  "chemin_relatif": "Ressources/PLU bioclimatique/Règlement/Pièces écrites/Tome 1/REG1_MS1.pdf",
+  "chemin_relatif": "Ressources/PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 1/REG1_MS1.pdf",
   "sommaire_pages_detected": {
     "physical_indices_0based": [
       1,
@@ -15,7 +15,7 @@
       5
     ]
   },
-  "numbering_rule_used": "depth = 1 + number of numbering components, where a component is the leading alpha code/letter/roman-numeral plus each subsequent dot-separated digit group. 'PARTIE n' = 1 component -> level 1. A single letter or roman numeral ('A.', 'I.') = 1 component -> level 2. A code with numeric groups ('C.1', 'UG.1', 'UGSU.2.4', 'N.1.2.2') = component count of (code + each .digit group) -> level = 1 + count (e.g. UG.1 -> 2 components -> level 3; UG.1.4 -> 3 -> level 4; N.1.2.2 -> 4 -> level 5). Unnumbered ALL-CAPS lines (e.g. 'ZONE URBAINE GÉNÉRALE (UG)') are treated as level 2 zone headers, siblings of lettered PARTIE subsections. Unnumbered non-caps lines (e.g. 'Caractère de la zone urbaine générale') are nested one level below whatever node is currently open on the stack (here: level 3, sibling of the zone's first numbered subsection).",
+  "numbering_rule_used": "Numbering profiles tried in order: PARTIE n (FLAT), Annexe <roman> (FLAT), <ordinal> partie (FLAT), Axe n (FLAT), a leading code + N dot-digit-groups e.g. UG.1.4/C.1/N.1.2.2 (NESTING, depth=N), a bare digit-dot chain e.g. 1/1.1/2.14 (NESTING, depth=dot-group count), a single letter or roman numeral (FLAT), an ALL-CAPS unnumbered heading (FLAT). LEVEL is relative, not absolute depth: a recurring FLAT profile jumps back to its first-occurrence level regardless of what happened in between; a NESTING profile moves by the signed depth-delta vs. its own last occurrence; an unnumbered/non-caps line inherits the previous level; first entry of the document = level 1. Header length and TOC-page range are discovered per document (title-marker search + shape-based continuation), not assumed from a fixed line count. TOC pages are read in column order (block-level x0 clustering decides 1 vs 2 columns; fragments sharing a block and a y-band are coalesced before grouping, to avoid a wide sentence or a mid-sentence number corrupting the read).",
   "anchor_check": {
     "sample_size": 10,
     "match_rate": 1.0,
@@ -108,6 +108,17 @@
     ]
   },
   "warnings": [
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='ZONE URBAINE GÉNÉRALE (UG)' page_debut=38",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Caractère de la zone urbaine générale' page_debut=39",
+    "Entry with no trailing page number found, skipped: 'RÈGLEMENT TOME 1 SOMMAIRE'",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='ZONE URBAINE DE GRANDS SERVICES URBAINS (UGSU)' page_debut=125",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Caractère de la zone urbaine de grands services urbains' page_debut=126",
+    "Entry with no trailing page number found, skipped: 'RÈGLEMENT TOME 1 SOMMAIRE'",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='ZONE URBAINE VERTE (UV)' page_debut=171",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Caractère de la zone urbaine verte' page_debut=172",
+    "Entry with no trailing page number found, skipped: 'RÈGLEMENT TOME 1 SOMMAIRE'",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='ZONE NATURELLE ET FORESTIÈRE (N)' page_debut=201",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Caractère de la zone naturelle et forestière' page_debut=202",
     "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='C.1' titre='Portée du règlement du PLU' page_debut=9, next entry starts on page 9 (numero='C.2'). page_fin/nb_pages set to a 1-page lower bound.",
     "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='C.2' titre='Dérogations et adaptations mineures' page_debut=9, next entry starts on page 9 (numero='C.3'). page_fin/nb_pages set to a 1-page lower bound.",
     "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='D.2' titre='Au titre du code de la santé publique' page_debut=11, next entry starts on page 11 (numero='D.3'). page_fin/nb_pages set to a 1-page lower bound.",
@@ -129,7 +140,7 @@
     "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='N.1.1' titre='Occupations et utilisations des sols interdites' page_debut=203, next entry starts on page 203 (numero='N.1.2'). page_fin/nb_pages set to a 1-page lower bound.",
     "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='N.2.1' titre='Dispositions générales' page_debut=206, next entry starts on page 206 (numero='N.2.2'). page_fin/nb_pages set to a 1-page lower bound.",
     "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='N.7.1' titre='Desserte' page_debut=222, next entry starts on page 222 (numero='N.7.2'). page_fin/nb_pages set to a 1-page lower bound.",
-    "Last entry of its branch, page_fin not reliably derivable: numero='PARTIE 4' titre='FIGURES' page_debut=223"
+    "Last entry of its branch, page_fin not reliably derivable — set to doc.page_count (250): numero='PARTIE 4' titre='FIGURES' page_debut=223"
   ],
   "arbre": [
     {
@@ -440,18 +451,18 @@
           "titre": "ZONE URBAINE GÉNÉRALE (UG)",
           "niveau": 2,
           "page_debut": 38,
+          "page_fin": 38,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Caractère de la zone urbaine générale",
+          "niveau": 2,
+          "page_debut": 39,
           "page_fin": 124,
-          "nb_pages": 87,
+          "nb_pages": 86,
           "enfants": [
-            {
-              "numero": null,
-              "titre": "Caractère de la zone urbaine générale",
-              "niveau": 3,
-              "page_debut": 39,
-              "page_fin": 40,
-              "nb_pages": 2,
-              "enfants": []
-            },
             {
               "numero": "UG.1",
               "titre": "Occupations et utilisations des sols, destinations* des constructions",
@@ -800,18 +811,18 @@
           "titre": "ZONE URBAINE DE GRANDS SERVICES URBAINS (UGSU)",
           "niveau": 2,
           "page_debut": 125,
+          "page_fin": 125,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Caractère de la zone urbaine de grands services urbains",
+          "niveau": 2,
+          "page_debut": 126,
           "page_fin": 170,
-          "nb_pages": 46,
+          "nb_pages": 45,
           "enfants": [
-            {
-              "numero": null,
-              "titre": "Caractère de la zone urbaine de grands services urbains",
-              "niveau": 3,
-              "page_debut": 126,
-              "page_fin": 126,
-              "nb_pages": 1,
-              "enfants": []
-            },
             {
               "numero": "UGSU.1",
               "titre": "Occupations et utilisations des sols, destinations* des constructions",
@@ -1078,18 +1089,18 @@
           "titre": "ZONE URBAINE VERTE (UV)",
           "niveau": 2,
           "page_debut": 171,
+          "page_fin": 171,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Caractère de la zone urbaine verte",
+          "niveau": 2,
+          "page_debut": 172,
           "page_fin": 200,
-          "nb_pages": 30,
+          "nb_pages": 29,
           "enfants": [
-            {
-              "numero": null,
-              "titre": "Caractère de la zone urbaine verte",
-              "niveau": 3,
-              "page_debut": 172,
-              "page_fin": 172,
-              "nb_pages": 1,
-              "enfants": []
-            },
             {
               "numero": "UV.1",
               "titre": "Occupations et utilisations des sols, destinations* des constructions",
@@ -1356,18 +1367,18 @@
           "titre": "ZONE NATURELLE ET FORESTIÈRE (N)",
           "niveau": 2,
           "page_debut": 201,
+          "page_fin": 201,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Caractère de la zone naturelle et forestière",
+          "niveau": 2,
+          "page_debut": 202,
           "page_fin": 222,
-          "nb_pages": 22,
+          "nb_pages": 21,
           "enfants": [
-            {
-              "numero": null,
-              "titre": "Caractère de la zone naturelle et forestière",
-              "niveau": 3,
-              "page_debut": 202,
-              "page_fin": 202,
-              "nb_pages": 1,
-              "enfants": []
-            },
             {
               "numero": "N.1",
               "titre": "Occupations et utilisations des sols",
@@ -1620,8 +1631,8 @@
       "titre": "FIGURES",
       "niveau": 1,
       "page_debut": 223,
-      "page_fin": null,
-      "nb_pages": null,
+      "page_fin": 250,
+      "nb_pages": 28,
       "enfants": []
     }
   ]

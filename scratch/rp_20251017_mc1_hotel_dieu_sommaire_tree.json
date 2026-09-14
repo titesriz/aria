@@ -1,20 +1,396 @@
 {
   "doc": "RP_20251017_MC1_HOTEL_DIEU.pdf",
-  "chemin_relatif": "Ressources/PLU bioclimatique/Rapport de présentation/RP_20251017_MC1_HOTEL_DIEU.pdf",
+  "chemin_relatif": "Ressources/PLU/75 Paris/PLU Bioclimatique/Rapport de présentation/RP_20251017_MC1_HOTEL_DIEU.pdf",
   "sommaire_pages_detected": {
-    "physical_indices_0based": [],
-    "printed_page_numbers": []
+    "physical_indices_0based": [
+      1
+    ],
+    "printed_page_numbers": [
+      2
+    ]
   },
-  "numbering_rule_used": "n/a — aucun sommaire détecté",
+  "numbering_rule_used": "Numbering profiles tried in order: PARTIE n (FLAT), Annexe <roman> (FLAT), <ordinal> partie (FLAT), Axe n (FLAT), a leading code + N dot-digit-groups e.g. UG.1.4/C.1/N.1.2.2 (NESTING, depth=N), a bare digit-dot chain e.g. 1/1.1/2.14 (NESTING, depth=dot-group count), a single letter or roman numeral (FLAT), an ALL-CAPS unnumbered heading (FLAT). LEVEL is relative, not absolute depth: a recurring FLAT profile jumps back to its first-occurrence level regardless of what happened in between; a NESTING profile moves by the signed depth-delta vs. its own last occurrence; an unnumbered/non-caps line inherits the previous level; first entry of the document = level 1. Header length and TOC-page range are discovered per document (title-marker search + shape-based continuation), not assumed from a fixed line count. TOC pages are read in column order (block-level x0 clustering decides 1 vs 2 columns; fragments sharing a block and a y-band are coalesced before grouping, to avoid a wide sentence or a mid-sentence number corrupting the read).",
   "anchor_check": {
-    "sample_size": 0,
-    "match_rate": null,
-    "dominant_offset_detected": null,
-    "offset_votes": {},
-    "results": []
+    "sample_size": 10,
+    "match_rate": 1.0,
+    "dominant_offset_detected": 0,
+    "offset_votes": {
+      "-1": 1,
+      "-3": 2,
+      "0": 6,
+      "-2": 1
+    },
+    "results": [
+      {
+        "numero": "1",
+        "titre": "Préambule",
+        "page_debut": 3,
+        "naive_physical_index": 2,
+        "matched": true,
+        "offset_detected": -1
+      },
+      {
+        "numero": "2",
+        "titre": "Mise en compatibilité du PLU",
+        "page_debut": 4,
+        "naive_physical_index": 3,
+        "matched": true,
+        "offset_detected": -3
+      },
+      {
+        "numero": "2.2.1",
+        "titre": "Rapport de présentation",
+        "page_debut": 5,
+        "naive_physical_index": 4,
+        "matched": true,
+        "offset_detected": -3
+      },
+      {
+        "numero": "2.2.4",
+        "titre": "Règlement écrit et graphique",
+        "page_debut": 10,
+        "naive_physical_index": 9,
+        "matched": true,
+        "offset_detected": 0
+      },
+      {
+        "numero": "2.3.1",
+        "titre": "Rappel des évolutions nécessaires",
+        "page_debut": 26,
+        "naive_physical_index": 25,
+        "matched": true,
+        "offset_detected": 0
+      },
+      {
+        "numero": "2.3.4",
+        "titre": "Evolution du Plan B",
+        "page_debut": 29,
+        "naive_physical_index": 28,
+        "matched": true,
+        "offset_detected": 0
+      },
+      {
+        "numero": "2.3.7",
+        "titre": "Evolution de l’atlas des planches au 1/2000",
+        "page_debut": 32,
+        "naive_physical_index": 31,
+        "matched": true,
+        "offset_detected": 0
+      },
+      {
+        "numero": "2.3.1",
+        "titre": "Tome 2 du règlement écrit - Annexe IV : Périmètres de localisation d'équipements",
+        "page_debut": 36,
+        "naive_physical_index": 35,
+        "matched": true,
+        "offset_detected": 0
+      },
+      {
+        "numero": "4.1",
+        "titre": "Schéma de cohérence territoriale de la Métropole du Grand Paris",
+        "page_debut": 38,
+        "naive_physical_index": 37,
+        "matched": true,
+        "offset_detected": 0
+      },
+      {
+        "numero": "4.4",
+        "titre": "Programme local de l'habitat",
+        "page_debut": 40,
+        "naive_physical_index": 39,
+        "matched": true,
+        "offset_detected": -2
+      }
+    ]
   },
   "warnings": [
-    "aucun sommaire détecté dans ce document"
+    "sommaire détecté sans marqueur \"sommaire\"/\"table des matières\" — repéré par densité de lignes en forme de table des matières (page 2)",
+    "ligne sans aucun signal d'entrée (ni numérotation, ni majuscule, ni points de suite, ni texte) ignorée après une entrée déjà close : '2'",
+    "code dupliqué dans le document source : '2.3.1' apparaît 3x sous la section 2.3 (p.26 et p.36 et p.37) — conservé tel quel, non renuméroté (décision humaine à prendre) ; toute clé dérivée du code '2.3.1' sous la section 2.3 entrera en collision, à désambiguïser à l'injection",
+    "trou de séquence : section 3 absente sous la racine (2 → 4)",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='1.1' titre='Rappel du projet et de son intérêt général' page_debut=3, next entry starts on page 3 (numero='1.2'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='2.2.1' titre='Rapport de présentation' page_debut=5, next entry starts on page 5 (numero='2.2.2'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Last entry of its branch, page_fin not reliably derivable — set to doc.page_count (40): numero='4' titre='Articulation avec les documents de rang supra-communaux' page_debut=38",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='4.1' titre='Schéma de cohérence territoriale de la Métropole du Grand Paris' page_debut=38, next entry starts on page 38 (numero='4.2'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='4.4' titre=\"Programme local de l'habitat\" page_debut=40, next entry starts on page 40 (numero='4.5'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='4.5' titre='Plan climat-air-énergie de la Métropole du Grand Paris' page_debut=40, next entry starts on page 40 (numero='4.6'). page_fin/nb_pages set to a 1-page lower bound.",
+    "Last entry of its branch, page_fin not reliably derivable — set to doc.page_count (40): numero='4.6' titre='Synthèse' page_debut=40"
   ],
-  "arbre": []
+  "arbre": [
+    {
+      "numero": "1",
+      "titre": "Préambule",
+      "niveau": 1,
+      "page_debut": 3,
+      "page_fin": 3,
+      "nb_pages": 1,
+      "enfants": [
+        {
+          "numero": "1.1",
+          "titre": "Rappel du projet et de son intérêt général",
+          "niveau": 2,
+          "page_debut": 3,
+          "page_fin": 3,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": "1.2",
+          "titre": "Le PLU, généralité",
+          "niveau": 2,
+          "page_debut": 3,
+          "page_fin": 3,
+          "nb_pages": 1,
+          "enfants": []
+        }
+      ]
+    },
+    {
+      "numero": "2",
+      "titre": "Mise en compatibilité du PLU",
+      "niveau": 1,
+      "page_debut": 4,
+      "page_fin": 37,
+      "nb_pages": 34,
+      "enfants": [
+        {
+          "numero": "2.1",
+          "titre": "Présentation du PLU, dit « PLU Bioclimatique » (PLUb)",
+          "niveau": 2,
+          "page_debut": 4,
+          "page_fin": 4,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": "2.2",
+          "titre": "Analyse de la compatibilité du projet avec le PLU",
+          "niveau": 2,
+          "page_debut": 5,
+          "page_fin": 25,
+          "nb_pages": 21,
+          "enfants": [
+            {
+              "numero": "2.2.1",
+              "titre": "Rapport de présentation",
+              "niveau": 3,
+              "page_debut": 5,
+              "page_fin": 5,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "2.2.2",
+              "titre": "Projet d'aménagement et de développement durable (P.A.D.D.)",
+              "niveau": 3,
+              "page_debut": 5,
+              "page_fin": 5,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "2.2.3",
+              "titre": "Orientations d’Aménagement et de Programmation",
+              "niveau": 3,
+              "page_debut": 6,
+              "page_fin": 9,
+              "nb_pages": 4,
+              "enfants": []
+            },
+            {
+              "numero": "2.2.4",
+              "titre": "Règlement écrit et graphique",
+              "niveau": 3,
+              "page_debut": 10,
+              "page_fin": 23,
+              "nb_pages": 14,
+              "enfants": []
+            },
+            {
+              "numero": "2.2.5",
+              "titre": "Synthèse de l’analyse de la compatibilité du projet avec le PLU",
+              "niveau": 3,
+              "page_debut": 24,
+              "page_fin": 25,
+              "nb_pages": 2,
+              "enfants": []
+            }
+          ]
+        },
+        {
+          "numero": "2.3",
+          "titre": "Présentation détaillée des évolutions assurant la compatibilité du PLU avec le projet",
+          "niveau": 2,
+          "page_debut": 26,
+          "page_fin": 37,
+          "nb_pages": 12,
+          "enfants": [
+            {
+              "numero": "2.3.1",
+              "titre": "Rappel des évolutions nécessaires",
+              "niveau": 3,
+              "page_debut": 26,
+              "page_fin": 26,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "2.3.2",
+              "titre": "Clé de lecture",
+              "niveau": 3,
+              "page_debut": 27,
+              "page_fin": 27,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "2.3.3",
+              "titre": "Evolution du Plan A",
+              "niveau": 3,
+              "page_debut": 28,
+              "page_fin": 28,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "2.3.4",
+              "titre": "Evolution du Plan B",
+              "niveau": 3,
+              "page_debut": 29,
+              "page_fin": 29,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "2.3.5",
+              "titre": "Evolution du Plan C",
+              "niveau": 3,
+              "page_debut": 30,
+              "page_fin": 30,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "2.3.6",
+              "titre": "Evolution du Plan D",
+              "niveau": 3,
+              "page_debut": 31,
+              "page_fin": 31,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "2.3.7",
+              "titre": "Evolution de l’atlas des planches au 1/2000",
+              "niveau": 3,
+              "page_debut": 32,
+              "page_fin": 32,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "2.3.8",
+              "titre": "Evolution du règlement écrit – article UG.4.1.1",
+              "niveau": 3,
+              "page_debut": 33,
+              "page_fin": 34,
+              "nb_pages": 2,
+              "enfants": []
+            },
+            {
+              "numero": "2.3.9",
+              "titre": "Evolution du Tome 2 du règlement (annexe I : Liste des secteurs soumis à des dispositions particulières)",
+              "niveau": 3,
+              "page_debut": 35,
+              "page_fin": 35,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "2.3.1",
+              "titre": "Tome 2 du règlement écrit - Annexe IV : Périmètres de localisation d'équipements",
+              "niveau": 3,
+              "page_debut": 36,
+              "page_fin": 36,
+              "nb_pages": 1,
+              "enfants": []
+            },
+            {
+              "numero": "2.3.1",
+              "titre": "Tome 2 du règlement écrit - Annexe V : Emplacements réservés en vue de la réalisation de logements",
+              "niveau": 3,
+              "page_debut": 37,
+              "page_fin": 37,
+              "nb_pages": 1,
+              "enfants": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "numero": "4",
+      "titre": "Articulation avec les documents de rang supra-communaux",
+      "niveau": 1,
+      "page_debut": 38,
+      "page_fin": 40,
+      "nb_pages": 3,
+      "enfants": [
+        {
+          "numero": "4.1",
+          "titre": "Schéma de cohérence territoriale de la Métropole du Grand Paris",
+          "niveau": 2,
+          "page_debut": 38,
+          "page_fin": 38,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": "4.2",
+          "titre": "Schéma de mise en valeur de la mer",
+          "niveau": 2,
+          "page_debut": 38,
+          "page_fin": 38,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": "4.3",
+          "titre": "Plans de déplacements urbains d’Île-de-France",
+          "niveau": 2,
+          "page_debut": 39,
+          "page_fin": 39,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": "4.4",
+          "titre": "Programme local de l'habitat",
+          "niveau": 2,
+          "page_debut": 40,
+          "page_fin": 40,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": "4.5",
+          "titre": "Plan climat-air-énergie de la Métropole du Grand Paris",
+          "niveau": 2,
+          "page_debut": 40,
+          "page_fin": 40,
+          "nb_pages": 1,
+          "enfants": []
+        },
+        {
+          "numero": "4.6",
+          "titre": "Synthèse",
+          "niveau": 2,
+          "page_debut": 40,
+          "page_fin": 40,
+          "nb_pages": 1,
+          "enfants": []
+        }
+      ]
+    }
+  ]
 }

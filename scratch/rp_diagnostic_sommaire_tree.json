@@ -1,6 +1,6 @@
 {
   "doc": "RP_DIAGNOSTIC.pdf",
-  "chemin_relatif": "Ressources/PLU bioclimatique/Rapport de présentation/RP_DIAGNOSTIC.pdf",
+  "chemin_relatif": "Ressources/PLU/75 Paris/PLU Bioclimatique/Rapport de présentation/RP_DIAGNOSTIC.pdf",
   "sommaire_pages_detected": {
     "physical_indices_0based": [
       4,
@@ -16,11 +16,11 @@
   "numbering_rule_used": "Numbering profiles tried in order: PARTIE n (FLAT), Annexe <roman> (FLAT), <ordinal> partie (FLAT), Axe n (FLAT), a leading code + N dot-digit-groups e.g. UG.1.4/C.1/N.1.2.2 (NESTING, depth=N), a bare digit-dot chain e.g. 1/1.1/2.14 (NESTING, depth=dot-group count), a single letter or roman numeral (FLAT), an ALL-CAPS unnumbered heading (FLAT). LEVEL is relative, not absolute depth: a recurring FLAT profile jumps back to its first-occurrence level regardless of what happened in between; a NESTING profile moves by the signed depth-delta vs. its own last occurrence; an unnumbered/non-caps line inherits the previous level; first entry of the document = level 1. Header length and TOC-page range are discovered per document (title-marker search + shape-based continuation), not assumed from a fixed line count. TOC pages are read in column order (block-level x0 clustering decides 1 vs 2 columns; fragments sharing a block and a y-band are coalesced before grouping, to avoid a wide sentence or a mid-sentence number corrupting the read).",
   "anchor_check": {
     "sample_size": 10,
-    "match_rate": 0.9,
+    "match_rate": 1.0,
     "dominant_offset_detected": 2,
     "offset_votes": {
       "-1": 1,
-      "2": 8
+      "2": 9
     },
     "results": [
       {
@@ -41,17 +41,17 @@
       },
       {
         "numero": null,
-        "titre": "Les spécificités du parc de logements parisien . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 76 18,1% de logements inoccupés à Paris",
+        "titre": "18,1% de logements inoccupés à Paris",
         "page_debut": 82,
         "naive_physical_index": 81,
-        "matched": false,
-        "offset_detected": null
+        "matched": true,
+        "offset_detected": 2
       },
       {
         "numero": null,
-        "titre": "De nouvelles formes d’économies accompagnées par la Ville de Paris",
-        "page_debut": 134,
-        "naive_physical_index": 133,
+        "titre": "Des secteurs particuliers de l’économie parisienne",
+        "page_debut": 118,
+        "naive_physical_index": 117,
         "matched": true,
         "offset_detected": 2
       },
@@ -65,9 +65,9 @@
       },
       {
         "numero": null,
-        "titre": "L’exposition au phénomène d’îlots de chaleur urbain",
-        "page_debut": 202,
-        "naive_physical_index": 201,
+        "titre": "L’adaptation de Paris aux changements climatiques",
+        "page_debut": 200,
+        "naive_physical_index": 199,
         "matched": true,
         "offset_detected": 2
       },
@@ -117,7 +117,8 @@
     "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Une forte mixité sociale et des inégalités territoriales marquées' page_debut=52",
     "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Évolution du parc de logements et des résidences principales' page_debut=64",
     "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Une offre d’hébergement importante' page_debut=72",
-    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Les spécificités du parc de logements parisien . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 76 18,1% de logements inoccupés à Paris' page_debut=82",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Les spécificités du parc de logements parisien' page_debut=76",
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='18,1% de logements inoccupés à Paris' page_debut=82",
     "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Les tensions et la pression de la demande de logement' page_debut=86",
     "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Les parcours résidentiels des Parisiens' page_debut=92",
     "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Une concentration d’emplois et d’établissements exceptionnelle' page_debut=98",
@@ -170,8 +171,7 @@
     "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Les évolutions des espaces extérieurs et les pratiques de végétalisation' page_debut=376",
     "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Un bâti entretenu et qui change d’usage' page_debut=382",
     "Last entry of its branch, page_fin not reliably derivable — set to doc.page_count (390): numero=None titre='PRÉAMBULE\\x08.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�.�' page_debut=6",
-    "Last entry of its branch, page_fin not reliably derivable — set to doc.page_count (390): numero=None titre='Un bâti entretenu et qui change d’usage' page_debut=382",
-    "Anchor check MISMATCH: numero=None titre='Les spécificités du parc de logements parisien . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 76 18,1% de logements inoccupés à Paris' page_debut=82 — title not found within +/-3 pages of naive physical index 81"
+    "Last entry of its branch, page_fin not reliably derivable — set to doc.page_count (390): numero=None titre='Un bâti entretenu et qui change d’usage' page_debut=382"
   ],
   "arbre": [
     {
@@ -295,13 +295,22 @@
           "titre": "Une offre d’hébergement importante",
           "niveau": 2,
           "page_debut": 72,
-          "page_fin": 81,
-          "nb_pages": 10,
+          "page_fin": 75,
+          "nb_pages": 4,
           "enfants": []
         },
         {
           "numero": null,
-          "titre": "Les spécificités du parc de logements parisien . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 76 18,1% de logements inoccupés à Paris",
+          "titre": "Les spécificités du parc de logements parisien",
+          "niveau": 2,
+          "page_debut": 76,
+          "page_fin": 81,
+          "nb_pages": 6,
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "18,1% de logements inoccupés à Paris",
           "niveau": 2,
           "page_debut": 82,
           "page_fin": 85,

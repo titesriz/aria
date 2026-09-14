@@ -1,6 +1,6 @@
 {
   "doc": "REG2A1_MS1.pdf",
-  "chemin_relatif": "Ressources/PLU bioclimatique/Règlement/Pièces écrites/Tome 2/REG2A1_MS1.pdf",
+  "chemin_relatif": "Ressources/PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 2/REG2A1_MS1.pdf",
   "sommaire_pages_detected": {
     "physical_indices_0based": [
       1
@@ -9,15 +9,14 @@
       2
     ]
   },
-  "numbering_rule_used": "REG2-SPECIFIC numbering (unrelated to REG1's PARTIE/lettered/zone-code scheme): 'Annexe <roman numeral> :' -> level 1 (e.g. Annexe I, Annexe III, Annexe IX). '<ordinal> partie :' (French ordinals '1ère partie', '2ème partie') -> level 2, nested under whichever Annexe is currently open. Any unnumbered line is nested one level below whatever node is currently open on the stack (same generic fallback rule as REG1's UNNUMBERED_OTHER) — in this document that fires exactly once, for a stray descriptive paragraph under Annexe III that happens to end in a leader-dot run + page number (flagged separately in warnings, not trusted as real structure).",
+  "numbering_rule_used": "Numbering profiles tried in order: PARTIE n (FLAT), Annexe <roman> (FLAT), <ordinal> partie (FLAT), Axe n (FLAT), a leading code + N dot-digit-groups e.g. UG.1.4/C.1/N.1.2.2 (NESTING, depth=N), a bare digit-dot chain e.g. 1/1.1/2.14 (NESTING, depth=dot-group count), a single letter or roman numeral (FLAT), an ALL-CAPS unnumbered heading (FLAT). LEVEL is relative, not absolute depth: a recurring FLAT profile jumps back to its first-occurrence level regardless of what happened in between; a NESTING profile moves by the signed depth-delta vs. its own last occurrence; an unnumbered/non-caps line inherits the previous level; first entry of the document = level 1. Header length and TOC-page range are discovered per document (title-marker search + shape-based continuation), not assumed from a fixed line count. TOC pages are read in column order (block-level x0 clustering decides 1 vs 2 columns; fragments sharing a block and a y-band are coalesced before grouping, to avoid a wide sentence or a mid-sentence number corrupting the read).",
   "anchor_check": {
     "sample_size": 10,
     "match_rate": 1.0,
     "dominant_offset_detected": 0,
     "offset_votes": {
       "-2": 1,
-      "0": 8,
-      "-1": 1
+      "0": 9
     },
     "results": [
       {
@@ -50,7 +49,7 @@
         "page_debut": 10,
         "naive_physical_index": 9,
         "matched": true,
-        "offset_detected": -1
+        "offset_detected": 0
       },
       {
         "numero": "2e partie",
@@ -103,8 +102,9 @@
     ]
   },
   "warnings": [
-    "Suspected body-text paragraph mis-captured as a TOC entry (long, unnumbered, starts with a determiner rather than a heading noun): titre='Les emplacements réservés pour création ou élargissement de voies* sont indiqués aux documents graphiques du règlement conformément à la légende. Ils sont énumérés dans la liste ci-après' page_debut=14. Needs human review, not auto-trusted as a real structural node.",
-    "Last entry of its branch, page_fin not reliably derivable: numero='Annexe IX' titre='Liste des arbres et arbustes d’espèces régionales adaptées au climat' page_debut=223"
+    "Entry with no numbering code (numero=None), kept but flagged (convention: fused into parent, not standalone): titre='Les emplacements réservés pour création ou élargissement de voies* sont indiqués aux documents graphiques du règlement conformément à la légende. Ils sont énumérés dans la liste ci-après' page_debut=14",
+    "Entry shares its start page with the next entry (dense page, page-level extent not resolvable): numero='2e partie' titre='les emplacements réservés pour élargissement ou création de voie* publique communale' page_debut=14, next entry starts on page 14 (numero=None). page_fin/nb_pages set to a 1-page lower bound.",
+    "Last entry of its branch, page_fin not reliably derivable — set to doc.page_count (224): numero='Annexe IX' titre='Liste des arbres et arbustes d’espèces régionales adaptées au climat' page_debut=223"
   ],
   "arbre": [
     {
@@ -149,17 +149,16 @@
           "page_debut": 14,
           "page_fin": 14,
           "nb_pages": 1,
-          "enfants": [
-            {
-              "numero": null,
-              "titre": "Les emplacements réservés pour création ou élargissement de voies* sont indiqués aux documents graphiques du règlement conformément à la légende. Ils sont énumérés dans la liste ci-après",
-              "niveau": 3,
-              "page_debut": 14,
-              "page_fin": 14,
-              "nb_pages": 1,
-              "enfants": []
-            }
-          ]
+          "enfants": []
+        },
+        {
+          "numero": null,
+          "titre": "Les emplacements réservés pour création ou élargissement de voies* sont indiqués aux documents graphiques du règlement conformément à la légende. Ils sont énumérés dans la liste ci-après",
+          "niveau": 2,
+          "page_debut": 14,
+          "page_fin": 14,
+          "nb_pages": 1,
+          "enfants": []
         }
       ]
     },
@@ -213,8 +212,8 @@
       "titre": "Liste des arbres et arbustes d’espèces régionales adaptées au climat",
       "niveau": 1,
       "page_debut": 223,
-      "page_fin": null,
-      "nb_pages": null,
+      "page_fin": 224,
+      "nb_pages": 2,
       "enfants": []
     }
   ]
