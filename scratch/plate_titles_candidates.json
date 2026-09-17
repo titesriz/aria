@@ -1,0 +1,1958 @@
+[
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Alignements arbres/DG_H_ARBRALIG_NE.pdf",
+  "file": "DG_H_ARBRALIG_NE.pdf",
+  "titre_extrait": "NORD-EST H - ALIGNEMENTS D'ARBRES ET COMPOSITIONS ARBORÉES",
+  "method": "atlas1_cartouche"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Alignements arbres/DG_H_ARBRALIG_NO.pdf",
+  "file": "DG_H_ARBRALIG_NO.pdf",
+  "titre_extrait": "NORD-OUEST H - ALIGNEMENTS D'ARBRES ET COMPOSITIONS ARBORÉES",
+  "method": "atlas1_cartouche"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Alignements arbres/DG_H_ARBRALIG_SE.pdf",
+  "file": "DG_H_ARBRALIG_SE.pdf",
+  "titre_extrait": "SUD-EST H - ALIGNEMENTS D'ARBRES ET COMPOSITIONS ARBORÉES",
+  "method": "atlas1_cartouche"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Alignements arbres/DG_H_ARBRALIG_SO.pdf",
+  "file": "DG_H_ARBRALIG_SO.pdf",
+  "titre_extrait": "H - ALIGNEMENTS D'ARBRES ET COMPOSITIONS ARBORÉES SUD-OUEST",
+  "method": "atlas1_cartouche"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Bois Boulogne/BBC.pdf",
+  "file": "BBC.pdf",
+  "titre_extrait": "Bois de Boulogne - Centre ʌ Bois de Bou logn   e - Nord ʌ Bois de Boulogne - Centre ʌ Bois de Bou logn   e - Nord ʌ 16ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Bois Boulogne/BBN.pdf",
+  "file": "BBN.pdf",
+  "titre_extrait": "Bois de Boulogne - Nord Bois de Boulogne - Nord 16ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Bois Boulogne/BBRG.pdf",
+  "file": "BBRG.pdf",
+  "titre_extrait": "ʌ Bois de Boulogne - Sud ʌ Feuille Roland Garros ʌ Bois de Boulogne - Sud ʌ 16ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Bois Boulogne/BBS.pdf",
+  "file": "BBS.pdf",
+  "titre_extrait": "Bois de Boulogne - Sud ʌ Bois de Boulogne - Centre ʌ Bois de Boulogne - Sud ʌ Bois de Boulogne - Centre ʌ 16ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Bois Boulogne/LEG2000.pdf",
+  "file": "LEG2000.pdf",
+  "titre_extrait": "Légende des plans au 1/1000, 1/2000 et 1/5000",
+  "method": "atlas1_cartouche"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Bois Vincennes/BVNE.pdf",
+  "file": "BVNE.pdf",
+  "titre_extrait": "Bois de Vincennes - Nord Est Bois de Vincennes - Nord Est 12ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Bois Vincennes/BVO.pdf",
+  "file": "BVO.pdf",
+  "titre_extrait": "Bois de Vincennes - Ouest Bois de Vincennes - Ouest 12ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Bois Vincennes/BVSE.pdf",
+  "file": "BVSE.pdf",
+  "titre_extrait": "Bois de Vincennes - Sud Est ʌ Bois de Vince nne s - Nord Est ʌ Bois de Vincennes - Sud Est ʌ Bois de Vince nne s - Nord Est ʌ 12ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Bois Vincennes/LEG2000.pdf",
+  "file": "LEG2000.pdf",
+  "titre_extrait": "Légende des plans au 1/1000, 1/2000 et 1/5000",
+  "method": "atlas1_cartouche"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/DG_A_ZONAGE.pdf",
+  "file": "DG_A_ZONAGE.pdf",
+  "titre_extrait": "A - ZONAGE ET OAP SECTORIELLES",
+  "method": "atlas1_cartouche"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/DG_E_HAUTEUR.pdf",
+  "file": "DG_E_HAUTEUR.pdf",
+  "titre_extrait": "E - PLAN GÉNÉRAL DES HAUTEURS",
+  "method": "atlas1_cartouche"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/DG_L_BOIS_VINCENNES.pdf",
+  "file": "DG_L_BOIS_VINCENNES.pdf",
+  "titre_extrait": "L - BOIS DE VINCENNES",
+  "method": "atlas1_cartouche"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/DG_M_BOIS_BOULOGNE.pdf",
+  "file": "DG_M_BOIS_BOULOGNE.pdf",
+  "titre_extrait": "M - BOIS DE BOULOGNE",
+  "method": "atlas1_cartouche"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Equilibre destinations/DG_B_DEST_NE.pdf",
+  "file": "DG_B_DEST_NE.pdf",
+  "titre_extrait": "SAINT-OUEN AUBERVILLIERS SAINT-DENIS",
+  "method": "atlas1_cartouche"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Equilibre destinations/DG_B_DEST_NO.pdf",
+  "file": "DG_B_DEST_NO.pdf",
+  "titre_extrait": "B - ÉQUILIBRE ENTRE DESTINATIONS NORD-OUEST",
+  "method": "atlas1_cartouche"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Equilibre destinations/DG_B_DEST_SE.pdf",
+  "file": "DG_B_DEST_SE.pdf",
+  "titre_extrait": "PLU mis en compatibilité par arrêté préfectoral le 17 octobre 2025",
+  "method": "atlas1_cartouche"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Equilibre destinations/DG_B_DEST_SO.pdf",
+  "file": "DG_B_DEST_SO.pdf",
+  "titre_extrait": "SUD-OUEST B - ÉQUILIBRE ENTRE DESTINATIONS",
+  "method": "atlas1_cartouche"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Fuseaux protection/DG_F_FUSEAU_NE.pdf",
+  "file": "DG_F_FUSEAU_NE.pdf",
+  "titre_extrait": "F - FUSEAUX DE PROTECTION NORD-EST",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Fuseaux protection/DG_F_FUSEAU_NO.pdf",
+  "file": "DG_F_FUSEAU_NO.pdf",
+  "titre_extrait": "F - FUSEAUX DE PROTECTION NORD-OUEST",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Fuseaux protection/DG_F_FUSEAU_SE.pdf",
+  "file": "DG_F_FUSEAU_SE.pdf",
+  "titre_extrait": "F - FUSEAUX DE PROTECTION SUD-EST",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Fuseaux protection/DG_F_FUSEAU_SO.pdf",
+  "file": "DG_F_FUSEAU_SO.pdf",
+  "titre_extrait": "F - FUSEAUX DE PROTECTION SUD-OUEST",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Limitation parc stationnement/DG_I_PARCSTAT_NE.pdf",
+  "file": "DG_I_PARCSTAT_NE.pdf",
+  "titre_extrait": "I - LIMITATION DES PARCS DE STATIONNEMENT NORD-EST",
+  "method": "atlas1_cartouche"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Limitation parc stationnement/DG_I_PARCSTAT_NO.pdf",
+  "file": "DG_I_PARCSTAT_NO.pdf",
+  "titre_extrait": "I - LIMITATION DES PARCS DE STATIONNEMENT NORD-OUEST",
+  "method": "atlas1_cartouche"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Limitation parc stationnement/DG_I_PARCSTAT_SE.pdf",
+  "file": "DG_I_PARCSTAT_SE.pdf",
+  "titre_extrait": "PLU mis en compatibilité par arrêté préfectoral le 17 octobre 2025",
+  "method": "atlas1_cartouche"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Limitation parc stationnement/DG_I_PARCSTAT_SO.pdf",
+  "file": "DG_I_PARCSTAT_SO.pdf",
+  "titre_extrait": "I - LIMITATION DES PARCS DE STATIONNEMENT SUD-OUEST",
+  "method": "atlas1_cartouche"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Mixité sociale/DG_D_LOGSOC_NE.pdf",
+  "file": "DG_D_LOGSOC_NE.pdf",
+  "titre_extrait": "NORD-EST D - MIXITÉ SOCIALE",
+  "method": "atlas1_cartouche"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Mixité sociale/DG_D_LOGSOC_NO.pdf",
+  "file": "DG_D_LOGSOC_NO.pdf",
+  "titre_extrait": "D - MIXITÉ SOCIALE NORD-OUEST",
+  "method": "atlas1_cartouche"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Mixité sociale/DG_D_LOGSOC_SE.pdf",
+  "file": "DG_D_LOGSOC_SE.pdf",
+  "titre_extrait": "PLU mis en compatibilité par arrêté préfectoral le 17 octobre 2025",
+  "method": "atlas1_cartouche"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Mixité sociale/DG_D_LOGSOC_SO.pdf",
+  "file": "DG_D_LOGSOC_SO.pdf",
+  "titre_extrait": "D - MIXITÉ SOCIALE SUD-OUEST",
+  "method": "atlas1_cartouche"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Protections commerces/DG_C_PROTCOM_NE.pdf",
+  "file": "DG_C_PROTCOM_NE.pdf",
+  "titre_extrait": "C - PROTECTION DU COMMERCE NORD-EST",
+  "method": "atlas1_cartouche"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Protections commerces/DG_C_PROTCOM_NO.pdf",
+  "file": "DG_C_PROTCOM_NO.pdf",
+  "titre_extrait": "C - PROTECTION DU COMMERCE NORD-OUEST",
+  "method": "atlas1_cartouche"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Protections commerces/DG_C_PROTCOM_SE.pdf",
+  "file": "DG_C_PROTCOM_SE.pdf",
+  "titre_extrait": "PLU mis en compatibilité par arrêté préfectoral le 17 octobre 2025",
+  "method": "atlas1_cartouche"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Protections commerces/DG_C_PROTCOM_SO.pdf",
+  "file": "DG_C_PROTCOM_SO.pdf",
+  "titre_extrait": "C - PROTECTION DU COMMERCE SUD-OUEST",
+  "method": "atlas1_cartouche"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Renforcement végétal/DG_G_RENFVEG_NE.pdf",
+  "file": "DG_G_RENFVEG_NE.pdf",
+  "titre_extrait": "G - SECTORISATION VÉGÉTALE NORD-EST",
+  "method": "atlas1_cartouche"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Renforcement végétal/DG_G_RENFVEG_NO.pdf",
+  "file": "DG_G_RENFVEG_NO.pdf",
+  "titre_extrait": "NORD-OUEST G - SECTORISATION VÉGÉTALE",
+  "method": "atlas1_cartouche"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Renforcement végétal/DG_G_RENFVEG_SE.pdf",
+  "file": "DG_G_RENFVEG_SE.pdf",
+  "titre_extrait": "G - SECTORISATION VÉGÉTALE SUD-EST",
+  "method": "atlas1_cartouche"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Renforcement végétal/DG_G_RENFVEG_SO.pdf",
+  "file": "DG_G_RENFVEG_SO.pdf",
+  "titre_extrait": "G - SECTORISATION VÉGÉTALE SUD-OUEST PLU approuvé par délibération du Conseil de Paris du 20 novembre 2024",
+  "method": "atlas1_cartouche"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Secteurs risques/DG_J_RISQUE.pdf",
+  "file": "DG_J_RISQUE.pdf",
+  "titre_extrait": "J - SECTEURS DE RISQUE",
+  "method": "atlas1_cartouche"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 1/Secteurs risques/DG_K_SOURCENORD.pdf",
+  "file": "DG_K_SOURCENORD.pdf",
+  "titre_extrait": "K - SOURCES DU NORD",
+  "method": "atlas1_cartouche"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/A_08.pdf",
+  "file": "A_08.pdf",
+  "titre_extrait": "Feuille A-08 ʌ Bois de Boulogne-Sud ʌ Feuille A-08 ʌ Bois de Boulogne-Sud ʌ 16ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/A_09.pdf",
+  "file": "A_09.pdf",
+  "titre_extrait": "Feuille A-09 ʌ A-08 ʌ Feuille A-09 ʌ A-08 ʌ 16ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/A_10.pdf",
+  "file": "A_10.pdf",
+  "titre_extrait": "Feuille A-10 ʌ A-09 ʌ Feuille A-10 ʌ A-09 ʌ 16ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/B_05.pdf",
+  "file": "B_05.pdf",
+  "titre_extrait": "Feuille B-05 ʌ Bois de Boulogne-Nord ʌ Feuille B-05 ʌ Bois de Boulogne-Nord ʌ 16ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/B_06.pdf",
+  "file": "B_06.pdf",
+  "titre_extrait": "Feuille B-06 ʌ B-05 ʌ Feuille B-06 ʌ B-05 ʌ 16ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/B_07.pdf",
+  "file": "B_07.pdf",
+  "titre_extrait": "Feuille B-07 ʌ B-06 ʌ Feuille B-07 ʌ B-06 ʌ 16ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/B_08.pdf",
+  "file": "B_08.pdf",
+  "titre_extrait": "Feuille B-08 ʌ B-07 ʌ Feuille B-08 ʌ B-07 ʌ 16ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/B_09.pdf",
+  "file": "B_09.pdf",
+  "titre_extrait": "Feuille B-09 ʌ B-08 ʌ Feuille B-09 ʌ B-08 ʌ 15ème et 16ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/B_10.pdf",
+  "file": "B_10.pdf",
+  "titre_extrait": "Feuille B-10 ʌ B-09 ʌ Feuille B-10 ʌ B-09 ʌ 15ème et 16ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/B_11.pdf",
+  "file": "B_11.pdf",
+  "titre_extrait": "Feuille B-11 ʌ B-10 ʌ Feuille B-11 ʌ B-10 ʌ 15ème et 16ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/C_03.pdf",
+  "file": "C_03.pdf",
+  "titre_extrait": "Feuille C-03 Feuille C-03 17ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/C_04.pdf",
+  "file": "C_04.pdf",
+  "titre_extrait": "Feuille C-04 ʌ C-03 ʌ Feuille C-04 ʌ C-03 ʌ 16ème et 17ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/C_05.pdf",
+  "file": "C_05.pdf",
+  "titre_extrait": "Feuille C-05 ʌ C-04 ʌ Feuille C-05 ʌ C-04 ʌ 16ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/C_06_A_251216.pdf",
+  "file": "C_06_A_251216.pdf",
+  "titre_extrait": "Feuille C-06 ʌ C-05 ʌ Feuille C-06 ʌ C-05 ʌ 16ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/C_07.pdf",
+  "file": "C_07.pdf",
+  "titre_extrait": "Feuille C-07 ʌ C-06 ʌ Feuille C-07 ʌ C-06 ʌ 16ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/C_08_A_251216.pdf",
+  "file": "C_08_A_251216.pdf",
+  "titre_extrait": "Feuille C-08 ʌ C-07 ʌ Feuille C-08 ʌ C-07 ʌ 15ème et 16ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/C_09_A_251216.pdf",
+  "file": "C_09_A_251216.pdf",
+  "titre_extrait": "Feuille C-09 ʌ C-08 ʌ Feuille C-09 ʌ C-08 ʌ 15ème et 16ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/C_10.pdf",
+  "file": "C_10.pdf",
+  "titre_extrait": "Feuille C-10 ʌ C-09 ʌ Feuille C-10 ʌ C-09 ʌ 15ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/C_11.pdf",
+  "file": "C_11.pdf",
+  "titre_extrait": "Feuille C-11 ʌ C-10 ʌ Feuille C-11 ʌ C-10 ʌ 15ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/Consultation_des_planches_au_1_sur_2000.pdf",
+  "file": "Consultation_des_planches_au_1_sur_2000.pdf",
+  "titre_extrait": "Consultation des planches au 1/2000 :",
+  "method": "atlas1_cartouche"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/D_02.pdf",
+  "file": "D_02.pdf",
+  "titre_extrait": "Feuille D-02 Feuille D-02 17ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/D_03_A_251216.pdf",
+  "file": "D_03_A_251216.pdf",
+  "titre_extrait": "Feuille D-03 ʌ D-02 ʌ Feuille D-03 ʌ D-02 ʌ 17ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/D_04.pdf",
+  "file": "D_04.pdf",
+  "titre_extrait": "Feuille D-04 ʌ D-03 ʌ Feuille D-04 ʌ D-03 ʌ 8ème et 17ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/D_05_A_251216.pdf",
+  "file": "D_05_A_251216.pdf",
+  "titre_extrait": "Feuille D-05 ʌ D-04 ʌ Feuille D-05 ʌ D-04 ʌ 8ème, 16ème et 17ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/D_06_A_251216.pdf",
+  "file": "D_06_A_251216.pdf",
+  "titre_extrait": "Feuille D-06 ʌ D-05 ʌ Feuille D-06 ʌ D-05 ʌ 7ème, 8ème et 16ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/D_07.pdf",
+  "file": "D_07.pdf",
+  "titre_extrait": "Feuille D-07 ʌ D-06 ʌ Feuille D-07 ʌ D-06 ʌ 7ème, 15ème et 16ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/D_08_A_251216.pdf",
+  "file": "D_08_A_251216.pdf",
+  "titre_extrait": "Feuille D-08 ʌ D-07 ʌ Feuille D-08 ʌ D-07 ʌ 7ème et 15ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/D_09_A_251216.pdf",
+  "file": "D_09_A_251216.pdf",
+  "titre_extrait": "Feuille D-09 ʌ D-08 ʌ Feuille D-09 ʌ D-08 ʌ 15ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/D_10_A_251216.pdf",
+  "file": "D_10_A_251216.pdf",
+  "titre_extrait": "Feuille D-10 ʌ D-09 ʌ Feuille D-10 ʌ D-09 ʌ 15ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/D_11_A_251216.pdf",
+  "file": "D_11_A_251216.pdf",
+  "titre_extrait": "Feuille D-11 ʌ D-10 ʌ Feuille D-11 ʌ D-10 ʌ 15ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/D_12.pdf",
+  "file": "D_12.pdf",
+  "titre_extrait": "Feuille D-12 ʌ D-11 ʌ Feuille D-12 ʌ D-11 ʌ 14ème et 15ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/E_01.pdf",
+  "file": "E_01.pdf",
+  "titre_extrait": "Feuille E-01 Feuille E-01 17ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/E_02.pdf",
+  "file": "E_02.pdf",
+  "titre_extrait": "Feuille E-02 ʌ E-01 ʌ Feuille E-02 ʌ E-01 ʌ 17ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/E_03_A_251216.pdf",
+  "file": "E_03_A_251216.pdf",
+  "titre_extrait": "Feuille E-03 ʌ E-02 ʌ Feuille E-03 ʌ E-02 ʌ 17ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/E_04.pdf",
+  "file": "E_04.pdf",
+  "titre_extrait": "Feuille E-04 ʌ E-03 ʌ Feuille E-04 ʌ E-03 ʌ 8ème et 17ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/E_05_A_251216.pdf",
+  "file": "E_05_A_251216.pdf",
+  "titre_extrait": "Sao Tomé et Principe Feuille E-05 ʌ E-04 ʌ Feuille E-05 ʌ E-04 ʌ 8ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/E_06_A_251216.pdf",
+  "file": "E_06_A_251216.pdf",
+  "titre_extrait": "Feuille E-06 ʌ E-05 ʌ Feuille E-06 ʌ E-05 ʌ 7ème et 8ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/E_07.pdf",
+  "file": "E_07.pdf",
+  "titre_extrait": "Feuille E-07 ʌ E-06 ʌ Feuille E-07 ʌ E-06 ʌ 7ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/E_08.pdf",
+  "file": "E_08.pdf",
+  "titre_extrait": "Feuille E-08 ʌ E-07 ʌ Feuille E-08 ʌ E-07 ʌ 7ème et 15ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/E_09.pdf",
+  "file": "E_09.pdf",
+  "titre_extrait": "Feuille E-09 ʌ E-08 ʌ Feuille E-09 ʌ E-08 ʌ 7ème et 15ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/E_10_A_251216.pdf",
+  "file": "E_10_A_251216.pdf",
+  "titre_extrait": "Feuille E-10 ʌ E-09 ʌ Feuille E-10 ʌ E-09 ʌ 14ème et 15ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/E_11_A_251216.pdf",
+  "file": "E_11_A_251216.pdf",
+  "titre_extrait": "Feuille E-11 ʌ E-10 ʌ Feuille E-11 ʌ E-10 ʌ 14ème et 15ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/E_12.pdf",
+  "file": "E_12.pdf",
+  "titre_extrait": "Feuille E-12 ʌ E-11 ʌ Feuille E-12 ʌ E-11 ʌ 14ème et 15ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/F_01.pdf",
+  "file": "F_01.pdf",
+  "titre_extrait": "Feuille F-01 Feuille F-01 17ème et 18ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/F_02.pdf",
+  "file": "F_02.pdf",
+  "titre_extrait": "Feuille F-02 ʌ F-01 ʌ Feuille F-02 ʌ F-01 ʌ 17ème et 18ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/F_03_A_251216.pdf",
+  "file": "F_03_A_251216.pdf",
+  "titre_extrait": "Feuille F-03 ʌ F-02 ʌ Feuille F-03 ʌ F-02 ʌ 8ème, 9ème, 17ème et 18ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/F_04_A_251216.pdf",
+  "file": "F_04_A_251216.pdf",
+  "titre_extrait": "Feuille F-04 ʌ F-03 ʌ Feuille F-04 ʌ F-03 ʌ 8ème et 9ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/F_05_A_251216.pdf",
+  "file": "F_05_A_251216.pdf",
+  "titre_extrait": "Feuille F-05 ʌ F-04 ʌ Feuille F-05 ʌ F-04 ʌ 1er, 2ème, 8ème et 9ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/F_06.pdf",
+  "file": "F_06.pdf",
+  "titre_extrait": "Feuille F-06 ʌ F-05 ʌ Feuille F-06 ʌ F-05 ʌ 1er, 7ème et 8ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/F_07.pdf",
+  "file": "F_07.pdf",
+  "titre_extrait": "Feuille F-07 ʌ F-06 ʌ Feuille F-07 ʌ F-06 ʌ 1er et 7ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/F_08.pdf",
+  "file": "F_08.pdf",
+  "titre_extrait": "Feuille F-08 ʌ F-07 ʌ Feuille F-08 ʌ F-07 ʌ 6ème et 7ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/F_09_A_251216.pdf",
+  "file": "F_09_A_251216.pdf",
+  "titre_extrait": "Feuille F-09 ʌ F-08 ʌ Feuille F-09 ʌ F-08 ʌ 6ème, 7ème, 14ème et 15ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/F_10.pdf",
+  "file": "F_10.pdf",
+  "titre_extrait": "Feuille F-10 ʌ F-09 ʌ Feuille F-10 ʌ F-09 ʌ 14ème et 15ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/F_11.pdf",
+  "file": "F_11.pdf",
+  "titre_extrait": "Feuille F-11 ʌ F-10 ʌ Feuille F-11 ʌ F-10 ʌ 14ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/F_12.pdf",
+  "file": "F_12.pdf",
+  "titre_extrait": "Feuille F-12 ʌ F-11 ʌ Feuille F-12 ʌ F-11 ʌ 14ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/F_13.pdf",
+  "file": "F_13.pdf",
+  "titre_extrait": "Feuille F-13 ʌ F-12 ʌ Feuille F-13 ʌ F-12 ʌ 14ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/G_01.pdf",
+  "file": "G_01.pdf",
+  "titre_extrait": "Feuille G-01 Feuille G-01 17ème et 18ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/G_02.pdf",
+  "file": "G_02.pdf",
+  "titre_extrait": "Feuille G-02 ʌ G-01 ʌ Feuille G-02 ʌ G-01 ʌ 18ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/G_03.pdf",
+  "file": "G_03.pdf",
+  "titre_extrait": "Feuille G-03 ʌ G-02 ʌ Feuille G-03 ʌ G-02 ʌ 9ème et 18ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/G_04.pdf",
+  "file": "G_04.pdf",
+  "titre_extrait": "Feuille G-04 ʌ G-03 ʌ Feuille G-04 ʌ G-03 ʌ 8ème et 9ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/G_05.pdf",
+  "file": "G_05.pdf",
+  "titre_extrait": "Feuille G-05 ʌ G-04 ʌ Feuille G-05 ʌ G-04 ʌ 2ème et 9ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/G_06_A_251216.pdf",
+  "file": "G_06_A_251216.pdf",
+  "titre_extrait": "Feuille G-06 ʌ G-05 ʌ Feuille G-06 ʌ G-05 ʌ 1er et 2ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/G_07.pdf",
+  "file": "G_07.pdf",
+  "titre_extrait": "Feuille G-07 ʌ G-06 ʌ Feuille G-07 ʌ G-06 ʌ 1er, 6ème et 7ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/G_08.pdf",
+  "file": "G_08.pdf",
+  "titre_extrait": "Feuille G-08 ʌ G-07 ʌ Feuille G-08 ʌ G-07 ʌ 5ème, 6ème et 7ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/G_09.pdf",
+  "file": "G_09.pdf",
+  "titre_extrait": "Feuille G-09 ʌ G-08 ʌ Feuille G-09 ʌ G-08 ʌ 5ème et 6ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/G_10_A_251216.pdf",
+  "file": "G_10_A_251216.pdf",
+  "titre_extrait": "Feuille G-10 ʌ G-09 ʌ Feuille G-10 ʌ G-09 ʌ 5ème, 6ème, 13ème et 14ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/G_11.pdf",
+  "file": "G_11.pdf",
+  "titre_extrait": "Feuille G-11 ʌ G-10 ʌ Feuille G-11 ʌ G-10 ʌ 13ème et 14ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/G_12_A_251216.pdf",
+  "file": "G_12_A_251216.pdf",
+  "titre_extrait": "Feuille G-12 ʌ G-11 ʌ Feuille G-12 ʌ G-11 ʌ 13ème et 14ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/G_13_A_251216.pdf",
+  "file": "G_13_A_251216.pdf",
+  "titre_extrait": "Feuille G-13 ʌ G-12 ʌ Feuille G-13 ʌ G-12 ʌ 14ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/H_01.pdf",
+  "file": "H_01.pdf",
+  "titre_extrait": "Feuille H-01 Feuille H-01 18ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/H_02.pdf",
+  "file": "H_02.pdf",
+  "titre_extrait": "Feuille H-02 ʌ H-01 ʌ Feuille H-02 ʌ H-01 ʌ 18ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/H_03.pdf",
+  "file": "H_03.pdf",
+  "titre_extrait": "Feuille H-03 ʌ H-02 ʌ Feuille H-03 ʌ H-02 ʌ 9ème, 10ème et 18ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/H_04.pdf",
+  "file": "H_04.pdf",
+  "titre_extrait": "Feuille H-04 ʌ H-03 ʌ Feuille H-04 ʌ H-03 ʌ 9ème et 10ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/H_05.pdf",
+  "file": "H_05.pdf",
+  "titre_extrait": "Feuille H-05 ʌ H-04 ʌ Feuille H-05 ʌ H-04 ʌ 2ème, 3ème, 9ème et 10ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/H_06.pdf",
+  "file": "H_06.pdf",
+  "titre_extrait": "Feuille H-06 ʌ H-05 ʌ Feuille H-06 ʌ H-05 ʌ 1er, 2ème, 3ème et 4ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/H_07.pdf",
+  "file": "H_07.pdf",
+  "titre_extrait": "Feuille H-07 ʌ H-06 ʌ Feuille H-07 ʌ H-06 ʌ 1er, 3ème et 4ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/H_08_A_251216.pdf",
+  "file": "H_08_A_251216.pdf",
+  "titre_extrait": "Feuille H-08 ʌ H-07 ʌ Feuille H-08 ʌ H-07 ʌ 1er, 4ème, 5ème et 6ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/H_09.pdf",
+  "file": "H_09.pdf",
+  "titre_extrait": "Feuille H-09 ʌ H-08 ʌ Feuille H-09 ʌ H-08 ʌ 5ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/H_10_A_251216.pdf",
+  "file": "H_10_A_251216.pdf",
+  "titre_extrait": "Feuille H-10 ʌ H-09 ʌ Feuille H-10 ʌ H-09 ʌ 5ème et 13ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/H_11.pdf",
+  "file": "H_11.pdf",
+  "titre_extrait": "Feuille H-11 ʌ H-10 ʌ Feuille H-11 ʌ H-10 ʌ 13ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/H_12_A_251216.pdf",
+  "file": "H_12_A_251216.pdf",
+  "titre_extrait": "Feuille H-12 ʌ H-11 ʌ Feuille H-12 ʌ H-11 ʌ 13ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/H_13.pdf",
+  "file": "H_13.pdf",
+  "titre_extrait": "Feuille H-13 ʌ H-12 ʌ Feuille H-13 ʌ H-12 ʌ 13ème et 14ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/I_01.pdf",
+  "file": "I_01.pdf",
+  "titre_extrait": "Feuille I-01 Feuille I-01 18ème et 19ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/I_02.pdf",
+  "file": "I_02.pdf",
+  "titre_extrait": "Feuille I-02 ʌ I-01 ʌ Feuille I-02 ʌ I-01 ʌ 18ème et 19ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/I_03.pdf",
+  "file": "I_03.pdf",
+  "titre_extrait": "Feuille I-03 ʌ I-02 ʌ Feuille I-03 ʌ I-02 ʌ 10ème, 18ème et 19ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/I_04_A_251216.pdf",
+  "file": "I_04_A_251216.pdf",
+  "titre_extrait": "Feuille I-04 ʌ I-03 ʌ Feuille I-04 ʌ I-03 ʌ 10ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/I_05.pdf",
+  "file": "I_05.pdf",
+  "titre_extrait": "Feuille I-05 ʌ I-04 ʌ Feuille I-05 ʌ I-04 ʌ 10ème et 11ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/I_06.pdf",
+  "file": "I_06.pdf",
+  "titre_extrait": "Feuille I-06 ʌ I-05 ʌ Feuille I-06 ʌ I-05 ʌ 3ème, 10ème et 11ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/I_07.pdf",
+  "file": "I_07.pdf",
+  "titre_extrait": "Feuille I-07 ʌ I-06 ʌ Feuille I-07 ʌ I-06 ʌ 3ème, 4ème et 11ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/I_08.pdf",
+  "file": "I_08.pdf",
+  "titre_extrait": "Feuille I-08 ʌ I-07 ʌ Feuille I-08 ʌ I-07 ʌ 4ème, 5ème, 11ème et 12ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/I_09.pdf",
+  "file": "I_09.pdf",
+  "titre_extrait": "Feuille I-09 ʌ I-08 ʌ Feuille I-09 ʌ I-08 ʌ 4ème, 5ème, 12ème et 13ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/I_10.pdf",
+  "file": "I_10.pdf",
+  "titre_extrait": "Feuille I-10 ʌ I-09 ʌ Feuille I-10 ʌ I-09 ʌ 5ème et 13ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/I_11.pdf",
+  "file": "I_11.pdf",
+  "titre_extrait": "Feuille I-11 ʌ I-10 ʌ Feuille I-11 ʌ I-10 ʌ 13ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/I_12.pdf",
+  "file": "I_12.pdf",
+  "titre_extrait": "Feuille I-12 ʌ I-11 ʌ Feuille I-12 ʌ I-11 ʌ 13ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/I_13.pdf",
+  "file": "I_13.pdf",
+  "titre_extrait": "Feuille I-13 ʌ I-12 ʌ Feuille I-13 ʌ I-12 ʌ 13ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/J_01.pdf",
+  "file": "J_01.pdf",
+  "titre_extrait": "Feuille J-01 Feuille J-01 18ème et 19ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/J_02.pdf",
+  "file": "J_02.pdf",
+  "titre_extrait": "Feuille J-02 ʌ J-01 ʌ Feuille J-02 ʌ J-01 ʌ 18ème et 19ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/J_03.pdf",
+  "file": "J_03.pdf",
+  "titre_extrait": "Feuille J-03 ʌ J-02 ʌ Feuille J-03 ʌ J-02 ʌ 10ème et 19ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/J_04.pdf",
+  "file": "J_04.pdf",
+  "titre_extrait": "Consulat d'Algérie Feuille J-04 ʌ J-03 ʌ Feuille J-04 ʌ J-03 ʌ 10ème et 19ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/J_05.pdf",
+  "file": "J_05.pdf",
+  "titre_extrait": "Feuille J-05 ʌ J-04 ʌ Feuille J-05 ʌ J-04 ʌ 10ème, 11ème, 19ème et 20ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/J_06_A_251216.pdf",
+  "file": "J_06_A_251216.pdf",
+  "titre_extrait": "Feuille J-06 ʌ J-05 ʌ Feuille J-06 ʌ J-05 ʌ 11ème et 20ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/J_07.pdf",
+  "file": "J_07.pdf",
+  "titre_extrait": "Feuille J-07 ʌ J-06 ʌ Feuille J-07 ʌ J-06 ʌ 11ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/J_08.pdf",
+  "file": "J_08.pdf",
+  "titre_extrait": "Feuille J-08 ʌ J-07 ʌ Feuille J-08 ʌ J-07 ʌ 11ème et 12ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/J_09.pdf",
+  "file": "J_09.pdf",
+  "titre_extrait": "Feuille J-09 ʌ J-08 ʌ Feuille J-09 ʌ J-08 ʌ 12ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/J_10.pdf",
+  "file": "J_10.pdf",
+  "titre_extrait": "Feuille J-10 ʌ J-09 ʌ Feuille J-10 ʌ J-09 ʌ 12ème et 13ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/J_11.pdf",
+  "file": "J_11.pdf",
+  "titre_extrait": "Feuille J-11 ʌ J-10 ʌ Feuille J-11 ʌ J-10 ʌ 12ème et 13ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/J_12.pdf",
+  "file": "J_12.pdf",
+  "titre_extrait": "Feuille J-12 ʌ J-11 ʌ Feuille J-12 ʌ J-11 ʌ 13ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/J_13.pdf",
+  "file": "J_13.pdf",
+  "titre_extrait": "Feuille J-13 ʌ J-12 ʌ Feuille J-13 ʌ J-12 ʌ 13ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/K_01.pdf",
+  "file": "K_01.pdf",
+  "titre_extrait": "Feuille K-01 Feuille K-01 19ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/K_02.pdf",
+  "file": "K_02.pdf",
+  "titre_extrait": "Feuille K-02 ʌ K-01 ʌ Feuille K-02 ʌ K-01 ʌ 19ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/K_03.pdf",
+  "file": "K_03.pdf",
+  "titre_extrait": "Feuille K-03 ʌ K-02 ʌ Feuille K-03 ʌ K-02 ʌ 19ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/K_04.pdf",
+  "file": "K_04.pdf",
+  "titre_extrait": "Feuille K-04 ʌ K-03 ʌ Feuille K-04 ʌ K-03 ʌ 19ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/K_05_A_251216.pdf",
+  "file": "K_05_A_251216.pdf",
+  "titre_extrait": "Feuille K-05 ʌ K-04 ʌ Feuille K-05 ʌ K-04 ʌ 19ème et 20ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/K_06_A_251216.pdf",
+  "file": "K_06_A_251216.pdf",
+  "titre_extrait": "Feuille K-06 ʌ K-05 ʌ Feuille K-06 ʌ K-05 ʌ 11ème et 20ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/K_07_A_251216.pdf",
+  "file": "K_07_A_251216.pdf",
+  "titre_extrait": "Feuille K-07 ʌ K-06 ʌ Feuille K-07 ʌ K-06 ʌ 11ème et 20ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/K_08.pdf",
+  "file": "K_08.pdf",
+  "titre_extrait": "Feuille K-08 ʌ K-07 ʌ Feuille K-08 ʌ K-07 ʌ 11ème, 12ème et 20ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/K_09_A_251216.pdf",
+  "file": "K_09_A_251216.pdf",
+  "titre_extrait": "Feuille K-09 ʌ K-08 ʌ Feuille K-09 ʌ K-08 ʌ 12ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/K_10.pdf",
+  "file": "K_10.pdf",
+  "titre_extrait": "Feuille K-10 ʌ K-09 ʌ Feuille K-10 ʌ K-09 ʌ 12ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/K_11.pdf",
+  "file": "K_11.pdf",
+  "titre_extrait": "Feuille K-11 ʌ K-10 ʌ Feuille K-11 ʌ K-10 ʌ 12ème et 13ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/K_12.pdf",
+  "file": "K_12.pdf",
+  "titre_extrait": "Feuille K-12 ʌ K-11 ʌ Feuille K-12 ʌ K-11 ʌ 12ème et 13ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/LEG2000.pdf",
+  "file": "LEG2000.pdf",
+  "titre_extrait": "Légende des plans au 1/1000, 1/2000 et 1/5000",
+  "method": "atlas1_cartouche"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/L_03.pdf",
+  "file": "L_03.pdf",
+  "titre_extrait": "Feuille L-03 Feuille L-03 19ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/L_04.pdf",
+  "file": "L_04.pdf",
+  "titre_extrait": "Feuille L-04 ʌ L-03 ʌ Feuille L-04 ʌ L-03 ʌ 19ème et 20ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/L_05_A_251216.pdf",
+  "file": "L_05_A_251216.pdf",
+  "titre_extrait": "Feuille L-05 ʌ L-04 ʌ Feuille L-05 ʌ L-04 ʌ 20ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/L_06.pdf",
+  "file": "L_06.pdf",
+  "titre_extrait": "Feuille L-06 ʌ L-05 ʌ Feuille L-06 ʌ L-05 ʌ 20ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/L_07.pdf",
+  "file": "L_07.pdf",
+  "titre_extrait": "Feuille L-07 ʌ L-06 ʌ Feuille L-07 ʌ L-06 ʌ 20ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/L_08.pdf",
+  "file": "L_08.pdf",
+  "titre_extrait": "Feuille L-08 ʌ L-07 ʌ Feuille L-08 ʌ L-07 ʌ 11ème et 20ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/L_09_A_251216.pdf",
+  "file": "L_09_A_251216.pdf",
+  "titre_extrait": "Feuille L-09 ʌ L-08 ʌ Feuille L-09 ʌ L-08 ʌ 11ème, 12ème et 20ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/L_10.pdf",
+  "file": "L_10.pdf",
+  "titre_extrait": "Feuille L-10 ʌ L-09 ʌ Feuille L-10 ʌ L-09 ʌ 12ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/L_11.pdf",
+  "file": "L_11.pdf",
+  "titre_extrait": "Feuille L-11 ʌ L-10 ʌ Feuille L-11 ʌ L-10 ʌ 12ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/M_05.pdf",
+  "file": "M_05.pdf",
+  "titre_extrait": "Feuille M-05 Feuille M-05 20ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/M_06_A_251216.pdf",
+  "file": "M_06_A_251216.pdf",
+  "titre_extrait": "Feuille M-06 ʌ M-05 ʌ Feuille M-06 ʌ M-05 ʌ 20ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/M_07_A_251216.pdf",
+  "file": "M_07_A_251216.pdf",
+  "titre_extrait": "Feuille M-07 ʌ M-06 ʌ Feuille M-07 ʌ M-06 ʌ 20ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/M_08.pdf",
+  "file": "M_08.pdf",
+  "titre_extrait": "Feuille M-08 ʌ M-07 ʌ Feuille M-08 ʌ M-07 ʌ 20ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/M_09.pdf",
+  "file": "M_09.pdf",
+  "titre_extrait": "Feuille M-09 ʌ M-08 ʌ Feuille M-09 ʌ M-08 ʌ 12ème et 20ème arrondissements Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 2/M_10.pdf",
+  "file": "M_10.pdf",
+  "titre_extrait": "Feuille M-10 ʌ M-09 ʌ Feuille M-10 ʌ M-09 ʌ 12ème arrondissement Plan Local d'Urbanisme de Paris",
+  "method": "atlas2_tile_band"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/Consultation_des_planches_d_ilots_du_secteur_de_Montmartre.pdf",
+  "file": "Consultation_des_planches_d_ilots_du_secteur_de_Montmartre.pdf",
+  "titre_extrait": "Consultation des planches d'îlots du secteur de Montmartre :",
+  "method": "atlas1_cartouche"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/LEGMONT.pdf",
+  "file": "LEGMONT.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M69105.pdf",
+  "file": "M69105.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M69106.pdf",
+  "file": "M69106.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M69107.pdf",
+  "file": "M69107.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M69108.pdf",
+  "file": "M69108.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M69109.pdf",
+  "file": "M69109.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M69110.pdf",
+  "file": "M69110.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M69111.pdf",
+  "file": "M69111.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M69112.pdf",
+  "file": "M69112.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M69113.pdf",
+  "file": "M69113.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M69114.pdf",
+  "file": "M69114.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M69115.pdf",
+  "file": "M69115.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M69116.pdf",
+  "file": "M69116.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M69117.pdf",
+  "file": "M69117.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M69118.pdf",
+  "file": "M69118.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M69119.pdf",
+  "file": "M69119.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M69120.pdf",
+  "file": "M69120.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M69121.pdf",
+  "file": "M69121.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M69122.pdf",
+  "file": "M69122.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M69123.pdf",
+  "file": "M69123.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M69124.pdf",
+  "file": "M69124.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M69125.pdf",
+  "file": "M69125.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M69126.pdf",
+  "file": "M69126.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M69127.pdf",
+  "file": "M69127.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M69128.pdf",
+  "file": "M69128.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M69129.pdf",
+  "file": "M69129.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M69130.pdf",
+  "file": "M69130.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M69131.pdf",
+  "file": "M69131.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M69132.pdf",
+  "file": "M69132.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M69133.pdf",
+  "file": "M69133.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M69134.pdf",
+  "file": "M69134.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M69137.pdf",
+  "file": "M69137.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M69138.pdf",
+  "file": "M69138.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M69139.pdf",
+  "file": "M69139.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M69140.pdf",
+  "file": "M69140.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M69173.pdf",
+  "file": "M69173.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70001.pdf",
+  "file": "M70001.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70002.pdf",
+  "file": "M70002.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70003.pdf",
+  "file": "M70003.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70004.pdf",
+  "file": "M70004.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70005.pdf",
+  "file": "M70005.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70006.pdf",
+  "file": "M70006.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70007.pdf",
+  "file": "M70007.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70008.pdf",
+  "file": "M70008.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70009.pdf",
+  "file": "M70009.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70010.pdf",
+  "file": "M70010.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70011.pdf",
+  "file": "M70011.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70012.pdf",
+  "file": "M70012.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70013.pdf",
+  "file": "M70013.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70014.pdf",
+  "file": "M70014.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70015.pdf",
+  "file": "M70015.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70016.pdf",
+  "file": "M70016.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70017.pdf",
+  "file": "M70017.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70018.pdf",
+  "file": "M70018.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70019.pdf",
+  "file": "M70019.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70020.pdf",
+  "file": "M70020.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70021.pdf",
+  "file": "M70021.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70022.pdf",
+  "file": "M70022.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70023.pdf",
+  "file": "M70023.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70024.pdf",
+  "file": "M70024.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70025.pdf",
+  "file": "M70025.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70026.pdf",
+  "file": "M70026.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70027.pdf",
+  "file": "M70027.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70029.pdf",
+  "file": "M70029.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70033.pdf",
+  "file": "M70033.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70034.pdf",
+  "file": "M70034.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70035.pdf",
+  "file": "M70035.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70036.pdf",
+  "file": "M70036.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70037.pdf",
+  "file": "M70037.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70038.pdf",
+  "file": "M70038.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70039.pdf",
+  "file": "M70039.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70040.pdf",
+  "file": "M70040.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70041.pdf",
+  "file": "M70041.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70042.pdf",
+  "file": "M70042.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70043.pdf",
+  "file": "M70043.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70044.pdf",
+  "file": "M70044.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70045.pdf",
+  "file": "M70045.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70046.pdf",
+  "file": "M70046.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70047.pdf",
+  "file": "M70047.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70048.pdf",
+  "file": "M70048.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70049.pdf",
+  "file": "M70049.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70050.pdf",
+  "file": "M70050.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70051.pdf",
+  "file": "M70051.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70052.pdf",
+  "file": "M70052.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70053.pdf",
+  "file": "M70053.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70054.pdf",
+  "file": "M70054.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70055.pdf",
+  "file": "M70055.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70056.pdf",
+  "file": "M70056.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70057.pdf",
+  "file": "M70057.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70058.pdf",
+  "file": "M70058.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70059.pdf",
+  "file": "M70059.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70060.pdf",
+  "file": "M70060.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70061.pdf",
+  "file": "M70061.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70062.pdf",
+  "file": "M70062.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur Montmartre/M70177.pdf",
+  "file": "M70177.pdf",
+  "titre_extrait": null,
+  "method": "no_text_ocr_required"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/Consultation_des_plans_des_secteurs_de_maisons_et_villas.pdf",
+  "file": "Consultation_des_plans_des_secteurs_de_maisons_et_villas.pdf",
+  "titre_extrait": "Consultation des plans des secteurs de maisons et villas :",
+  "method": "atlas1_cartouche"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/LEGSMV.pdf",
+  "file": "LEGSMV.pdf",
+  "titre_extrait": "Légende des plans au 1/1000, 1/2000 et 1/5000",
+  "method": "atlas1_cartouche"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P07.pdf",
+  "file": "P07.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P08.pdf",
+  "file": "P08.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P09.pdf",
+  "file": "P09.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P10.pdf",
+  "file": "P10.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P11.pdf",
+  "file": "P11.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P12.pdf",
+  "file": "P12.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P13.pdf",
+  "file": "P13.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P14.pdf",
+  "file": "P14.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P15.pdf",
+  "file": "P15.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P16.pdf",
+  "file": "P16.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P17.pdf",
+  "file": "P17.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P18.pdf",
+  "file": "P18.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P19.pdf",
+  "file": "P19.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P20.pdf",
+  "file": "P20.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P21.pdf",
+  "file": "P21.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P22.pdf",
+  "file": "P22.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P23.pdf",
+  "file": "P23.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P24.pdf",
+  "file": "P24.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P25.pdf",
+  "file": "P25.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P26.pdf",
+  "file": "P26.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P27.pdf",
+  "file": "P27.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P28.pdf",
+  "file": "P28.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P29.pdf",
+  "file": "P29.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P30.pdf",
+  "file": "P30.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P31.pdf",
+  "file": "P31.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P32.pdf",
+  "file": "P32.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P33.pdf",
+  "file": "P33.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P34.pdf",
+  "file": "P34.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P35.pdf",
+  "file": "P35.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P36.pdf",
+  "file": "P36.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P37.pdf",
+  "file": "P37.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P38.pdf",
+  "file": "P38.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P39.pdf",
+  "file": "P39.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P40.pdf",
+  "file": "P40.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P42.pdf",
+  "file": "P42.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P44.pdf",
+  "file": "P44.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P45.pdf",
+  "file": "P45.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P46.pdf",
+  "file": "P46.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P47.pdf",
+  "file": "P47.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P48.pdf",
+  "file": "P48.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P49.pdf",
+  "file": "P49.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P50.pdf",
+  "file": "P50.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P51.pdf",
+  "file": "P51.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P54.pdf",
+  "file": "P54.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P55.pdf",
+  "file": "P55.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P56.pdf",
+  "file": "P56.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P57.pdf",
+  "file": "P57.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P58.pdf",
+  "file": "P58.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ },
+ {
+  "path": "Ressources/PLU bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/P59.pdf",
+  "file": "P59.pdf",
+  "titre_extrait": null,
+  "method": "no_title_candidate"
+ }
+]

@@ -724,6 +724,46 @@ def group_raw_lines(raw_lines, warnings):
         stripped = re.sub(r"\.(?:\s?\.){2,}", " ", line)
         return not any(c.isalpha() for c in stripped)
 
+    def has_unclosed_bracket(lines: list[str]) -> bool:
+        """True if the group accumulated so far leaves a '[' still open.
+
+        A TOC title may carry a bracketed source reference ("[Annexe X et
+        atlas n° 2 du règlement]", "[Règlement, sous-section UG.1.5.1 et fond
+        de plan de l'Atlas n°2]") that WRAPS across several rendered lines.
+        When it does, the continuation line can legitimately begin with a
+        token that parse_prefix recognises as numbering — confirmed on
+        Rapport_presentation_MS1.pdf, whose entry 2.9 wraps as:
+
+            "2.9. Application de la règle de mixité sociale (UG.1.5.1) à la Cité"
+            "internationale universitaire de Paris [Règlement, sous-section"
+            "UG.1.5.1 et fond de plan de l'Atlas n°2] .... 79"
+
+        The third line opens with "UG.1.5.1", which RE_CODE_DOTGROUPS matches,
+        so the still-open group was split there: the fragment became a bogus
+        standalone entry ("UG.1.5.1 — et fond de plan de l'Atlas n°2]", p.79)
+        AND real section 2.9 — left with no page number of its own — was then
+        dropped outright by parse_groups. One wrapped bracket, two failures.
+
+        An unclosed '[' is a reliable, shape-based "we are still inside this
+        title" signal: a genuine new TOC entry never begins while the previous
+        entry has a bracket dangling open, because a title's own brackets are
+        always balanced by the time that title ends. Used ONLY to veto the
+        not-yet-closed branch's prefix test, so the still-open vs
+        already-closed distinction from the prior fixes is untouched: a group
+        that has already met its page number closes exactly as before, and an
+        entry that genuinely has no page number still yields to the next
+        numbered entry exactly as before (unless a bracket is open, which is
+        precisely the case that was broken).
+        """
+        depth = 0
+        for line in lines:
+            for ch in line:
+                if ch == "[":
+                    depth += 1
+                elif ch == "]":
+                    depth = max(0, depth - 1)
+        return depth > 0
+
     def looks_like_standalone_toc_entry(line: str) -> bool:
         """A dot-leader run (the classic TOC ellipsis filler to a page
         number — either consecutive dots "...." or, as rendered in this
@@ -758,7 +798,7 @@ def group_raw_lines(raw_lines, warnings):
                     or looks_like_standalone_toc_entry(line)
                 )
             else:
-                starts_new = parse_prefix(line) is not None
+                starts_new = parse_prefix(line) is not None and not has_unclosed_bracket(current)
         else:
             starts_new = False
 

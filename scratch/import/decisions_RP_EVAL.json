@@ -1,0 +1,310 @@
+{
+  "exported_at": "2026-09-14T20:58:15.350Z",
+  "document": "RP_EVAL.pdf",
+  "decisions": {
+    "RP_EVAL::1": {
+      "note": "code 1.1",
+      "numero": null,
+      "titre": "Approche générale de l’évaluation",
+      "choice": "keep",
+      "page_debut": 9,
+      "page_fin": 9,
+      "niveau": 1
+    },
+    "RP_EVAL::2": {
+      "note": "",
+      "numero": null,
+      "titre": "Cadre réglementaire applicable à Paris",
+      "choice": "keep",
+      "page_debut": 9,
+      "page_fin": 9,
+      "niveau": 1
+    },
+    "RP_EVAL::3": {
+      "choice": "keep",
+      "numero": null,
+      "titre": "Esprit de la démarche",
+      "page_debut": 10,
+      "page_fin": 13,
+      "niveau": 1
+    },
+    "RP_EVAL::4": {
+      "choice": "keep",
+      "numero": null,
+      "titre": "Autoévaluation du PLU",
+      "page_debut": 14,
+      "page_fin": 14,
+      "niveau": 1
+    },
+    "RP_EVAL::5": {
+      "choice": "keep",
+      "numero": null,
+      "titre": "Développement méthodologique",
+      "page_debut": 14,
+      "page_fin": 18,
+      "niveau": 1
+    },
+    "RP_EVAL::6": {
+      "choice": "keep",
+      "numero": null,
+      "titre": "Grilles d’analyse",
+      "page_debut": 19,
+      "page_fin": 21,
+      "niveau": 1
+    },
+    "RP_EVAL::7": {
+      "choice": "keep",
+      "numero": "2",
+      "titre": "Analyse de l’état initial de l’environnement",
+      "page_debut": 22,
+      "page_fin": 22,
+      "niveau": 1
+    },
+    "RP_EVAL::8": {
+      "choice": "keep",
+      "numero": null,
+      "titre": "Enjeux environnementaux auxquels le PLU doit répondre",
+      "page_debut": 23,
+      "page_fin": 23,
+      "niveau": 1
+    },
+    "RP_EVAL::9": {
+      "choice": "keep",
+      "numero": null,
+      "titre": "Enjeux globaux",
+      "page_debut": 23,
+      "page_fin": 23,
+      "niveau": 1
+    },
+    "RP_EVAL::10": {
+      "choice": "keep",
+      "numero": null,
+      "titre": "Enjeux locaux",
+      "page_debut": 24,
+      "page_fin": 28,
+      "niveau": 1
+    },
+    "RP_EVAL::11": {
+      "choice": "keep",
+      "numero": null,
+      "titre": "Perspectives d’évolution de l’environnement",
+      "page_debut": 29,
+      "page_fin": 29,
+      "niveau": 1
+    },
+    "RP_EVAL::12": {
+      "choice": "keep",
+      "numero": null,
+      "titre": "Composantes du scénario tendanciel",
+      "page_debut": 29,
+      "page_fin": 43,
+      "niveau": 1
+    },
+    "RP_EVAL::13": {
+      "choice": "keep",
+      "numero": null,
+      "titre": "Effets potentiels sur l’environnement du scénario tendanciel",
+      "page_debut": 44,
+      "page_fin": 49,
+      "niveau": 1
+    },
+    "RP_EVAL::14": {
+      "choice": "keep",
+      "numero": "3",
+      "titre": "Analyse des incidences notables du PLU sur l’environnement",
+      "page_debut": 50,
+      "page_fin": 50,
+      "niveau": 1
+    },
+    "RP_EVAL::15": {
+      "choice": "keep",
+      "numero": null,
+      "titre": "Démarche d’intégration des enjeux environnementaux",
+      "page_debut": 51,
+      "page_fin": 51,
+      "niveau": 1
+    },
+    "RP_EVAL::16": {
+      "choice": "keep",
+      "numero": null,
+      "titre": "Principales étapes de la révision",
+      "page_debut": 51,
+      "page_fin": 52,
+      "niveau": 1
+    },
+    "RP_EVAL::17": {
+      "choice": "keep",
+      "numero": null,
+      "titre": "Explication des choix retenus",
+      "page_debut": 53,
+      "page_fin": 53,
+      "niveau": 1
+    },
+    "RP_EVAL::18": {
+      "choice": "keep",
+      "numero": null,
+      "titre": "Alternatives raisonnables",
+      "page_debut": 54,
+      "page_fin": 60,
+      "niveau": 1
+    },
+    "RP_EVAL::19": {
+      "choice": "keep",
+      "numero": null,
+      "titre": "Évaluation du Projet d’Aménagement et de Développement Durables (PADD)",
+      "page_debut": 61,
+      "page_fin": 61,
+      "niveau": 1
+    },
+    "RP_EVAL::20": {
+      "choice": "keep",
+      "numero": null,
+      "titre": "L’urbanisme bioclimatique, une méthode au service de la transition écologique du territoire",
+      "page_debut": 61,
+      "page_fin": 61,
+      "niveau": 1
+    },
+    "RP_EVAL::21": {
+      "choice": "keep",
+      "numero": null,
+      "titre": "Axe I. Une ville en transition vertueuse et résiliente",
+      "page_debut": 62,
+      "page_fin": 67,
+      "niveau": 1
+    },
+    "RP_EVAL::22": {
+      "choice": "keep",
+      "numero": null,
+      "titre": "Axe II. Une ville inclusive, productive et solidaire",
+      "page_debut": 68,
+      "page_fin": 73,
+      "niveau": 1
+    },
+    "RP_EVAL::23": {
+      "choice": "keep",
+      "numero": null,
+      "titre": "Axe III. Une ville qui considère et valorise ses identités urbaines",
+      "page_debut": 74,
+      "page_fin": 76,
+      "niveau": 1
+    },
+    "RP_EVAL::24": {
+      "choice": "keep",
+      "numero": null,
+      "titre": "Synthèse de l’évaluation environnementale du PADD",
+      "page_debut": 77,
+      "page_fin": 79,
+      "niveau": 1
+    },
+    "RP_EVAL::25": {
+      "choice": "keep",
+      "numero": null,
+      "titre": "Évaluation des OAP thématiques",
+      "page_debut": 80,
+      "page_fin": 80,
+      "niveau": 1
+    },
+    "RP_EVAL::26": {
+      "choice": "keep",
+      "numero": null,
+      "titre": "OAP biodiversité et adaptation",
+      "page_debut": 80,
+      "page_fin": 87,
+      "niveau": 1
+    },
+    "RP_EVAL::27": {
+      "choice": "keep",
+      "numero": null,
+      "titre": "OAP espace public",
+      "page_debut": 88,
+      "page_fin": 90,
+      "niveau": 1
+    },
+    "RP_EVAL::28": {
+      "choice": "keep",
+      "numero": null,
+      "titre": "OAP liens métropolitains",
+      "page_debut": 91,
+      "page_fin": 101,
+      "niveau": 1
+    },
+    "RP_EVAL::29": {
+      "choice": "keep",
+      "numero": null,
+      "titre": "OAP quartier du quart d’heure",
+      "page_debut": 102,
+      "page_fin": 104,
+      "niveau": 1
+    },
+    "RP_EVAL::30": {
+      "choice": "keep",
+      "numero": null,
+      "titre": "OAP héritage transformation",
+      "page_debut": 105,
+      "page_fin": 109,
+      "niveau": 1
+    },
+    "RP_EVAL::31": {
+      "choice": "keep",
+      "numero": null,
+      "titre": "OAP construction neuve",
+      "page_debut": 110,
+      "page_fin": 113,
+      "niveau": 1
+    },
+    "RP_EVAL::32": {
+      "choice": "keep",
+      "numero": null,
+      "titre": "OAP santé publique et environnementale",
+      "page_debut": 114,
+      "page_fin": 115,
+      "niveau": 1
+    },
+    "RP_EVAL::33": {
+      "choice": "keep",
+      "numero": null,
+      "titre": "Synthèse de l’évaluation environnementale des OAP thématiques",
+      "page_debut": 116,
+      "page_fin": 120,
+      "niveau": 1
+    },
+    "RP_EVAL::34": {
+      "choice": "keep",
+      "numero": null,
+      "titre": "Évaluation des OAP sectorielles",
+      "page_debut": 121,
+      "page_fin": 352,
+      "niveau": 1
+    },
+    "RP_EVAL::34.0": {
+      "note": "titre",
+      "numero": null,
+      "titre": "RAPPORT DE PRÉSENTATIONÉVALUATION ENVIRONNEMENTALE ÉVALUATION ENVIRONNEMENTALE OAP Bercy – Charenton"
+    },
+    "RP_EVAL::34.21": {
+      "note": "titre",
+      "numero": null,
+      "titre": "RAPPORT DE PRÉSENTATIONÉVALUATION ENVIRONNEMENTALE ÉVALUATION ENVIRONNEMENTALE Rappel des mesures d’évitement, de réduction et de compensation incluses dans les dispositions du PLU"
+    },
+    "RP_EVAL::34.31.0": {
+      "note": "??",
+      "numero": "Tableau 1",
+      "titre": "Codification des thématiques environnementales"
+    },
+    "RP_EVAL::34.102": {
+      "note": "??",
+      "numero": null,
+      "titre": "Carte 29. Prise en compte du SRCE par le PLU"
+    },
+    "RP_EVAL::34.101": {
+      "note": "??",
+      "numero": null,
+      "titre": "Carte 28. Dispositions du PLU en faveur des mobilités et de la logistique urbaine"
+    },
+    "RP_EVAL::34.100": {
+      "note": "??",
+      "numero": null,
+      "titre": "Carte 27. Cumul des nuisances (Urban-Éco, d’après Airparif, Bruitparif, Géorisque et Ville)"
+    }
+  }
+}

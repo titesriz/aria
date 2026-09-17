@@ -1,0 +1,1302 @@
+{
+  "exported_at": "2026-09-08T13:37:19.060Z",
+  "decisions": {
+    "REG1::0": {
+      "choice": "keep",
+      "numero": "PARTIE 1",
+      "titre": "MODALITÉS D’APPLICATION DU RÈGLEMENT",
+      "page_debut": 6,
+      "page_fin": 19,
+      "niveau": 1
+    },
+    "REG1::0.0": {
+      "choice": "keep",
+      "numero": "A",
+      "titre": "Champ d’application territorial",
+      "page_debut": 7,
+      "page_fin": 7,
+      "niveau": 2
+    },
+    "REG1::0.1": {
+      "choice": "keep",
+      "numero": "B",
+      "titre": "Fondement juridique du règlement",
+      "page_debut": 8,
+      "page_fin": 8,
+      "niveau": 2
+    },
+    "REG1::0.2": {
+      "choice": "keep",
+      "numero": "C",
+      "titre": "Effets du règlement",
+      "page_debut": 9,
+      "page_fin": 9,
+      "niveau": 2
+    },
+    "REG1::0.2.0": {
+      "choice": "drop",
+      "numero": "C.1",
+      "titre": "Portée du règlement du PLU",
+      "page_debut": 9,
+      "page_fin": 9,
+      "niveau": 3
+    },
+    "REG1::0.2.1": {
+      "choice": "drop",
+      "numero": "C.2",
+      "titre": "Dérogations et adaptations mineures",
+      "page_debut": 9,
+      "page_fin": 9,
+      "niveau": 3
+    },
+    "REG1::0.2.2": {
+      "choice": "drop",
+      "numero": "C.3",
+      "titre": "Figures",
+      "page_debut": 9,
+      "page_fin": 9,
+      "niveau": 3
+    },
+    "REG1::0.3": {
+      "choice": "keep",
+      "numero": "D",
+      "titre": "Principaux textes législatifs et réglementaires applicables",
+      "page_debut": 10,
+      "page_fin": 13,
+      "niveau": 2
+    },
+    "REG1::0.3.0": {
+      "choice": "keep",
+      "numero": "D.1",
+      "titre": "Au titre du code de l’urbanisme",
+      "page_debut": 10,
+      "page_fin": 10,
+      "niveau": 3
+    },
+    "REG1::0.3.1": {
+      "choice": "keep",
+      "numero": "D.2",
+      "titre": "Au titre du code de la santé publique",
+      "page_debut": 11,
+      "page_fin": 11,
+      "niveau": 3
+    },
+    "REG1::0.3.2": {
+      "choice": "keep",
+      "numero": "D.3",
+      "titre": "Au titre du code général des collectivités territoriales",
+      "page_debut": 11,
+      "page_fin": 11,
+      "niveau": 3
+    },
+    "REG1::0.3.3": {
+      "choice": "keep",
+      "numero": "D.4",
+      "titre": "Au titre du code de la construction et de l’habitation",
+      "page_debut": 11,
+      "page_fin": 11,
+      "niveau": 3
+    },
+    "REG1::0.3.4": {
+      "choice": "keep",
+      "numero": "D.5",
+      "titre": "Au titre du code de l’environnement",
+      "page_debut": 12,
+      "page_fin": 12,
+      "niveau": 3
+    },
+    "REG1::0.3.5": {
+      "choice": "keep",
+      "numero": "D.6",
+      "titre": "Au titre du code du patrimoine",
+      "page_debut": 12,
+      "page_fin": 12,
+      "niveau": 3
+    },
+    "REG1::0.3.6": {
+      "choice": "keep",
+      "numero": "D.7",
+      "titre": "Au titre d’autres codes",
+      "page_debut": 13,
+      "page_fin": 13,
+      "niveau": 3
+    },
+    "REG1::0.3.7": {
+      "choice": "keep",
+      "numero": "D.8",
+      "titre": "Au titre d’autres textes",
+      "page_debut": 13,
+      "page_fin": 13,
+      "niveau": 3
+    },
+    "REG1::0.4": {
+      "choice": "keep",
+      "numero": "E",
+      "titre": "Liens du règlement avec les autres documents constituant le PLU",
+      "page_debut": 14,
+      "page_fin": 14,
+      "niveau": 2
+    },
+    "REG1::0.4.0": {
+      "choice": "drop",
+      "numero": "E.1",
+      "titre": "Liens avec le rapport de présentation et avec le projet d’aménagement et de développement durables (PADD)",
+      "page_debut": 14,
+      "page_fin": 14,
+      "niveau": 3
+    },
+    "REG1::0.4.1": {
+      "choice": "drop",
+      "numero": "E.2",
+      "titre": "Liens avec les orientations d’aménagement et de programmation (OAP)",
+      "page_debut": 14,
+      "page_fin": 14,
+      "niveau": 3
+    },
+    "REG1::0.4.2": {
+      "choice": "drop",
+      "numero": "E.3",
+      "titre": "Liens avec les annexes du PLU",
+      "page_debut": 14,
+      "page_fin": 14,
+      "niveau": 3
+    },
+    "REG1::0.5": {
+      "choice": "keep",
+      "numero": "F",
+      "titre": "Contenu du règlement du PLU",
+      "page_debut": 15,
+      "page_fin": 17,
+      "niveau": 2
+    },
+    "REG1::0.5.0": {
+      "choice": "drop",
+      "numero": "F.1",
+      "titre": "Le règlement écrit",
+      "page_debut": 15,
+      "page_fin": 15,
+      "niveau": 3,
+      "note": "à intégrer dans F"
+    },
+    "REG1::0.5.1": {
+      "choice": "keep",
+      "numero": "F.2",
+      "titre": "Le règlement graphique",
+      "page_debut": 16,
+      "page_fin": 17,
+      "niveau": 3
+    },
+    "REG1::0.6": {
+      "choice": "keep",
+      "numero": "G",
+      "titre": "Division du territoire en zones urbaines et naturelle",
+      "page_debut": 18,
+      "page_fin": 19,
+      "niveau": 2
+    },
+    "REG1::1.0": {
+      "choice": "keep",
+      "numero": "I",
+      "titre": "Statut réglementaire des voies*",
+      "page_debut": 21,
+      "page_fin": 21,
+      "niveau": 2,
+      "note": ""
+    },
+    "REG1::1": {
+      "choice": "keep",
+      "numero": "PARTIE 2",
+      "titre": "DISPOSITIONS GÉNÉRALES APPLICABLES À L’ENSEMBLE DU TERRITOIRE COUVERT PAR LE PLU",
+      "page_debut": 20,
+      "page_fin": 36,
+      "niveau": 1
+    },
+    "REG1::1.1": {
+      "choice": "keep",
+      "numero": "II",
+      "titre": "Application du règlement aux constructions existantes",
+      "page_debut": 22,
+      "page_fin": 22,
+      "niveau": 2
+    },
+    "REG1::1.1.0": {
+      "choice": "drop",
+      "numero": "II.1",
+      "titre": "Catégories d’interventions sur les constructions existantes",
+      "page_debut": 22,
+      "page_fin": 22,
+      "niveau": 3
+    },
+    "REG1::1.1.1": {
+      "choice": "drop",
+      "numero": "II.2",
+      "titre": "Travaux sur les constructions existantes",
+      "page_debut": 22,
+      "page_fin": 22,
+      "niveau": 3
+    },
+    "REG1::1.1.2": {
+      "choice": "drop",
+      "numero": "II.3",
+      "titre": "Reconstruction à l’identique",
+      "page_debut": 22,
+      "page_fin": 22,
+      "niveau": 3
+    },
+    "REG1::1.2": {
+      "choice": "keep",
+      "numero": "III",
+      "titre": "Application du règlement aux divisions foncières",
+      "page_debut": 23,
+      "page_fin": 23,
+      "niveau": 2
+    },
+    "REG1::1.3": {
+      "choice": "keep",
+      "numero": "IV",
+      "titre": "Définitions",
+      "page_debut": 24,
+      "page_fin": 36,
+      "niveau": 2
+    },
+    "REG1::2": {
+      "choice": "keep",
+      "numero": "PARTIE 3",
+      "titre": "RÈGLEMENTS DES ZONES",
+      "page_debut": 37,
+      "page_fin": 222,
+      "niveau": 1
+    },
+    "REG1::2.0": {
+      "choice": "keep",
+      "numero": null,
+      "titre": "ZONE URBAINE GÉNÉRALE (UG)",
+      "page_debut": 38,
+      "page_fin": 124,
+      "niveau": 2
+    },
+    "REG1::2.0.0": {
+      "choice": "drop",
+      "numero": null,
+      "titre": "Caractère de la zone urbaine générale",
+      "page_debut": 39,
+      "page_fin": 40,
+      "niveau": 3,
+      "note": "à intégrer dans UG"
+    },
+    "REG1::2.0.1.0": {
+      "choice": "drop",
+      "numero": "UG.1.1",
+      "titre": "Occupations et utilisations des sols interdites",
+      "page_debut": 41,
+      "page_fin": 41,
+      "niveau": 4
+    },
+    "REG1::2.0.1.1": {
+      "choice": "drop",
+      "numero": "UG.1.2",
+      "titre": "Occupations et utilisations des sols soumises à des conditions particulières",
+      "page_debut": 41,
+      "page_fin": 41,
+      "niveau": 4
+    },
+    "REG1::2.0.1": {
+      "choice": "keep",
+      "numero": "UG.1",
+      "titre": "Occupations et utilisations des sols, destinations* des constructions",
+      "page_debut": 41,
+      "page_fin": 51,
+      "niveau": 3
+    },
+    "REG1::2.0.1.2": {
+      "choice": "drop",
+      "numero": "UG.1.3",
+      "titre": "Destinations*, sous-destinations* et types d’activités soumis à des conditions particulières",
+      "page_debut": 42,
+      "page_fin": 42,
+      "niveau": 4
+    },
+    "REG1::2.0.1.3": {
+      "choice": "drop",
+      "numero": "UG.1.4",
+      "titre": "Mixité fonctionnelle",
+      "page_debut": 43,
+      "page_fin": 47,
+      "niveau": 4
+    },
+    "REG1::2.0.1.4": {
+      "choice": "drop",
+      "numero": "UG.1.5",
+      "titre": "Mixité sociale",
+      "page_debut": 48,
+      "page_fin": 49,
+      "niveau": 4
+    },
+    "REG1::2.0.1.5": {
+      "choice": "drop",
+      "numero": "UG.1.6",
+      "titre": "Emplacements réservés pour équipements et périmètres de localisation d’équipements",
+      "page_debut": 50,
+      "page_fin": 50,
+      "niveau": 4
+    },
+    "REG1::2.0.1.6": {
+      "choice": "drop",
+      "numero": "UG.1.7",
+      "titre": "Périmètre d’attente de projet d’aménagement global (PAPAG)",
+      "page_debut": 51,
+      "page_fin": 51,
+      "niveau": 4
+    },
+    "REG1::2.0.2": {
+      "choice": "keep",
+      "numero": "UG.2",
+      "titre": "Caractéristiques architecturales et urbaines des constructions, aspect extérieur",
+      "page_debut": 52,
+      "page_fin": 60,
+      "niveau": 3
+    },
+    "REG1::2.0.2.0": {
+      "choice": "drop",
+      "numero": "UG.2.1",
+      "titre": "Dispositions générales",
+      "page_debut": 52,
+      "page_fin": 55,
+      "niveau": 4
+    },
+    "REG1::2.0.2.1": {
+      "choice": "drop",
+      "numero": "UG.2.2",
+      "titre": "Dispositions applicables aux constructions neuves",
+      "page_debut": 56,
+      "page_fin": 56,
+      "niveau": 4
+    },
+    "REG1::2.0.2.2": {
+      "choice": "drop",
+      "numero": "UG.2.3",
+      "titre": "Dispositions applicables aux interventions sur les constructions existantes",
+      "page_debut": 57,
+      "page_fin": 58,
+      "niveau": 4
+    },
+    "REG1::2.0.2.3": {
+      "choice": "drop",
+      "numero": "UG.2.4",
+      "titre": "Protection des formes urbaines et du patrimoine architectural",
+      "page_debut": 59,
+      "page_fin": 60,
+      "niveau": 4
+    },
+    "REG1::2.0.3": {
+      "choice": "keep",
+      "numero": "UG.3",
+      "titre": "Implantation, hauteur et volumétrie des constructions",
+      "page_debut": 61,
+      "page_fin": 92,
+      "niveau": 3
+    },
+    "REG1::2.0.3.0": {
+      "choice": "drop",
+      "numero": "UG.3.1",
+      "titre": "Implantation des constructions",
+      "page_debut": 61,
+      "page_fin": 67,
+      "niveau": 4
+    },
+    "REG1::2.0.3.1": {
+      "choice": "drop",
+      "numero": "UG.3.2",
+      "titre": "Hauteur et volumétrie des constructions",
+      "page_debut": 68,
+      "page_fin": 81,
+      "niveau": 4
+    },
+    "REG1::2.0.3.2": {
+      "choice": "drop",
+      "numero": "UG.3.3",
+      "titre": "Dépassements admis par rapport à la hauteur et à la volumétrie maximales des constructions",
+      "page_debut": 82,
+      "page_fin": 92,
+      "niveau": 4
+    },
+    "REG1::2.0.4": {
+      "choice": "keep",
+      "numero": "UG.4",
+      "titre": "Espaces libres, végétalisation des abords des constructions et du bâti",
+      "page_debut": 93,
+      "page_fin": 105,
+      "niveau": 3
+    },
+    "REG1::2.0.4.0": {
+      "choice": "drop",
+      "numero": "UG.4.1",
+      "titre": "Espaces libres de construction*",
+      "page_debut": 93,
+      "page_fin": 99,
+      "niveau": 4
+    },
+    "REG1::2.0.4.1": {
+      "choice": "drop",
+      "numero": "UG.4.2",
+      "titre": "Végétalisation du bâti",
+      "page_debut": 100,
+      "page_fin": 101,
+      "niveau": 4
+    },
+    "REG1::2.0.4.2": {
+      "choice": "drop",
+      "numero": "UG.4.3",
+      "titre": "Prescriptions localisées",
+      "page_debut": 102,
+      "page_fin": 105,
+      "niveau": 4
+    },
+    "REG1::2.0.5": {
+      "choice": "keep",
+      "numero": "UG.5",
+      "titre": "Conception bioclimatique et performances environnementales",
+      "page_debut": 106,
+      "page_fin": 110,
+      "niveau": 3
+    },
+    "REG1::2.0.5.0": {
+      "choice": "drop",
+      "numero": "UG.5.1",
+      "titre": "Dispositions applicables aux constructions neuves, extensions*, surélévations* et créations de locaux en sous-sol",
+      "page_debut": 106,
+      "page_fin": 106,
+      "niveau": 4
+    },
+    "REG1::2.0.5.1": {
+      "choice": "drop",
+      "numero": "UG.5.2",
+      "titre": "Dispositions applicables aux interventions sur les constructions existantes",
+      "page_debut": 107,
+      "page_fin": 109,
+      "niveau": 4
+    },
+    "REG1::2.0.5.2": {
+      "choice": "drop",
+      "numero": "UG.5.3",
+      "titre": "Dispositions particulières applicables dans certains secteurs",
+      "page_debut": 110,
+      "page_fin": 110,
+      "niveau": 4
+    },
+    "REG1::2.0.6": {
+      "choice": "keep",
+      "numero": "UG.6",
+      "titre": "Réseaux et assainissement, déchets",
+      "page_debut": 111,
+      "page_fin": 112,
+      "niveau": 3
+    },
+    "REG1::2.0.6.0": {
+      "choice": "drop",
+      "numero": "UG.6.1",
+      "titre": "Desserte par les réseaux",
+      "page_debut": 111,
+      "page_fin": 111,
+      "niveau": 4
+    },
+    "REG1::2.0.6.1": {
+      "choice": "drop",
+      "numero": "UG.6.2",
+      "titre": "Déchets",
+      "page_debut": 112,
+      "page_fin": 112,
+      "niveau": 4
+    },
+    "REG1::2.0.7": {
+      "choice": "keep",
+      "numero": "UG.7",
+      "titre": "Desserte, stationnement",
+      "page_debut": 113,
+      "page_fin": 119,
+      "niveau": 3
+    },
+    "REG1::2.0.7.0": {
+      "choice": "drop",
+      "numero": "UG.7.1",
+      "titre": "Desserte des constructions",
+      "page_debut": 113,
+      "page_fin": 113,
+      "niveau": 4
+    },
+    "REG1::2.0.7.1": {
+      "choice": "drop",
+      "numero": "UG.7.2",
+      "titre": "Stationnement",
+      "page_debut": 114,
+      "page_fin": 119,
+      "niveau": 4
+    },
+    "REG1::2.0.8": {
+      "choice": "keep",
+      "numero": "UG.8",
+      "titre": "Valorisation des externalités positives des projets",
+      "page_debut": 120,
+      "page_fin": 124,
+      "niveau": 3
+    },
+    "REG1::2.0.8.0": {
+      "choice": "drop",
+      "numero": "UG.8.1",
+      "titre": "Dispositions générales",
+      "page_debut": 120,
+      "page_fin": 120,
+      "niveau": 4
+    },
+    "REG1::2.0.8.1": {
+      "choice": "drop",
+      "numero": "UG.8.2",
+      "titre": "Thématique biodiversité et environnement",
+      "page_debut": 120,
+      "page_fin": 120,
+      "niveau": 4
+    },
+    "REG1::2.0.8.2": {
+      "choice": "drop",
+      "numero": "UG.8.3",
+      "titre": "Thématique programmation",
+      "page_debut": 121,
+      "page_fin": 122,
+      "niveau": 4
+    },
+    "REG1::2.0.8.3": {
+      "choice": "drop",
+      "numero": "UG.8.4",
+      "titre": "Thématique efficacité énergétique et sobriété",
+      "page_debut": 123,
+      "page_fin": 123,
+      "niveau": 4
+    },
+    "REG1::2.0.8.4": {
+      "choice": "drop",
+      "numero": "UG.8.5",
+      "titre": "Dispositions particulières applicables dans certains secteurs",
+      "page_debut": 124,
+      "page_fin": 124,
+      "niveau": 4
+    },
+    "REG1::2.1": {
+      "choice": "keep",
+      "numero": null,
+      "titre": "ZONE URBAINE DE GRANDS SERVICES URBAINS (UGSU)",
+      "page_debut": 125,
+      "page_fin": 170,
+      "niveau": 2
+    },
+    "REG1::2.1.0": {
+      "choice": "drop",
+      "numero": null,
+      "titre": "Caractère de la zone urbaine de grands services urbains",
+      "page_debut": 126,
+      "page_fin": 126,
+      "niveau": 3,
+      "note": "à intégrer dans UGSU"
+    },
+    "REG1::2.1.1": {
+      "choice": "keep",
+      "numero": "UGSU.1",
+      "titre": "Occupations et utilisations des sols, destinations* des constructions",
+      "page_debut": 127,
+      "page_fin": 129,
+      "niveau": 3
+    },
+    "REG1::2.1.1.0": {
+      "choice": "drop",
+      "numero": "UGSU.1.1",
+      "titre": "Occupations et utilisations des sols interdites",
+      "page_debut": 127,
+      "page_fin": 127,
+      "niveau": 4
+    },
+    "REG1::2.1.1.1": {
+      "choice": "drop",
+      "numero": "UGSU.1.2",
+      "titre": "Occupations et utilisations des sols soumises à des conditions particulières",
+      "page_debut": 127,
+      "page_fin": 127,
+      "niveau": 4
+    },
+    "REG1::2.1.1.2": {
+      "choice": "drop",
+      "numero": "UGSU.1.3",
+      "titre": "Destinations*, sous-destinations* et types d’activités soumis à des conditions particulières",
+      "page_debut": 127,
+      "page_fin": 127,
+      "niveau": 4
+    },
+    "REG1::2.1.1.3": {
+      "choice": "drop",
+      "numero": "UGSU.1.4",
+      "titre": "Emplacements réservés pour équipements et périmètres de localisation d’équipements",
+      "page_debut": 128,
+      "page_fin": 128,
+      "niveau": 4
+    },
+    "REG1::2.1.1.4": {
+      "choice": "drop",
+      "numero": "UGSU.1.5",
+      "titre": "Périmètre d’attente de projet d’aménagement global (PAPAG)",
+      "page_debut": 129,
+      "page_fin": 129,
+      "niveau": 4
+    },
+    "REG1::2.1.2": {
+      "choice": "keep",
+      "numero": "UGSU.2",
+      "titre": "Caractéristiques architecturales et urbaines des constructions, aspect extérieur",
+      "page_debut": 130,
+      "page_fin": 136,
+      "niveau": 3
+    },
+    "REG1::2.1.2.0": {
+      "choice": "drop",
+      "numero": "UGSU.2.1",
+      "titre": "Dispositions générales",
+      "page_debut": 130,
+      "page_fin": 132,
+      "niveau": 4
+    },
+    "REG1::2.1.2.1": {
+      "choice": "drop",
+      "numero": "UGSU.2.2",
+      "titre": "Dispositions applicables aux constructions neuves",
+      "page_debut": 133,
+      "page_fin": 133,
+      "niveau": 4
+    },
+    "REG1::2.1.2.2": {
+      "choice": "drop",
+      "numero": "UGSU.2.3",
+      "titre": "Dispositions applicables aux interventions sur les constructions existantes",
+      "page_debut": 134,
+      "page_fin": 134,
+      "niveau": 4
+    },
+    "REG1::2.1.2.3": {
+      "choice": "drop",
+      "numero": "UGSU.2.4",
+      "titre": "Protection des formes urbaines et du patrimoine architectural",
+      "page_debut": 135,
+      "page_fin": 136,
+      "niveau": 4
+    },
+    "REG1::2.1.3": {
+      "choice": "keep",
+      "numero": "UGSU.3",
+      "titre": "Implantation, hauteur et volumétrie des constructions",
+      "page_debut": 137,
+      "page_fin": 150,
+      "niveau": 3
+    },
+    "REG1::2.1.3.0": {
+      "choice": "drop",
+      "numero": "UGSU.3.1",
+      "titre": "Implantation des constructions",
+      "page_debut": 137,
+      "page_fin": 138,
+      "niveau": 4
+    },
+    "REG1::2.1.3.1": {
+      "choice": "drop",
+      "numero": "UGSU.3.2",
+      "titre": "Hauteur et volumétrie des constructions",
+      "page_debut": 139,
+      "page_fin": 142,
+      "niveau": 4
+    },
+    "REG1::2.1.3.2": {
+      "choice": "drop",
+      "numero": "UGSU.3.3",
+      "titre": "Dépassements admis par rapport à la hauteur et à la volumétrie maximales des constructions",
+      "page_debut": 143,
+      "page_fin": 150,
+      "niveau": 4
+    },
+    "REG1::2.1.4": {
+      "choice": "keep",
+      "numero": "UGSU.4",
+      "titre": "Espaces libres, végétalisation des abords des constructions et du bâti",
+      "page_debut": 151,
+      "page_fin": 158,
+      "niveau": 3
+    },
+    "REG1::2.1.4.0": {
+      "choice": "drop",
+      "numero": "UGSU.4.1",
+      "titre": "Espaces libres de construction*",
+      "page_debut": 151,
+      "page_fin": 153,
+      "niveau": 4
+    },
+    "REG1::2.1.4.1": {
+      "choice": "drop",
+      "numero": "UGSU.4.2",
+      "titre": "Végétalisation du bâti",
+      "page_debut": 154,
+      "page_fin": 155,
+      "niveau": 4
+    },
+    "REG1::2.1.4.2": {
+      "choice": "drop",
+      "numero": "UGSU.4.3",
+      "titre": "Prescriptions localisées",
+      "page_debut": 156,
+      "page_fin": 158,
+      "niveau": 4
+    },
+    "REG1::2.1.5": {
+      "choice": "keep",
+      "numero": "UGSU.5",
+      "titre": "Conception bioclimatique et performances environnementales",
+      "page_debut": 159,
+      "page_fin": 163,
+      "niveau": 3
+    },
+    "REG1::2.1.5.0": {
+      "choice": "drop",
+      "numero": "UGSU.5.1",
+      "titre": "Dispositions applicables aux constructions neuves, extensions*, surélévations* et créations de locaux en sous-sol",
+      "page_debut": 159,
+      "page_fin": 159,
+      "niveau": 4,
+      "note": "à intégrer avec UGSU.5"
+    },
+    "REG1::2.1.5.1": {
+      "choice": "keep",
+      "numero": "UGSU.5.2",
+      "titre": "Dispositions applicables aux interventions sur les constructions existantes",
+      "page_debut": 160,
+      "page_fin": 163,
+      "niveau": 4
+    },
+    "REG1::2.1.6": {
+      "choice": "keep",
+      "numero": "UGSU.6",
+      "titre": "Réseaux et assainissement, déchets",
+      "page_debut": 164,
+      "page_fin": 165,
+      "niveau": 3
+    },
+    "REG1::2.1.6.0": {
+      "choice": "drop",
+      "numero": "UGSU.6.1",
+      "titre": "Desserte par les réseaux",
+      "page_debut": 164,
+      "page_fin": 164,
+      "niveau": 4
+    },
+    "REG1::2.1.6.1": {
+      "choice": "drop",
+      "numero": "UGSU.6.2",
+      "titre": "Déchets",
+      "page_debut": 165,
+      "page_fin": 165,
+      "niveau": 4
+    },
+    "REG1::2.1.7": {
+      "choice": "keep",
+      "numero": "UGSU.7",
+      "titre": "Desserte, stationnement",
+      "page_debut": 166,
+      "page_fin": 170,
+      "niveau": 3
+    },
+    "REG1::2.1.7.0": {
+      "choice": "drop",
+      "numero": "UGSU.7.1",
+      "titre": "Desserte des constructions",
+      "page_debut": 166,
+      "page_fin": 166,
+      "niveau": 4
+    },
+    "REG1::2.1.7.1": {
+      "choice": "drop",
+      "numero": "UGSU.7.2",
+      "titre": "Stationnement",
+      "page_debut": 167,
+      "page_fin": 170,
+      "niveau": 4
+    },
+    "REG1::2.2": {
+      "choice": "keep",
+      "numero": null,
+      "titre": "ZONE URBAINE VERTE (UV)",
+      "page_debut": 171,
+      "page_fin": 200,
+      "niveau": 2
+    },
+    "REG1::2.2.0": {
+      "choice": "drop",
+      "numero": null,
+      "titre": "Caractère de la zone urbaine verte",
+      "page_debut": 172,
+      "page_fin": 172,
+      "niveau": 3,
+      "note": "à intégrer dans UV"
+    },
+    "REG1::2.2.1": {
+      "choice": "keep",
+      "numero": "UV.1",
+      "titre": "Occupations et utilisations des sols, destinations* des constructions",
+      "page_debut": 173,
+      "page_fin": 176,
+      "niveau": 3
+    },
+    "REG1::2.2.1.0": {
+      "choice": "drop",
+      "numero": "UV.1.1",
+      "titre": "Occupations et utilisations des sols interdites",
+      "page_debut": 173,
+      "page_fin": 173,
+      "niveau": 4
+    },
+    "REG1::2.2.1.2": {
+      "choice": "drop",
+      "numero": "UV.1.3",
+      "titre": "Dispositions particulières applicables sur le domaine public fluvial",
+      "page_debut": 174,
+      "page_fin": 174,
+      "niveau": 4
+    },
+    "REG1::2.2.1.1": {
+      "choice": "drop",
+      "numero": "UV.1.2",
+      "titre": "Occupations, utilisations des sols, destinations* et sous-destinations* soumises à des conditions particulières",
+      "page_debut": 173,
+      "page_fin": 173,
+      "niveau": 4
+    },
+    "REG1::2.2.1.3": {
+      "choice": "drop",
+      "numero": "UV.1.4",
+      "titre": "Dispositions particulières applicables dans le secteur Roland Garros",
+      "page_debut": 175,
+      "page_fin": 175,
+      "niveau": 4
+    },
+    "REG1::2.2.1.4": {
+      "choice": "drop",
+      "numero": "UV.1.5",
+      "titre": "Emplacements réservés pour équipements et périmètres de localisation d’équipements",
+      "page_debut": 175,
+      "page_fin": 176,
+      "niveau": 4
+    },
+    "REG1::2.2.2": {
+      "choice": "keep",
+      "numero": "UV.2",
+      "titre": "Caractéristiques urbaines et architecturales de construction",
+      "page_debut": 177,
+      "page_fin": 181,
+      "niveau": 3
+    },
+    "REG1::2.2.2.0": {
+      "choice": "drop",
+      "numero": "UV.2.1",
+      "titre": "Dispositions générales",
+      "page_debut": 177,
+      "page_fin": 178,
+      "niveau": 4
+    },
+    "REG1::2.2.2.1": {
+      "choice": "drop",
+      "numero": "UV.2.2",
+      "titre": "Dispositions applicables aux interventions sur les constructions existantes",
+      "page_debut": 179,
+      "page_fin": 179,
+      "niveau": 4
+    },
+    "REG1::2.2.2.2": {
+      "choice": "drop",
+      "numero": "UV.2.3",
+      "titre": "Disposition particulières applicables sur le domaine public fluvial",
+      "page_debut": 180,
+      "page_fin": 180,
+      "niveau": 4
+    },
+    "REG1::2.2.2.3": {
+      "choice": "drop",
+      "numero": "UV.2.4",
+      "titre": "Protection des formes urbaines et du patrimoine architectural",
+      "page_debut": 180,
+      "page_fin": 181,
+      "niveau": 4
+    },
+    "REG1::2.2.3": {
+      "choice": "keep",
+      "numero": "UV.3",
+      "titre": "Implantation, hauteur et volumétrie des constructions",
+      "page_debut": 182,
+      "page_fin": 186,
+      "niveau": 3
+    },
+    "REG1::2.2.3.0": {
+      "choice": "drop",
+      "numero": "UV.3.1",
+      "titre": "Implantation des constructions",
+      "page_debut": 182,
+      "page_fin": 183,
+      "niveau": 4
+    },
+    "REG1::2.2.3.1": {
+      "choice": "drop",
+      "numero": "UV.3.2",
+      "titre": "Hauteur et volumétrie des constructions",
+      "page_debut": 184,
+      "page_fin": 184,
+      "niveau": 4
+    },
+    "REG1::2.2.3.2": {
+      "choice": "drop",
+      "numero": "UV.3.3",
+      "titre": "Dépassements admis par rapport à la hauteur et à la volumétrie maximales des constructions",
+      "page_debut": 185,
+      "page_fin": 186,
+      "niveau": 4
+    },
+    "REG1::2.2.4": {
+      "choice": "keep",
+      "numero": "UV.4",
+      "titre": "Espaces libres, végétalisation des abords des constructions et du bâti",
+      "page_debut": 187,
+      "page_fin": 191,
+      "niveau": 3
+    },
+    "REG1::2.2.4.0": {
+      "choice": "drop",
+      "numero": "UV.4.1",
+      "titre": "Espaces libres de construction*",
+      "page_debut": 187,
+      "page_fin": 187,
+      "niveau": 4
+    },
+    "REG1::2.2.4.1": {
+      "choice": "drop",
+      "numero": "UV.4.2",
+      "titre": "Végétalisation du bâti",
+      "page_debut": 187,
+      "page_fin": 188,
+      "niveau": 4
+    },
+    "REG1::2.2.4.2": {
+      "choice": "drop",
+      "numero": "UV.4.3",
+      "titre": "Prescriptions localisées",
+      "page_debut": 189,
+      "page_fin": 191,
+      "niveau": 4
+    },
+    "REG1::2.2.5": {
+      "choice": "keep",
+      "numero": "UV.5",
+      "titre": "Conception bioclimatique et performances environnementales",
+      "page_debut": 192,
+      "page_fin": 196,
+      "niveau": 3
+    },
+    "REG1::2.2.5.0": {
+      "choice": "drop",
+      "numero": "UV.5.1",
+      "titre": "Dispositions applicables aux constructions neuves, extensions*, surélévations* et créations de locaux en sous-sol",
+      "page_debut": 192,
+      "page_fin": 192,
+      "niveau": 4
+    },
+    "REG1::2.2.5.1": {
+      "choice": "drop",
+      "numero": "UV.5.2",
+      "titre": "Dispositions applicables aux interventions sur les constructions existantes",
+      "page_debut": 193,
+      "page_fin": 196,
+      "niveau": 4
+    },
+    "REG1::2.2.6": {
+      "choice": "keep",
+      "numero": "UV.6",
+      "titre": "Réseaux et assainissement, déchets",
+      "page_debut": 197,
+      "page_fin": 198,
+      "niveau": 3
+    },
+    "REG1::2.2.6.0": {
+      "choice": "drop",
+      "numero": "UV.6.1",
+      "titre": "Desserte par les réseaux",
+      "page_debut": 197,
+      "page_fin": 197,
+      "niveau": 4
+    },
+    "REG1::2.2.6.1": {
+      "choice": "drop",
+      "numero": "UV.6.2",
+      "titre": "Déchets",
+      "page_debut": 198,
+      "page_fin": 198,
+      "niveau": 4
+    },
+    "REG1::2.2.7": {
+      "choice": "keep",
+      "numero": "UV.7",
+      "titre": "Desserte et stationnement",
+      "page_debut": 199,
+      "page_fin": 200,
+      "niveau": 3
+    },
+    "REG1::2.2.7.0": {
+      "choice": "drop",
+      "numero": "UV.7.1",
+      "titre": "Desserte des constructions",
+      "page_debut": 199,
+      "page_fin": 199,
+      "niveau": 4
+    },
+    "REG1::2.2.7.1": {
+      "choice": "drop",
+      "numero": "UV.7.2",
+      "titre": "Stationnement",
+      "page_debut": 200,
+      "page_fin": 200,
+      "niveau": 4
+    },
+    "REG1::2.3": {
+      "choice": "keep",
+      "numero": null,
+      "titre": "ZONE NATURELLE ET FORESTIÈRE (N)",
+      "page_debut": 201,
+      "page_fin": 222,
+      "niveau": 2
+    },
+    "REG1::2.3.0": {
+      "choice": "drop",
+      "numero": null,
+      "titre": "Caractère de la zone naturelle et forestière",
+      "page_debut": 202,
+      "page_fin": 202,
+      "niveau": 3,
+      "note": "à intégrer avec N"
+    },
+    "REG1::2.3.1": {
+      "choice": "keep",
+      "numero": "N.1",
+      "titre": "Occupations et utilisations des sols",
+      "page_debut": 203,
+      "page_fin": 205,
+      "niveau": 3
+    },
+    "REG1::2.3.1.0": {
+      "choice": "drop",
+      "numero": "N.1.1",
+      "titre": "Occupations et utilisations des sols interdites",
+      "page_debut": 203,
+      "page_fin": 203,
+      "niveau": 4
+    },
+    "REG1::2.3.1.1": {
+      "choice": "drop",
+      "numero": "N.1.2",
+      "titre": "Occupations et utilisations des sols soumises à des conditions particulières",
+      "page_debut": 203,
+      "page_fin": 203,
+      "niveau": 4
+    },
+    "REG1::2.3.1.1.0": {
+      "choice": "drop",
+      "numero": "N.1.2.2",
+      "titre": "Dispositions applicables hors des Secteurs de taille et de capacité d’accueil",
+      "page_debut": 203,
+      "page_fin": 203,
+      "niveau": 5
+    },
+    "REG1::2.3.1.2": {
+      "choice": "drop",
+      "numero": "N.1.3",
+      "titre": "Emplacements réservés pour équipements et périmètres de localisation d’équipements",
+      "page_debut": 204,
+      "page_fin": 205,
+      "niveau": 4
+    },
+    "REG1::2.3.2": {
+      "choice": "keep",
+      "numero": "N.2",
+      "titre": "Caractéristiques des constructions",
+      "page_debut": 206,
+      "page_fin": 207,
+      "niveau": 3
+    },
+    "REG1::2.3.2.0": {
+      "choice": "drop",
+      "numero": "N.2.1",
+      "titre": "Dispositions générales",
+      "page_debut": 206,
+      "page_fin": 206,
+      "niveau": 4
+    },
+    "REG1::2.3.2.1": {
+      "choice": "drop",
+      "numero": "N.2.2",
+      "titre": "Protections patrimoniales",
+      "page_debut": 206,
+      "page_fin": 207,
+      "niveau": 4
+    },
+    "REG1::2.3.3": {
+      "choice": "keep",
+      "numero": "N.3",
+      "titre": "Implantation, hauteur et volumétrie des constructions",
+      "page_debut": 208,
+      "page_fin": 211,
+      "niveau": 3
+    },
+    "REG1::2.3.3.0": {
+      "choice": "drop",
+      "numero": "N.3.1",
+      "titre": "Emprise au sol* et emprise géométrique* des constructions",
+      "page_debut": 208,
+      "page_fin": 208,
+      "niveau": 4
+    },
+    "REG1::2.3.3.1": {
+      "choice": "drop",
+      "numero": "N.3.2",
+      "titre": "Implantation des constructions",
+      "page_debut": 209,
+      "page_fin": 209,
+      "niveau": 4
+    },
+    "REG1::2.3.3.2": {
+      "choice": "drop",
+      "numero": "N.3.3",
+      "titre": "Hauteur maximale des constructions",
+      "page_debut": 210,
+      "page_fin": 211,
+      "niveau": 4
+    },
+    "REG1::2.3.4": {
+      "choice": "keep",
+      "numero": "N.4",
+      "titre": "Espaces libres, végétalisation, abords des constructions",
+      "page_debut": 212,
+      "page_fin": 215,
+      "niveau": 3
+    },
+    "REG1::2.3.4.0": {
+      "choice": "drop",
+      "numero": "N.4.1",
+      "titre": "Espaces libres, espaces végétalisés et plantations",
+      "page_debut": 212,
+      "page_fin": 212,
+      "niveau": 4
+    },
+    "REG1::2.3.4.0.0": {
+      "choice": "drop",
+      "numero": "N.4.1.2",
+      "titre": "Dispositions applicables dans les Secteurs de taille et de capacité d’accueil",
+      "page_debut": 212,
+      "page_fin": 212,
+      "niveau": 5
+    },
+    "REG1::2.3.4.1": {
+      "choice": "drop",
+      "numero": "N.4.2",
+      "titre": "Végétalisation du bâti",
+      "page_debut": 213,
+      "page_fin": 214,
+      "niveau": 4
+    },
+    "REG1::2.3.4.2": {
+      "choice": "drop",
+      "numero": "N.4.3",
+      "titre": "Prescriptions localisées",
+      "page_debut": 215,
+      "page_fin": 215,
+      "niveau": 4
+    },
+    "REG1::2.3.5": {
+      "choice": "keep",
+      "numero": "N.5",
+      "titre": "Conception bioclimatique et performances environnementales",
+      "page_debut": 216,
+      "page_fin": 219,
+      "niveau": 3
+    },
+    "REG1::2.3.5.0": {
+      "choice": "drop",
+      "numero": "N.5.1",
+      "titre": "Dispositions applicables aux constructions neuves, extensions*, surélévations* et créations de locaux en sous-sol",
+      "page_debut": 216,
+      "page_fin": 216,
+      "niveau": 4,
+      "note": "intégrer à N.5"
+    },
+    "REG1::2.3.5.1": {
+      "choice": "drop",
+      "numero": "N.5.2",
+      "titre": "Dispositions applicables aux interventions sur les constructions existantes",
+      "page_debut": 217,
+      "page_fin": 219,
+      "niveau": 4
+    },
+    "REG1::2.3.6": {
+      "choice": "keep",
+      "numero": "N.6",
+      "titre": "Réseaux, assainissement et déchets",
+      "page_debut": 220,
+      "page_fin": 221,
+      "niveau": 3
+    },
+    "REG1::2.3.6.0": {
+      "choice": "drop",
+      "numero": "N.6.1",
+      "titre": "Desserte par les réseaux",
+      "page_debut": 220,
+      "page_fin": 220,
+      "niveau": 4
+    },
+    "REG1::2.3.6.1": {
+      "choice": "drop",
+      "numero": "N.6.2",
+      "titre": "Déchets",
+      "page_debut": 221,
+      "page_fin": 221,
+      "niveau": 4
+    },
+    "REG1::2.3.7": {
+      "choice": "keep",
+      "numero": "N.7",
+      "titre": "Desserte et stationnement",
+      "page_debut": 222,
+      "page_fin": 222,
+      "niveau": 3
+    },
+    "REG1::2.3.7.0": {
+      "choice": "drop",
+      "numero": "N.7.1",
+      "titre": "Desserte",
+      "page_debut": 222,
+      "page_fin": 222,
+      "niveau": 4
+    },
+    "REG1::2.3.7.1": {
+      "choice": "drop",
+      "numero": "N.7.2",
+      "titre": "Stationnement",
+      "page_debut": 222,
+      "page_fin": 222,
+      "niveau": 4
+    },
+    "REG1::3": {
+      "choice": "keep",
+      "numero": "PARTIE 4",
+      "titre": "FIGURES",
+      "page_debut": 223,
+      "page_fin": null,
+      "niveau": 1,
+      "note": "idéalement associer toutes les figues au bon texte - citation dans texte notamment mais aussi avec mot clé ?"
+    }
+  }
+}

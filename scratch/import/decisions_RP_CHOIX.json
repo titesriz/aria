@@ -1,0 +1,261 @@
+{
+  "exported_at": "2026-09-14T20:19:19.189Z",
+  "document": "RP_CHOIX.pdf",
+  "decisions": {
+    "RP_CHOIX::0.1": {
+      "choice": "drop",
+      "numero": null,
+      "titre": "La démarche de construction du PADD",
+      "page_debut": 5,
+      "page_fin": 283,
+      "niveau": 2
+    },
+    "RP_CHOIX::0": {
+      "choice": "drop",
+      "numero": null,
+      "titre": "Introduction - le contenu du rapport de présentation dans le code de l’urbanisme",
+      "page_debut": 5,
+      "page_fin": 283,
+      "niveau": 1
+    },
+    "RP_CHOIX::0.1.0.2.1": {
+      "note": "attention il y a également un paragraphe page 16",
+      "numero": "1.3.2",
+      "titre": "Une démarche de prévention des risques et d’atténuation des pollutions pour favoriser l’amélioration de la qualité de vie"
+    },
+    "RP_CHOIX::0.1.1.0.0": {
+      "note": "fin du paragraphe page 18",
+      "numero": "1.4.1",
+      "titre": "Offrir à tous les publics un accès à l’hébergement et à un logement digne, abordable et adapté"
+    },
+    "RP_CHOIX::0.1.1.0.1": {
+      "note": "fin page 19",
+      "numero": "1.4.2",
+      "titre": "Développer un parc de logements qualitatif et non excluant"
+    },
+    "RP_CHOIX::0.1.1.2": {
+      "choice": "drop",
+      "numero": null,
+      "titre": "Le constat du diagnostic territorial et de l’état initial de l’environnement",
+      "page_debut": 19,
+      "page_fin": 19,
+      "niveau": 4
+    },
+    "RP_CHOIX::0.1.1.3": {
+      "choice": "drop",
+      "numero": null,
+      "titre": "La réponse du projet d’aménagement et de développement durables",
+      "page_debut": 20,
+      "page_fin": 20,
+      "niveau": 4
+    },
+    "RP_CHOIX::0.1.1.3.1": {
+      "note": "fin page 21",
+      "numero": "1.5.2",
+      "titre": "Partager au service de tous les richesses engendrées par une « ville- monde »"
+    },
+    "RP_CHOIX::0.1.1.4": {
+      "note": "fin page 22",
+      "numero": "1.6",
+      "titre": "Maintenir et faire revenir les activités de fabrication en ville"
+    },
+    "RP_CHOIX::0.1.1.5": {
+      "choice": "drop",
+      "numero": null,
+      "titre": "Le constat du diagnostic territorial et de l’état initial de l’environnement",
+      "page_debut": 21,
+      "page_fin": 21,
+      "niveau": 4
+    },
+    "RP_CHOIX::0.1.1.6": {
+      "choice": "drop",
+      "numero": null,
+      "titre": "La réponse du projet d’aménagement et de développement durables",
+      "page_debut": 22,
+      "page_fin": 23,
+      "niveau": 4
+    },
+    "RP_CHOIX::0.1.1.6.1": {
+      "note": "fin page 23",
+      "numero": "1.6.2",
+      "titre": "Les activités de production, patrimoine et socle de l’emploi de demain"
+    },
+    "RP_CHOIX::0.1.1.8": {
+      "choice": "drop",
+      "numero": null,
+      "titre": "Le constat du diagnostic territorial et de l’état initial de l’environnement",
+      "page_debut": 24,
+      "page_fin": 24,
+      "niveau": 4
+    },
+    "RP_CHOIX::0.1.1.9": {
+      "choice": "drop",
+      "numero": null,
+      "titre": "La réponse du projet d’aménagement et de développement durables",
+      "page_debut": 24,
+      "page_fin": 24,
+      "niveau": 4
+    },
+    "RP_CHOIX::0.1.3.0.0": {
+      "note": "fin page 40",
+      "numero": "1.1.1",
+      "titre": "OAP Biodiversité et adaptation au changement climatique"
+    },
+    "RP_CHOIX::0.1.3.0.2": {
+      "note": "fin page 48",
+      "numero": "1.1.3",
+      "titre": "OAP Construction neuve"
+    },
+    "RP_CHOIX::0.1.3.0.3": {
+      "note": "fin page 54",
+      "numero": "1.1.4",
+      "titre": "OAP Quartier du quart d’heure"
+    },
+    "RP_CHOIX::0.1.3.0.4": {
+      "note": "fin page 58",
+      "numero": "1.1.5",
+      "titre": "OAP Espace public"
+    },
+    "RP_CHOIX::0.1.3.0.5": {
+      "note": "fin page 61",
+      "numero": "1.1.6",
+      "titre": "OAP Liens métropolitains"
+    },
+    "RP_CHOIX::0.1.3.0.6": {
+      "note": "fin page 67",
+      "numero": "1.1.7",
+      "titre": "OAP Santé environnementale"
+    },
+    "RP_CHOIX::0.1.3.1.2": {
+      "note": "fin p69",
+      "numero": "1.2.3",
+      "titre": "Liste des OAP sectorielles"
+    },
+    "RP_CHOIX::0.1.4.0.1": {
+      "note": "fin p86",
+      "numero": "1.3.2",
+      "titre": "Statut réglementaire des voies"
+    },
+    "RP_CHOIX::0.1.4.0.0": {
+      "note": "fin p86",
+      "numero": "1.3.1",
+      "titre": "Division du territoire en zones et secteurs"
+    },
+    "RP_CHOIX::0.1.4.0.2": {
+      "note": "prendre définition des mots - fin p.89",
+      "numero": "1.3.3",
+      "titre": "Application du règlement aux constructions existantes"
+    },
+    "RP_CHOIX::0.1.4.1.7": {
+      "note": "fin p.222",
+      "numero": "1.4.8",
+      "titre": "Chapitre UG.8 : Valorisation des externalités positives des projets"
+    },
+    "RP_CHOIX::0.1.4.3": {
+      "choice": "drop",
+      "numero": "UGSU.2.1",
+      "titre": "Dispositions Générales",
+      "page_debut": 248,
+      "page_fin": 248,
+      "niveau": 4
+    },
+    "RP_CHOIX::0.1.4.4": {
+      "choice": "drop",
+      "numero": "UGSU.2.2",
+      "titre": "Dispositions applicables aux constructions neuves",
+      "page_debut": 249,
+      "page_fin": 249,
+      "niveau": 4
+    },
+    "RP_CHOIX::0.1.4.5": {
+      "choice": "drop",
+      "numero": "UGSU.2.3",
+      "titre": "Dispositions applicables interventions sur les constructions existantes",
+      "page_debut": 249,
+      "page_fin": 249,
+      "niveau": 4
+    },
+    "RP_CHOIX::0.1.4.6": {
+      "choice": "drop",
+      "numero": "UGSU.3.1",
+      "titre": "Implantation des constructions",
+      "page_debut": 250,
+      "page_fin": 250,
+      "niveau": 4
+    },
+    "RP_CHOIX::0.1.4.7": {
+      "choice": "drop",
+      "numero": "UGSU.3.2",
+      "titre": "Hauteur et volumétrie des constructions",
+      "page_debut": 251,
+      "page_fin": 252,
+      "niveau": 4
+    },
+    "RP_CHOIX::0.1.4.8": {
+      "choice": "drop",
+      "numero": "UGSU.3.3",
+      "titre": "Dépassements admis par rapport à la hauteur et à la volumétrie maximales des constructions",
+      "page_debut": 253,
+      "page_fin": 255,
+      "niveau": 4
+    },
+    "RP_CHOIX::0.1.4.8.0": {
+      "note": "fin p.254",
+      "numero": "1.5.4",
+      "titre": "Chapitre UGSU.4. : Espaces libres, végétalisations des abords des constructions et du bâti"
+    },
+    "RP_CHOIX::0.1.4.9.1": {
+      "note": "fin p.258",
+      "numero": "1.6.2",
+      "titre": "Chapitre UV.2. : Caractéristiques urbaines et architecturales des constructions"
+    },
+    "RP_CHOIX::0.1.4.9.2": {
+      "note": "fin",
+      "numero": "1.6.3",
+      "titre": "Chapitre UV.3. : Implantation et volumétrie"
+    },
+    "RP_CHOIX::0.1.4.9.3": {
+      "note": "fin",
+      "numero": "1.6.4",
+      "titre": "Chapitre UV.4. : Espaces libres, végétalisation des abords des constructions et du bâti"
+    },
+    "RP_CHOIX::0.1.4.9.6": {
+      "note": "fin",
+      "numero": "1.6.7",
+      "titre": "Chapitre UV.7. Desserte et stationnement"
+    },
+    "RP_CHOIX::0.1.4.10.0": {
+      "note": "fin",
+      "numero": "1.7.1",
+      "titre": "Chapitre N.1 : Occupation et utilisation des sols"
+    },
+    "RP_CHOIX::0.1.4.10.1": {
+      "note": "fin",
+      "numero": "1.7.2",
+      "titre": "Chapitre N.2 : Caractéristiques des constructions"
+    },
+    "RP_CHOIX::0.1.4.10.2": {
+      "note": "fin",
+      "numero": "1.7.3",
+      "titre": "Chapitre N.3 : Implantation et volumétrie"
+    },
+    "RP_CHOIX::0.1.4.10.3": {
+      "note": "fin",
+      "numero": "1.7.4",
+      "titre": "Chapitre N.4 : Espaces libres, végétalisation, abord de constructions"
+    },
+    "RP_CHOIX::0.1.6": {
+      "choice": "drop",
+      "numero": null,
+      "titre": "Rappel des obligations juridiques",
+      "page_debut": 271,
+      "page_fin": 283,
+      "niveau": 3
+    },
+    "RP_CHOIX::0.1.6.0": {
+      "note": "fin",
+      "numero": "1.8",
+      "titre": "Analyse de la consommation d’espaces naturels, agricoles et forestiers – dispositions favorisant sa limitation"
+    }
+  }
+}

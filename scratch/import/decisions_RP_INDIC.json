@@ -1,0 +1,21 @@
+{
+  "exported_at": "2026-09-14T20:49:53.709Z",
+  "document": "RP_INDIC.pdf",
+  "decisions": {
+    "RP_INDIC::2.1.4": {
+      "note": "fin",
+      "numero": "Tableau 5",
+      "titre": "Indicateurs « Santé environnementale des populations »"
+    },
+    "RP_INDIC::2.1.2": {
+      "note": "fin",
+      "numero": "Tableau 3",
+      "titre": "Indicateurs « Préservation des ressources naturelles »"
+    },
+    "RP_INDIC::2.1.1": {
+      "note": "fin",
+      "numero": "Tableau 2",
+      "titre": "Indicateurs « Lutte contre le changement climatique »"
+    }
+  }
+}
