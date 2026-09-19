@@ -1,277 +1,160 @@
 [
   {
     "id": "CH-01",
-    "persona": "Architecte",
     "question": "Je veux faire une surélévation d'un immeuble de bureau à Paris. Quelles sont les restrictions ?",
-    "context": "Question ouverte, sans arrondissement ni chiffres. Éval Charline 02/07 — Q1.",
-    "type_cas": "regression",
-    "type_echec": "mixte",
-    "famille_attendue": [
-      "Règlement"
-    ],
-    "articles_attendus": [
-      "UG.3.2",
-      "UG.3.3",
-      "UG.1.4.1"
-    ],
-    "answerable": "oui",
+    "articles_attendus": "UG.3.2, UG.3.3, UG.1.4.1",
     "reponse_attendue": "Hauteur/gabarit (UG.3.2/3.3) + obligation de mixité fonctionnelle (UG.1.4.1 3°) au-delà de 4500m² SPE (10%, min 500m²) — seuil VALIDÉ par Charline. Secteur dérogatoire Ternes-Maillot/Palais des Congrès (validé). REJETER les inventions du run : 'surélévation doit faire 4500m²' (contresens) et '6 à 8 logements' (calcul inventé).",
-    "ressource_a_pointer": "—",
     "critere_reussite": "Citer les bons articles depuis le Règlement (pas le Rapport) ; la citation active doit correspondre au contenu ; ne pas convertir '10%' en un nombre de logements inventé.",
-    "reproche_charline": "Incomplète voire fausse. Pas d'explication, juste des phrases pas forcément compréhensibles. La citation active ne semble pas correspondre. (annotations : seuil 4500m² ✓, Ternes-Maillot ✓, '6-8 logements' ✗, 'surélévation 4500m²' ✗)",
-    "fiabilite": "Validé Charline",
-    "validated": false,
-    "priorite": "⭐⭐⭐⭐⭐"
+    "ontologie_domaine": [
+      "https://app.notion.com/p/3a93ae1f2a6d804b8f8bf80d6171a4ad",
+      "https://app.notion.com/p/3a93ae1f2a6d808e94a8cda0cf5d6e76",
+      "https://app.notion.com/p/3a93ae1f2a6d8078914ccac91eebae90",
+      "https://app.notion.com/p/39f3ae1f2a6d81e8bbf9db8dce94238b",
+      "https://app.notion.com/p/3a93ae1f2a6d8070a05ae29e99b7512f",
+      "https://app.notion.com/p/39f3ae1f2a6d819fb3cdf2705b30901a",
+      "https://app.notion.com/p/39f3ae1f2a6d81b1a68cdc602fa03870"
+    ]
   },
   {
     "id": "CH-02",
-    "persona": "Architecte",
     "question": "Je souhaite installer des volets, quelles sont les règles à respecter dans le 10e arrondissement ?",
-    "context": "Aspect extérieur. Éval Charline (Figma) — volets.",
-    "type_cas": "regression",
-    "type_echec": "R",
-    "famille_attendue": [
-      "Règlement"
-    ],
-    "articles_attendus": [
-      "UG.2.2 (aspect extérieur)"
-    ],
-    "answerable": "oui",
+    "articles_attendus": "UG.2.2 (aspect extérieur)",
     "reponse_attendue": "Règles d'aspect extérieur (UG.2.2) applicables aux volets/menuiseries. À reconstruire depuis le Règlement. Le run a échoué en allant chercher dans RP_EVAL/RP_CHOIX (Rapport de présentation) et a parlé de zone N et du 7e — hors sujet.",
-    "ressource_a_pointer": "—",
-    "critere_reussite": "LE cas de routing famille : trouver UG.2.2 dans le Règlement, NE PAS aller dans le Rapport de présentation. Ne pas parler de zone N ni du 7e.",
-    "reproche_charline": "Difficile de donner une réponse précise... le système cite RP_EVAL.pdf (zone N) et RP_CHOIX.pdf (7e, hors PLU). Ne répond pas au 10e. Nécessaire de consulter le règlement écrit.",
-    "fiabilite": "Hypothèse à valider",
-    "validated": false,
-    "priorite": "⭐⭐⭐⭐⭐"
+    "critere_reussite": "LE cas de routing famille : trouver UG.2.2 dans le Règlement, NE PAS aller dans le Rapport de présentation. Ne pas parler de zone N ni du 7e.<br><span color=\"yellow_bg\">CL : Parler également de modification de façade donc d’autorisation d’urbanisme, de protection du patrimoine, de droit de copropriété, de dispositif de protection solaire</span>",
+    "ontologie_domaine": [
+      "https://app.notion.com/p/3a93ae1f2a6d80fa8842ea24630364e1",
+      "https://app.notion.com/p/39f3ae1f2a6d818ba850fdd282693471",
+      "https://app.notion.com/p/3a93ae1f2a6d803aba9ac93768944ac7",
+      "https://app.notion.com/p/3a93ae1f2a6d803ba355fc69fa734412"
+    ]
   },
   {
     "id": "CH-03",
-    "persona": "Architecte",
     "question": "Je souhaite remplacer mon toit en zinc par un toit en tuile. Est-ce que c'est possible ?",
-    "context": "Aspect extérieur / patrimoine. Éval Charline 02/07 — Q4. Gold standard fourni.",
-    "type_cas": "regression",
-    "type_echec": "R",
-    "famille_attendue": [
-      "Règlement",
-      "Annexe"
-    ],
-    "articles_attendus": [
-      "UG.2.2.3 (couronnement/couverture)",
-      "Annexe X"
-    ],
-    "answerable": "oui",
+    "articles_attendus": "UG.2.2.3 (couronnement/couverture), Annexe X",
     "reponse_attendue": "GOLD (structure validée Charline) : UG.2.2.3 fonde l'appréciation d'insertion paysagère. Trois situations : 1) bâtiment protégé PLUb (Annexe X) — tuile quasi refusée ; 2) abords MH (500m) — avis conforme ABF ; 3) cas général — déclaration préalable, appréciation d'insertion. Conclusion : très probablement non. NB : le noyau réglementaire (3 cas + UG.2.2.3 + Annexe X) est la cible ; les enrichissements Claude (80% zinc, Unesco, adresse BASU) sont hors corpus, hors portée MVP.",
-    "ressource_a_pointer": "Annexe X (liste des bâtiments protégés)",
     "critere_reussite": "Structurer en 3 cas patrimoniaux ; citer UG.2.2.3 + Annexe X depuis Règlement/Annexe. NE PAS répondre sur l'albédo/bioclimatique (piège OAP).",
-    "reproche_charline": "Réponse très incomplète. Aucune citation d'article précise du PLU, pas de référence à la protection des bâtiments patrimoniaux. (le run citait OAP_HERITAGE/OAP_CONSTRUCTION — albédo, isolation)",
-    "fiabilite": "Gold standard",
-    "validated": false,
-    "priorite": "⭐⭐⭐⭐⭐"
+    "ontologie_domaine": [
+      "https://app.notion.com/p/3a93ae1f2a6d802cbc9be131e68cd31e",
+      "https://app.notion.com/p/3a93ae1f2a6d804abcb7e1ba56d70d79",
+      "https://app.notion.com/p/3a93ae1f2a6d80fbb5eff92c42d3c2cc",
+      "https://app.notion.com/p/3a93ae1f2a6d80e69529f1990a131c5d"
+    ]
   },
   {
     "id": "CH-04",
-    "persona": "Architecte",
     "question": "Donne moi la liste des occupations et utilisations du sol interdites.",
-    "context": "Question ambiguë (sans zone précisée). Éval Charline 02/07 — Q6.",
-    "type_cas": "regression",
-    "type_echec": "S",
-    "famille_attendue": [
-      "Règlement"
-    ],
-    "articles_attendus": [
-      "UG.1.1",
-      "UGSU.1.1",
-      "UV.1.1",
-      "N.1.1"
-    ],
-    "answerable": "oui",
+    "articles_attendus": "UG.1.1, UGSU.1.1, UV.1.1, N.1.1",
     "reponse_attendue": "Question ambiguë sans zone : couvrir les interdictions par zone (UG.1.1, UGSU.1.1, UV.1.1, N.1.1) sans les mélanger, OU demander de préciser la zone (doctrine ambiguïté à trancher avec Charline). Le run a mélangé des articles de stationnement (N.7.2.1) avec les interdictions — hors sujet.",
-    "ressource_a_pointer": "—",
-    "critere_reussite": "Ne pas produire de contenu non traçable ; ne pas mélanger stationnement (N.7.2.1) et interdictions (N.1.1) ; séparer les zones. DOCTRINE À TRANCHER : répondre toutes zones vs demander la zone.",
-    "reproche_charline": "Je ne sais pas d'où il sort les trois dernières réponses. (les 3 dernières puces mélangeaient destination/stationnement N.7.2.1)",
-    "fiabilite": "Hypothèse à valider",
-    "validated": false,
-    "priorite": "⭐⭐⭐⭐"
+    "critere_reussite": "Ne pas produire de contenu non traçable ; ne pas mélanger stationnement (N.7.2.1) et interdictions (N.1.1) ; séparer les zones. DOCTRINE À TRANCHER : répondre toutes zones vs demander la zone.<br>CL : On peut citer les grandes familles d’occupations des sols interdites puis celles soumises à restrictions. On pourrait aussi parler de ce qui est autorisé.",
+    "ontologie_domaine": [
+      "https://app.notion.com/p/39f3ae1f2a6d81e8bbf9db8dce94238b"
+    ]
   },
   {
     "id": "CH-05",
-    "persona": "Architecte",
     "question": "Donne la liste des secteurs soumis à des dispositions particulières.",
-    "context": "Extraction liste depuis Annexe I. Éval Charline (Figma).",
-    "type_cas": "regression",
-    "type_echec": "R",
-    "famille_attendue": [
-      "Annexe",
-      "Règlement"
-    ],
-    "articles_attendus": [
-      "Annexe I (liste des secteurs)",
-      "UG.1.4.1"
-    ],
-    "answerable": "oui",
+    "articles_attendus": "Annexe I (liste des secteurs), UG.1.4.1",
     "reponse_attendue": "Liste des secteurs à dispositions particulières depuis l'Annexe I (Les Halles, Hôtel-Dieu, Val-de-Grâce, Bercy-Charenton, Montmartre, Maisons et villas SMV, etc.). À valider l'exhaustivité contre l'Annexe I réelle. Le run a mis en citation active un dossier de modification (Hôtel-Dieu) au lieu de l'Annexe I.",
-    "ressource_a_pointer": "Annexe I — Liste des secteurs à dispositions particulières",
     "critere_reussite": "Atteindre l'Annexe I (pas le dossier Hôtel-Dieu ni le Rapport) ; liste exhaustive et fidèle à l'Annexe I.",
-    "reproche_charline": "(citation active = RP_20251017_MC1_HOTEL_DIEU.pdf, dossier de modification, au lieu de l'Annexe I ; exhaustivité à vérifier)",
-    "fiabilite": "Hypothèse à valider",
-    "validated": false,
-    "priorite": "⭐⭐⭐⭐"
+    "ontologie_domaine": [
+      "https://app.notion.com/p/39f3ae1f2a6d819882e8dd440e78a771"
+    ]
   },
   {
     "id": "CH-06",
-    "persona": "Architecte",
     "question": "Peux-tu me donner la liste des adresses du 1er arrondissement (emplacements réservés logement) ?",
-    "context": "Extraction exhaustive depuis Annexe V. Éval Charline 02/07 — Q8. Référence d'exhaustivité connue (tableau Annexe V).",
-    "type_cas": "regression",
-    "type_echec": "R",
-    "famille_attendue": [
-      "Annexe"
-    ],
-    "articles_attendus": [
-      "Annexe V (emplacements réservés logement)"
-    ],
-    "answerable": "oui",
+    "articles_attendus": "Annexe V (emplacements réservés logement)",
     "reponse_attendue": "Liste exhaustive du 1er depuis l'Annexe V (~17 lignes) : 15 rue d'Argenteuil ; 4 Argenteuil/11 Échelle ; 16 Argenteuil/15 av Opéra ; 24 Bons Enfants/9-13 Colonel Driant ; 26 Bouloi ; 4 Jean Lantier ; 2 Molière/6 av Opéra ; 1 Molière/8 av Opéra ; 21 Mont-Thabor ; 7 av Opéra ; 21 Pyramides/19 Argenteuil ; 53 Rivoli/8 Lavandières ; 15-17 Sourdière/2-6 St Hyacinthe (avec type LS 100-100 / 100-60). Le run n'a retourné que 2 adresses depuis de mauvais documents.",
-    "ressource_a_pointer": "Annexe V — tableau des emplacements réservés, 1er arrondissement",
     "critere_reussite": "EXHAUSTIVITÉ : retourner ~17 lignes depuis l'Annexe V (le bug d'origine en retournait 2). Ne pas sourcer depuis le dossier Hôtel-Dieu / Rapport.",
-    "reproche_charline": "La réponse est bonne mais est incomplète, voir screenshot de la liste. (2 adresses retournées sur ~17)",
-    "fiabilite": "Validé Charline",
-    "validated": false,
-    "priorite": "⭐⭐⭐⭐"
+    "ontologie_domaine": [
+      "https://app.notion.com/p/3a93ae1f2a6d804b8aedf0072e4087a1"
+    ]
   },
   {
     "id": "UC-01",
-    "persona": "Architecte",
     "question": "Connaître la hauteur maximale constructible sur une parcelle en zone UG à Paris 11e, rue de la Roquette, pour un projet de logements neufs de 800m² (surface de plancher).",
-    "context": "Zone UG | Paris 11e | Logements neufs | 800m² SDP | Pas de MH proche | Hauteur plafond à vérifier sur plan",
-    "type_cas": "couverture",
-    "type_echec": "R",
-    "famille_attendue": [
-      "Règlement"
-    ],
-    "articles_attendus": [
-      "UG.3.2"
-    ],
-    "answerable": "renvoi",
+    "articles_attendus": "UG.3.2",
     "reponse_attendue": "En zone UG la hauteur max est fixée par le Plan général des hauteurs (DG5) ; l'article UG.3.2 pose le principe et renvoie au plan. La valeur opposable ne peut pas être donnée par le texte seul — il faut consulter la planche DG5 du secteur. Vérifier aussi les surcouches (fuseaux de protection, servitudes).",
-    "ressource_a_pointer": "Plan général des hauteurs DG5, planche du 11e (document graphique — non indexé). Comportement cible : ouvrir/pointer le bon PDF de plan.",
     "critere_reussite": "Restituer la règle UG.3.2 + pointer explicitement le Plan des hauteurs DG5. NE PAS halluciner une valeur chiffrée.",
-    "reproche_charline": null,
-    "fiabilite": "Hypothèse à valider",
-    "validated": false,
-    "priorite": "⭐⭐⭐⭐⭐"
+    "ontologie_domaine": [
+      "https://app.notion.com/p/3a93ae1f2a6d80878762f5352db8b81f",
+      "https://app.notion.com/p/39f3ae1f2a6d81b1a68cdc602fa03870",
+      "https://app.notion.com/p/39f3ae1f2a6d81e8bbf9db8dce94238b",
+      "https://app.notion.com/p/39f3ae1f2a6d818ba850fdd282693471",
+      "https://app.notion.com/p/39f3ae1f2a6d819fb3cdf2705b30901a",
+      "https://app.notion.com/p/39f3ae1f2a6d819882e8dd440e78a771",
+      "https://app.notion.com/p/3a93ae1f2a6d807baea9f11748ed1a99",
+      "https://app.notion.com/p/3a93ae1f2a6d80ea874bc49ad6f6a29f"
+    ]
   },
   {
     "id": "UC-02",
-    "persona": "Architecte",
     "question": "Savoir si ma construction neuve peut être implantée en retrait de 3m par rapport à l'alignement de la voie, en zone UG, pour un programme mixte logements/commerces à Paris 15e.",
-    "context": "Zone UG | Paris 15e | Programme mixte | Retrait souhaité 3m | Voie de 12m | Construction neuve",
-    "type_cas": "couverture",
-    "type_echec": "R",
-    "famille_attendue": [
-      "Règlement"
-    ],
-    "articles_attendus": [
-      "UG.3.1.1"
-    ],
-    "answerable": "oui",
+    "articles_attendus": "UG.3.1.1",
     "reponse_attendue": "Alignement de principe en zone UG (UG.3.1.1). Un retrait est admissible sous conditions : maintien/création d'espaces libres ou végétalisés, amélioration de l'insertion urbaine/paysagère, recherche architecturale (REG1 p.96). Le retrait de 3m n'est pas automatique.",
-    "ressource_a_pointer": "—",
-    "critere_reussite": "Trouver UG.3.1.1 (pas le Rapport) ; énoncer alignement de principe + retrait conditionnel. Ne pas inventer de seuil de largeur de voie (15m) non confirmé.",
-    "reproche_charline": null,
-    "fiabilite": "Run réel",
-    "validated": false,
-    "priorite": "⭐⭐⭐⭐⭐"
+    "critere_reussite": "Trouver UG.3.1.1 (pas le Rapport) ; énoncer alignement de principe + retrait conditionnel. CONFIRMÉ CORPUS (T5-A) : le seuil de largeur de voie dans UG.3.1.1 est 6m (p.62), PAS 15m (le 15m de la fiche web était faux — il existe ailleurs pour des règles de dépassement sans rapport). La condition de la question (voie de 12m) est donc au-dessus du seuil de 6m.",
+    "ontologie_domaine": [
+      "https://app.notion.com/p/39f3ae1f2a6d818ba850fdd282693471",
+      "https://app.notion.com/p/39f3ae1f2a6d81bb9020c00ed81141d4"
+    ]
   },
   {
     "id": "UC-03",
-    "persona": "Architecte",
     "question": "Comprendre la règle de prospect à respecter vis-à-vis de la limite séparative droite, sachant que la façade projetée comprend des baies de pièces principales à 8m de haut.",
-    "context": "Zone UG | Paris indifférencié | Façade avec baies pièces principales (PP) | Hauteur baie 8m | Limite séparative droite | Neuf",
-    "type_cas": "couverture",
-    "type_echec": "mixte",
-    "famille_attendue": [
-      "Règlement"
-    ],
-    "articles_attendus": [
-      "UG.3.1.2 (à confirmer)",
-      "figure FNE (à confirmer)"
-    ],
-    "answerable": "oui",
-    "reponse_attendue": "Pour des baies de pièces principales, prospect minimal de 6m au droit de la limite séparative, sur la largeur de façade concernée (~2m devant les autres vues). La hauteur (8m) n'abaisse pas la règle. NB : règle issue de sources web — à confirmer dans le corpus. Le JSON 'H/2 min 6m' est probablement une invention.",
-    "ressource_a_pointer": "Figure FNE (si confirmée) — illustration géométrique du prospect",
-    "critere_reussite": "Réponse chiffrée 6m pour baies PP ; distinguer vue principale/secondaire ; ne pas appliquer H/2.",
-    "reproche_charline": null,
-    "fiabilite": "Hypothèse à valider",
-    "validated": false,
-    "priorite": "⭐⭐⭐⭐⭐"
+    "articles_attendus": "UG.3.1.2 (confirmé corpus T5) + Figure 6 « Détermination du prospect sur voie » p.232",
+    "reponse_attendue": "CONFIRMÉ CORPUS (T5-A, verbatim) : règle dépendante des baies — prospect de 6m pour les baies de pièces principales, 3m pour les autres cas. AUCUNE formule H/2 dans le document (le « H/2 min 6m » du JSON legacy était une invention ; le « 2m autres vues » de la fiche web était faux — c'est 3m). La hauteur de la baie (8m) ne change pas la règle. Pour ce cas : 6m (baies PP).",
+    "critere_reussite": "Réponse chiffrée 6m pour baies PP / 3m autres cas ; ne pas appliquer H/2 ; citer UG.3.1.2.",
+    "ontologie_domaine": [
+      "https://app.notion.com/p/39f3ae1f2a6d818ba850fdd282693471",
+      "https://app.notion.com/p/39f3ae1f2a6d81bb9020c00ed81141d4",
+      "https://app.notion.com/p/39f3ae1f2a6d819fb3cdf2705b30901a",
+      "https://app.notion.com/p/39f3ae1f2a6d81e8bbf9db8dce94238b",
+      "https://app.notion.com/p/39f3ae1f2a6d81b1a68cdc602fa03870"
+    ]
   },
   {
     "id": "UC-04",
-    "persona": "Promoteur immobilier",
     "question": "Vérifier si la création d'un hôtel de 40 chambres est autorisée en zone UG Paris 8e, sur une parcelle actuellement à usage de bureaux, et quelles conditions s'appliquent.",
-    "context": "Zone UG | Paris 8e | Hôtel 40 chambres | Parcelle en bureaux | Changement de destination | 600m²",
-    "type_cas": "couverture",
-    "type_echec": "R",
-    "famille_attendue": [
-      "Règlement"
-    ],
-    "articles_attendus": [
-      "UG.1.3 (destinations)"
-    ],
-    "answerable": "oui",
+    "articles_attendus": "UG.1.3 (destinations)",
     "reponse_attendue": "À RECONSTRUIRE. Le changement de destination bureaux→hébergement hôtelier est encadré par UG.1.3 et conditionné par le plan d'équilibre entre destinations. Rejeter les inventions de la fiche : seuil 1000m², QCA saturé, avis préfecture, 70% refus — tous non sourcés.",
-    "ressource_a_pointer": "Plan d'équilibre entre destinations (surcouche à vérifier)",
     "critere_reussite": "Trouver UG.1.3 ; mentionner le plan d'équilibre. Ne pas fabriquer de seuil ni de statistique de refus.",
-    "reproche_charline": null,
-    "fiabilite": "Fabriqué - à refaire",
-    "validated": false,
-    "priorite": "⭐⭐⭐⭐"
+    "ontologie_domaine": [
+      "https://app.notion.com/p/39f3ae1f2a6d81e8bbf9db8dce94238b",
+      "https://app.notion.com/p/3a43ae1f2a6d81b2be00e7c9ec1d7278",
+      "https://app.notion.com/p/3a93ae1f2a6d8070a05ae29e99b7512f",
+      "https://app.notion.com/p/3a93ae1f2a6d80aa883acfe0dc5af48e",
+      "https://app.notion.com/p/3a93ae1f2a6d80279422c91828c1f9a2"
+    ]
   },
   {
     "id": "UC-05",
-    "persona": "Architecte",
     "question": "Savoir quelle proportion minimale de surface de plancher doit être affectée au logement dans un programme mixte bureaux + logements en zone UG, secteur nord-ouest de Paris.",
-    "context": "Zone UG | Secteur nord-ouest | Mixte logements+bureaux | Neuf | Surface totale 2000m²",
-    "type_cas": "couverture",
-    "type_echec": "S",
-    "famille_attendue": [
-      "Règlement"
-    ],
-    "articles_attendus": [
-      "UG.1.4.1 3°"
-    ],
-    "answerable": "oui",
-    "reponse_attendue": "Question piège (présuppose une obligation inexistante à 2000m²). La servitude de mixité fonctionnelle (UG.1.4.1 3°) ne se déclenche qu'au-delà de 4500m² SPE. À 2000m² : PAS d'obligation de mixité fonctionnelle. Au-delà du seuil : 10% habitation, min 500m². Ne pas confondre avec mixité sociale. Rejeter tout ratio type 40/60.",
-    "ressource_a_pointer": "—",
+    "articles_attendus": "UG.1.4.1 3°",
+    "reponse_attendue": "Question piège (présuppose une obligation inexistante à 2000m²). La servitude de mixité fonctionnelle (UG.1.4.1 3°) ne se déclenche qu'au-delà de 4500m² SPE — SEUIL CONFIRMÉ VERBATIM DANS LE CORPUS (T5-A, p.45). À 2000m² : PAS d'obligation de mixité fonctionnelle. Au-delà du seuil : 10% habitation, min 500m². Ne pas confondre avec mixité sociale. Rejeter tout ratio type 40/60. Reste à préciser avec Charline : le sens exact de l'acronyme SPE.",
     "critere_reussite": "Répondre 'sous le seuil, pas de servitude' ; ne PAS inventer un pourcentage pour satisfaire la question.",
-    "reproche_charline": null,
-    "fiabilite": "Validé Charline",
-    "validated": false,
-    "priorite": "⭐⭐⭐"
+    "ontologie_domaine": [
+      "https://app.notion.com/p/39f3ae1f2a6d81c2b1bec49c319d2d55",
+      "https://app.notion.com/p/3a93ae1f2a6d80ea874bc49ad6f6a29f",
+      "https://app.notion.com/p/3a93ae1f2a6d8078914ccac91eebae90",
+      "https://app.notion.com/p/3a93ae1f2a6d807baea9f11748ed1a99",
+      "https://app.notion.com/p/39f3ae1f2a6d8127ab78c617eb4b938e",
+      "https://app.notion.com/p/39f3ae1f2a6d81528850d36eef82e4ad"
+    ]
   },
   {
     "id": "UC-16",
-    "persona": "Architecte",
-    "question": "Puis-je surélever d'un niveau (R+1) mon immeuble R+4 existant à 17m en zone UG Paris 9e, où le plafond de hauteur DG5 est à 18m ? Sous quelles conditions ?",
-    "context": "Zone UG | Paris 9e | Immeuble R+4 existant (17m) | Secteur plafond DG5 18m | Surélévation R+1 | Faisabilité",
-    "type_cas": "couverture",
-    "type_echec": "S",
-    "famille_attendue": [
-      "Règlement"
-    ],
-    "articles_attendus": [
-      "UG.3.2",
-      "UG.3.3"
-    ],
-    "answerable": "oui",
+    "question": "Puis-je surélever d'un niveau mon immeuble R+4 existant à 17m en zone UG Paris 9e, où le plafond de hauteur DG5 est à 18m ? Sous quelles conditions ?",
+    "articles_attendus": "UG.3.2, UG.3.3",
     "reponse_attendue": "Marge de 1m sous le plafond (17→18m). Une surélévation est possible dans la limite du gabarit, mais R+1 complet (~2,5-3m) EXCÈDE la marge d'1m — sauf mécanisme de dépassement admis (UG.3.3) à vérifier. Conditions d'insertion (mitoyenneté, qualité architecturale). Rejeter le '+2m' fabriqué de la fiche.",
-    "ressource_a_pointer": "— (chiffres fournis dans l'énoncé, pas besoin du plan)",
     "critere_reussite": "Calculer la marge (1m) ; signaler que R+1 complet la dépasse sauf dépassement admis. Ne pas inventer +2m.",
-    "reproche_charline": null,
-    "fiabilite": "Hypothèse à valider",
-    "validated": false,
-    "priorite": "⭐⭐⭐⭐"
+    "ontologie_domaine": [
+      "https://app.notion.com/p/3a93ae1f2a6d804b8f8bf80d6171a4ad",
+      "https://app.notion.com/p/39f3ae1f2a6d81e8bbf9db8dce94238b",
+      "https://app.notion.com/p/39f3ae1f2a6d81b1a68cdc602fa03870",
+      "https://app.notion.com/p/39f3ae1f2a6d819fb3cdf2705b30901a",
+      "https://app.notion.com/p/39f3ae1f2a6d818ba850fdd282693471",
+      "https://app.notion.com/p/39f3ae1f2a6d819882e8dd440e78a771"
+    ]
   }
 ]

@@ -141,19 +141,57 @@ def _normalize_code(s: str) -> str:
     return re.sub(r'\s+', '', s).lower().rstrip('.')
 
 
+_ARTICLE_RE = re.compile(r'^[A-Z]{1,8}(?:\.\d+)+(?:\s+\d+°)?$')
+_PAREN_RE = re.compile(r'\([^)]*\)')
+_GUILLEMET_RE = re.compile(r'«[^»]*»')
+_PAGE_REF_RE = re.compile(r'\bp\.\s*\d+\b')
+_RESOURCE_SPLIT_RE = re.compile(r'[,+]')
+
+
+def parse_expected_resources(raw: str) -> list[dict[str, str]]:
+    """Parse the "Articles / ressources attendus" free-text field into
+    canonical [{"type", "value"}, ...] items, by rule rather than by
+    matching known strings.
+
+    Each comma- or "+"-separated part is stripped of annotation —
+    parentheticals "(...)", guillemet quotes «...», and page refs "p.232"
+    — then classified: if what remains matches an article-code shape
+    (zone-prefix letters, dot-separated numbers, optional trailing "N°"
+    clause, e.g. "UG.3.1.2", "UG.1.4.1 3°"), it's type "article"; otherwise
+    it's a free-form resource label ("Annexe X", "Figure 6", "Plan des
+    hauteurs"), type "resource".
+    """
+    if not raw:
+        return []
+    items = []
+    for part in _RESOURCE_SPLIT_RE.split(raw):
+        cleaned = _GUILLEMET_RE.sub(' ', part)
+        cleaned = _PAREN_RE.sub(' ', cleaned)
+        cleaned = _PAGE_REF_RE.sub(' ', cleaned)
+        cleaned = re.sub(r'\s+', ' ', cleaned).strip()
+        if not cleaned:
+            continue
+        item_type = "article" if _ARTICLE_RE.match(cleaned) else "resource"
+        items.append({"type": item_type, "value": cleaned})
+    return items
+
+
 def _normalize_expectations(uc: dict[str, Any]) -> list[dict[str, str]]:
     """Return uc's expected-retrieval items in canonical [{"type", "value"}, ...]
     form. Supports the legacy `expected_articles: [str, ...]` field, the legacy
     `expected: [{"type", "value"}, ...]` field, and the Notion-v2 export's
-    `articles_attendus: [str, ...]` field (scripts/export_golden_cases.py) —
-    every plain-string item is treated as type "article" for scoring, same as
-    `expected_articles` always was. A case is expected to use exactly one of
-    these three.
+    `articles_attendus` field — a free-text string (scripts/export_golden_cases.py's
+    current output; parsed by parse_expected_resources) or, for older exports,
+    a list of plain strings each treated as type "article". A case is expected
+    to use exactly one of these three.
     """
     if "expected" in uc:
         return uc["expected"]
     if "articles_attendus" in uc:
-        return [{"type": "article", "value": v} for v in uc["articles_attendus"]]
+        raw = uc["articles_attendus"]
+        if isinstance(raw, str):
+            return parse_expected_resources(raw)
+        return [{"type": "article", "value": v} for v in raw]
     return [{"type": "article", "value": v} for v in uc.get("expected_articles", [])]
 
 
@@ -174,9 +212,18 @@ def _hit_satisfies(hit: dict[str, str | None], item_type: str, value: str) -> bo
       général des hauteurs") and annexe/document titles rather than bare
       article codes, but the match mechanics are identical to "article".
       section=None hits never satisfy either.
+    - "resource": free-form labels from parse_expected_resources (e.g.
+      "Annexe X", "Figure 6") — these can equally be the hit's section
+      (if the corpus tags a chunk with that label) or a substring of its
+      filename (if the label names the whole document/annexe rather than
+      a section within it), so both are checked.
     """
     if item_type == "document":
         return _normalize_code(value) == _normalize_code(hit["filename"])
+    if item_type == "resource":
+        if hit["filename"] and _normalize_code(value) in _normalize_code(hit["filename"]):
+            return True
+        return hit["section"] is not None and _normalize_code(value) in _normalize_code(hit["section"])
     if hit["section"] is None:
         return False
     return _normalize_code(value) in _normalize_code(hit["section"])
