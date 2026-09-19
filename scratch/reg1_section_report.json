@@ -1,0 +1,2876 @@
+{
+  "null": {
+    "n_chunks": 53,
+    "lengths": [
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      808
+    ]
+  },
+  "__non_article_headers_folded__": {
+    "n_chunks": 0,
+    "lengths": [],
+    "headers": [
+      "RÈGLEMENT TOME 1",
+      "SOMMAIRE",
+      "PARTIE 1 : MODALITÉS D'APPLICATION DU RÈGLEMENT",
+      "A. CHAMP D'APPLICATION TERRITORIAL",
+      "B. FONDEMENT JURIDIQUE DU RÈGLEMENT",
+      "C. EFFETS DU RÈGLEMENT",
+      "C.1 Portée du règlement du PLU",
+      "C.2 Dérogations et adaptations mineures",
+      "C.3 Figures",
+      "D. PRINCIPAUX TEXTES LÉGISLATIFS ET RÉGLEMENTAIRES APPLICABLES",
+      "D.1 Au titre du code de l'urbanisme",
+      "D.2 Au titre du code de la santé publique",
+      "D.3. Au titre du code général des collectivités territoriales",
+      "D.4. Au titre du code de la construction et de l'habitation",
+      "D.5 Au titre du code de l'environnement",
+      "D.6 Au titre du code du patrimoine",
+      "D.7 Au titre d'autres codes",
+      "D.8 Au titre d'autres textes",
+      "E. LIENS DU RÈGLEMENT AVEC LES AUTRES DOCUMENTS CONSTITUANT LE PLU",
+      "E.1 Liens avec le rapport de présentation et avec le projet d'aménagement et de développement durables (PADD)",
+      "E.2 Liens avec les orientations d'aménagement et de programmation (OAP)",
+      "E.3 Liens avec les annexes du PLU",
+      "F. CONTENU DU RÈGLEMENT DU PLU",
+      "F.1 Le règlement écrit",
+      "Le tome 2 contient les annexes du règlement écrit :",
+      "F.2 Le règlement graphique",
+      "L'atlas n°1 contient les plans généraux suivants :",
+      "L'atlas n°2 contient :",
+      "L'atlas n°3 contient :",
+      "G. DIVISION DU TERRITOIRE EN ZONES URBAINES ET NATURELLE",
+      "PARTIE 2 : DISPOSITIONS GÉNÉRALES APPLICABLES À L'ENSEMBLE DU TERRITOIRE COUVERT PAR LE PLU",
+      "I. STATUT RÉGLEMENTAIRE DES VOIES*",
+      "II. APPLICATION DU RÈGLEMENT AUX CONSTRUCTIONS EXISTANTES",
+      "II.1 Catégories d'interventions sur les constructions existantes",
+      "II.2 Travaux sur les constructions existantes",
+      "II.3 Reconstruction à l'identique",
+      "III. APPLICATION DU RÈGLEMENT AUX DIVISIONS FONCIÈRES",
+      "IV. DÉFINITIONS",
+      "Activités, types d'activités",
+      "Bail réel solidaire",
+      "(voir figure 3)",
+      "Destinations (et sous-destinations) des constructions (UG.1, UGSU.1, UV.1, N.1)",
+      "(1) Précisions relatives à certaines sous-destinations* :",
+      "Emprise géométrique des constructions (UG.3.1.4, UG.4.1.1, N.3.1.1, N.3.1.2)",
+      "Gabarit-enveloppe (UG.3.1.2, UG.3.2, UG.3.3, UGSU.3.1.2, UGSU.3.2, UGSU.3.3)",
+      "Logement locatif intermédiaire (UG.1.5.1, UG.1.5.2)",
+      "Logement en bail réel solidaire (BRS) (UG.1.5.1, UG.1.5.2, UG.8.3)",
+      "Nu extérieur de la façade",
+      "Pleine terre",
+      "Reconstruction",
+      "Sous-destination",
+      "Surface de nivellement d'îlot",
+      "Surface de plancher",
+      "Terrain",
+      "Voie",
+      "PARTIE 3 : RÈGLEMENTS DES ZONES",
+      "ZONE URBAINE GÉNÉRALE (UG)",
+      "CARACTÈRE DE LA ZONE URBAINE GÉNÉRALE",
+      "a) Secteurs de Maisons et villas",
+      "b) Secteur de Montmartre",
+      "1° Dispositions générales",
+      "2° Protection de l'habitation",
+      "3° Dispositions particulières applicables dans le secteur de développement de l'habitation",
+      "1° Protection des linéaires commerciaux et artisanaux",
+      "a) Voies* concernées par une protection du commerce et de l'artisanat",
+      "b) Voies*  concernées  par  une  protection  particulière  du  commerce  artisanal  de proximité*",
+      "c) Voies* concernées par une protection particulière du commerce culturel*",
+      "2° Sites de protection des grands magasins",
+      "Ces dispositions ne s'appliquent pas :",
+      "1° Dispositions générales",
+      "2° Dispositions particulières applicables à certaines voies* et dans certains secteurs",
+      "a) Abords du Parc Monceau",
+      "b) Abords du Bois de Boulogne",
+      "c) Jardins du Champ de Mars et ses abords",
+      "d) Rond-point des Champs-Élysées et ses abords",
+      "e) Place Charles de Gaulle et avenue Foch",
+      "a) Secteur Porte de Versailles (15 e  arrondissement)",
+      "1° Bâtiments protégés",
+      "2° Éléments particuliers protégés",
+      "1° Dispositions générales",
+      "2° Terrains* concernés par une emprise constructible maximale (ECM)",
+      "3° Terrains* concernés par une emprise de constructions basses en bordure de voie* (ECB)",
+      "4° Dispositions particulières applicables dans le secteur des Bâtiments et ensembles modernes",
+      "5° Dispositions particulières applicables dans certains secteurs",
+      "a) Secteur Paris Rive Gauche (13 e  arrondissement)",
+      "b) Secteur Porte de Versailles (15 e  arrondissement)",
+      "c) Secteur Ternes-Maillot (17 e  arrondissement)",
+      "d) Secteur Gare des Mines-Fillettes (18 e  arrondissement)",
+      "1° Dispositions générales",
+      "2° Façades* comportant des baies* constituant l'éclairement premier de pièces principales*",
+      "3° Façades* comportant des baies* dont aucune ne constitue l'éclairement premier d'une pièce principale*",
+      "4° Façades* ne comportant pas de baie",
+      "5° Cours communes et servitudes contractuelles d'implantation",
+      "6° Terrains* concernés par une emprise constructible maximale (ECM)",
+      "7° Terrains* situés en limite d'équipement sportif de plein air, parc, jardin ou cimetière",
+      "(Voir figure 20)",
+      "8° Dispositions particulières applicables dans le secteur des Bâtiments et ensembles modernes",
+      "9° Dispositions particulières applicables dans certains secteurs",
+      "a) Secteur Olympiades-Villa d'Este-Place de Vénétie (13 e  arrondissement)",
+      "b) Secteur Clichy-Batignolles (17 e  arrondissement)",
+      "c) Secteur Gare des Mines-Fillettes (18 e  arrondissement)",
+      "d) Secteur Ordener-Poissonniers (18 e  arrondissement)",
+      "1° Façades* comportant des baies* constituant l'éclairement premier d'une pièce principale*",
+      "2° Façades* comportant des baies* dont aucune ne constitue l'éclairement premier d'une pièce principale*",
+      "3° Façades* ne comportant pas de baie",
+      "4° Terrains* concernés par une emprise constructible maximale (ECM)",
+      "5° Dispositions particulières applicables dans certains secteurs",
+      "a) Secteur  de  Maisons  et  villas  SMV  10-01,  rues  Sainte-Marthe-Jean  Moinon  (10 e arrondissement)",
+      "b) Secteur Fort Neuf de Vincennes (12 e  arrondissement)",
+      "c) Secteur Balard (15 e  arrondissement)",
+      "1° Terrains* concernés par une emprise constructible maximale (ECM)",
+      "2° Dispositions particulières applicables dans certains secteurs",
+      "a) Secteur de Maisons et villas SMV 16-31, Villa de Montmorency (16 e  arrondissement)",
+      "b) Secteur de Maisons et villas SMV 17-04, Villa des Ternes (17 e  arrondissement)",
+      "c) Secteur des abords du boulevard périphérique",
+      "1° Plan général des hauteurs",
+      "2° Limitation des hauteurs au-delà de la bande de constructibilité principale*",
+      "3° Dispositions particulières applicables dans certains secteurs",
+      "a) Secteur Bercy-Charenton (12 e  arrondissement)",
+      "b) Secteur Gare de Lyon-Daumesnil-Les messageries (12 e  arrondissement)",
+      "c) Secteur des abords de l'établissement pénitentiaire de la Santé (14 e  arrondissement)",
+      "d) Secteur Didot-Mariniers (14 e  arrondissement)",
+      "e) Secteur Chapelle Charbon (18e arrondissement)",
+      "f) Secteur Gare des Mines-Fillettes (18 e  arrondissement)",
+      "g) Secteur Hébert (18 e  arrondissement)",
+      "h) Secteur Belgrand Saint-Fargeau (20e arrondissement)",
+      "1° Dispositions générales",
+      "2° Dispositions particulières applicables dans certains secteurs",
+      "a) Secteur Opéra Bastille (12 e  arrondissement)",
+      "b) Secteur Paris Rive Gauche (13 e  arrondissement)",
+      "c) Secteur Porte de Versailles (15 e  arrondissement)",
+      "d) Secteur Gare des Mines-Fillettes (18 e  arrondissement)",
+      "e) Secteur Ordener-Poissonniers (18 e  arrondissement)",
+      "1° Dispositions générales",
+      "2° Gabarit-enveloppe* en bordure des voies non bordées de filets de couleur* aux documents graphiques du règlement",
+      "3° Gabarit-enveloppe* en bordure des voies* ou espaces bordés de filets de couleur* aux documents graphiques du règlement",
+      "4° Dispositions particulières applicables aux terrains* situés à l'angle de deux voies* et aux terrains* traversants",
+      "5° Dispositions particulières applicables dans le secteur des Bâtiments et ensembles modernes",
+      "6° Dispositions particulières applicables dans certains secteurs",
+      "a) Secteur Bercy-Charenton (12 e  arrondissement)",
+      "b) Secteur Gare de Lyon-Daumesnil-Les messageries (12 e  arrondissement)",
+      "c) Secteur Paris Rive Gauche (13 e  arrondissement)",
+      "d) Secteur Saint-Vincent-de-Paul (14 e  arrondissement)",
+      "e) Secteur Bartholomé Brancion (15 e  arrondissement)",
+      "f) Secteur Chapelle Charbon (18 e  arrondissement)",
+      "g) Secteur Gare des Mines-Fillettes (18 e  arrondissement)",
+      "h) Secteur Hébert (18 e  arrondissement)",
+      "i) Secteur de Montmartre (18 e  arrondissement) :",
+      "j) Secteur Belgrand Saint-Fargeau (20 e  arrondissement)",
+      "k) Secteur Python-Duvernois (20 e  arrondissement)",
+      "1° Dispositions générales",
+      "(voir figure 11a)",
+      "2° Terrains* dont la superficie est supérieure à 4 000 mètres carrés",
+      "(voir figure 11b)",
+      "3° Dispositions particulières applicables dans le secteur des Bâtiments et ensembles modernes",
+      "4° Dispositions particulières applicables dans certains secteurs",
+      "a) Secteur Bercy-Charenton (12 e  arrondissement)",
+      "b) Secteur Gare de Lyon-Daumesnil-les Messageries (12 e  arrondissement)",
+      "c) Secteur Olympiades-Villa d'Este-Place de Vénétie (13 e  arrondissement)",
+      "d) Secteur Didot-Marinier (14 e  arrondissement)",
+      "e) Secteur Saint-Vincent-de-Paul (14 e  arrondissement)",
+      "f) Secteur Chapelle Charbon (18 e  arrondissement)",
+      "g) Secteur Gare des Mines-Fillettes (18 e  arrondissement)",
+      "h) Secteur Hébert (18 e  arrondissement)",
+      "i) Secteur de Montmartre (18 e  arrondissement)",
+      "j) Secteur Belgrand Saint-Fargeau (20 e  arrondissement)",
+      "1° Dispositions générales",
+      "(voir figure 12)",
+      "(voir figure 13)",
+      "(voir figure 14)",
+      "2° Dispositions particulières applicables dans certains secteurs",
+      "a) Secteur Fort Neuf de Vincennes (12 e  arrondissement)",
+      "b) Secteur Balard (15 e  arrondissement)",
+      "c) Secteur Chapelle International (18 e  arrondissement)",
+      "d) Secteur Gare des Mines-Fillettes (18 e  arrondissement)",
+      "1° Dispositions générales",
+      "2° Dispositions particulières applicables à certains secteurs",
+      "a) Secteurs de Maisons et villas, SMV 16-31 (Villa de Montmorency) et SMV.17-04 (Villa des Ternes)",
+      "a) Secteur Fort Neuf de Vincennes (12 e  arrondissement)",
+      "b) Secteur Balard (15 e  arrondissement)",
+      "1° Dispositions générales",
+      "(voir figure 15)",
+      "(voir figure 16)",
+      "2° Dispositions particulières applicables dans le secteur des Bâtiments et ensembles modernes",
+      "(voir figures 17 et 18)",
+      "3° Dispositions particulières applicables dans les secteurs de Maisons et villas et dans le secteur de Montmartre",
+      "1° Dispositions générales",
+      "2° Dispositions particulières applicables dans le secteur des Bâtiments et ensembles modernes",
+      "1° Dispositions générales",
+      "2° Dispositions particulières applicables dans certains secteurs",
+      "a) Secteur des Bâtiments et ensembles modernes",
+      "b) Secteur de Montmartre",
+      "1° Saillies* par rapport à la verticale du gabarit-enveloppe* en bordure de voie*",
+      "a) Saillies* des éléments de construction",
+      "b) Saillies* des devantures de boutiques",
+      "2° Saillies* par rapport au couronnement du gabarit-enveloppe* en bordure de voie*",
+      "3° Saillies* par rapport à l'horizontale du gabarit-enveloppe* en bordure de voie*",
+      "4° Dispositions particulières applicables dans certains secteurs",
+      "a) Secteur Paris Rive Gauche (13 e  arrondissement)",
+      "b) Secteur Gare des Mines-Fillettes (18 e  arrondissement)",
+      "1° Saillies par rapport aux plans des façades*",
+      "2° Saillies par rapport à la partie supérieure des gabarits-enveloppes* en limite séparative* et en vis-à-vis sur un même terrain*",
+      "1° Dispositions générales",
+      "2° Modalités de calcul",
+      "3° Terrains* concernés par une emprise de construction maximale (ECM)",
+      "4° Dispositions particulières applicables dans le secteur des Bâtiments et ensembles modernes",
+      "5° Dispositions particulières applicables dans certains secteurs",
+      "a) Secteur Fort Neuf de Vincennes (12 e  arrondissement)",
+      "b) Secteur Olympiades-Villa d'Este-Place de Vénétie (13 e  arrondissement)",
+      "c) Secteur Porte de Versailles (15 e  arrondissement)",
+      "d) Secteurs de Maisons et villas SMV 16-31 (Villa de Montmorency) et SMV 17-04 (Villa des Ternes)",
+      "e) Secteur Hôtel-Dieu (4 e  arrondissement)",
+      "1° Dispositions générales",
+      "2°Dispositions particulières applicables dans certains secteurs",
+      "a) Secteurs de Maisons et villas SMV 16-31 (Villa de Montmorency) et SMV 17-04 (Villa des Ternes)",
+      "b) Secteur Saint-Vincent-de-Paul (14 e  arrondissement)",
+      "c) Orientations d'aménagement et de programmation (OAP) sectorielles exprimant un objectif global d'espaces libres défini à l'échelle du périmètre de l'OAP ou d'un secteur de projet délimité au sein du périmètre de l'OAP",
+      "1° Dispositions générales",
+      "2° Densité de plantation",
+      "Nombre minimum d'unités de plantation = 30 x (S / 100)",
+      "3° Arbres existants",
+      "4° Dispositions particulières applicables dans certains secteurs",
+      "a) Secteur Belgrand Saint-Fargeau (20 e  arrondissement)",
+      "b) Orientations d'aménagement et de programmation (OAP) sectorielles exprimant un objectif global d'espaces libres défini à l'échelle du périmètre de l'OAP ou d'un secteur de projet délimité au sein du périmètre de l'OAP",
+      "1° Modalités de calcul",
+      "2° Valeurs applicables",
+      "3° Dispositions particulières applicables dans certains secteurs",
+      "a) Secteur Porte de Versailles (15 e  arrondissement)",
+      "1° Végétalisation des toitures, terrasses, espaces sur dalle et jardinières intégrées",
+      "2° Végétalisation des façades*",
+      "a) Secteur Fort Neuf de Vincennes (12 e  arrondissement)",
+      "1° Gestion des eaux usées domestiques",
+      "2° Gestion des eaux usées non domestiques",
+      "3° Gestion des eaux pluviales",
+      "a) Pluies courantes",
+      "b) Pluies exceptionnelles",
+      "1° Restructurations lourdes*",
+      "2° Réhabilitations*, extensions*, surélévations*",
+      "1° Implantation des accès",
+      "2° Accessibilité aux personnes à mobilité réduite",
+      "3° Accès des véhicules",
+      "1° Dispositions générales",
+      "2° Normes de stationnement des véhicules motorisés applicables aux constructions neuves",
+      "b) Autres destinations* et sous-destinations*",
+      "3° Normes de stationnement des véhicules motorisés applicables aux constructions existantes",
+      "b) Autres catégories d'intervention sur les constructions existantes",
+      "4° Dispositions particulières applicables dans certains secteurs",
+      "a) Secteur Gare des Mines-Fillettes (18 e  arrondissement)",
+      "b) Secteur Python-Duvernois (20 e  arrondissement)",
+      "1° Dispositions générales",
+      "2° Normes relatives aux aires de livraisons et de dépose applicables aux constructions neuves",
+      "3° Normes relatives aux aires de livraisons et de dépose applicables aux constructions existantes",
+      "a) Extensions*  dont  la  surface  de  plancher*  est  supérieure  à  250 mètres  carrés, restructurations lourdes*, changements de destination* ou de sous-destinations*",
+      "b) Autres catégories interventions sur les constructions existantes",
+      "1° Dispositions générales",
+      "2° Normes de stationnement des vélos applicables aux constructions neuves",
+      "a) Logement",
+      "b) Hébergement",
+      "c) Bureaux, Locaux et bureaux accueillant du public des administrations publiques et assimilés",
+      "d) Hôtels",
+      "e) Artisanat  et  commerce  de  détail,  Restauration,  Activités  de  service  avec  accueil d'une clientèle",
+      "f) Équipements d'intérêt collectif et services publics",
+      "g) Autres destinations* et sous-destinations*",
+      "3° Normes de stationnement des vélos applicables aux constructions existantes",
+      "a) Extensions* dont la surface de plancher* est supérieure à 150 mètres carrés",
+      "b) Restructurations lourdes*",
+      "c) Extensions* dont la surface de plancher* est inférieure ou égale à 150 mètres carrés, réhabilitations*, surélévations*, changements de destination* ou de sousdestination*,",
+      "4° Dispositions particulières applicables dans certains secteurs",
+      "a) Secteur Fort Neuf de Vincennes (12 e  arrondissement)",
+      "Critère 1 : espaces libres de construction*",
+      "Critère 2 : végétalisation du bâti",
+      "Critère 3 : réutilisation des eaux de pluie",
+      "Critère 4 : mixité sociale",
+      "Critère 5 : diversité des fonctions urbaines",
+      "S1 ≥ SDP totale x 0,2",
+      "Critère 6 : animation des rez-de-chaussée",
+      "Critère 7 : performances énergétiques du bâti",
+      "Critère 8 : confort d'été",
+      "Critère 9 : réduction de l'impact carbone",
+      "a) Secteur Fort Neuf de Vincennes (12 e  arrondissement)",
+      "ZONE URBAINE DE GRANDS SERVICES URBAINS (UGSU)",
+      "CARACTÈRE DE LA ZONE URBAINE DE GRANDS SERVICES URBAINS",
+      "1° Bâtiments protégés",
+      "2° Éléments particuliers protégés",
+      "1° Dispositions générales",
+      "2° Façades* comportant des baies* constituant l'éclairement premier de pièces principales*",
+      "3° Façades* comportant des baies* dont aucune ne constitue l'éclairement premier d'une pièce principale*",
+      "4° Façades* ne comportant pas de baie",
+      "5° Cours communes et servitudes contractuelles d'implantation",
+      "1° Façades* comportant des baies* constituant l'éclairement premier d'une pièce principale*",
+      "2° Façades* comportant des baies* dont aucune ne constitue l'éclairement premier d'une pièce principale*",
+      "3° Façades* ne comportant pas de baie",
+      "1° Dispositions générales",
+      "2° Dispositions particulières applicables sur le domaine public fluvial",
+      "1° Dispositions générales",
+      "2° Gabarit-enveloppe* en bordure des voies* non bordées de filets de couleur* aux documents graphiques du règlement",
+      "(voir figure 7)",
+      "3° Gabarit-enveloppe* en bordure des voies* bordées de filets de couleur* aux documents graphiques du règlement",
+      "4° Dispositions particulières applicables aux terrains* situées à l'angle de deux voies* et aux terrains* traversants",
+      "1° Saillies* par rapport à la verticale du gabarit-enveloppe* en bordure de voie*",
+      "a) Saillies* des éléments de construction",
+      "b) Saillies* des devantures de boutiques",
+      "2° Saillies* par rapport au couronnement du gabarit-enveloppe* en bordure de voie*",
+      "3° Saillies* par rapport à l'horizontale du gabarit-enveloppe* en bordure de voie*",
+      "1° Saillies* par rapport aux plans des façades*",
+      "2° Saillies* par rapport à la partie supérieure des gabarits-enveloppes* en limite séparative* et en vis-à-vis sur un même terrain*",
+      "1° Dispositions générales",
+      "1° Dispositions générales",
+      "2° Densité de plantation",
+      "3° Arbres existants",
+      "1° Modalités de calcul",
+      "2° Valeurs applicables",
+      "1° Végétalisation des toitures, terrasses, espaces sur dalle et jardinières intégrées",
+      "2° Végétalisation des façades*",
+      "1° Gestion des eaux usées domestiques",
+      "2° Gestion des eaux usées non domestiques",
+      "3° Gestion des eaux pluviales",
+      "a) Pluies courantes",
+      "b) Pluies exceptionnelles",
+      "1° Restructurations lourdes*",
+      "2° Réhabilitations*, extensions*, surélévations*",
+      "1° Implantation des accès",
+      "2° Accessibilité aux personnes à mobilité réduite",
+      "3° Accès des véhicules",
+      "1° Dispositions générales",
+      "2° Normes de stationnement des véhicules motorisés applicables aux constructions neuves",
+      "b) Autres destinations* et sous-destinations*",
+      "3° Normes de stationnement des véhicules motorisés applicables aux constructions existantes",
+      "a) Extensions*  dont  la  surface  de  plancher*  est  supérieure  à  250  mètres  carrés, restructurations lourdes*, réhabilitations*, changements de destination* ou de sousdestination*",
+      "b) Autres catégories d'intervention sur les constructions existantes",
+      "1° Dispositions générales",
+      "2° Normes de stationnement des vélos applicables aux constructions neuves",
+      "a) Logement",
+      "b) Hébergement",
+      "c) Bureau, Locaux et bureaux accueillant du public des administrations publiques et assimilés",
+      "d) Artisanat et commerce de détail, Restauration et Activités de service avec accueil d'une clientèle",
+      "e) Autres destinations* et sous-destinations*",
+      "3° Normes de stationnement des vélos applicables aux constructions existantes",
+      "a) Extensions* dont la surface de plancher* est supérieure à 150 mètres carrés",
+      "b) Restructurations lourdes*",
+      "c) Extensions*  dont  la  surface  de  plancher*  est  inférieure  ou  égale  à  150  mètres carrés, réhabilitations*,  surélévations*,  changements  de  destination*  ou  de  sousdestination*",
+      "ZONE URBAINE VERTE (UV)",
+      "CARACTÈRE DE LA ZONE URBAINE VERTE",
+      "1° Bâtiments protégés",
+      "2° Éléments particuliers protégés",
+      "1° Dispositions générales",
+      "2° Dispositions particulières applicables aux constructions situées sur le domaine public fluvial",
+      "1° Dispositions générales",
+      "2° Dispositions particulières applicables aux constructions situées sur le domaine public fluvial",
+      "1° Modalités de calcul",
+      "2° Valeurs applicables",
+      "1° Végétalisation des toitures, terrasses, espaces sur dalle et jardinières intégrées",
+      "2° Végétalisation des façades*",
+      "1° Gestion des eaux usées domestiques",
+      "2° Gestion des eaux usées non domestiques",
+      "3° Gestion des eaux pluviales",
+      "a) Pluies courantes",
+      "b) Pluies exceptionnelles",
+      "1° Principes d'implantation des accès",
+      "2° Accessibilité aux piétons et aux personnes à mobilité réduite",
+      "3° Accès des véhicules",
+      "4° Principe de liaison piétonnière à conserver, créer ou modifier",
+      "ZONE NATURELLE ET FORESTIÈRE (N)",
+      "CARACTÈRE DE LA ZONE NATURELLE ET FORESTIÈRE",
+      "1° Bâtiments protégés",
+      "2° Éléments particuliers protégés",
+      "1° Dispositions générales",
+      "2° Dispositions applicables hors des Secteurs de taille et de capacité d'accueil limitées (STECAL)",
+      "3° Dispositions applicables dans les Secteurs de taille et de capacité d'accueil limitées (STECAL)",
+      "1° Dispositions générales",
+      "2° Dispositions applicables hors des Secteurs de taille et de capacité d'accueil limitées (STECAL)",
+      "3° Dispositions applicables dans des Secteurs de taille et de capacité d'accueil limitées (STECAL)",
+      "1° Modalités de calcul",
+      "2° Valeurs applicables",
+      "1° Végétalisation des toitures, terrasses, espaces sur dalle, jardinières intégrées",
+      "2° Végétalisation des façades*",
+      "1° Eau Potable",
+      "2° Assainissement",
+      "a) Gestion des eaux usées domestiques",
+      "b) Gestion des eaux usées non domestiques",
+      "c) Gestion des eaux pluviales",
+      "Pluies courantes :",
+      "Pluies exceptionnelles :",
+      "PARTIE 4 : FIGURES",
+      "Figure 1 (Partie 2, définitions)",
+      "Figure 3 (Partie 2, définitions)",
+      "Détermination de la bande de constructibilité principale* en bordure de voie*",
+      "Figure 4 (Partie 2, définitions)",
+      "Détermination du nu extérieur de la façade*",
+      "Figure 5a (Partie 2, définitions)",
+      "Détermination des plateaux de nivellement* d'îlot : cas général",
+      "Figure 5b (Partie 2, définitions)",
+      "Détermination des plateaux de nivellement* d'îlot - Cas particuliers",
+      "Figure 6 (Partie 2, définitions)",
+      "Détermination du prospect* sur voie*",
+      "Figure 7 (Partie 3, UG.3.2.4, 2° et UGSU.3.2.4, 2°)",
+      "Figure 8 (Partie 3, UG.3.2.4, 3°)",
+      "Figure 9 (Partie 3, UG.3.2.4, 4° et UGSU.3.2.4, 4°)",
+      "Figure 10 (Partie 3, UG.3.2.4, 5°)",
+      "Figure 11a (Partie 3, UG.3.2.5, 1°)",
+      "Gabarit-enveloppe* en limite séparative* : cas général",
+      "Figure 11b (Partie 3, UG.3.2.5, 2°)",
+      "Figure 12 (Partie 3, UG.3.2.6, 1°)",
+      "Gabarit-enveloppe* des constructions en vis-à-vis sur un même terrain*",
+      "Figure 13 (Partie 3, UG.3.2.6, 1°)",
+      "Figure 14 (Partie 3, UG.3.2.6, 1° et UGSU.3.2.6)",
+      "Figure 15 (Partie 3, UG.3.3.3, 1°)",
+      "Figure 16 (Partie 3, UG.3.3.3, 1°)",
+      "a) En cas de toiture en pente",
+      "b) En cas de toiture-terrasse",
+      "Figure 17 (Partie 3, UG.3.3.3, 2°)",
+      "Figure 18 (Partie 3, UG.3.3.3, 2°)",
+      "a) Cas général",
+      "b) Cas  où  seulement  certaines  parties  de  la  construction  existantes  sont  non conformes au gabarit-enveloppe*",
+      "Figure 19 (Partie 3, UG.3.3.4)",
+      "Adossements en limite séparative*",
+      "Figure 20 (Partie 3, UG.3.1.2, UG.3.3.5)",
+      "Figure 21 (Partie 3, UG.3.2.2, 2°)"
+    ]
+  },
+  "UG.1": {
+    "n_chunks": 1,
+    "lengths": [
+      74
+    ]
+  },
+  "UG.1.1": {
+    "n_chunks": 1,
+    "lengths": [
+      54
+    ]
+  },
+  "UG.1.1.1": {
+    "n_chunks": 1,
+    "lengths": [
+      347
+    ]
+  },
+  "UG.1.1.2": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      640
+    ]
+  },
+  "UG.1.2": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      726
+    ]
+  },
+  "UG.1.3": {
+    "n_chunks": 1,
+    "lengths": [
+      190
+    ]
+  },
+  "UG.1.3.1": {
+    "n_chunks": 1,
+    "lengths": [
+      928
+    ]
+  },
+  "UG.1.3.2": {
+    "n_chunks": 1,
+    "lengths": [
+      621
+    ]
+  },
+  "UG.1.3.3": {
+    "n_chunks": 1,
+    "lengths": [
+      653
+    ]
+  },
+  "UG.1.3.4": {
+    "n_chunks": 1,
+    "lengths": [
+      285
+    ]
+  },
+  "UG.1.3.5": {
+    "n_chunks": 1,
+    "lengths": [
+      510
+    ]
+  },
+  "UG.1.4": {
+    "n_chunks": 1,
+    "lengths": [
+      27
+    ]
+  },
+  "UG.1.4.1": {
+    "n_chunks": 7,
+    "lengths": [
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      260
+    ]
+  },
+  "UG.1.4.2": {
+    "n_chunks": 4,
+    "lengths": [
+      1200,
+      1200,
+      1200,
+      661
+    ]
+  },
+  "UG.1.4.3": {
+    "n_chunks": 1,
+    "lengths": [
+      519
+    ]
+  },
+  "UG.1.4.4": {
+    "n_chunks": 1,
+    "lengths": [
+      647
+    ]
+  },
+  "UG.1.4.5": {
+    "n_chunks": 1,
+    "lengths": [
+      614
+    ]
+  },
+  "UG.1.4.6": {
+    "n_chunks": 1,
+    "lengths": [
+      535
+    ]
+  },
+  "UG.1.5": {
+    "n_chunks": 1,
+    "lengths": [
+      21
+    ]
+  },
+  "UG.1.5.1": {
+    "n_chunks": 3,
+    "lengths": [
+      1200,
+      1200,
+      866
+    ]
+  },
+  "UG.1.5.2": {
+    "n_chunks": 4,
+    "lengths": [
+      1200,
+      1200,
+      1200,
+      1096
+    ]
+  },
+  "UG.1.6": {
+    "n_chunks": 1,
+    "lengths": [
+      89
+    ]
+  },
+  "UG.1.6.1": {
+    "n_chunks": 1,
+    "lengths": [
+      776
+    ]
+  },
+  "UG.1.6.2": {
+    "n_chunks": 1,
+    "lengths": [
+      718
+    ]
+  },
+  "UG.1.7": {
+    "n_chunks": 1,
+    "lengths": [
+      728
+    ]
+  },
+  "UG.2": {
+    "n_chunks": 1,
+    "lengths": [
+      85
+    ]
+  },
+  "UG.2.1": {
+    "n_chunks": 1,
+    "lengths": [
+      29
+    ]
+  },
+  "UG.2.1.1": {
+    "n_chunks": 4,
+    "lengths": [
+      1200,
+      1200,
+      1200,
+      124
+    ]
+  },
+  "UG.2.1.2": {
+    "n_chunks": 1,
+    "lengths": [
+      709
+    ]
+  },
+  "UG.2.1.3": {
+    "n_chunks": 1,
+    "lengths": [
+      952
+    ]
+  },
+  "UG.2.1.4": {
+    "n_chunks": 3,
+    "lengths": [
+      1200,
+      1200,
+      390
+    ]
+  },
+  "UG.2.1.5": {
+    "n_chunks": 3,
+    "lengths": [
+      1200,
+      1200,
+      596
+    ]
+  },
+  "UG.2.1.6": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      208
+    ]
+  },
+  "UG.2.1.7": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      141
+    ]
+  },
+  "UG.2.2": {
+    "n_chunks": 1,
+    "lengths": [
+      56
+    ]
+  },
+  "UG.2.2.1": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      63
+    ]
+  },
+  "UG.2.2.2": {
+    "n_chunks": 1,
+    "lengths": [
+      830
+    ]
+  },
+  "UG.2.2.3": {
+    "n_chunks": 1,
+    "lengths": [
+      1174
+    ]
+  },
+  "UG.2.2.4": {
+    "n_chunks": 1,
+    "lengths": [
+      308
+    ]
+  },
+  "UG.2.3": {
+    "n_chunks": 1,
+    "lengths": [
+      501
+    ]
+  },
+  "UG.2.3.1": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      193
+    ]
+  },
+  "UG.2.3.2": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      62
+    ]
+  },
+  "UG.2.3.3": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      360
+    ]
+  },
+  "UG.2.3.4": {
+    "n_chunks": 1,
+    "lengths": [
+      552
+    ]
+  },
+  "UG.2.4": {
+    "n_chunks": 1,
+    "lengths": [
+      68
+    ]
+  },
+  "UG.2.4.1": {
+    "n_chunks": 3,
+    "lengths": [
+      1200,
+      1200,
+      563
+    ]
+  },
+  "UG.2.4.2": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      167
+    ]
+  },
+  "UG.2.4.3": {
+    "n_chunks": 1,
+    "lengths": [
+      390
+    ]
+  },
+  "UG.3": {
+    "n_chunks": 1,
+    "lengths": [
+      243
+    ]
+  },
+  "UG.3.1": {
+    "n_chunks": 1,
+    "lengths": [
+      37
+    ]
+  },
+  "UG.3.1.1": {
+    "n_chunks": 7,
+    "lengths": [
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      334
+    ]
+  },
+  "UG.3.1.2": {
+    "n_chunks": 9,
+    "lengths": [
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      782
+    ]
+  },
+  "UG.3.1.3": {
+    "n_chunks": 3,
+    "lengths": [
+      1200,
+      1200,
+      808
+    ]
+  },
+  "UG.3.1.4": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      790
+    ]
+  },
+  "UG.3.2": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      79
+    ]
+  },
+  "UG.3.2.1": {
+    "n_chunks": 3,
+    "lengths": [
+      1200,
+      1200,
+      1081
+    ]
+  },
+  "UG.3.2.2": {
+    "n_chunks": 5,
+    "lengths": [
+      1200,
+      1200,
+      1200,
+      1200,
+      355
+    ]
+  },
+  "UG.3.2.3": {
+    "n_chunks": 1,
+    "lengths": [
+      584
+    ]
+  },
+  "UG.3.2.4": {
+    "n_chunks": 10,
+    "lengths": [
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      882
+    ]
+  },
+  "UG.3.2.5": {
+    "n_chunks": 7,
+    "lengths": [
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      608
+    ]
+  },
+  "UG.3.2.6": {
+    "n_chunks": 4,
+    "lengths": [
+      1200,
+      1200,
+      1200,
+      161
+    ]
+  },
+  "UG.3.2.7": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      1003
+    ]
+  },
+  "UG.3.2.8": {
+    "n_chunks": 1,
+    "lengths": [
+      822
+    ]
+  },
+  "UG.3.3": {
+    "n_chunks": 1,
+    "lengths": [
+      427
+    ]
+  },
+  "UG.3.3.1": {
+    "n_chunks": 4,
+    "lengths": [
+      1200,
+      1200,
+      1200,
+      604
+    ]
+  },
+  "UG.3.3.2": {
+    "n_chunks": 1,
+    "lengths": [
+      836
+    ]
+  },
+  "UG.3.3.3": {
+    "n_chunks": 5,
+    "lengths": [
+      1200,
+      1200,
+      1200,
+      1200,
+      681
+    ]
+  },
+  "UG.3.3.4": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      974
+    ]
+  },
+  "UG.3.3.5": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      1053
+    ]
+  },
+  "UG.3.3.6": {
+    "n_chunks": 1,
+    "lengths": [
+      558
+    ]
+  },
+  "UG.3.3.7": {
+    "n_chunks": 1,
+    "lengths": [
+      559
+    ]
+  },
+  "UG.3.3.8": {
+    "n_chunks": 6,
+    "lengths": [
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      607
+    ]
+  },
+  "UG.3.3.9": {
+    "n_chunks": 3,
+    "lengths": [
+      1200,
+      1200,
+      1007
+    ]
+  },
+  "UG.4": {
+    "n_chunks": 1,
+    "lengths": [
+      75
+    ]
+  },
+  "UG.4.1": {
+    "n_chunks": 1,
+    "lengths": [
+      532
+    ]
+  },
+  "UG.4.1.1": {
+    "n_chunks": 5,
+    "lengths": [
+      1200,
+      1200,
+      1200,
+      1200,
+      401
+    ]
+  },
+  "UG.4.1.2": {
+    "n_chunks": 5,
+    "lengths": [
+      1200,
+      1200,
+      1200,
+      1200,
+      612
+    ]
+  },
+  "UG.4.1.3": {
+    "n_chunks": 5,
+    "lengths": [
+      1200,
+      1200,
+      1200,
+      1200,
+      450
+    ]
+  },
+  "UG.4.2": {
+    "n_chunks": 1,
+    "lengths": [
+      29
+    ]
+  },
+  "UG.4.2.1": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      904
+    ]
+  },
+  "UG.4.2.2": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      804
+    ]
+  },
+  "UG.4.3": {
+    "n_chunks": 1,
+    "lengths": [
+      31
+    ]
+  },
+  "UG.4.3.1": {
+    "n_chunks": 1,
+    "lengths": [
+      197
+    ]
+  },
+  "UG.4.3.2": {
+    "n_chunks": 1,
+    "lengths": [
+      824
+    ]
+  },
+  "UG.4.3.3": {
+    "n_chunks": 1,
+    "lengths": [
+      813
+    ]
+  },
+  "UG.4.3.4": {
+    "n_chunks": 4,
+    "lengths": [
+      1200,
+      1200,
+      1200,
+      177
+    ]
+  },
+  "UG.4.3.5": {
+    "n_chunks": 4,
+    "lengths": [
+      1200,
+      1200,
+      1200,
+      229
+    ]
+  },
+  "UG.4.3.6": {
+    "n_chunks": 1,
+    "lengths": [
+      749
+    ]
+  },
+  "UG.4.3.7": {
+    "n_chunks": 1,
+    "lengths": [
+      562
+    ]
+  },
+  "UG.5": {
+    "n_chunks": 1,
+    "lengths": [
+      63
+    ]
+  },
+  "UG.5.1": {
+    "n_chunks": 1,
+    "lengths": [
+      120
+    ]
+  },
+  "UG.5.1.1": {
+    "n_chunks": 1,
+    "lengths": [
+      669
+    ]
+  },
+  "UG.5.1.2": {
+    "n_chunks": 1,
+    "lengths": [
+      422
+    ]
+  },
+  "UG.5.1.3": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      1025
+    ]
+  },
+  "UG.5.1.4": {
+    "n_chunks": 1,
+    "lengths": [
+      1089
+    ]
+  },
+  "UG.5.1.5": {
+    "n_chunks": 1,
+    "lengths": [
+      973
+    ]
+  },
+  "UG.5.2": {
+    "n_chunks": 1,
+    "lengths": [
+      504
+    ]
+  },
+  "UG.5.2.1": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      124
+    ]
+  },
+  "UG.5.2.2": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      575
+    ]
+  },
+  "UG.5.2.3": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      728
+    ]
+  },
+  "UG.5.2.4": {
+    "n_chunks": 1,
+    "lengths": [
+      466
+    ]
+  },
+  "UG.5.2.5": {
+    "n_chunks": 1,
+    "lengths": [
+      246
+    ]
+  },
+  "UG.5.3": {
+    "n_chunks": 1,
+    "lengths": [
+      285
+    ]
+  },
+  "UG.6": {
+    "n_chunks": 1,
+    "lengths": [
+      39
+    ]
+  },
+  "UG.6.1": {
+    "n_chunks": 1,
+    "lengths": [
+      31
+    ]
+  },
+  "UG.6.1.1": {
+    "n_chunks": 1,
+    "lengths": [
+      129
+    ]
+  },
+  "UG.6.1.2": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      594
+    ]
+  },
+  "UG.6.1.3": {
+    "n_chunks": 1,
+    "lengths": [
+      472
+    ]
+  },
+  "UG.6.2": {
+    "n_chunks": 1,
+    "lengths": [
+      14
+    ]
+  },
+  "UG.6.2.1": {
+    "n_chunks": 1,
+    "lengths": [
+      1105
+    ]
+  },
+  "UG.6.2.2": {
+    "n_chunks": 1,
+    "lengths": [
+      1160
+    ]
+  },
+  "UG.7": {
+    "n_chunks": 1,
+    "lengths": [
+      28
+    ]
+  },
+  "UG.7.1": {
+    "n_chunks": 1,
+    "lengths": [
+      33
+    ]
+  },
+  "UG.7.1.1": {
+    "n_chunks": 1,
+    "lengths": [
+      641
+    ]
+  },
+  "UG.7.1.2": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      777
+    ]
+  },
+  "UG.7.1.3": {
+    "n_chunks": 1,
+    "lengths": [
+      788
+    ]
+  },
+  "UG.7.1.4": {
+    "n_chunks": 1,
+    "lengths": [
+      397
+    ]
+  },
+  "UG.7.1.5": {
+    "n_chunks": 1,
+    "lengths": [
+      216
+    ]
+  },
+  "UG.7.1.6": {
+    "n_chunks": 1,
+    "lengths": [
+      322
+    ]
+  },
+  "UG.7.2": {
+    "n_chunks": 1,
+    "lengths": [
+      152
+    ]
+  },
+  "UG.7.2.1": {
+    "n_chunks": 3,
+    "lengths": [
+      1200,
+      1200,
+      441
+    ]
+  },
+  "UG.7.2.2": {
+    "n_chunks": 4,
+    "lengths": [
+      1200,
+      1200,
+      1200,
+      105
+    ]
+  },
+  "UG.7.2.3": {
+    "n_chunks": 7,
+    "lengths": [
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      182
+    ]
+  },
+  "UG.8": {
+    "n_chunks": 1,
+    "lengths": [
+      56
+    ]
+  },
+  "UG.8.1": {
+    "n_chunks": 1,
+    "lengths": [
+      1162
+    ]
+  },
+  "UG.8.2": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      954
+    ]
+  },
+  "UG.8.3": {
+    "n_chunks": 3,
+    "lengths": [
+      1200,
+      1200,
+      367
+    ]
+  },
+  "UG.8.4": {
+    "n_chunks": 3,
+    "lengths": [
+      1200,
+      1200,
+      791
+    ]
+  },
+  "UG.8.5": {
+    "n_chunks": 3,
+    "lengths": [
+      1200,
+      1200,
+      1063
+    ]
+  },
+  "UGSU.1": {
+    "n_chunks": 1,
+    "lengths": [
+      76
+    ]
+  },
+  "UGSU.1.1": {
+    "n_chunks": 1,
+    "lengths": [
+      499
+    ]
+  },
+  "UGSU.1.2": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      530
+    ]
+  },
+  "UGSU.1.3": {
+    "n_chunks": 3,
+    "lengths": [
+      1200,
+      1200,
+      385
+    ]
+  },
+  "UGSU.1.4": {
+    "n_chunks": 1,
+    "lengths": [
+      91
+    ]
+  },
+  "UGSU.1.4.1": {
+    "n_chunks": 1,
+    "lengths": [
+      861
+    ]
+  },
+  "UGSU.1.4.2": {
+    "n_chunks": 1,
+    "lengths": [
+      720
+    ]
+  },
+  "UGSU.1.5": {
+    "n_chunks": 1,
+    "lengths": [
+      815
+    ]
+  },
+  "UGSU.2": {
+    "n_chunks": 1,
+    "lengths": [
+      87
+    ]
+  },
+  "UGSU.2.1": {
+    "n_chunks": 1,
+    "lengths": [
+      31
+    ]
+  },
+  "UGSU.2.1.1": {
+    "n_chunks": 3,
+    "lengths": [
+      1200,
+      1200,
+      676
+    ]
+  },
+  "UGSU.2.1.2": {
+    "n_chunks": 1,
+    "lengths": [
+      790
+    ]
+  },
+  "UGSU.2.1.3": {
+    "n_chunks": 1,
+    "lengths": [
+      952
+    ]
+  },
+  "UGSU.2.1.4": {
+    "n_chunks": 3,
+    "lengths": [
+      1200,
+      1200,
+      308
+    ]
+  },
+  "UGSU.2.1.5": {
+    "n_chunks": 1,
+    "lengths": [
+      645
+    ]
+  },
+  "UGSU.2.1.6": {
+    "n_chunks": 1,
+    "lengths": [
+      899
+    ]
+  },
+  "UGSU.2.1.7": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      303
+    ]
+  },
+  "UGSU.2.2": {
+    "n_chunks": 1,
+    "lengths": [
+      58
+    ]
+  },
+  "UGSU.2.2.1": {
+    "n_chunks": 1,
+    "lengths": [
+      969
+    ]
+  },
+  "UGSU.2.2.2": {
+    "n_chunks": 1,
+    "lengths": [
+      377
+    ]
+  },
+  "UGSU.2.2.3": {
+    "n_chunks": 1,
+    "lengths": [
+      1148
+    ]
+  },
+  "UGSU.2.3": {
+    "n_chunks": 1,
+    "lengths": [
+      503
+    ]
+  },
+  "UGSU.2.3.1": {
+    "n_chunks": 1,
+    "lengths": [
+      356
+    ]
+  },
+  "UGSU.2.3.2": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      64
+    ]
+  },
+  "UGSU.2.3.3": {
+    "n_chunks": 1,
+    "lengths": [
+      683
+    ]
+  },
+  "UGSU.2.4": {
+    "n_chunks": 1,
+    "lengths": [
+      70
+    ]
+  },
+  "UGSU.2.4.1": {
+    "n_chunks": 3,
+    "lengths": [
+      1200,
+      1200,
+      650
+    ]
+  },
+  "UGSU.2.4.2": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      171
+    ]
+  },
+  "UGSU.2.4.3": {
+    "n_chunks": 1,
+    "lengths": [
+      348
+    ]
+  },
+  "UGSU.2.4.4": {
+    "n_chunks": 1,
+    "lengths": [
+      702
+    ]
+  },
+  "UGSU.3": {
+    "n_chunks": 1,
+    "lengths": [
+      60
+    ]
+  },
+  "UGSU.3.1": {
+    "n_chunks": 1,
+    "lengths": [
+      39
+    ]
+  },
+  "UGSU.3.1.1": {
+    "n_chunks": 1,
+    "lengths": [
+      412
+    ]
+  },
+  "UGSU.3.1.2": {
+    "n_chunks": 5,
+    "lengths": [
+      1200,
+      1200,
+      1200,
+      1200,
+      234
+    ]
+  },
+  "UGSU.3.1.3": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      903
+    ]
+  },
+  "UGSU.3.1.4": {
+    "n_chunks": 1,
+    "lengths": [
+      603
+    ]
+  },
+  "UGSU.3.2": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      63
+    ]
+  },
+  "UGSU.3.2.1": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      378
+    ]
+  },
+  "UGSU.3.2.2": {
+    "n_chunks": 1,
+    "lengths": [
+      864
+    ]
+  },
+  "UGSU.3.2.3": {
+    "n_chunks": 1,
+    "lengths": [
+      586
+    ]
+  },
+  "UGSU.3.2.4": {
+    "n_chunks": 3,
+    "lengths": [
+      1200,
+      1200,
+      756
+    ]
+  },
+  "UGSU.3.2.5": {
+    "n_chunks": 1,
+    "lengths": [
+      1028
+    ]
+  },
+  "UGSU.3.2.6": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      518
+    ]
+  },
+  "UGSU.3.3": {
+    "n_chunks": 1,
+    "lengths": [
+      374
+    ]
+  },
+  "UGSU.3.3.1": {
+    "n_chunks": 4,
+    "lengths": [
+      1200,
+      1200,
+      1200,
+      387
+    ]
+  },
+  "UGSU.3.3.2": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      435
+    ]
+  },
+  "UGSU.3.3.3": {
+    "n_chunks": 1,
+    "lengths": [
+      579
+    ]
+  },
+  "UGSU.3.3.4": {
+    "n_chunks": 5,
+    "lengths": [
+      1200,
+      1200,
+      1200,
+      1200,
+      735
+    ]
+  },
+  "UGSU.3.3.5": {
+    "n_chunks": 3,
+    "lengths": [
+      1200,
+      1200,
+      1066
+    ]
+  },
+  "UGSU.4": {
+    "n_chunks": 1,
+    "lengths": [
+      78
+    ]
+  },
+  "UGSU.4.1": {
+    "n_chunks": 1,
+    "lengths": [
+      678
+    ]
+  },
+  "UGSU.4.1.1": {
+    "n_chunks": 1,
+    "lengths": [
+      72
+    ]
+  },
+  "UGSU.4.1.2": {
+    "n_chunks": 4,
+    "lengths": [
+      1200,
+      1200,
+      1200,
+      611
+    ]
+  },
+  "UGSU.4.1.3": {
+    "n_chunks": 4,
+    "lengths": [
+      1200,
+      1200,
+      1200,
+      485
+    ]
+  },
+  "UGSU.4.2": {
+    "n_chunks": 1,
+    "lengths": [
+      31
+    ]
+  },
+  "UGSU.4.2.1": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      911
+    ]
+  },
+  "UGSU.4.2.2": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      752
+    ]
+  },
+  "UGSU.4.3": {
+    "n_chunks": 1,
+    "lengths": [
+      33
+    ]
+  },
+  "UGSU.4.3.1": {
+    "n_chunks": 1,
+    "lengths": [
+      198
+    ]
+  },
+  "UGSU.4.3.2": {
+    "n_chunks": 1,
+    "lengths": [
+      915
+    ]
+  },
+  "UGSU.4.3.3": {
+    "n_chunks": 4,
+    "lengths": [
+      1200,
+      1200,
+      1200,
+      310
+    ]
+  },
+  "UGSU.4.3.4": {
+    "n_chunks": 1,
+    "lengths": [
+      751
+    ]
+  },
+  "UGSU.4.3.5": {
+    "n_chunks": 1,
+    "lengths": [
+      649
+    ]
+  },
+  "UGSU.5": {
+    "n_chunks": 1,
+    "lengths": [
+      65
+    ]
+  },
+  "UGSU.5.1": {
+    "n_chunks": 1,
+    "lengths": [
+      122
+    ]
+  },
+  "UGSU.5.1.1": {
+    "n_chunks": 1,
+    "lengths": [
+      669
+    ]
+  },
+  "UGSU.5.1.2": {
+    "n_chunks": 1,
+    "lengths": [
+      424
+    ]
+  },
+  "UGSU.5.1.3": {
+    "n_chunks": 3,
+    "lengths": [
+      1200,
+      1200,
+      16
+    ]
+  },
+  "UGSU.5.1.4": {
+    "n_chunks": 1,
+    "lengths": [
+      1103
+    ]
+  },
+  "UGSU.5.1.5": {
+    "n_chunks": 1,
+    "lengths": [
+      977
+    ]
+  },
+  "UGSU.5.2": {
+    "n_chunks": 1,
+    "lengths": [
+      579
+    ]
+  },
+  "UGSU.5.2.1": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      137
+    ]
+  },
+  "UGSU.5.2.2": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      676
+    ]
+  },
+  "UGSU.5.2.3": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      720
+    ]
+  },
+  "UGSU.5.2.4": {
+    "n_chunks": 1,
+    "lengths": [
+      846
+    ]
+  },
+  "UGSU.5.2.5": {
+    "n_chunks": 1,
+    "lengths": [
+      333
+    ]
+  },
+  "UGSU.6": {
+    "n_chunks": 1,
+    "lengths": [
+      41
+    ]
+  },
+  "UGSU.6.1": {
+    "n_chunks": 1,
+    "lengths": [
+      33
+    ]
+  },
+  "UGSU.6.1.1": {
+    "n_chunks": 1,
+    "lengths": [
+      131
+    ]
+  },
+  "UGSU.6.1.2": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      596
+    ]
+  },
+  "UGSU.6.1.3": {
+    "n_chunks": 1,
+    "lengths": [
+      559
+    ]
+  },
+  "UGSU.6.2": {
+    "n_chunks": 1,
+    "lengths": [
+      16
+    ]
+  },
+  "UGSU.6.2.1": {
+    "n_chunks": 1,
+    "lengths": [
+      1107
+    ]
+  },
+  "UGSU.6.2.2": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      49
+    ]
+  },
+  "UGSU.7": {
+    "n_chunks": 1,
+    "lengths": [
+      30
+    ]
+  },
+  "UGSU.7.1": {
+    "n_chunks": 1,
+    "lengths": [
+      35
+    ]
+  },
+  "UGSU.7.1.1": {
+    "n_chunks": 1,
+    "lengths": [
+      207
+    ]
+  },
+  "UGSU.7.1.2": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      724
+    ]
+  },
+  "UGSU.7.1.3": {
+    "n_chunks": 1,
+    "lengths": [
+      772
+    ]
+  },
+  "UGSU.7.1.4": {
+    "n_chunks": 1,
+    "lengths": [
+      238
+    ]
+  },
+  "UGSU.7.1.5": {
+    "n_chunks": 1,
+    "lengths": [
+      370
+    ]
+  },
+  "UGSU.7.2": {
+    "n_chunks": 1,
+    "lengths": [
+      154
+    ]
+  },
+  "UGSU.7.2.1": {
+    "n_chunks": 3,
+    "lengths": [
+      1200,
+      1200,
+      2
+    ]
+  },
+  "UGSU.7.2.2": {
+    "n_chunks": 1,
+    "lengths": [
+      678
+    ]
+  },
+  "UGSU.7.2.3": {
+    "n_chunks": 8,
+    "lengths": [
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      1200,
+      126
+    ]
+  },
+  "UV.1": {
+    "n_chunks": 1,
+    "lengths": [
+      74
+    ]
+  },
+  "UV.1.1": {
+    "n_chunks": 1,
+    "lengths": [
+      562
+    ]
+  },
+  "UV.1.2": {
+    "n_chunks": 4,
+    "lengths": [
+      1200,
+      1200,
+      1200,
+      1139
+    ]
+  },
+  "UV.1.3": {
+    "n_chunks": 1,
+    "lengths": [
+      1176
+    ]
+  },
+  "UV.1.4": {
+    "n_chunks": 1,
+    "lengths": [
+      365
+    ]
+  },
+  "UV.1.5": {
+    "n_chunks": 1,
+    "lengths": [
+      89
+    ]
+  },
+  "UV.1.5.1": {
+    "n_chunks": 1,
+    "lengths": [
+      731
+    ]
+  },
+  "UV.1.5.2": {
+    "n_chunks": 1,
+    "lengths": [
+      800
+    ]
+  },
+  "UV.2": {
+    "n_chunks": 1,
+    "lengths": [
+      65
+    ]
+  },
+  "UV.2.1": {
+    "n_chunks": 1,
+    "lengths": [
+      29
+    ]
+  },
+  "UV.2.1.1": {
+    "n_chunks": 4,
+    "lengths": [
+      1200,
+      1200,
+      1200,
+      1097
+    ]
+  },
+  "UV.2.1.2": {
+    "n_chunks": 1,
+    "lengths": [
+      738
+    ]
+  },
+  "UV.2.1.3": {
+    "n_chunks": 1,
+    "lengths": [
+      837
+    ]
+  },
+  "UV.2.2": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      288
+    ]
+  },
+  "UV.2.2.1": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      116
+    ]
+  },
+  "UV.2.2.2": {
+    "n_chunks": 1,
+    "lengths": [
+      652
+    ]
+  },
+  "UV.2.3": {
+    "n_chunks": 1,
+    "lengths": [
+      538
+    ]
+  },
+  "UV.2.4": {
+    "n_chunks": 1,
+    "lengths": [
+      68
+    ]
+  },
+  "UV.2.4.1": {
+    "n_chunks": 3,
+    "lengths": [
+      1200,
+      1200,
+      560
+    ]
+  },
+  "UV.2.4.2": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      158
+    ]
+  },
+  "UV.2.4.3": {
+    "n_chunks": 1,
+    "lengths": [
+      387
+    ]
+  },
+  "UV.3": {
+    "n_chunks": 1,
+    "lengths": [
+      58
+    ]
+  },
+  "UV.3.1": {
+    "n_chunks": 1,
+    "lengths": [
+      37
+    ]
+  },
+  "UV.3.1.1": {
+    "n_chunks": 3,
+    "lengths": [
+      1200,
+      1200,
+      482
+    ]
+  },
+  "UV.3.1.2": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      1199
+    ]
+  },
+  "UV.3.1.3": {
+    "n_chunks": 1,
+    "lengths": [
+      378
+    ]
+  },
+  "UV.3.1.4": {
+    "n_chunks": 1,
+    "lengths": [
+      592
+    ]
+  },
+  "UV.3.2": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      14
+    ]
+  },
+  "UV.3.2.1": {
+    "n_chunks": 1,
+    "lengths": [
+      235
+    ]
+  },
+  "UV.3.2.2": {
+    "n_chunks": 1,
+    "lengths": [
+      595
+    ]
+  },
+  "UV.3.2.3": {
+    "n_chunks": 1,
+    "lengths": [
+      588
+    ]
+  },
+  "UV.3.2.4": {
+    "n_chunks": 1,
+    "lengths": [
+      445
+    ]
+  },
+  "UV.3.3": {
+    "n_chunks": 3,
+    "lengths": [
+      1200,
+      1200,
+      584
+    ]
+  },
+  "UV.4": {
+    "n_chunks": 1,
+    "lengths": [
+      75
+    ]
+  },
+  "UV.4.1": {
+    "n_chunks": 1,
+    "lengths": [
+      38
+    ]
+  },
+  "UV.4.1.1": {
+    "n_chunks": 1,
+    "lengths": [
+      70
+    ]
+  },
+  "UV.4.1.2": {
+    "n_chunks": 1,
+    "lengths": [
+      555
+    ]
+  },
+  "UV.4.1.3": {
+    "n_chunks": 1,
+    "lengths": [
+      694
+    ]
+  },
+  "UV.4.2": {
+    "n_chunks": 1,
+    "lengths": [
+      29
+    ]
+  },
+  "UV.4.2.1": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      715
+    ]
+  },
+  "UV.4.2.2": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      758
+    ]
+  },
+  "UV.4.3": {
+    "n_chunks": 1,
+    "lengths": [
+      31
+    ]
+  },
+  "UV.4.3.1": {
+    "n_chunks": 1,
+    "lengths": [
+      196
+    ]
+  },
+  "UV.4.3.2": {
+    "n_chunks": 1,
+    "lengths": [
+      825
+    ]
+  },
+  "UV.4.3.3": {
+    "n_chunks": 4,
+    "lengths": [
+      1200,
+      1200,
+      1200,
+      259
+    ]
+  },
+  "UV.4.3.4": {
+    "n_chunks": 1,
+    "lengths": [
+      559
+    ]
+  },
+  "UV.5": {
+    "n_chunks": 1,
+    "lengths": [
+      63
+    ]
+  },
+  "UV.5.1": {
+    "n_chunks": 1,
+    "lengths": [
+      120
+    ]
+  },
+  "UV.5.1.1": {
+    "n_chunks": 1,
+    "lengths": [
+      665
+    ]
+  },
+  "UV.5.1.2": {
+    "n_chunks": 1,
+    "lengths": [
+      422
+    ]
+  },
+  "UV.5.1.3": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      1115
+    ]
+  },
+  "UV.5.1.4": {
+    "n_chunks": 1,
+    "lengths": [
+      1089
+    ]
+  },
+  "UV.5.1.5": {
+    "n_chunks": 1,
+    "lengths": [
+      973
+    ]
+  },
+  "UV.5.2": {
+    "n_chunks": 1,
+    "lengths": [
+      487
+    ]
+  },
+  "UV.5.2.1": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      124
+    ]
+  },
+  "UV.5.2.2": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      588
+    ]
+  },
+  "UV.5.2.3": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      708
+    ]
+  },
+  "UV.5.2.4": {
+    "n_chunks": 1,
+    "lengths": [
+      745
+    ]
+  },
+  "UV.5.2.5": {
+    "n_chunks": 1,
+    "lengths": [
+      243
+    ]
+  },
+  "UV.6": {
+    "n_chunks": 1,
+    "lengths": [
+      39
+    ]
+  },
+  "UV.6.1": {
+    "n_chunks": 1,
+    "lengths": [
+      31
+    ]
+  },
+  "UV.6.1.1": {
+    "n_chunks": 1,
+    "lengths": [
+      129
+    ]
+  },
+  "UV.6.1.2": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      763
+    ]
+  },
+  "UV.6.1.3": {
+    "n_chunks": 1,
+    "lengths": [
+      428
+    ]
+  },
+  "UV.6.2": {
+    "n_chunks": 1,
+    "lengths": [
+      14
+    ]
+  },
+  "UV.6.2.1": {
+    "n_chunks": 1,
+    "lengths": [
+      591
+    ]
+  },
+  "UV.6.2.2": {
+    "n_chunks": 1,
+    "lengths": [
+      532
+    ]
+  },
+  "UV.7": {
+    "n_chunks": 1,
+    "lengths": [
+      30
+    ]
+  },
+  "UV.7.1": {
+    "n_chunks": 1,
+    "lengths": [
+      33
+    ]
+  },
+  "UV.7.1.1": {
+    "n_chunks": 1,
+    "lengths": [
+      463
+    ]
+  },
+  "UV.7.1.2": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      1000
+    ]
+  },
+  "UV.7.2": {
+    "n_chunks": 1,
+    "lengths": [
+      20
+    ]
+  },
+  "UV.7.2.1": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      50
+    ]
+  },
+  "UV.7.2.2": {
+    "n_chunks": 3,
+    "lengths": [
+      1200,
+      1200,
+      177
+    ]
+  },
+  "N.1": {
+    "n_chunks": 1,
+    "lengths": [
+      40
+    ]
+  },
+  "N.1.1": {
+    "n_chunks": 1,
+    "lengths": [
+      656
+    ]
+  },
+  "N.1.2": {
+    "n_chunks": 1,
+    "lengths": [
+      82
+    ]
+  },
+  "N.1.2.1": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      394
+    ]
+  },
+  "N.1.2.2": {
+    "n_chunks": 1,
+    "lengths": [
+      461
+    ]
+  },
+  "N.1.2.3": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      358
+    ]
+  },
+  "N.1.3": {
+    "n_chunks": 1,
+    "lengths": [
+      88
+    ]
+  },
+  "N.1.3.1": {
+    "n_chunks": 1,
+    "lengths": [
+      731
+    ]
+  },
+  "N.1.3.2": {
+    "n_chunks": 1,
+    "lengths": [
+      817
+    ]
+  },
+  "N.2": {
+    "n_chunks": 1,
+    "lengths": [
+      38
+    ]
+  },
+  "N.2.1": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      2
+    ]
+  },
+  "N.2.2": {
+    "n_chunks": 1,
+    "lengths": [
+      31
+    ]
+  },
+  "N.2.2.1": {
+    "n_chunks": 3,
+    "lengths": [
+      1200,
+      1200,
+      568
+    ]
+  },
+  "N.2.2.3": {
+    "n_chunks": 1,
+    "lengths": [
+      395
+    ]
+  },
+  "N.3": {
+    "n_chunks": 1,
+    "lengths": [
+      57
+    ]
+  },
+  "N.3.1": {
+    "n_chunks": 1,
+    "lengths": [
+      63
+    ]
+  },
+  "N.3.1.1": {
+    "n_chunks": 1,
+    "lengths": [
+      362
+    ]
+  },
+  "N.3.1.2": {
+    "n_chunks": 1,
+    "lengths": [
+      677
+    ]
+  },
+  "N.3.2": {
+    "n_chunks": 1,
+    "lengths": [
+      36
+    ]
+  },
+  "N.3.2.1": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      661
+    ]
+  },
+  "N.3.2.2": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      947
+    ]
+  },
+  "N.3.2.3": {
+    "n_chunks": 1,
+    "lengths": [
+      433
+    ]
+  },
+  "N.3.3": {
+    "n_chunks": 1,
+    "lengths": [
+      212
+    ]
+  },
+  "N.3.3.1": {
+    "n_chunks": 1,
+    "lengths": [
+      583
+    ]
+  },
+  "N.3.3.2": {
+    "n_chunks": 1,
+    "lengths": [
+      1037
+    ]
+  },
+  "N.4": {
+    "n_chunks": 1,
+    "lengths": [
+      60
+    ]
+  },
+  "N.4.1": {
+    "n_chunks": 1,
+    "lengths": [
+      56
+    ]
+  },
+  "N.4.1.1": {
+    "n_chunks": 1,
+    "lengths": [
+      114
+    ]
+  },
+  "N.4.1.2": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      1082
+    ]
+  },
+  "N.4.2": {
+    "n_chunks": 1,
+    "lengths": [
+      28
+    ]
+  },
+  "N.4.2.1": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      682
+    ]
+  },
+  "N.4.2.2": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      805
+    ]
+  },
+  "N.4.3": {
+    "n_chunks": 1,
+    "lengths": [
+      30
+    ]
+  },
+  "N.4.3.1": {
+    "n_chunks": 1,
+    "lengths": [
+      194
+    ]
+  },
+  "N.4.3.2": {
+    "n_chunks": 1,
+    "lengths": [
+      833
+    ]
+  },
+  "N.5": {
+    "n_chunks": 1,
+    "lengths": [
+      62
+    ]
+  },
+  "N.5.1": {
+    "n_chunks": 1,
+    "lengths": [
+      119
+    ]
+  },
+  "N.5.1.1": {
+    "n_chunks": 1,
+    "lengths": [
+      668
+    ]
+  },
+  "N.5.1.2": {
+    "n_chunks": 1,
+    "lengths": [
+      421
+    ]
+  },
+  "N.5.1.3": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      885
+    ]
+  },
+  "N.5.1.4": {
+    "n_chunks": 1,
+    "lengths": [
+      850
+    ]
+  },
+  "N.5.1.5": {
+    "n_chunks": 1,
+    "lengths": [
+      960
+    ]
+  },
+  "N.5.2": {
+    "n_chunks": 1,
+    "lengths": [
+      444
+    ]
+  },
+  "N.5.2.1": {
+    "n_chunks": 1,
+    "lengths": [
+      1051
+    ]
+  },
+  "N.5.2.2": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      546
+    ]
+  },
+  "N.5.2.3": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      539
+    ]
+  },
+  "N.5.2.4": {
+    "n_chunks": 1,
+    "lengths": [
+      465
+    ]
+  },
+  "N.5.2.5": {
+    "n_chunks": 1,
+    "lengths": [
+      251
+    ]
+  },
+  "N.6": {
+    "n_chunks": 1,
+    "lengths": [
+      38
+    ]
+  },
+  "N.6.1": {
+    "n_chunks": 1,
+    "lengths": [
+      30
+    ]
+  },
+  "N.6.1.1": {
+    "n_chunks": 1,
+    "lengths": [
+      115
+    ]
+  },
+  "N.6.1.2": {
+    "n_chunks": 2,
+    "lengths": [
+      1200,
+      1062
+    ]
+  },
+  "N.6.2": {
+    "n_chunks": 1,
+    "lengths": [
+      13
+    ]
+  },
+  "N.6.2.1": {
+    "n_chunks": 1,
+    "lengths": [
+      646
+    ]
+  },
+  "N.6.2.2": {
+    "n_chunks": 1,
+    "lengths": [
+      567
+    ]
+  },
+  "N.7": {
+    "n_chunks": 1,
+    "lengths": [
+      29
+    ]
+  },
+  "N.7.1": {
+    "n_chunks": 1,
+    "lengths": [
+      435
+    ]
+  },
+  "N.7.2": {
+    "n_chunks": 1,
+    "lengths": [
+      19
+    ]
+  },
+  "N.7.2.1": {
+    "n_chunks": 1,
+    "lengths": [
+      518
+    ]
+  },
+  "N.7.2.2": {
+    "n_chunks": 5,
+    "lengths": [
+      1200,
+      1200,
+      1200,
+      1200,
+      562
+    ]
+  }
+}
