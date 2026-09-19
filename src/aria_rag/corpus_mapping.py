@@ -64,6 +64,26 @@ def _relative_posix(path: Path, docs_dir: Path) -> str:
     return unicodedata.normalize("NFC", rel)
 
 
+def to_relative_posix(path: Path, docs_dir: Path) -> str:
+    """Public alias of `_relative_posix` — the one place path Unicode
+    normalization (NFC) is meant to happen for this corpus. macOS's
+    filesystem APIs hand back directory-entry strings in NFD for accented
+    components ("Règlement", "Pièces écrites"); `classify_path` has always
+    normalized through this before matching against corpus_mapping.yaml's
+    (NFC) rule prefixes, so classification itself was never affected by
+    that drift. But anything that PERSISTS a path string for later exact-
+    equality comparison — e.g. indexer.py's `Chunk.source_path`, currently
+    set to a raw `str(path)` with no normalization — is exactly the kind of
+    comparison that silently breaks (see the 2026-09-18 REG1_MS1.pdf
+    ingestion incident, where a naive `==` against an NFC literal matched
+    zero of 666 existing NFD-stored chunks). Any code that needs to persist
+    or compare a docs_dir-relative path should call this instead of adding
+    its own ad hoc `unicodedata.normalize` — one normalization point,
+    reused, rather than the same bug fixed per-script as it's rediscovered.
+    """
+    return _relative_posix(path, docs_dir)
+
+
 def classify_path(path: Path, docs_dir: Path, rules: list[MappingRule]) -> Classification:
     """Longest-matching-prefix classification of `path` against `rules`.
 

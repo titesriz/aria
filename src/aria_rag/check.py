@@ -27,6 +27,7 @@ from aria_rag.loader import iter_pdf_paths
 from aria_rag.referentiel import Piece, load_referentiel, match_piece
 
 CHECKS_DIR = ROOT_DIR / "checks"
+KNOWN_UNMAPPED_FILES_PATH = CHECKS_DIR / "known_unmapped_files.json"
 KNOWN_MANIFEST_DESYNC_PATH = CHECKS_DIR / "known_manifest_desync.json"
 KNOWN_ZERO_CHUNK_FILES_PATH = CHECKS_DIR / "known_zero_chunk_files.json"
 KNOWN_ENCODING_FAILURES_PATH = CHECKS_DIR / "known_encoding_failures.json"
@@ -59,6 +60,70 @@ def _relative_path(source_path: str, docs_dir: Path) -> str:
         return Path(source_path).resolve().relative_to(docs_dir.resolve()).as_posix()
     except ValueError:
         return source_path
+
+
+# ---------------------------------------------------------------------------
+# 0. Corpus mapping coverage
+# ---------------------------------------------------------------------------
+
+def check_corpus_mapping_coverage(
+    settings: Settings,
+    reports_dir: Path,
+    mapping_rules: list[MappingRule] | None = None,
+    known_unmapped_path: Path | None = None,
+) -> InvariantResult:
+    """classify_path() over every PDF actually on disk, independent of
+    chunks.json/manifest.json — the 2026-09 corpus_mapping.yaml drift (all
+    410 files silently classifying as family "other" for however long the
+    Ressources/ tree had moved out from under corpus_mapping.yaml's rule
+    prefixes) went undetected because check_family_coverage below only
+    inspects chunks that were ALREADY indexed: nobody re-ran `aria-rag
+    ingest` while the drift was live, so the stale (pre-drift, correctly
+    classified) chunks.json kept that check green the whole time. This
+    check has no such blind spot — it reads corpus_mapping.yaml and
+    Ressources/ directly, so it fails the moment the two disagree, whether
+    or not anyone has re-ingested since.
+
+    An "other" classification is not automatically wrong (an unmapped file
+    is still indexed, never silently dropped — see classify_path's own
+    docstring), but today's corpus has none, so any new one is either a
+    genuinely new, not-yet-mapped source (fix corpus_mapping.yaml) or a
+    renamed/moved folder (the exact failure mode this check exists for) —
+    never silently accepted. A deliberate, reviewed exception goes in
+    known_unmapped_files.json, mirroring every other KNOWN_* allowlist in
+    this module.
+    """
+    known_unmapped_path = known_unmapped_path or KNOWN_UNMAPPED_FILES_PATH
+    known_unmapped: set[str] = set()
+    if known_unmapped_path.exists():
+        data = json.loads(known_unmapped_path.read_text(encoding="utf-8"))
+        known_unmapped = set(data.get("entries", []))
+
+    rules = mapping_rules if mapping_rules is not None else load_rules()
+    on_disk = list(iter_pdf_paths(settings.docs_dir))
+
+    other: list[str] = []
+    for p in on_disk:
+        cls = classify_path(p, settings.docs_dir, rules)
+        if cls.family == "other":
+            other.append(_relative_path(str(p), settings.docs_dir))
+
+    new_unmapped = sorted(set(other) - known_unmapped)
+
+    details_path = _write_details(reports_dir, "corpus_mapping_coverage", {
+        "on_disk_pdf_count": len(on_disk),
+        "other_count": len(other),
+        "other_files": sorted(other),
+        "known_unmapped_count": len(known_unmapped),
+        "new_unmapped_files": new_unmapped,
+    })
+    status: Status = "fail" if new_unmapped else "pass"
+    message = (
+        f"{len(other)} file(s) classify as family=\"other\" "
+        f"({len(known_unmapped)} documented in {known_unmapped_path.name}), "
+        f"{len(new_unmapped)} NEW/undocumented"
+    )
+    return InvariantResult("0. Corpus mapping coverage", status, len(new_unmapped), message, details_path)
 
 
 # ---------------------------------------------------------------------------
@@ -567,6 +632,7 @@ def run_checks(settings: Settings, strict: bool = False) -> list[InvariantResult
     pieces = load_referentiel().pieces
 
     results = [
+        check_corpus_mapping_coverage(settings, reports_dir),
         check_family_coverage(chunks, settings, reports_dir),
         check_size_cap(chunks, settings, reports_dir),
         check_metadata_integrity(chunks, reports_dir),

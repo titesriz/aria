@@ -46,17 +46,17 @@ rules:
   #     version of any Rapport de présentation sub-document — see the
   #     MS1-vs-base audit. Both of these are already "current" by default
   #     via the folder rules below; no entry needed.
-  - prefix: "PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 1/REG1.pdf"
+  - prefix: "PLU bioclimatique/Règlement/Pièces écrites/Tome 1/REG1.pdf"
     family: reglement_ecrit
     norm_level: local
     city: paris
     validity: superseded
-  - prefix: "PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 2/REG2A1.pdf"
+  - prefix: "PLU bioclimatique/Règlement/Pièces écrites/Tome 2/REG2A1.pdf"
     family: reglement_ecrit
     norm_level: local
     city: paris
     validity: superseded
-  - prefix: "PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 2/REG2A10_1DE2.pdf"
+  - prefix: "PLU bioclimatique/Règlement/Pièces écrites/Tome 2/REG2A10_1DE2.pdf"
     family: reglement_ecrit
     norm_level: local
     city: paris
@@ -71,7 +71,7 @@ rules:
   # index, and the repeated banner was polluting retrieval as false-signal
   # noise. Same family/norm_level/city as the annexes rule below — only
   # validity differs, hence its own file-specific entry.
-  - prefix: "PLU/75 Paris/PLU Bioclimatique/Annexes/Textes et documents illustrés/ANN2A_2025_12_19.pdf"
+  - prefix: "PLU bioclimatique/Annexes/Textes et documents illustrés/ANN2A_2025_12_19.pdf"
     family: annexes
     norm_level: local
     city: paris
@@ -79,35 +79,49 @@ rules:
 
   # --- PLU bioclimatique de Paris (today's corpus) — norm_level: local,
   # city: paris.
-  - prefix: "PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites"
+  #
+  # Prefixes below are "PLU bioclimatique/..." (verified directly against
+  # Ressources/ on disk and against every chemin_relatif in
+  # eval/corpus_metadata.json's 411 documents — see the corpus_mapping
+  # drift audit). They were previously "PLU/75 Paris/PLU Bioclimatique/..."
+  # — a layout that does not exist anywhere in the real tree (no "PLU/"
+  # wrapper, no "75 Paris/" segment, capital "B" in "Bioclimatique") — which
+  # silently classified all 410 on-disk PDFs as family "other" for however
+  # long that drift went unnoticed. See check.py's assert_no_unexpected_
+  # other_family (added alongside this fix) for the guard against this
+  # happening silently again.
+  - prefix: "PLU bioclimatique/Règlement/Pièces écrites"
     family: reglement_ecrit
     norm_level: local
     city: paris
-  - prefix: "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques"
+  - prefix: "PLU bioclimatique/Règlement/Documents graphiques"
     family: reglement_graphique
     norm_level: local
     city: paris
-  - prefix: "PLU/75 Paris/PLU Bioclimatique/Rapport de présentation"
+  - prefix: "PLU bioclimatique/Rapport de présentation"
     family: rapport_presentation
     norm_level: local
     city: paris
-  - prefix: "PLU/75 Paris/PLU Bioclimatique/OAP"
+  - prefix: "PLU bioclimatique/OAP"
     family: oap
     norm_level: local
     city: paris
-  - prefix: "PLU/75 Paris/PLU Bioclimatique/PADD"
+  - prefix: "PLU bioclimatique/PADD"
     family: padd
     norm_level: local
     city: paris
-  - prefix: "PLU/75 Paris/PLU Bioclimatique/Annexes"
+  - prefix: "PLU bioclimatique/Annexes"
     family: annexes
     norm_level: local
     city: paris
 
   # --- Code de la Construction et de l'Habitation (national norm) — the
-  # CCH dual-source prototype's second source. Previously fell through to
-  # family "other" for lack of any matching DOC_FAMILIES fragment.
-  - prefix: "LEGIFRANCE/CCH"
+  # CCH dual-source prototype's second source. Previously keyed on a
+  # "LEGIFRANCE/CCH" folder that has never existed in Ressources/ — the
+  # real file sits bare at Ressources/LEGITEXT000006074096.pdf (LEGITEXT
+  # 000006074096 is the CCH's actual Légifrance identifier), so this rule
+  # also silently fell through to family "other" until this fix.
+  - prefix: "LEGITEXT000006074096.pdf"
     family: cch
     norm_level: national
     city: null

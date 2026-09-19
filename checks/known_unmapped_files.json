@@ -1,0 +1,4 @@
+{
+  "_description": "Files that deliberately classify as corpus_mapping family \"other\" — reviewed and accepted, not a mapping gap. aria_rag.check's check_corpus_mapping_coverage treats exactly these paths as pass, and fails on any NEW file classifying as \"other\" that isn't here, before it can go unnoticed the way the 2026-09 corpus_mapping.yaml path-prefix drift did (see check.py's check_corpus_mapping_coverage docstring). Paths are relative to Settings.docs_dir (Ressources/), forward-slash, for portability. As of 2026-09-19, every file in the corpus classifies correctly — this list is empty on purpose; keep it that way unless a specific new file is reviewed and deliberately added.",
+  "entries": []
+}

@@ -15,6 +15,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from aria_rag.check import (
     check_annexe_section_plausibility,
+    check_corpus_mapping_coverage,
     check_coverage,
     check_dedup_ledger,
     check_encoding,
@@ -26,8 +27,8 @@ from aria_rag.check import (
     check_size_cap,
     run_checks,
 )
-from aria_rag.config import Settings
-from aria_rag.corpus_mapping import MappingRule
+from aria_rag.config import ROOT_DIR, Settings
+from aria_rag.corpus_mapping import MappingRule, load_rules
 from aria_rag.indexer import Chunk, IndexedFile
 from aria_rag.referentiel import Piece
 
@@ -52,6 +53,63 @@ def _settings(tmp_path: Path, **overrides) -> Settings:
     s = Settings(**defaults)
     s.index_dir.mkdir(parents=True, exist_ok=True)
     return s
+
+
+# ---------------------------------------------------------------------------
+# 0. Corpus mapping coverage
+# ---------------------------------------------------------------------------
+
+def test_corpus_mapping_coverage_passes_for_documented_other(tmp_path):
+    docs_dir = tmp_path / "docs"
+    (docs_dir / "Unmapped").mkdir(parents=True)
+    (docs_dir / "Unmapped" / "stray.pdf").write_bytes(b"%PDF-1.4")
+    settings = _settings(tmp_path, docs_dir=docs_dir)
+    known_path = tmp_path / "known_unmapped.json"
+    known_path.write_text(json.dumps({"entries": ["Unmapped/stray.pdf"]}), encoding="utf-8")
+
+    result = check_corpus_mapping_coverage(settings, tmp_path / "reports", mapping_rules=[], known_unmapped_path=known_path)
+    assert result.status == "pass"
+    assert result.count == 0
+
+
+def test_corpus_mapping_coverage_fails_for_new_undocumented_other(tmp_path):
+    """The 2026-09 regression this check exists for: corpus_mapping.yaml's
+    rule prefixes stop matching the real tree (a rename, a moved folder)
+    and every file silently falls through to family "other" — with no
+    re-ingest, check_family_coverage never sees it. This check reads
+    Ressources/ and corpus_mapping.yaml directly, so it catches it without
+    needing a rebuild.
+    """
+    docs_dir = tmp_path / "docs"
+    (docs_dir / "Unmapped").mkdir(parents=True)
+    (docs_dir / "Unmapped" / "new_file.pdf").write_bytes(b"%PDF-1.4")
+    settings = _settings(tmp_path, docs_dir=docs_dir)
+    known_path = tmp_path / "known_unmapped.json"
+    known_path.write_text(json.dumps({"entries": []}), encoding="utf-8")
+
+    result = check_corpus_mapping_coverage(settings, tmp_path / "reports", mapping_rules=[], known_unmapped_path=known_path)
+    assert result.status == "fail"
+    assert result.count == 1
+
+
+def test_corpus_mapping_coverage_real_corpus_has_zero_other():
+    """The actual deliverable: every PDF under the real Ressources/ tree,
+    classified with the real corpus_mapping.yaml, right now. Fails the
+    instant a future folder rename or a new, unmapped source drifts the
+    mapping out of sync with disk again — exactly the failure mode that
+    went unnoticed silently for however long before the 2026-09-19 fix.
+    """
+    repo_root = ROOT_DIR
+    settings = Settings(docs_dir=repo_root / "Ressources")
+    rules = load_rules(repo_root / "corpus_mapping.yaml")
+    result = check_corpus_mapping_coverage(
+        settings,
+        Path("/tmp/aria_rag_test_reports"),
+        mapping_rules=rules,
+        known_unmapped_path=repo_root / "checks" / "known_unmapped_files.json",
+    )
+    assert result.status == "pass", result.message
+    assert result.count == 0
 
 
 # ---------------------------------------------------------------------------
