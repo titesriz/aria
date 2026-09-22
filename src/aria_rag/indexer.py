@@ -726,6 +726,88 @@ def load_manifest(index_dir: Path) -> dict[str, IndexedFile]:
     return {item["source_path"]: IndexedFile(**item) for item in data}
 
 
+def _load_embedding_cache(index_dir: Path) -> dict[str, np.ndarray]:
+    """Content-hash -> embedding vector, reconstructed losslessly from the
+    PREVIOUS build's index.faiss (IndexFlatIP stores raw vectors, so
+    reconstruct_n() returns them bit-exact -- verified empirically, see the
+    2026-09-19 incremental-indexing feasibility spike) and paired with each
+    old chunk's own content (re-hashed on the fly here rather than reading a
+    persisted hash field, since none is stored -- md5 over ~27k short
+    strings is sub-second, so persisting a hash would only add a schema
+    migration surface for no measurable benefit).
+
+    Deliberately keyed by CONTENT, not chunk_id/source_path: a chunk that
+    moved (different file, different position after a corpus-wide re-sort)
+    but has byte-identical text still hits the cache; a chunk whose content
+    changed at all, even at the same id, correctly misses and gets
+    re-encoded. Returns {} (safe, full-encode fallback) if no prior index
+    exists yet, or if the old chunks.json / index.faiss chunk counts don't
+    match (defensive -- a mismatch there means the two files are from
+    different builds and the cache can't be trusted).
+    """
+    chunks_path = index_dir / "chunks.json"
+    faiss_path = index_dir / "index.faiss"
+    if not chunks_path.exists() or not faiss_path.exists():
+        return {}
+    try:
+        old_chunks_raw = json.loads(chunks_path.read_text(encoding="utf-8"))
+        old_index = faiss.read_index(str(faiss_path))
+    except Exception as exc:
+        logger.warning("Embedding cache: could not read previous index (%s) -- falling back to full encode", exc)
+        return {}
+    if old_index.ntotal != len(old_chunks_raw):
+        logger.warning(
+            "Embedding cache: previous chunks.json (%d) and index.faiss (%d) sizes disagree -- "
+            "falling back to full encode",
+            len(old_chunks_raw), old_index.ntotal,
+        )
+        return {}
+    if len(old_chunks_raw) == 0:
+        return {}
+    old_vectors = old_index.reconstruct_n(0, old_index.ntotal)
+    cache: dict[str, np.ndarray] = {}
+    for item, vec in zip(old_chunks_raw, old_vectors):
+        h = hashlib.md5(item["content"].encode()).hexdigest()
+        cache.setdefault(h, vec)  # first occurrence wins; content is already corpus-deduped upstream
+    return cache
+
+
+def should_reuse_cached_chunks(
+    *,
+    in_family_scope: bool,
+    force_this_file: bool,
+    cached: IndexedFile | None,
+    cached_chunk_count: int,
+    size_bytes: int,
+    modified_time: float,
+) -> bool:
+    """The per-file cache-reuse decision build_index's main loop applies to
+    every discovered PDF -- pulled out as its own pure function so it can be
+    unit-tested directly with synthetic IndexedFile/count fixtures, without
+    needing real PDFs, an embedding model, or FAISS (see
+    tests/test_indexer.py, added alongside the 2026-09-19 --family-scope fix).
+
+    Two independent reasons to reuse:
+    - Out-of-family-scope: a file outside the requested --family filter must
+      NEVER be reprocessed, regardless of any bookkeeping inconsistency --
+      this is a hard scope boundary, checked first and unconditionally
+      (except when there's nothing to reuse at all: cached is None, a
+      never-before-indexed file, which always proceeds to extraction).
+    - Normal incremental cache: unchanged file (size/mtime match) with
+      internally consistent bookkeeping (len(cached_chunks) ==
+      cached.chunk_count) and not force-flagged for reprocessing.
+    """
+    if not in_family_scope and cached is not None:
+        return True
+    return (
+        not force_this_file
+        and cached is not None
+        and cached.size_bytes == size_bytes
+        and cached.modified_time == modified_time
+        and cached_chunk_count == cached.chunk_count
+    )
+
+
 def build_index(
     settings: Settings,
     workers: int = 1,
@@ -733,6 +815,7 @@ def build_index(
     heartbeat_callback: Callable[[int, int, int], None] | None = None,
     rebuild: bool = False,
     family_filter: list[str] | None = None,
+    use_embedding_cache: bool = True,
 ) -> tuple[int, int]:
     pdf_paths = iter_pdf_paths(settings.docs_dir)
     if settings.max_files is not None:
@@ -772,21 +855,29 @@ def build_index(
 
         # Force reprocess if: no family filter and rebuild=True,
         # OR family filter matches this file and rebuild=True.
-        force_this_file = rebuild and (
-            not family_filter or classifications[str(path)].family in family_filter
-        )
+        in_family_scope = not family_filter or classifications[str(path)].family in family_filter
+        force_this_file = rebuild and in_family_scope
 
-        if (
-            not force_this_file
-            and cached is not None
-            and cached.size_bytes == size_bytes
-            and cached.modified_time == modified_time
-            and len(cached_chunks) == cached.chunk_count
+        # See should_reuse_cached_chunks's docstring -- --family is a hard
+        # scope boundary (a desynced out-of-scope file must never be
+        # reprocessed) checked independently of the normal incremental
+        # cache-integrity check. Fixed 2026-09-19 after
+        # `aria-rag ingest --rebuild --family reglement_graphique` silently
+        # re-extracted REG1_MS1/REG2A1_MS1/REG2A10 via the old pypdf path
+        # despite being outside the requested family.
+        if should_reuse_cached_chunks(
+            in_family_scope=in_family_scope,
+            force_this_file=force_this_file,
+            cached=cached,
+            cached_chunk_count=len(cached_chunks),
+            size_bytes=size_bytes,
+            modified_time=modified_time,
         ):
             chunks.extend(cached_chunks)
             manifest_entries.append(cached)
+            status = "cached" if in_family_scope else "cached (out of --family scope)"
             if progress_callback is not None:
-                progress_callback(index, total, path, len(cached_chunks), "cached")
+                progress_callback(index, total, path, len(cached_chunks), status)
             continue
         paths_to_process.append(path)
 
@@ -892,11 +983,35 @@ def build_index(
     manifest_entries.sort(key=lambda item: item.source_path)
     chunks.sort(key=lambda chunk: (chunk.source_path, chunk.chunk_id))
 
-    print(f"Building embeddings with {settings.embedding_model} for {len(chunks)} chunks...", flush=True)
-    model = SentenceTransformer(settings.embedding_model)
-    texts = [chunk.content for chunk in chunks]
-    embeddings = model.encode(texts, batch_size=64, show_progress_bar=True, normalize_embeddings=True)
-    embeddings = np.array(embeddings, dtype=np.float32)
+    embedding_cache = _load_embedding_cache(settings.index_dir) if use_embedding_cache else {}
+    dimension = None
+    if embedding_cache:
+        dimension = next(iter(embedding_cache.values())).shape[0]
+    chunk_hashes = [hashlib.md5(chunk.content.encode()).hexdigest() for chunk in chunks]
+    to_encode_positions = [i for i, h in enumerate(chunk_hashes) if h not in embedding_cache]
+
+    print(
+        f"Embeddings for {len(chunks)} chunks: {len(chunks) - len(to_encode_positions)} reused from cache "
+        f"(unchanged content), {len(to_encode_positions)} to encode.",
+        flush=True,
+    )
+    if to_encode_positions:
+        model = SentenceTransformer(settings.embedding_model)
+        texts_to_encode = [chunks[i].content for i in to_encode_positions]
+        print(f"Building embeddings with {settings.embedding_model} for {len(texts_to_encode)} chunk(s)...", flush=True)
+        new_vectors = model.encode(texts_to_encode, batch_size=64, show_progress_bar=True, normalize_embeddings=True)
+        new_vectors = np.array(new_vectors, dtype=np.float32)
+        if dimension is None:
+            dimension = new_vectors.shape[1]
+    else:
+        new_vectors = np.zeros((0, dimension), dtype=np.float32)
+
+    embeddings = np.empty((len(chunks), dimension), dtype=np.float32)
+    for slot, i in enumerate(to_encode_positions):
+        embeddings[i] = new_vectors[slot]
+    reused_positions = set(range(len(chunks))) - set(to_encode_positions)
+    for i in reused_positions:
+        embeddings[i] = embedding_cache[chunk_hashes[i]]
 
     dimension = embeddings.shape[1]
     faiss_index = faiss.IndexFlatIP(dimension)  # inner product = cosine similarity (normalized vectors)

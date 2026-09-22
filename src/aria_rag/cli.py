@@ -44,6 +44,16 @@ def build_parser() -> argparse.ArgumentParser:
         ),
     )
     ingest_parser.add_argument(
+        "--no-embedding-cache",
+        action="store_true",
+        default=False,
+        help=(
+            "Force re-encoding every chunk's embedding instead of reusing unchanged chunks' vectors "
+            "from the previous index.faiss (content-hash keyed). Fallback for the incremental embedding "
+            "cache added 2026-09-19 -- full from-scratch behavior."
+        ),
+    )
+    ingest_parser.add_argument(
         "--strict-check",
         action="store_true",
         default=False,
@@ -305,6 +315,7 @@ def main() -> None:
             heartbeat_callback=report_ingest_heartbeat,
             rebuild=args.rebuild,
             family_filter=args.family,
+            use_embedding_cache=not args.no_embedding_cache,
         )
         print(f"Indexed {file_count} PDF files into {chunk_count} chunks at {settings.index_dir}")
         if not args.skip_check:
