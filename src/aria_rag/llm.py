@@ -6,6 +6,7 @@ from pathlib import Path
 
 import anthropic
 import httpx
+import openai
 from openai import OpenAI
 
 from aria_rag.config import Settings
