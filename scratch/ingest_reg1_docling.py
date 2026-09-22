@@ -7,18 +7,18 @@ unchanged; BM25/FAISS have no true incremental-add API in this codebase
 (build_index always re-embeds the full corpus), so a full re-embed is
 required, but no other file's content, section, or family changes.
 
-Classification note: at the time this script was first run (2026-09-18),
-corpus_mapping.yaml's rules were keyed on "PLU/75 Paris/PLU Bioclimatique/..."
-while the real Ressources tree is "PLU bioclimatique/..." (no "PLU/75
-Paris/" prefix, lower "b") -- classify_path() returned family="other" for
-EVERY file, so REG1_MS1.pdf's classification was hardcoded below rather
-than routed through it. That drift is now fixed at the source
-(corpus_mapping.yaml + corpus_mapping.classify_path — see the 2026-09-19
-classification audit), so DOC_FAMILY/NORM_LEVEL/CITY below now come from a
-live classify_path() call instead of being hardcoded. This script is not
-re-run as part of that fix — REG1_MS1.pdf is already ingested — kept
-current only so a future re-run wouldn't silently reintroduce the same
-bypass.
+Classification note: on 2026-09-18/19 corpus_mapping.yaml was briefly
+changed to key on "PLU bioclimatique/..." based on one machine's local
+Ressources/ tree only; a 2026-09-19 cross-machine check (git-tracked
+eval/ontology/corpus_pdf_inventory_full.csv's chemin_relatif rows +
+scratch/reconcile.py, both predating that change) confirmed the real,
+portable tree is "PLU/75 Paris/PLU Bioclimatique/..." — the original form —
+and the yaml was reverted back. DOC_FAMILY/NORM_LEVEL/CITY below come from
+a live classify_path() call rather than being hardcoded, so this script
+tracks whichever form corpus_mapping.yaml currently uses without needing
+its own fix; only PDF_PATH below is a literal, machine-specific path and
+needs to match Settings.docs_dir's real layout on whatever machine runs
+this.
 
 Design mirrors indexer.py's chunk_text_by_article exactly (split at
 article-code header boundaries, no overlap, oversized articles split by
@@ -55,7 +55,7 @@ from aria_rag.corpus_mapping import classify_path, load_rules
 from aria_rag.indexer import Chunk, IndexedFile, _tokenize, get_file_signature, build_article_whitelist
 
 CONTENT_JSON = REPO_ROOT / "scratch" / "reg1_content.json"
-PDF_PATH = REPO_ROOT / "Ressources" / "PLU bioclimatique" / "Règlement" / "Pièces écrites" / "Tome 1" / "REG1_MS1.pdf"
+PDF_PATH = REPO_ROOT / "Ressources" / "PLU" / "75 Paris" / "PLU Bioclimatique" / "Règlement" / "Pièces écrites" / "Tome 1" / "REG1_MS1.pdf"
 SOURCE_PATH = str(PDF_PATH)
 STEM = "REG1_MS1"
 

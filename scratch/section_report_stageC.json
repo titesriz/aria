@@ -1,0 +1,29 @@
+{
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Rapport de présentation\\RP_DIAGNOSTIC.pdf": {
+    "family": "rapport_presentation",
+    "status": "ok",
+    "before_chunk_count": 789,
+    "new_chunk_count": 1033,
+    "null_section_count": 0,
+    "pct_null_section": 0.0,
+    "n_distinct_sections": 584,
+    "dropped_low_alpha": 128,
+    "sample_sections": [
+      "RAPPORT DE PRÉSENTATION",
+      "Diagnostic",
+      "DIAGNOSTIC",
+      "Sommaire",
+      "PRÉAMBULE",
+      "1. \u0007 UNE VILLE AU CŒUR D'UN SYSTÈME MÉTROPOLITAIN",
+      "Paris et la Métropole du Grand Paris, de nouveaux équilibres",
+      "Des disparités fonctionnelles, économiques et sociales",
+      "Une attractivité touristique exceptionnelle",
+      "LES HÔTELS",
+      "LES  EFFETS  DE  LA  CRISE DE LA  COVID-19",
+      "FRÉQUENTATION DES SITES EN 2019 FRÉQUENTATION DES SITES EN 2021",
+      "LES CENTRES DE CONGRÈS DE PARIS ET DE SA RÉGION",
+      "LES AÉROPORTS, GARES FERROVIAIRES ET GARES ROUTIÈRES DU GRAND PARIS",
+      "Arrêt des Services Librement Organisés (SLO)"
+    ]
+  }
+}

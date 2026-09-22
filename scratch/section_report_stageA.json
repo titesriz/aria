@@ -1,0 +1,1178 @@
+{
+  "C:\\Users\\Wenwen\\aria\\Ressources\\LEGIFRANCE\\CCH\\LEGITEXT000006074096.pdf": {
+    "family": "cch",
+    "status": "timeout",
+    "message": "exceeded 1200s budget"
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Addenda\\ANNAD1_2025_12_19.pdf": {
+    "family": "annexes",
+    "status": "cached",
+    "before_chunk_count": 41,
+    "new_chunk_count": 106,
+    "null_section_count": 1,
+    "pct_null_section": 0.9,
+    "n_distinct_sections": 47,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "__no_header__",
+      "APPLICATION DU DROIT DE PRÉEMPTION URBAIN (D.P.U.) ET DU DROIT DE PRÉEMPTION  RENFORCÉ (D.P.U.R.) SUR PARIS",
+      "A. Délibérations du Conseil de Paris relatives au Droit de préemption urbain (D.P.U.) et au droit de préemption urbain renforcé (D.P.U.R.)",
+      "B. Immeubles et lots de biens immobiliers soumis au D.P.U.R.",
+      "10ème arrondissement",
+      "11ème arrondissement",
+      "15ème arrondissement",
+      "18ème arrondissement",
+      "19ème arrondissement",
+      "19ème arrondissement (suite)",
+      "20ème arrondissement",
+      "2ème arrondissement",
+      "4ème arrondissement",
+      "5ème arrondissement",
+      "8ème arrondissement"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Addenda\\ANNAD2.pdf": {
+    "family": "annexes",
+    "status": "cached",
+    "before_chunk_count": 8,
+    "new_chunk_count": 9,
+    "null_section_count": 0,
+    "pct_null_section": 0.0,
+    "n_distinct_sections": 9,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "Informations complémentaires Mesures d'archéologie préventive",
+      "ARRÊTÉ N° 2005-984 DU 16 MAI 2005 DÉFINISSANT SUR LE TERRITOIRE DE LA COMMUNE DE PARIS DES ZONES ET SEUILS D'EMPRISE DE CERTAINS TRAVAUX SUSCEPTIBL...",
+      "Considérant :",
+      "ARRETE     :",
+      "ANNEXE À L'ARRÊTÉ N° 2005-984",
+      "Article premier     :",
+      "Article 2     :",
+      "Article 3     :",
+      "Préfecture de Paris"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Addenda\\ANNAD3.pdf": {
+    "family": "annexes",
+    "status": "cached",
+    "before_chunk_count": 5,
+    "new_chunk_count": 13,
+    "null_section_count": 1,
+    "pct_null_section": 7.7,
+    "n_distinct_sections": 11,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "__no_header__",
+      "PRÉVENTION ET RÉGLEMENTATION CONTRE LES TERMITES",
+      "ARRÊTÉ N° 2003-80-1 RELATIF À LA PROTECTION DES ACQUÉREURS ET DES PROPRIÉTAIRES CONTRE LES TERMITES ET AUTRES XYLOPHAGES",
+      "ARRETE",
+      "ARTICLE PREMIER",
+      "ARTICLE 2",
+      "ARTICLE 3",
+      "ARTICLE 4",
+      "ARTICLE 5",
+      "ARTICLE 6",
+      "ARTICLE 7",
+      "ARTICLE 8"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Addenda\\ANNAD4.pdf": {
+    "family": "annexes",
+    "status": "cached",
+    "before_chunk_count": 27,
+    "new_chunk_count": 32,
+    "null_section_count": 0,
+    "pct_null_section": 0.0,
+    "n_distinct_sections": 19,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "Informations complémentaires",
+      "Arrêté du 30 mai 1996 relatif aux modalités de classement des infrastructures de transports terrestres et à l'isolement acoustique des bâtiments d'...",
+      "ART  ICLE 1 modifié",
+      "TITRE IER : CLASSEMENT DES INFRASTRUCTURES DE TRANSPORTS TERRESTRES PAR LE PRÉFET",
+      "ART  ICLE 2 modifié",
+      "ART  ICLE 3 modifié",
+      "ARTICLE 4 modifié",
+      "I nfrastructures routières et lignes ferroviaires à grande vitesse",
+      "Lignes ferroviaires conventionnelles",
+      "ART  ICLE 5 modifié",
+      "ART  ICLE 6 modifié",
+      "Tableau des valeurs d'isolement minimal D nT'A'tr en dB",
+      "1. Protection des façades du bâtiment considéré par des bâtiments",
+      "2. Protection des façades du bâtiment considéré par des écrans acoustiques ou des merlons continus en bordure de l'infrastructure",
+      "3. Exposition à plusieurs infrastructures de transports terrestres"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Plans autres périmètres\\A15152_01A04_2025_12_19.pdf": {
+    "family": "annexes",
+    "status": "cached",
+    "before_chunk_count": 1,
+    "new_chunk_count": 2,
+    "null_section_count": 1,
+    "pct_null_section": 50.0,
+    "n_distinct_sections": 1,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "__no_header__",
+      "Légende"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Plans autres périmètres\\A15152_05_06_2025_12_19.pdf": {
+    "family": "annexes",
+    "status": "ok",
+    "before_chunk_count": 1,
+    "new_chunk_count": 2,
+    "null_section_count": 1,
+    "pct_null_section": 50.0,
+    "n_distinct_sections": 1,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "__no_header__",
+      "Légende"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Plans autres périmètres\\A15152_07_08_2025_12_19.pdf": {
+    "family": "annexes",
+    "status": "ok",
+    "before_chunk_count": 1,
+    "new_chunk_count": 1,
+    "null_section_count": 1,
+    "pct_null_section": 100.0,
+    "n_distinct_sections": 0,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "__no_header__"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Plans autres périmètres\\A15152_09_10_2025_12_19.pdf": {
+    "family": "annexes",
+    "status": "ok",
+    "before_chunk_count": 1,
+    "new_chunk_count": 2,
+    "null_section_count": 1,
+    "pct_null_section": 50.0,
+    "n_distinct_sections": 1,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "__no_header__",
+      "Légende"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Plans autres périmètres\\A15152_11_2025_12_19.pdf": {
+    "family": "annexes",
+    "status": "ok",
+    "before_chunk_count": 1,
+    "new_chunk_count": 2,
+    "null_section_count": 1,
+    "pct_null_section": 50.0,
+    "n_distinct_sections": 1,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "__no_header__",
+      "Légende"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Plans autres périmètres\\A15152_12_2025_12_19.pdf": {
+    "family": "annexes",
+    "status": "ok",
+    "before_chunk_count": 3,
+    "new_chunk_count": 3,
+    "null_section_count": 3,
+    "pct_null_section": 100.0,
+    "n_distinct_sections": 0,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "__no_header__"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Plans autres périmètres\\A15152_13_2025_12_19.pdf": {
+    "family": "annexes",
+    "status": "ok",
+    "before_chunk_count": 3,
+    "new_chunk_count": 4,
+    "null_section_count": 1,
+    "pct_null_section": 25.0,
+    "n_distinct_sections": 1,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "__no_header__",
+      "Légende"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Plans autres périmètres\\A15152_14_2025_12_19.pdf": {
+    "family": "annexes",
+    "status": "ok",
+    "before_chunk_count": 5,
+    "new_chunk_count": 5,
+    "null_section_count": 1,
+    "pct_null_section": 20.0,
+    "n_distinct_sections": 1,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "__no_header__",
+      "Légende"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Plans autres périmètres\\A15152_15_2025_12_19.pdf": {
+    "family": "annexes",
+    "status": "ok",
+    "before_chunk_count": 4,
+    "new_chunk_count": 3,
+    "null_section_count": 3,
+    "pct_null_section": 100.0,
+    "n_distinct_sections": 0,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "__no_header__"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Plans autres périmètres\\A15152_16_2025_12_19.pdf": {
+    "family": "annexes",
+    "status": "ok",
+    "before_chunk_count": 1,
+    "new_chunk_count": 1,
+    "null_section_count": 1,
+    "pct_null_section": 100.0,
+    "n_distinct_sections": 0,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "__no_header__"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Plans autres périmètres\\A15152_17_2025_12_19.pdf": {
+    "family": "annexes",
+    "status": "ok",
+    "before_chunk_count": 5,
+    "new_chunk_count": 6,
+    "null_section_count": 1,
+    "pct_null_section": 16.7,
+    "n_distinct_sections": 2,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "__no_header__",
+      "Légende",
+      "R. Greffulhe R. Pasquier R. Marcel Cerdan"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Plans autres périmètres\\A15152_18_2025_12_19.pdf": {
+    "family": "annexes",
+    "status": "ok",
+    "before_chunk_count": 4,
+    "new_chunk_count": 4,
+    "null_section_count": 1,
+    "pct_null_section": 25.0,
+    "n_distinct_sections": 1,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "__no_header__",
+      "Légende"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Plans autres périmètres\\A15152_19_2025_12_19.pdf": {
+    "family": "annexes",
+    "status": "ok",
+    "before_chunk_count": 3,
+    "new_chunk_count": 4,
+    "null_section_count": 1,
+    "pct_null_section": 25.0,
+    "n_distinct_sections": 1,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "__no_header__",
+      "Légende"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Plans autres périmètres\\A15152_20_2025_12_19.pdf": {
+    "family": "annexes",
+    "status": "ok",
+    "before_chunk_count": 2,
+    "new_chunk_count": 3,
+    "null_section_count": 1,
+    "pct_null_section": 33.3,
+    "n_distinct_sections": 1,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "__no_header__",
+      "Légende"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Plans SUP\\ASUP1_2025_12_19.pdf": {
+    "family": "annexes",
+    "status": "timeout",
+    "message": "exceeded 1200s budget"
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Plans SUP\\ASUP2AD5.pdf": {
+    "family": "annexes",
+    "status": "error",
+    "message": "exit 3221226356 after 88s: \nLoading weights:   0%|          | 0/770 [00:00<?, ?it/s]\nLoading weights:  92%|#########2| 712/770 [00:00<00:00, 7114.41it/s]\nLoading weights: 100%|##########| 770/770 [00:00<00:00, 7158.25it/s]\n"
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Plans SUP\\ASUP2D3.pdf": {
+    "family": "annexes",
+    "status": "timeout",
+    "message": "exceeded 1200s budget"
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Plans SUP\\ASUP2E.pdf": {
+    "family": "annexes",
+    "status": "timeout",
+    "message": "exceeded 1200s budget"
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Plans SUP\\ASUP4_2025_12_19.pdf": {
+    "family": "annexes",
+    "status": "timeout",
+    "message": "exceeded 1200s budget"
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Plans SUP\\ASUPBOIS.pdf": {
+    "family": "annexes",
+    "status": "ok",
+    "before_chunk_count": 53,
+    "new_chunk_count": 54,
+    "null_section_count": 54,
+    "pct_null_section": 100.0,
+    "n_distinct_sections": 0,
+    "dropped_low_alpha": 2,
+    "sample_sections": [
+      "__no_header__"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Plans SUP\\PPRI\\ALEA1910.pdf": {
+    "family": "annexes",
+    "status": "ok",
+    "before_chunk_count": 0,
+    "new_chunk_count": 0,
+    "null_section_count": 0,
+    "pct_null_section": null,
+    "n_distinct_sections": 0,
+    "dropped_low_alpha": 0,
+    "sample_sections": []
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Plans SUP\\PPRI\\BOREUX.pdf": {
+    "family": "annexes",
+    "status": "ok",
+    "before_chunk_count": 0,
+    "new_chunk_count": 0,
+    "null_section_count": 0,
+    "pct_null_section": null,
+    "n_distinct_sections": 0,
+    "dropped_low_alpha": 0,
+    "sample_sections": []
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Plans SUP\\PPRI\\ENJEUX.pdf": {
+    "family": "annexes",
+    "status": "ok",
+    "before_chunk_count": 0,
+    "new_chunk_count": 0,
+    "null_section_count": 0,
+    "pct_null_section": null,
+    "n_distinct_sections": 0,
+    "dropped_low_alpha": 0,
+    "sample_sections": []
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Plans SUP\\PPRI\\PPRI12.pdf": {
+    "family": "annexes",
+    "status": "ok",
+    "before_chunk_count": 0,
+    "new_chunk_count": 0,
+    "null_section_count": 0,
+    "pct_null_section": null,
+    "n_distinct_sections": 0,
+    "dropped_low_alpha": 0,
+    "sample_sections": []
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Plans SUP\\PPRI\\PPRI1234_11.pdf": {
+    "family": "annexes",
+    "status": "ok",
+    "before_chunk_count": 0,
+    "new_chunk_count": 0,
+    "null_section_count": 0,
+    "pct_null_section": null,
+    "n_distinct_sections": 0,
+    "dropped_low_alpha": 0,
+    "sample_sections": []
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Plans SUP\\PPRI\\PPRI13.pdf": {
+    "family": "annexes",
+    "status": "ok",
+    "before_chunk_count": 0,
+    "new_chunk_count": 0,
+    "null_section_count": 0,
+    "pct_null_section": null,
+    "n_distinct_sections": 0,
+    "dropped_low_alpha": 0,
+    "sample_sections": []
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Plans SUP\\PPRI\\PPRI15.pdf": {
+    "family": "annexes",
+    "status": "ok",
+    "before_chunk_count": 0,
+    "new_chunk_count": 0,
+    "null_section_count": 0,
+    "pct_null_section": null,
+    "n_distinct_sections": 0,
+    "dropped_low_alpha": 0,
+    "sample_sections": []
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Plans SUP\\PPRI\\PPRI16.pdf": {
+    "family": "annexes",
+    "status": "ok",
+    "before_chunk_count": 0,
+    "new_chunk_count": 0,
+    "null_section_count": 0,
+    "pct_null_section": null,
+    "n_distinct_sections": 0,
+    "dropped_low_alpha": 0,
+    "sample_sections": []
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Plans SUP\\PPRI\\PPRI5_6_7.pdf": {
+    "family": "annexes",
+    "status": "ok",
+    "before_chunk_count": 0,
+    "new_chunk_count": 0,
+    "null_section_count": 0,
+    "pct_null_section": null,
+    "n_distinct_sections": 0,
+    "dropped_low_alpha": 0,
+    "sample_sections": []
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Plans SUP\\PPRI\\PPRI8_9_10.pdf": {
+    "family": "annexes",
+    "status": "ok",
+    "before_chunk_count": 0,
+    "new_chunk_count": 0,
+    "null_section_count": 0,
+    "pct_null_section": null,
+    "n_distinct_sections": 0,
+    "dropped_low_alpha": 0,
+    "sample_sections": []
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Plans SUP\\PPRI\\PPRI_LEGEND.pdf": {
+    "family": "annexes",
+    "status": "ok",
+    "before_chunk_count": 0,
+    "new_chunk_count": 0,
+    "null_section_count": 0,
+    "pct_null_section": null,
+    "n_distinct_sections": 0,
+    "dropped_low_alpha": 0,
+    "sample_sections": []
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Plans SUP\\PPRI\\PPRIBOU.pdf": {
+    "family": "annexes",
+    "status": "ok",
+    "before_chunk_count": 0,
+    "new_chunk_count": 0,
+    "null_section_count": 0,
+    "pct_null_section": null,
+    "n_distinct_sections": 0,
+    "dropped_low_alpha": 0,
+    "sample_sections": []
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Textes et documents illustrés\\ANN10.pdf": {
+    "family": "annexes",
+    "status": "ok",
+    "before_chunk_count": 5,
+    "new_chunk_count": 5,
+    "null_section_count": 1,
+    "pct_null_section": 20.0,
+    "n_distinct_sections": 4,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "__no_header__",
+      "Table des matières",
+      "DÉLIBÉRATION DÉFINISSANT LE PÉRIMÈTRE",
+      "II. PÉRIMÈTRE DE LA ZONE DE DÉVELOPPEMENT PRIORITAIRE",
+      "III. DOSSIER RELATIF AU CLASSEMENT ET À LA DÉFINITION DE LA ZONE DE DÉVELOPPEMENT PRIORITAIRE"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Textes et documents illustrés\\ANN11_2025_12_19.pdf": {
+    "family": "annexes",
+    "status": "ok",
+    "before_chunk_count": 3,
+    "new_chunk_count": 3,
+    "null_section_count": 3,
+    "pct_null_section": 100.0,
+    "n_distinct_sections": 0,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "__no_header__"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Textes et documents illustrés\\ANN1_2025_12_19.pdf": {
+    "family": "annexes",
+    "status": "ok",
+    "before_chunk_count": 702,
+    "new_chunk_count": 851,
+    "null_section_count": 0,
+    "pct_null_section": 0.0,
+    "n_distinct_sections": 371,
+    "dropped_low_alpha": 1,
+    "sample_sections": [
+      "TITRE PREMIER",
+      "Table des matières",
+      "I. - SERVITUDES RELATIVES A LA CONSERVATION DU PATRIMOINE",
+      "A. - PATRIMOINE NATUREL",
+      "a) Forêts",
+      "b) Littoral maritime :",
+      "c) Eaux",
+      "Place Paul Verlaine - 13 e arrondissement   :",
+      "Place Henri Queuille - 15 e arrondissement   :",
+      "Fontaine Lamartine - 16 e arrondissement   :",
+      "Square de la Madone - 18 e arrondissement     :",
+      "Réservoir de Ménilmontant - 20 e arrondissement   :",
+      "Berges de Seine du bois de Boulogne - 16 e arrondissement     :",
+      "devra être équipé d'un bassin de rétention d'au moins 60 m2 et d'un",
+      "P18"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Textes et documents illustrés\\ANN2B_2025_12_19.pdf": {
+    "family": "annexes",
+    "status": "ok",
+    "before_chunk_count": 48,
+    "new_chunk_count": 45,
+    "null_section_count": 1,
+    "pct_null_section": 2.2,
+    "n_distinct_sections": 17,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "__no_header__",
+      "Table des matières",
+      "I. - ALIMENTATION EN EAU",
+      "1)  Le réseau d'eau potable",
+      "L'approvisionnement",
+      "Le réseau de distribution",
+      "Le patrimoine",
+      "Protection durable de la ressource en eau",
+      "2) Le réseau d'eau non potable",
+      "La   production   et   la   distribution   de   l'eau   non potable",
+      "Les   usages   de   l'eau   non   potable   et   les appareils hydrauliques",
+      "SCHÉMAS DES RÉSEAUX : Assainissement",
+      "II. - ASSAINISSEMENT",
+      "Les caractéristiques essentielles du réseau",
+      "Le programme de modernisation de l'assainissement parisien"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Textes et documents illustrés\\ANN3.pdf": {
+    "family": "annexes",
+    "status": "ok",
+    "before_chunk_count": 23,
+    "new_chunk_count": 30,
+    "null_section_count": 1,
+    "pct_null_section": 3.3,
+    "n_distinct_sections": 18,
+    "dropped_low_alpha": 2,
+    "sample_sections": [
+      "__no_header__",
+      "Table des matières",
+      "I. - RAPPORT DE PRÉSENTATION",
+      "HELIPORT DE PARIS - ISSY LES MOULINEAUX",
+      "PLAN D'EXPOSITION AU BRUIT",
+      "SOMMAIRE",
+      "4 Plan d'exposition au bruit révisé 5 Urbanisme 6 Glossaire",
+      "Phase étude :",
+      "Phase consultative :",
+      "Phase d'application",
+      "Par QFU",
+      "Par trajectoires",
+      "A moyen terme on suppose :",
+      "A long terme on suppose :",
+      "3.3 Trafic à court terme :"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Textes et documents illustrés\\ANN4_2025_12_19.pdf": {
+    "family": "annexes",
+    "status": "ok",
+    "before_chunk_count": 240,
+    "new_chunk_count": 59,
+    "null_section_count": 1,
+    "pct_null_section": 1.7,
+    "n_distinct_sections": 52,
+    "dropped_low_alpha": 1,
+    "sample_sections": [
+      "__no_header__",
+      "Table des matières",
+      "I. - ARRÊTÉS PRÉFECTORAUX",
+      "Arrêté préfectoral N° IDF-2025-06-24-00010",
+      "ARRETE",
+      "Article 1er     :",
+      "Article 2 :",
+      "Article 3     :",
+      "Article 4 :",
+      "Article 5     :",
+      "Article 6     :",
+      "Article 7     :",
+      "Article 8     :",
+      "Voies et délais de recours      :",
+      "Direction régionale et interdépartementale de l'Environnement, de l'Aménagement et des Transports d'Île-de-France"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Textes et documents illustrés\\ANN5_2025_12_19.pdf": {
+    "family": "annexes",
+    "status": "ok",
+    "before_chunk_count": 143,
+    "new_chunk_count": 295,
+    "null_section_count": 1,
+    "pct_null_section": 0.3,
+    "n_distinct_sections": 248,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "__no_header__",
+      "Table des matières",
+      "NOUVEAU RÈGLEMENT DE LA PUBLICITÉ, DES ENSEIGNES ET PRÉSENSEIGNES À PARIS (ARRÊTÉ DU 7 JUILLET 2011)",
+      "AVERTISSEMENT",
+      "I - FONDEMENT JURIDIQUE DU RÈGLEMENT",
+      "II - CHAMP D'APPLICATION TERRITORIAL",
+      "III - EFFETS DU RÈGLEMENT",
+      "IV - STRUCTURE DU PRÉSENT RÈGLEMENT",
+      "IV-1 Document écrits :",
+      "IV-2 Documents graphiques :",
+      "V - TEXTES RÉGLEMENTAIRES ET LÉGISLATIFS À RESPECTER",
+      "TITRE I DISPOSITIONS GÉNÉRALES",
+      "ARTICLE DG1 - ZONAGE",
+      "REGLEMENT LOCAL DE PUBLICITE",
+      "ARTICLE DG2 - PLAN"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Textes et documents illustrés\\ANN6.pdf": {
+    "family": "annexes",
+    "status": "ok",
+    "before_chunk_count": 6,
+    "new_chunk_count": 13,
+    "null_section_count": 1,
+    "pct_null_section": 7.7,
+    "n_distinct_sections": 11,
+    "dropped_low_alpha": 1,
+    "sample_sections": [
+      "__no_header__",
+      "Table des matières",
+      "Arrêté préfectoral du 24 octobre 2000, modifié par l'Arrêté du 2 janvier 2002 déclarant zone à risques vis-à-vis du plomb, l'ensemble du territoire...",
+      "Article premier",
+      "Article 2",
+      "Article 3",
+      "Article 4",
+      "Article 5",
+      "Article 6",
+      "Article 7",
+      "Article 8",
+      "Article 9"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Textes et documents illustrés\\ANN7.pdf": {
+    "family": "annexes",
+    "status": "ok",
+    "before_chunk_count": 2,
+    "new_chunk_count": 7,
+    "null_section_count": 1,
+    "pct_null_section": 14.3,
+    "n_distinct_sections": 6,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "__no_header__",
+      "Table des matières",
+      "3MISE EN ŒUVRE DE LA TAXE D'AMÉNAGEMENT",
+      "I. LA PART COMMUNALE DE LA TAXE D'AMÉNAGEMENT",
+      "Avertissement",
+      "II. LA PART DÉPARTEMENTALE DE LA TAXE D'AMÉNAGEMENT",
+      "SECTEURS RELATIFS AUX TAUX DE LA TAXE D'AMÉNAGEMENT"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Textes et documents illustrés\\ANN8_2025_12_19.pdf": {
+    "family": "annexes",
+    "status": "ok",
+    "before_chunk_count": 33,
+    "new_chunk_count": 35,
+    "null_section_count": 1,
+    "pct_null_section": 2.9,
+    "n_distinct_sections": 12,
+    "dropped_low_alpha": 1,
+    "sample_sections": [
+      "__no_header__",
+      "Table des matières",
+      "I. BIENS INSCRITS AU PATRIMOINE MONDIAL CONCERNANT LE TERRITOIRE DE PARIS",
+      "1° Paris, rives de Seine",
+      "2°  Les Chemins de Saint-Jacques-de-Compostelle en France",
+      "II. ZONE TAMPON DES BIENS INSCRITS AU PATRIMOINE MONDIAL CONCERNANT LE TERRITOIRE DE PARIS",
+      "2° Les Chemins de Saint-Jacques-de-Compostelle en France",
+      "3° L'0euvre   architecturale   de   Le   Corbusier,   une   contribution exceptionnelle au Mouvement Moderne",
+      "3°1 - Maisons Laroche et Jeanneret",
+      "3°2 -  Immeuble locatif à la Porte Molitor",
+      "600 - Paris, rives de la Seine : délimitation du bien lors de son inscription sur la Liste en 1991",
+      "PARIS, RIVES DE LA SEINE, PATRIMOINE MONDIAL UNESCO",
+      "PROPOSITION D'EXTENSION MINEURE ET CRÉATION D'UNE ZONE TAMPON Rue Cardinet Boulevard de Reims Canal                             de                 ..."
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\Annexes\\Textes et documents illustrés\\ANN9.pdf": {
+    "family": "annexes",
+    "status": "ok",
+    "before_chunk_count": 92,
+    "new_chunk_count": 178,
+    "null_section_count": 1,
+    "pct_null_section": 0.6,
+    "n_distinct_sections": 90,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "__no_header__",
+      "Table des matières",
+      "I. LES SECTEURS D'INFORMATION SUR LES SOLS",
+      "Effets des SIS",
+      "II. LES SECTEURS D'INFORMATION SUR LES SOLS À PARIS",
+      "Guide de lecture",
+      "II.1- ARRÊTÉ PRÉFECTORAL",
+      "II.2- PLAN DE SITUATION DES SECTEURS D'INFORMATION SUR LES SOLS À PARIS",
+      "II.3- LISTE PAR ARRONDISSEMENT DES SECTEURS D'INFORMATION SUR LES SOLS DÉNOMMÉS PAR LEUR IDENTIFIANT ET LEUR NOM D'USAGE",
+      "3 ème  ARRONDISSEMENT",
+      "75SIS03559 « GSTS QUALITÉ OR »",
+      "Caractéristiques du SIS",
+      "4 ème  ARRONDISSEMENT",
+      "75SIS03551 « STATION-SERVICE AAS CARBURANTS »",
+      "C aractéristiques du SIS"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\OAP\\Sectorielles\\OAP_BARTHOLOME_BRANCION.pdf": {
+    "family": "oap",
+    "status": "ok",
+    "before_chunk_count": 6,
+    "new_chunk_count": 7,
+    "null_section_count": 0,
+    "pct_null_section": 0.0,
+    "n_distinct_sections": 3,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "ORIENTATIONS D'AMÉNAGEMENT ET DE PROGRAMMATION PAR QUARTIER OU SECTEUR",
+      "Bartholomé-Brancion (15 ème )",
+      "Dispositions relatives aux espaces libres et à leurs caractéristiques :"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\OAP\\Sectorielles\\OAP_BEAUGRENELLE.pdf": {
+    "family": "oap",
+    "status": "ok",
+    "before_chunk_count": 7,
+    "new_chunk_count": 8,
+    "null_section_count": 0,
+    "pct_null_section": 0.0,
+    "n_distinct_sections": 2,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "ORIENTATIONS D'AMÉNAGEMENT ET DE PROGRAMMATION PAR QUARTIER OU SECTEUR",
+      "Beaugrenelle / Front de Seine (15 ème )"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\OAP\\Sectorielles\\OAP_BEDIER_OUDINE.pdf": {
+    "family": "oap",
+    "status": "ok",
+    "before_chunk_count": 11,
+    "new_chunk_count": 14,
+    "null_section_count": 0,
+    "pct_null_section": 0.0,
+    "n_distinct_sections": 7,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "ORIENTATIONS D'AMÉNAGEMENT ET DE PROGRAMMATION PAR QUARTIER OU SECTEUR",
+      "Bédier-Oudiné (13 ème )",
+      "- L'amélioration des équipements publics présents sur le site",
+      "- De nouveaux équipements municipaux",
+      "- La requalification des espaces publics",
+      "- Le renforcement de la mixité sociale et fonctionnelle",
+      "Dispositions relatives aux espaces libres et à leurs caractéristiques :"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\OAP\\Sectorielles\\OAP_BERCY_CHARENTON.pdf": {
+    "family": "oap",
+    "status": "ok",
+    "before_chunk_count": 8,
+    "new_chunk_count": 8,
+    "null_section_count": 0,
+    "pct_null_section": 0.0,
+    "n_distinct_sections": 3,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "ORIENTATIONS D'AMÉNAGEMENT ET DE PROGRAMMATION PAR QUARTIER OU SECTEUR",
+      "Bercy-Charenton (12 ème )",
+      "Dispositions relatives aux espaces libres et à leurs caractéristiques :"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\OAP\\Sectorielles\\OAP_GARE_DE_LYON_DAUMESNIL.pdf": {
+    "family": "oap",
+    "status": "ok",
+    "before_chunk_count": 6,
+    "new_chunk_count": 7,
+    "null_section_count": 0,
+    "pct_null_section": 0.0,
+    "n_distinct_sections": 3,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "ORIENTATIONS D'AMÉNAGEMENT ET DE PROGRAMMATION PAR QUARTIER OU SECTEUR",
+      "Gare de Lyon-Daumesnil - Les Messageries (12 ème )",
+      "Dispositions relatives aux espaces libres et à leurs caractéristiques :"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\OAP\\Sectorielles\\OAP_MAINE_MONTPARNASSE.pdf": {
+    "family": "oap",
+    "status": "ok",
+    "before_chunk_count": 6,
+    "new_chunk_count": 8,
+    "null_section_count": 0,
+    "pct_null_section": 0.0,
+    "n_distinct_sections": 5,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "ORIENTATIONS D'AMÉNAGEMENT ET DE PROGRAMMATION PAR QUARTIER OU SECTEUR",
+      "Maine-Montparnasse (6 ème , 14 ème , 15 ème )",
+      "Faciliter les mobilités actives dans l'ensemble du périmètre pour simplifier  les  parcours  des  piétons,  des  personnes  à  mobilité réduite, de...",
+      "Améliorer les continuités végétales de la place de Catalogne à la place du 18 juin 1940, notamment :",
+      "Par ailleurs, cette restructuration visera à :"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\OAP\\Sectorielles\\OAP_OLYMPIADES.pdf": {
+    "family": "oap",
+    "status": "ok",
+    "before_chunk_count": 8,
+    "new_chunk_count": 9,
+    "null_section_count": 0,
+    "pct_null_section": 0.0,
+    "n_distinct_sections": 3,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "ORIENTATIONS D'AMÉNAGEMENT ET DE PROGRAMMATION PAR QUARTIER OU SECTEUR",
+      "Olympiades / Villa d'Este-Place de Vénétie (13 ème )",
+      "Villa d'Este - Place de Vénétie"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\OAP\\Sectorielles\\OAP_PARIS_NORD_EST.pdf": {
+    "family": "oap",
+    "status": "ok",
+    "before_chunk_count": 31,
+    "new_chunk_count": 32,
+    "null_section_count": 0,
+    "pct_null_section": 0.0,
+    "n_distinct_sections": 13,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "ORIENTATIONS D'AMÉNAGEMENT ET DE PROGRAMMATION PAR QUARTIER OU SECTEUR",
+      "Paris Nord-Est (18 ème -19 ème )",
+      "1.1 Secteur Clignancourt-Gley-Poissonniers",
+      "1.2 Secteur Ordener-Poissonniers (dit Jardin des Mécanos)",
+      "1.3 Secteur Gare des Mines-Fillettes",
+      "1.4 Secteur Dubois-Condorcet",
+      "1.5 Secteur Chapelle International",
+      "1.6 Secteur Evangile-Ney",
+      "1.6.1 Chapelle-Charbon",
+      "1.6.2 CAP 18",
+      "1.7 Secteur Hébert",
+      "1.8 Secteur Rosa Parks",
+      "1.9 Secteur Porte de la Villette"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\OAP\\Sectorielles\\OAP_PARIS_RIVE_GAUCHE.pdf": {
+    "family": "oap",
+    "status": "ok",
+    "before_chunk_count": 18,
+    "new_chunk_count": 22,
+    "null_section_count": 0,
+    "pct_null_section": 0.0,
+    "n_distinct_sections": 11,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "ORIENTATIONS D'AMÉNAGEMENT ET DE PROGRAMMATION PAR QUARTIER OU SECTEUR",
+      "Paris Rive Gauche (13 ème )",
+      "Le dossier de réalisation de la ZAC, modifié par délibérations des 22 et 23 septembre 2003 puis des 19 et 20 juin 2012, intègre les grandes options...",
+      "MISE EN VALEUR DES BERGES",
+      "INTEGRER L'UNIVERSITE DANS LA VILLE",
+      "REQUALIFICATION DE LA GARE D'AUSTERLITZ ET DES EMPRISES FERROVIAIRES",
+      "PROMOUVOIR,  DANS  LE  QUARTIER  TOLBIAC  SUD,  LES  LIENS ENTRE ANCIENS ET NOUVEAUX QUARTIERS",
+      "METTRE EN PLACE UNE CONTINUITE URBAINE ET PAYSAGERE AVEC LE QUARTIER PATAY MASSENA ET LA COMMUNE D'IVRY",
+      "DÉVELOPPER LE LIEN METROPOLITAIN SUR LE SOUS-SECTEUR MASSÉNA BRUNESEAU",
+      "Caractéristiques des espaces publics et localisation des équipements et espaces verts prévus pour l'ensemble de la ZAC :",
+      "Dispositions relatives aux espaces libres et à leurs caractéristiques :"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\OAP\\Sectorielles\\OAP_PAUL_BOURGET.pdf": {
+    "family": "oap",
+    "status": "ok",
+    "before_chunk_count": 6,
+    "new_chunk_count": 10,
+    "null_section_count": 0,
+    "pct_null_section": 0.0,
+    "n_distinct_sections": 7,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "ORIENTATIONS D'AMÉNAGEMENT ET DE PROGRAMMATION PAR QUARTIER OU SECTEUR",
+      "Paul Bourget (13 ème )",
+      "Conformément aux objectifs votés par délibération du Conseil de Paris des 16 et 17 mai 2011, les orientations d'aménagement sont les suivantes :",
+      "HABITAT",
+      "DESENCLAVEMENT  DU  QUARTIER  ET  ESPACES  PUBLICS  DE VOIRIE",
+      "ESPACES VERTS",
+      "EQUIPEMENTS, ACTIVITES ECONOMIQUES"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\OAP\\Sectorielles\\OAP_PORTES_EST.pdf": {
+    "family": "oap",
+    "status": "ok",
+    "before_chunk_count": 15,
+    "new_chunk_count": 22,
+    "null_section_count": 0,
+    "pct_null_section": 0.0,
+    "n_distinct_sections": 13,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "ORIENTATIONS D'AMÉNAGEMENT ET DE PROGRAMMATION PAR QUARTIER OU SECTEUR",
+      "Portes de l'Est parisien (12 ème  - 20 ème )",
+      "a. Secteur Porte de Vincennes",
+      "Dispositions relatives aux espaces libres et à leurs caractéristiques :",
+      "b. Secteur Porte de Montreuil",
+      "c. Secteur Python-Duvernois",
+      "d. Secteur Saint Blaise",
+      "Périmètres",
+      "Activités",
+      "Équipements et espaces verts publics",
+      "Infrastructures et activités et /ou ouvrages liés",
+      "PORTES DE L'EST PARISIEN",
+      "Cadre urbain"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\OAP\\Sectorielles\\OAP_SAINT_VINCENT_DE_PAUL.pdf": {
+    "family": "oap",
+    "status": "ok",
+    "before_chunk_count": 5,
+    "new_chunk_count": 9,
+    "null_section_count": 0,
+    "pct_null_section": 0.0,
+    "n_distinct_sections": 7,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "ORIENTATIONS D'AMÉNAGEMENT ET DE PROGRAMMATION PAR QUARTIER OU SECTEUR",
+      "Saint-Vincent-de-Paul (14ème)",
+      "Créer  un  quartier  à  dominante  logement  ouvert  sur  la  ville  et favorisant une mixité sociale",
+      "Engager une démarche environnementale ambitieuse, poussée et exemplaire",
+      "Réaliser un aménagement qui s'inscrit dans la trame paysagère du quartier",
+      "Créer un quartier qui valorise son patrimoine et son histoire",
+      "Dispositions relatives aux espaces libres et à leurs caractéristiques :"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\OAP\\Sectorielles\\OAP_SUZANNE_LENGLEN.pdf": {
+    "family": "oap",
+    "status": "ok",
+    "before_chunk_count": 7,
+    "new_chunk_count": 7,
+    "null_section_count": 0,
+    "pct_null_section": 0.0,
+    "n_distinct_sections": 2,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "ORIENTATIONS D'AMÉNAGEMENT ET DE PROGRAMMATION PAR QUARTIER OU SECTEUR",
+      "Héliport, Suzanne Lenglen, Frères Voisin, Aquaboulevard (15 ème )"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\OAP\\Thématiques\\OAP_BIODIVERSITE.pdf": {
+    "family": "oap",
+    "status": "ok",
+    "before_chunk_count": 34,
+    "new_chunk_count": 45,
+    "null_section_count": 0,
+    "pct_null_section": 0.0,
+    "n_distinct_sections": 28,
+    "dropped_low_alpha": 3,
+    "sample_sections": [
+      "ORIENTATION D'AMÉNAGEMENT ET DE PROGRAMMATION THÉMATIQUE",
+      "PRÉAMBULE",
+      "Qu'est - ce que l'OAP Biodiversité et adaptation au changement climatique ?",
+      "Champ d'application et portée de l'OAP",
+      "1 ORIENTATIONS GÉNÉRALES",
+      "1.1 LA PERMÉABILITÉ DES SOLS",
+      "1.2 LES ESPACES VÉGÉTALISÉS ET PLANTATIONS",
+      "1.3 LA VÉGÉTALISATION DES CONSTRUCTIONS",
+      "1.4 LA FAUNE",
+      "1.5 LA GESTION DES DÉCHETS ORGANIQUES",
+      "1.6 LA TRAME NOCTURNE ET LA TRAME BRUNE",
+      "1.7 L' ADAPTATION DE L ' ESPACE PUBLIC AU CHANGEMENT CLIMATIQUE",
+      "1.8 LES ESPACES DE COMPENSATION POTENTIELS (CARTE N°1)",
+      "2 ORIENTATIONS PARTICULIÈRES À CERTAINS SECTEURS",
+      "2.1 PRÉSERVER ET RENFORCER LA NATURE DANS LA VILLE (CARTE N°2)"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\OAP\\Thématiques\\OAP_CONSTRUCTION.pdf": {
+    "family": "oap",
+    "status": "ok",
+    "before_chunk_count": 18,
+    "new_chunk_count": 26,
+    "null_section_count": 1,
+    "pct_null_section": 3.8,
+    "n_distinct_sections": 16,
+    "dropped_low_alpha": 2,
+    "sample_sections": [
+      "__no_header__",
+      "ORIENTATION D'AMÉNAGEMENT ET DE PROGRAMMATION THÉMATIQUE",
+      "Construction neuve",
+      "PRÉAMBULE",
+      "Qu'est - ce que l'OAP thématique Construction neuve ?",
+      "Champ d'application et portée de l'OAP",
+      "1 DÉVELOPPER UNE ARCHITECTURE BIOCLIMATIQUE ET CONTEXTUELLE",
+      "- l 'isolation efficace des parois ;",
+      "· Maîtriser les apports thermiques et le stockage de la chaleur en été et en hiver, notamment par :",
+      "2 RÉALISER DES CONSTRUCTIONS SOBRES, PÉRENNES ET RÉVERSIBLES",
+      "2.1 SOBRIÉTÉ",
+      "2.2 QUALITÉ ET PÉRENNITÉ DES CONSTRUCTIONS ET DES FAÇADES",
+      "2.3 RÉVERSIBILITÉ",
+      "2.4 SYSTÈMES ÉNERGÉTIQUES",
+      "3 PROMOUVOIR UNE HAUTE QUALITÉ D ' USAGE"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\OAP\\Thématiques\\OAP_ESPACE_PUBLIC.pdf": {
+    "family": "oap",
+    "status": "ok",
+    "before_chunk_count": 18,
+    "new_chunk_count": 27,
+    "null_section_count": 1,
+    "pct_null_section": 3.7,
+    "n_distinct_sections": 20,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "__no_header__",
+      "Espace public",
+      "SOMMAIRE",
+      "PRÉAMBULE",
+      "Qu'est - ce que l'OAP Espace public ?",
+      "Champ d'application et portée de l'OAP",
+      "1 INTÉGRER LES ENJEUX DU DÉRÈGLEMENT CLIMATIQUE ET DE L ' ÉROSION DE LA BIODIVERSITÉ DANS L ' AMÉNAGEMENT DE L ' ESPACE PUBLIC",
+      "1.1 LA PLACE DU VÉGÉTAL DANS L ' ESPACE PUBLIC",
+      "· Prendre  en  compte  les  contraintes  inhérentes  à  la  plantation  en  contexte urbain dense, notamment par :",
+      "1.2 LA RÉDUCTION DE L ' EFFET D ' ÎLOT DE CHALEUR PRODUIT PAR LES SOLS",
+      "1.3 LA MISE EN PLACE DE DISPOSITIFS DE RAFRAÎCHISSEMENT",
+      "1.4 LA RÉDUCTION DE L ' IMPACT CARBONE DES AMÉNAGEMENTS",
+      "1.5 LE DÉVELOPPEMENT DE LA TRAME BRUNE",
+      "2 RENDRE L ' ESPACE PUBLIC ACCESSIBLE À TOUTES ET TOUS",
+      "2.1 UN ESPACE PUBLIC ACCUEILLANT"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\OAP\\Thématiques\\OAP_HERITAGE.pdf": {
+    "family": "oap",
+    "status": "ok",
+    "before_chunk_count": 21,
+    "new_chunk_count": 26,
+    "null_section_count": 0,
+    "pct_null_section": 0.0,
+    "n_distinct_sections": 15,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "ORIENTATION D'AMÉNAGEMENT ET DE PROGRAMMATION THÉMATIQUE",
+      "Héritage et transformation",
+      "SOMMAIRE",
+      "PRÉAMBULE",
+      "Qu'est - ce que l'OAP thématique Héritage et transformation ?",
+      "Champ d'application et portée de l'OAP",
+      "1. S' APPUYER SUR L ' EXISTANT EN PRIORITÉ",
+      "2. METTRE EN VALEUR LES QUALITÉS BIOCLIMATIQUES, URBAINES ET ARCHITECTURALES DES CONSTRUCTIONS EXISTANTES",
+      "· Préserver et mettre en valeur les qualités de composition des façades existantes, notamment par :",
+      "3. RÉALISER DES TRANSFORMATIONS SOBRES ET PÉRENNES",
+      "3.1 SOBRIÉTÉ ET CONFORT THERMIQUE",
+      "3.2 QUALITÉ ET PÉRENNITÉ DES CONSTRUCTIONS ET DES FAÇADES",
+      "3.3 SYSTÈMES ÉNERGÉTIQUES",
+      "4. AMÉLIORER LES QUALITÉS D ' USAGE",
+      "5. CONCOURIR À LA BIODIVERSITÉ"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\OAP\\Thématiques\\OAP_METROPOLE.pdf": {
+    "family": "oap",
+    "status": "ok",
+    "before_chunk_count": 20,
+    "new_chunk_count": 22,
+    "null_section_count": 0,
+    "pct_null_section": 0.0,
+    "n_distinct_sections": 13,
+    "dropped_low_alpha": 2,
+    "sample_sections": [
+      "ORIENTATION D'AMÉNAGEMENT ET DE PROGRAMMATION THÉMATIQUE",
+      "Liens métropolitains",
+      "PRÉAMBULE",
+      "QU ' EST-CE QUE L 'OAP LIENS MÉTROPOLITAINS ?",
+      "CHAMP D ' APPLICATION ET PORTÉE DE L 'OAP",
+      "SECTEURS CONCERNÉS PAR L 'OAP",
+      "ORIENTATIONS GÉNÉRALES",
+      "1 LE BOULEVARD PÉRIPHÉRIQUE ET SES ABORDS",
+      "2 LA SEINE ET SES BERGES",
+      "3 LES BOIS ET LEURS LISIÈRES",
+      "4 LES CANAUX ET LEURS BERGES",
+      "5 LA VALLÉE DE LA BIÈVRE",
+      "6 CARTES"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\OAP\\Thématiques\\OAP_QUART_HEURE.pdf": {
+    "family": "oap",
+    "status": "ok",
+    "before_chunk_count": 16,
+    "new_chunk_count": 26,
+    "null_section_count": 0,
+    "pct_null_section": 0.0,
+    "n_distinct_sections": 21,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "ORIENTATION D'AMÉNAGEMENT ET DE PROGRAMMATION THÉMATIQUE",
+      "Quartier du quart d'heure",
+      "SOMMAIRE",
+      "PRÉAMBULE",
+      "Qu'est - ce que l'OAP thématique Quartier du quart d'heure ?",
+      "Champ d'application et portée de l'OAP",
+      "1 UNE VILLE DES PROXIMITÉS INTÉGRANT LES ENJEUX DE SANTÉ DE SES HABITANTS ET USAGERS",
+      "1.1 UNE OFFRE DE SERVICES DE PRÉVENTION ET DE SOINS ACCESSIBLE ET ÉQUITABLEMENT RÉPARTIE SUR LE TERRITOIRE PARISIEN",
+      "1.2 MULTIPLIER LES ESPACES DE RESPIRATION AU SEIN DE LA VILLE DENSE",
+      "1.3 L ' AGRICULTURE URBAINE ET L ' ALIMENTATION DURABLE",
+      "2 DES QUARTIERS POURVUS DES CENTRALITÉS ET AMÉNITÉS NÉCESSAIRES À LA VIE QUOTIDIENNE",
+      "2.1 UN « SOCLE » D ' ÉQUIPEMENTS ET DE SERVICES DE PROXIMITÉ",
+      "2.2 LE RENFORCEMENT, LA REQUALIFICATION ET LA DIVERSIFICATION DU COMMERCE DE PROXIMITÉ",
+      "· Promouvoir au  sein  des  opérations  d'aménagement une  offre  diversifiée  et évolutive, notamment par :",
+      "2.3 L ' ACCÈS À LA CULTURE"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\OAP\\Thématiques\\OAP_SANTE.pdf": {
+    "family": "oap",
+    "status": "ok",
+    "before_chunk_count": 31,
+    "new_chunk_count": 40,
+    "null_section_count": 0,
+    "pct_null_section": 0.0,
+    "n_distinct_sections": 26,
+    "dropped_low_alpha": 0,
+    "sample_sections": [
+      "ORIENTATION D'AMÉNAGEMENT ET DE PROGRAMMATION THÉMATIQUE",
+      "Santé publique et environnementale",
+      "SOMMAIRE",
+      "PRÉAMBULE",
+      "Qu'est - ce que l'OAP Santé publique et environnementale ?",
+      "Champ d'application et portée de l'OAP",
+      "1 RAPPEL DES ORIENTATIONS DES AUTRES OAP THÉMATIQUES EN RELATION AVEC LA SANTÉ",
+      "1.1 RENFORCER L ' ACCÈS À L ' OFFRE DE PRÉVENTION ET DE SOINS",
+      "1.2 RENFORCER LA VÉGÉTALISATION ET RAFRAICHIR LA VILLE",
+      "Dans les secteurs plus particulièrement exposés à l'effet d'îlots de chaleur urbains :",
+      "Dans les espaces publics particulièrement vulnérables aux épisodes de fortes chaleurs :",
+      "1.3 PROMOUVOIR UNE ALIMENTATION DURABLE",
+      "1.4 CONCEVOIR  DES  CONSTRUCTIONS  NEUVES  ET  DES  INTERVENTIONS  SUR  LES CONSTRUCTIONS EXISTANTES CONFORTABLES, FAVORABLES À LA SANTÉ DE LEURS H...",
+      "· Veiller à la prise en compte des secteurs d'informations sur les sols annexés au PLU.",
+      "1.5 FAIRE ÉVOLUER LES MOBILITÉS ET L ' ESPACE PUBLIC POUR RÉDUIRE LES POLLUTIONS ET FAVORISER L ' ACTIVITÉ PHYSIQUE"
+    ]
+  },
+  "C:\\Users\\Wenwen\\aria\\Ressources\\PLU\\75 Paris\\PLU Bioclimatique\\PADD\\PADD.pdf": {
+    "family": "padd",
+    "status": "ok",
+    "before_chunk_count": 148,
+    "new_chunk_count": 176,
+    "null_section_count": 0,
+    "pct_null_section": 0.0,
+    "n_distinct_sections": 95,
+    "dropped_low_alpha": 1,
+    "sample_sections": [
+      "PROJET D ' AMÉNAGEMENT ET DE DÉVELOPPEMENT DURABLES",
+      "Introduction",
+      "Rappel juridique - le rôle du PADD",
+      "Processus d'élaboration du PADD",
+      "L'urbanisme  bioclimatique,  une  méthode  au  service de la transition écologique du territoire",
+      "1. Penser Paris comme membre d'une métropole majeure",
+      "2. Concevoir une ville résiliente face aux défis environnementaux",
+      "3. Accompagner  les  mutations  de  la  société  au  sein  du",
+      "patrimoine parisien",
+      "4. Concevoir la ville avec ses habitants et ses usagers",
+      "A. La nature en ville : atout majeur du cadre de vie et de l'adaptation au changement climatique",
+      "1. Donner sa place à la nature dans la ville",
+      "Orientation 1 : La nature, des apports bénéfiques multiples au fonctionnement de la cité",
+      "Orientation 2 : La biodiversité et l'essor des vies végétale et animale",
+      "Encadré territorial : Les Bois"
+    ]
+  }
+}
