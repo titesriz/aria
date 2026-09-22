@@ -6,6 +6,44 @@
 
 ---
 
+## 2026-09-20 — doc-consistency cleanup (PROJECT_MAP/README/SESSION_STATE split), no code touched
+
+**Reconciled the "incremental" claim** across README.md and PROJECT_MAP §2, which both implied the whole `aria-rag ingest` write is incremental — it isn't: only extraction + embedding are cached for unchanged files, the FAISS/BM25 index structure is rebuilt in full every write (PROJECT_MAP §4 already had this right; used as the reference wording).
+
+**Enforced one PROJECT_MAP=stable-structure / SESSION_STATE=current-state rule.** Removed PROJECT_MAP §6 ("Current state") entirely — replaced with a pointer here. Two facts that actually belong in PROJECT_MAP because they're permanent design properties, not dated status, moved there instead of here: the `Ressources/`+`corpus_mapping.yaml` cross-machine fragility (now inline in §1's Ressources/ row) and `cch` having 0 `DEFAULT_FAMILY_SLOTS` (now inline in §3's Config row).
+
+**Retroactively logging one gap found in the process**: the `build_index --family` scoping fix (`should_reuse_cached_chunks()`, `tests/test_indexer.py`, 6 new tests) landed 2026-09-19 in the same session as the 2026-09-19c entry below, but never got its own line here — noting it now so it isn't lost. Also carried over from the old §6, since neither is structural nor already logged: no CI config exists despite `--strict-check`/`--strict`/`--strict-expansion` flags built for it; `.env` still sets the deprecated `ARIA_OLLAMA_MODEL` alongside the per-stage `ARIA_EXPANSION_MODEL`/`ARIA_SYNTHESIS_MODEL` vars (harmless, the specific ones win, but worth a cleanup pass).
+
+**Deliberately not carried over**: old §6's "eval scores aren't certified (0/12 validated)" note — already fully covered by CLAUDE.md §4 as a standing convention; copying it here would just be duplication. Also dropped one now-false leftover line from §6 ("docling isn't a declared dependency") that directly contradicted the already-fixed bullet sitting right above it in the same section — pure staleness, nothing to preserve.
+
+**Open threads**: unchanged — still the same two items from 2026-09-19c below (REG1_MS1 manifest count reconciliation, Docling table-content-loss fix). Nothing code-level touched this session.
+
+---
+
+## 2026-09-19c — NEXT SESSION: start here — two supervised-session items open
+
+**Open item 1 — REG1_MS1.pdf manifest/chunks.json count desync (655 vs 653), diagnosed not fixed.** Root cause: `ingest_reg1_docling.py`'s cross-corpus dedup removed 2 self-duplicate chunks (`REG1_MS1-550`≡`REG1_MS1-263`, `REG1_MS1-590`≡`REG1_MS1-462`) after the manifest was already written with the pre-dedup count. Correct value is 653 (chunks.json is retrieval ground truth). Fix (NOT applied — needs a supervised session since it writes to the real index): update `manifest.json`'s REG1_MS1.pdf entry to `chunk_count=653`, and/or fix `build_index` to recompute post-dedup counts per file when writing the manifest, eliminating this whole desync class at the root (same fix implied by `known_manifest_desync.json`'s own description).
+
+**Open item 2 — table content silently dropped by Docling ingestion.** The Docling chunker (REG1_MS1, annexes, rapport_presentation, oap, padd, cch) reads only Docling's `texts` output, never its separate `tables` key. Confirmed real content loss on `ANN4_2025_12_19.pdf` (240→59 chunks, 88 tables detected) and `RP_INDIC.pdf` (37→6 chunks, 32 tables). Needs a deliberate design decision (extend the chunker to read `tables`, or something else) — explicitly out of scope for every task this session, never touched.
+
+**Also done this session (housekeeping, low-risk, already applied)**: fixed `llm.py`'s missing `import openai` (NameError instead of RuntimeError on API failure); rewrote `README.md` (was describing a long-dead TF-IDF retriever); added `docling` to `pyproject.toml` as an optional extra (`[docling]`) instead of leaving it undeclared; wrote `PROJECT_MAP.md` (root) as a maintained architecture reference, separate from this file's session-log role.
+
+---
+
+## 2026-09-19b — cross-machine corpus_mapping.yaml revert + Docling batch ingestion (annexes/oap/rapport_presentation/padd/cch) + REG1_MS1 redo on this machine (0 commits, working tree only)
+
+**Cross-machine drift, reversed**: the prior entry's `corpus_mapping.yaml` fix (`PLU bioclimatique/...`) matched only the Mac's local `Ressources/` tree — `Ressources/` and `data/index/` are both gitignored, never synced across machines. This machine's real tree is the OLD form (`PLU/75 Paris/PLU Bioclimatique/...`), confirmed two independent git-tracked ways: `eval/ontology/corpus_pdf_inventory_full.csv`'s 412 `chemin_relatif` rows (412/412 match the old form, 0 the new) and `scratch/reconcile.py` (committed 2026-09-07, predates the drift, hardcodes the old root). Reverted the yaml; `classify_path()` now 0/413 "other" here; `aria-rag check` clean.
+
+**REG1_MS1 redone locally**: this machine's `data/index/` was NOT the Mac's — still had the old 666 ToC-polluted regex chunks. Reused the already-pulled `scratch/reg1_content.json` (Mac's Docling output), fixed `PDF_PATH`, replaced with 655 chunks (matches Mac's count exactly). Local retrieval baseline before today's work: **54%**, not the Mac's 25% — this machine already had REG2A1_MS1/REG2A10's table-chunker working, which the Mac's own SESSION_STATE entry didn't reflect.
+
+**Extended Docling ingestion to padd/oap/annexes/cch/rapport_presentation** (`scratch/ingest_families_docling.py`, generalized from REG1_MS1's script to accept ANY section_header, not just article codes; per-file subprocess timeout for hang isolation). Installed `docling==2.128.0` (never a tracked dep) + worked around a Windows HF-symlink-privilege bug. Caught and killed a duplicate orchestrator process before it could race-write `chunks.json` — verified no corruption resulted. 63/69 + 9/9 + 1/1 files succeeded across 3 staged runs; CCH timed out twice (1856p; also has 0 `family_slots`, so irrelevant to retrieval regardless) and 5 `ASUP*.pdf` plates failed (timeout/crash; the one that did succeed came back 100% null-section — genuine doc-type mismatch, not a budget problem). Corpus: 26,608 → 27,288 chunks.
+
+**Result**: 12-case retrieval mean 54% → **64%** (`eval/results/results_20260919_212850_6bc4bca1.json`). UC-01 fully recovered. One regression caught: CH-03 50%→0% — `UG.2.2.3` exists correctly (`REG1_MS1-116`) but stopped ranking; the old ToC-polluted chunk apparently scored it by accident. Added `checks/known_null_section_chunks.json` (REG1_MS1's 52-chunk front-matter run) + 28 new `known_manifest_desync.json` entries (same pre-existing dedup-count debt class) — both needed to keep `aria-rag check` at 0 FAIL post-ingestion.
+
+**Open threads**: CH-05/UC-05's `UG.1.4.1` and CH-02's `UG.2.2` exist correctly but don't rank for these queries — 3 independent cases sharing one article family, worth a dedicated retrieval-quality look (not chunker tuning). `ANN4_2025_12_19.pdf`/`RP_INDIC.pdf` lost most of their content (table data lives in Docling's separate `tables` key, unread by this chunker) — a real chunker-fit gap for table-structured annexes, reported not fixed. CCH and the 5 failed `ASUP*.pdf` plates never got ingested section-aware. Nothing committed this session — yaml revert, check.py, 2 new allowlists, new scratch scripts, and the rebuilt local index are all uncommitted working-tree state.
+
+---
+
 ## 2026-09-19 — eval scorer parser fix + REG1_MS1 section-aware ingestion + corpus_mapping.yaml drift fix (3 commits)
 
 **Eval scorer**: `_score_answer`'s `expected_keywords` field doesn't exist in the Notion-v2 dataset (confirmed by direct read, not memory) — answer scoring is a hardcoded 1.0 for all 12 cases; left untouched, out of scope. Rewrote `eval/golden_dataset.json` from live Notion (id/question/articles_attendus/reponse_attendue/critere_reussite/ontologie_domaine only, per spec). Added `parse_expected_resources()` — rule-based parser (article-code regex vs free-text resource label, strips parens/guillemets/page-refs) replacing `_normalize_expectations`'s naive comma-split; 6/12 cases had malformed old-style expectations (annotation-polluted or entirely unsplit, e.g. UC-03). Wired a `resource`-type match into `_hit_satisfies` (filename OR section). Mean retrieval_score unchanged at re-run time (0.0%) — see next item for why.

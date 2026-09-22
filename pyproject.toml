@@ -30,6 +30,13 @@ dev = [
 eval = [
   "tabulate>=0.9.0",
 ]
+# Only used by scratch/ ingestion scripts (Docling section-aware chunking),
+# never imported by src/aria_rag/ itself -- kept optional since it pulls in
+# torch, opencv, pandas, and several ML model packages. Pin matches what
+# scratch/extract_reg1_content.py etc. were run against (2026-09-19).
+docling = [
+  "docling==2.128.0",
+]
 
 [project.scripts]
 aria-rag = "aria_rag.cli:main"

@@ -1,87 +1,49 @@
 # ARIA
 
-Starter repository for a document RAG workflow over the PDFs already stored in `Ressources/`.
+RAG pipeline for architects, answering regulatory questions grounded in the PLU bioclimatique de Paris and the CCH. Currently a proof of concept — no bundled UI yet (planned for MVP); this repo is the backend/API/CLI only.
 
-## What is included
+**Full architecture, module map, data flow, and current open issues: see [`PROJECT_MAP.md`](PROJECT_MAP.md).** This file is just quick-start commands.
 
-- A fresh Git repository in this folder.
-- A Python CLI to ingest PDFs into a local search index.
-- A retrieval flow that works locally with TF-IDF.
-- Optional answer generation with OpenAI or a local Ollama model.
-
-## Quick start
+## Setup
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 pip install --upgrade pip
-pip install -e .
-cp .env.example .env
+pip install -e ".[dev]"
+cp .env.example .env   # fill in model choices; OpenAI/Anthropic keys only needed if you use those backends
 ```
 
-Build the first index:
+Ollama is the default local backend (no API key needed) — see `.env.example` for the expansion/synthesis model split.
+
+## Build the index
 
 ```bash
-aria-rag ingest --max-files 20
+aria-rag ingest --max-files 20      # quick smoke test
+aria-rag ingest                     # full corpus; reuses extraction+embedding for unchanged files, but rebuilds the FAISS/BM25 index in full
+aria-rag ingest --rebuild --family reglement_ecrit   # scoped rebuild of one family
+aria-rag check                      # validate the index against corpus invariants
 ```
 
-For the full corpus, ingestion can take a while because PDF text extraction is expensive. The CLI now:
+Retrieval is a hybrid FAISS (dense) + BM25 (lexical) index, fused by Reciprocal Rank Fusion, scoped per document family. Not TF-IDF.
 
-- uses a conservative default worker count for laptops
-- prints per-file progress with `PROCESSED` or `CACHED`
-- reuses unchanged PDFs on later runs
-
-You can still override the worker count manually:
+## Ask a question
 
 ```bash
-aria-rag ingest --workers 4
-aria-rag ingest --rebuild
+aria-rag ask "Quelle est la hauteur maximale en zone UG ?" --no-llm   # retrieval only
+aria-rag ask "Quelle est la hauteur maximale en zone UG ?"            # + LLM-synthesized answer
 ```
 
-Ask a question:
+## Run the API
 
 ```bash
-aria-rag ask "What are the construction rules for this area?" --no-llm
+aria-rag serve   # FastAPI on :8000 — POST /ask, POST /feedback, GET /document/{piece_id}, GET /health
 ```
 
-If you add `OPENAI_API_KEY` in `.env`, you can omit `--no-llm` and get a synthesized answer grounded in retrieved passages.
-
-For a local LLM on your MacBook Air M2, install Ollama, pull a small model, and use the Ollama backend:
+## Evaluate
 
 ```bash
-ollama pull gemma3:4b
-aria-rag ask "What are the construction rules for this area?" --backend ollama
+aria-rag eval --no-llm   # golden-dataset retrieval scoring
 ```
 
-Suggested starting point on an M2 Air:
-
-- `gemma3:4b`
-- keep queries short
-- use retrieval first, generation second
-
-## Project structure
-
-```text
-Ressources/          Source PDFs
-data/index/          Generated local index
-src/aria_rag/        RAG starter package
-```
-
-## Link to GitHub later
-
-When you create the remote repository, run:
-
-```bash
-git remote add origin <your-repository-url>
-git branch -M main
-git add .
-git commit -m "Initial ARIA RAG scaffold"
-git push -u origin main
-```
-
-## Suggested next steps
-
-1. Run a small ingestion batch with `--max-files` to validate extraction quality.
-2. Inspect the retrieved passages for a few real questions.
-3. Replace the local TF-IDF retriever with embeddings + vector DB once the document pipeline is stable.
-4. Add metadata filters for document families such as `PLU bioclimatique`, annexes, and regulations.
+See `eval/README.md` for the methodology and `CLAUDE.md` §4 for why golden-dataset scores aren't a certified ceiling.
