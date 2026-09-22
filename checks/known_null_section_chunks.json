@@ -1,0 +1,14 @@
+{
+ "_description": "reglement_ecrit chunk_ids with section=None beyond the single index-0 title-page exception (_is_first_chunk_of_file, check.py) -- a legitimate CONTIGUOUS leading front-matter run, not a stray/unexplained null mid-file. REG1_MS1.pdf's 2026-09-19 Docling section-aware re-ingestion (scratch/ingest_reg1_docling.py) produces a real front-matter/definitions block before its first recognized article-code header that is long enough to char-split into 52 separate chunks (indices 1-52; index 0 already covered by the index-0 exception) -- unlike the old regex chunker (indexer.py's chunk_text_by_article, which the index-0 exception was originally written for) where that same front matter always fit in one chunk. Deliberately a flat chunk_id allowlist, NOT a relaxed 'any leading run is fine' rule in check_metadata_integrity itself -- that would also silently pass tests/test_check.py's single-synthetic-chunk regression case (REG9-5, section=None, no other chunks for that file), which exists specifically to catch a stray null-section chunk anywhere past index 0. aria_rag.check treats exactly these chunk_ids as pass, and fails on any NEW null-section chunk (any file, any index past 0) not documented here.",
+ "entries": [
+  "REG1_MS1-1", "REG1_MS1-2", "REG1_MS1-3", "REG1_MS1-4", "REG1_MS1-5", "REG1_MS1-6",
+  "REG1_MS1-7", "REG1_MS1-8", "REG1_MS1-9", "REG1_MS1-10", "REG1_MS1-11", "REG1_MS1-12",
+  "REG1_MS1-13", "REG1_MS1-14", "REG1_MS1-15", "REG1_MS1-16", "REG1_MS1-17", "REG1_MS1-18",
+  "REG1_MS1-19", "REG1_MS1-20", "REG1_MS1-21", "REG1_MS1-22", "REG1_MS1-23", "REG1_MS1-24",
+  "REG1_MS1-25", "REG1_MS1-26", "REG1_MS1-27", "REG1_MS1-28", "REG1_MS1-29", "REG1_MS1-30",
+  "REG1_MS1-31", "REG1_MS1-32", "REG1_MS1-33", "REG1_MS1-34", "REG1_MS1-35", "REG1_MS1-36",
+  "REG1_MS1-37", "REG1_MS1-38", "REG1_MS1-39", "REG1_MS1-40", "REG1_MS1-41", "REG1_MS1-42",
+  "REG1_MS1-43", "REG1_MS1-44", "REG1_MS1-45", "REG1_MS1-46", "REG1_MS1-47", "REG1_MS1-48",
+  "REG1_MS1-49", "REG1_MS1-50", "REG1_MS1-51", "REG1_MS1-52"
+ ]
+}

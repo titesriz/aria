@@ -1,145 +1,285 @@
 {
-  "_description": "Manifest.chunk_count records the PRE-dedup chunk count captured at extraction time; chunks.json reflects the POST-dedup (cross-file, content-hash) final count. build_index() never writes back the post-dedup count to manifest.json, so any file that contributed a cross-file duplicate desyncs permanently. This is a known, accepted debt (not yet fixed) -- aria_rag.check treats exactly these paths as pass, and fails on any NEW desync not in this list. Paths are relative to Settings.docs_dir (Ressources/), forward-slash, for portability. Regenerated after adding REG2A10_1DE2.pdf as validity=superseded (MS1 pair inventory follow-up): REG2A10_1DE2_MS1.pdf is no longer desynced (it now legitimately holds all 1636 chunks, its former competitor REG2A10_1DE2.pdf being excluded from indexing entirely), so its entry -- added during the Stage A ripple-effect fix -- is dropped. No new desync appeared this round. Regenerated again after the table-chunker fix (CH-06): REG2A1_MS1.pdf and both REG2A10_*.pdf's counts changed (fine-grained row/entry chunks instead of 1200-char windows -- see indexer.chunk_text_by_table) and now contribute a handful of cross-file content-hash duplicates each (e.g. short, identically-worded running-header-only fragments), same known shape as every other entry here.",
-  "entries": [
-    {
-      "source_path": "PLU/75 Paris/PLU Bioclimatique/Annexes/Plans SUP/ASUP4_2025_12_19.pdf",
-      "manifest_chunk_count": 202,
-      "actual_chunk_count": 201
-    },
-    {
-      "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Bois Vincennes/LEG2000.pdf",
-      "manifest_chunk_count": 5,
-      "actual_chunk_count": 0
-    },
-    {
-      "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Equilibre destinations/DG_B_DEST_NE.pdf",
-      "manifest_chunk_count": 49,
-      "actual_chunk_count": 2
-    },
-    {
-      "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Equilibre destinations/DG_B_DEST_NO.pdf",
-      "manifest_chunk_count": 35,
-      "actual_chunk_count": 1
-    },
-    {
-      "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Equilibre destinations/DG_B_DEST_SE.pdf",
-      "manifest_chunk_count": 42,
-      "actual_chunk_count": 1
-    },
-    {
-      "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Equilibre destinations/DG_B_DEST_SO.pdf",
-      "manifest_chunk_count": 40,
-      "actual_chunk_count": 1
-    },
-    {
-      "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Limitation parc stationnement/DG_I_PARCSTAT_NE.pdf",
-      "manifest_chunk_count": 49,
-      "actual_chunk_count": 5
-    },
-    {
-      "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Limitation parc stationnement/DG_I_PARCSTAT_NO.pdf",
-      "manifest_chunk_count": 35,
-      "actual_chunk_count": 1
-    },
-    {
-      "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Limitation parc stationnement/DG_I_PARCSTAT_SE.pdf",
-      "manifest_chunk_count": 42,
-      "actual_chunk_count": 4
-    },
-    {
-      "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Limitation parc stationnement/DG_I_PARCSTAT_SO.pdf",
-      "manifest_chunk_count": 40,
-      "actual_chunk_count": 1
-    },
-    {
-      "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Mixité sociale/DG_D_LOGSOC_NE.pdf",
-      "manifest_chunk_count": 49,
-      "actual_chunk_count": 2
-    },
-    {
-      "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Mixité sociale/DG_D_LOGSOC_NO.pdf",
-      "manifest_chunk_count": 35,
-      "actual_chunk_count": 1
-    },
-    {
-      "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Mixité sociale/DG_D_LOGSOC_SO.pdf",
-      "manifest_chunk_count": 40,
-      "actual_chunk_count": 1
-    },
-    {
-      "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Protections commerces/DG_C_PROTCOM_NE.pdf",
-      "manifest_chunk_count": 49,
-      "actual_chunk_count": 2
-    },
-    {
-      "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Protections commerces/DG_C_PROTCOM_NO.pdf",
-      "manifest_chunk_count": 35,
-      "actual_chunk_count": 1
-    },
-    {
-      "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Protections commerces/DG_C_PROTCOM_SE.pdf",
-      "manifest_chunk_count": 42,
-      "actual_chunk_count": 1
-    },
-    {
-      "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Protections commerces/DG_C_PROTCOM_SO.pdf",
-      "manifest_chunk_count": 40,
-      "actual_chunk_count": 1
-    },
-    {
-      "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Renforcement végétal/DG_G_RENFVEG_NE.pdf",
-      "manifest_chunk_count": 49,
-      "actual_chunk_count": 2
-    },
-    {
-      "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Renforcement végétal/DG_G_RENFVEG_NO.pdf",
-      "manifest_chunk_count": 35,
-      "actual_chunk_count": 1
-    },
-    {
-      "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Renforcement végétal/DG_G_RENFVEG_SE.pdf",
-      "manifest_chunk_count": 42,
-      "actual_chunk_count": 1
-    },
-    {
-      "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Renforcement végétal/DG_G_RENFVEG_SO.pdf",
-      "manifest_chunk_count": 40,
-      "actual_chunk_count": 1
-    },
-    {
-      "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Secteurs risques/DG_J_RISQUE.pdf",
-      "manifest_chunk_count": 10,
-      "actual_chunk_count": 1
-    },
-    {
-      "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/LEG2000.pdf",
-      "manifest_chunk_count": 5,
-      "actual_chunk_count": 0
-    },
-    {
-      "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/LEGSMV.pdf",
-      "manifest_chunk_count": 5,
-      "actual_chunk_count": 0
-    },
-    {
-      "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 1/REG1_MS1.pdf",
-      "manifest_chunk_count": 667,
-      "actual_chunk_count": 666
-    },
-    {
-      "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 2/REG2A10_1DE2_MS1.pdf",
-      "manifest_chunk_count": 3210,
-      "actual_chunk_count": 3205
-    },
-    {
-      "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 2/REG2A10_2DE2_MS1.pdf",
-      "manifest_chunk_count": 2564,
-      "actual_chunk_count": 2546
-    },
-    {
-      "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 2/REG2A1_MS1.pdf",
-      "manifest_chunk_count": 8102,
-      "actual_chunk_count": 7826
-    }
-  ]
+ "_description": "Manifest.chunk_count records the PRE-dedup chunk count captured at extraction time; chunks.json reflects the POST-dedup (cross-file, content-hash) final count. build_index() never writes back the post-dedup count to manifest.json, so any file that contributed a cross-file duplicate desyncs permanently. This is a known, accepted debt (not yet fixed) -- aria_rag.check treats exactly these paths as pass, and fails on any NEW desync not in this list. Paths are relative to Settings.docs_dir (Ressources/), forward-slash, for portability. Regenerated after adding REG2A10_1DE2.pdf as validity=superseded (MS1 pair inventory follow-up): REG2A10_1DE2_MS1.pdf is no longer desynced (it now legitimately holds all 1636 chunks, its former competitor REG2A10_1DE2.pdf being excluded from indexing entirely), so its entry -- added during the Stage A ripple-effect fix -- is dropped. No new desync appeared this round. Regenerated again after the table-chunker fix (CH-06): REG2A1_MS1.pdf and both REG2A10_*.pdf's counts changed (fine-grained row/entry chunks instead of 1200-char windows -- see indexer.chunk_text_by_table) and now contribute a handful of cross-file content-hash duplicates each (e.g. short, identically-worded running-header-only fragments), same known shape as every other entry here. Regenerated again 2026-09-19 after the Docling section-aware batch ingestion of annexes/oap/rapport_presentation/padd (scratch/ingest_families_docling.py) -- 28 new entries, all the same shape (a handful of short cross-file duplicate chunks, e.g. running headers/legends repeated verbatim across an atlas's plate files, deduped by content hash), same known/accepted debt.",
+ "entries": [
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Annexes/Plans SUP/ASUP4_2025_12_19.pdf",
+   "manifest_chunk_count": 202,
+   "actual_chunk_count": 201
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Annexes/Plans autres périmètres/A15152_05_06_2025_12_19.pdf",
+   "manifest_chunk_count": 2,
+   "actual_chunk_count": 1
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Annexes/Plans autres périmètres/A15152_11_2025_12_19.pdf",
+   "manifest_chunk_count": 2,
+   "actual_chunk_count": 1
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Annexes/Plans autres périmètres/A15152_13_2025_12_19.pdf",
+   "manifest_chunk_count": 4,
+   "actual_chunk_count": 3
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Annexes/Plans autres périmètres/A15152_14_2025_12_19.pdf",
+   "manifest_chunk_count": 5,
+   "actual_chunk_count": 4
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Annexes/Plans autres périmètres/A15152_20_2025_12_19.pdf",
+   "manifest_chunk_count": 3,
+   "actual_chunk_count": 2
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Annexes/Textes et documents illustrés/ANN1_2025_12_19.pdf",
+   "manifest_chunk_count": 851,
+   "actual_chunk_count": 843
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Annexes/Textes et documents illustrés/ANN2B_2025_12_19.pdf",
+   "manifest_chunk_count": 45,
+   "actual_chunk_count": 44
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Annexes/Textes et documents illustrés/ANN3.pdf",
+   "manifest_chunk_count": 30,
+   "actual_chunk_count": 29
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Annexes/Textes et documents illustrés/ANN4_2025_12_19.pdf",
+   "manifest_chunk_count": 59,
+   "actual_chunk_count": 54
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Annexes/Textes et documents illustrés/ANN5_2025_12_19.pdf",
+   "manifest_chunk_count": 295,
+   "actual_chunk_count": 287
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Annexes/Textes et documents illustrés/ANN6.pdf",
+   "manifest_chunk_count": 13,
+   "actual_chunk_count": 12
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Annexes/Textes et documents illustrés/ANN7.pdf",
+   "manifest_chunk_count": 7,
+   "actual_chunk_count": 6
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Annexes/Textes et documents illustrés/ANN8_2025_12_19.pdf",
+   "manifest_chunk_count": 35,
+   "actual_chunk_count": 34
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Annexes/Textes et documents illustrés/ANN9.pdf",
+   "manifest_chunk_count": 178,
+   "actual_chunk_count": 166
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/OAP/Thématiques/OAP_CONSTRUCTION.pdf",
+   "manifest_chunk_count": 26,
+   "actual_chunk_count": 25
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/OAP/Thématiques/OAP_ESPACE_PUBLIC.pdf",
+   "manifest_chunk_count": 27,
+   "actual_chunk_count": 25
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/OAP/Thématiques/OAP_HERITAGE.pdf",
+   "manifest_chunk_count": 26,
+   "actual_chunk_count": 23
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/OAP/Thématiques/OAP_METROPOLE.pdf",
+   "manifest_chunk_count": 22,
+   "actual_chunk_count": 20
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/OAP/Thématiques/OAP_QUART_HEURE.pdf",
+   "manifest_chunk_count": 26,
+   "actual_chunk_count": 23
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/OAP/Thématiques/OAP_SANTE.pdf",
+   "manifest_chunk_count": 40,
+   "actual_chunk_count": 37
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Rapport de présentation/RP_20251017_MC1_HOTEL_DIEU.pdf",
+   "manifest_chunk_count": 201,
+   "actual_chunk_count": 193
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Rapport de présentation/RP_CHOIX.pdf",
+   "manifest_chunk_count": 1046,
+   "actual_chunk_count": 1043
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Rapport de présentation/RP_DE.pdf",
+   "manifest_chunk_count": 88,
+   "actual_chunk_count": 87
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Rapport de présentation/RP_DIAGNOSTIC.pdf",
+   "manifest_chunk_count": 1033,
+   "actual_chunk_count": 1031
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Rapport de présentation/RP_EIE.pdf",
+   "manifest_chunk_count": 802,
+   "actual_chunk_count": 789
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Rapport de présentation/RP_EVAL.pdf",
+   "manifest_chunk_count": 499,
+   "actual_chunk_count": 497
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Rapport de présentation/RP_RNT.pdf",
+   "manifest_chunk_count": 79,
+   "actual_chunk_count": 78
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Rapport de présentation/Rapport_presentation_MS1.pdf",
+   "manifest_chunk_count": 275,
+   "actual_chunk_count": 199
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Bois Vincennes/LEG2000.pdf",
+   "manifest_chunk_count": 5,
+   "actual_chunk_count": 0
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Equilibre destinations/DG_B_DEST_NE.pdf",
+   "manifest_chunk_count": 49,
+   "actual_chunk_count": 2
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Equilibre destinations/DG_B_DEST_NO.pdf",
+   "manifest_chunk_count": 35,
+   "actual_chunk_count": 1
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Equilibre destinations/DG_B_DEST_SE.pdf",
+   "manifest_chunk_count": 42,
+   "actual_chunk_count": 1
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Equilibre destinations/DG_B_DEST_SO.pdf",
+   "manifest_chunk_count": 40,
+   "actual_chunk_count": 1
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Limitation parc stationnement/DG_I_PARCSTAT_NE.pdf",
+   "manifest_chunk_count": 49,
+   "actual_chunk_count": 5
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Limitation parc stationnement/DG_I_PARCSTAT_NO.pdf",
+   "manifest_chunk_count": 35,
+   "actual_chunk_count": 1
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Limitation parc stationnement/DG_I_PARCSTAT_SE.pdf",
+   "manifest_chunk_count": 42,
+   "actual_chunk_count": 4
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Limitation parc stationnement/DG_I_PARCSTAT_SO.pdf",
+   "manifest_chunk_count": 40,
+   "actual_chunk_count": 1
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Mixité sociale/DG_D_LOGSOC_NE.pdf",
+   "manifest_chunk_count": 49,
+   "actual_chunk_count": 2
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Mixité sociale/DG_D_LOGSOC_NO.pdf",
+   "manifest_chunk_count": 35,
+   "actual_chunk_count": 1
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Mixité sociale/DG_D_LOGSOC_SO.pdf",
+   "manifest_chunk_count": 40,
+   "actual_chunk_count": 1
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Protections commerces/DG_C_PROTCOM_NE.pdf",
+   "manifest_chunk_count": 49,
+   "actual_chunk_count": 2
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Protections commerces/DG_C_PROTCOM_NO.pdf",
+   "manifest_chunk_count": 35,
+   "actual_chunk_count": 1
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Protections commerces/DG_C_PROTCOM_SE.pdf",
+   "manifest_chunk_count": 42,
+   "actual_chunk_count": 1
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Protections commerces/DG_C_PROTCOM_SO.pdf",
+   "manifest_chunk_count": 40,
+   "actual_chunk_count": 1
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Renforcement végétal/DG_G_RENFVEG_NE.pdf",
+   "manifest_chunk_count": 49,
+   "actual_chunk_count": 2
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Renforcement végétal/DG_G_RENFVEG_NO.pdf",
+   "manifest_chunk_count": 35,
+   "actual_chunk_count": 1
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Renforcement végétal/DG_G_RENFVEG_SE.pdf",
+   "manifest_chunk_count": 42,
+   "actual_chunk_count": 1
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Renforcement végétal/DG_G_RENFVEG_SO.pdf",
+   "manifest_chunk_count": 40,
+   "actual_chunk_count": 1
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 1/Secteurs risques/DG_J_RISQUE.pdf",
+   "manifest_chunk_count": 10,
+   "actual_chunk_count": 1
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 2/LEG2000.pdf",
+   "manifest_chunk_count": 5,
+   "actual_chunk_count": 0
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Documents graphiques/Atlas 3/Secteur maisons et villas/LEGSMV.pdf",
+   "manifest_chunk_count": 5,
+   "actual_chunk_count": 0
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 1/REG1_MS1.pdf",
+   "manifest_chunk_count": 667,
+   "actual_chunk_count": 666
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 2/REG2A10_1DE2_MS1.pdf",
+   "manifest_chunk_count": 3210,
+   "actual_chunk_count": 3205
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 2/REG2A10_2DE2_MS1.pdf",
+   "manifest_chunk_count": 2564,
+   "actual_chunk_count": 2546
+  },
+  {
+   "source_path": "PLU/75 Paris/PLU Bioclimatique/Règlement/Pièces écrites/Tome 2/REG2A1_MS1.pdf",
+   "manifest_chunk_count": 8102,
+   "actual_chunk_count": 7826
+  }
+ ]
 }

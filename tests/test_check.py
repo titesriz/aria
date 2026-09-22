@@ -363,6 +363,54 @@ def test_manifest_consistency_passes_for_documented_desync(tmp_path):
     assert result.count == 0
 
 
+def test_manifest_consistency_fails_for_new_desync_count_on_a_documented_path(tmp_path):
+    """2026-09-19 bug: the allowlist matched by source_path alone, so a path
+    already documented for one desync (e.g. REG1_MS1.pdf, 667 vs 666 from
+    months ago) silently masked a DIFFERENT, NEW desync on that same path
+    (655 vs 653, from today's Docling re-ingestion) -- `aria-rag check`
+    stayed green while the real numbers had changed underneath it. Same
+    path as the documented entry, but different actual/manifest counts:
+    must fail loudly, not silently pass by path alone.
+    """
+    settings = _settings(tmp_path)
+    docs_dir = settings.docs_dir
+    docs_dir.mkdir(parents=True, exist_ok=True)
+    source_path = str(docs_dir / "REG1_MS1.pdf")
+    # Documented desync is the STALE one: 667 manifest vs 666 actual.
+    known = tmp_path / "known_desync.json"
+    known.write_text(
+        json.dumps({"entries": [{"source_path": "REG1_MS1.pdf", "manifest_chunk_count": 667, "actual_chunk_count": 666}]}),
+        encoding="utf-8",
+    )
+    # Real current state is a DIFFERENT desync: manifest says 655, only 653 chunks actually present.
+    chunks = [_chunk(source_path=source_path, chunk_id=f"REG1_MS1-{i}") for i in range(653)]
+    manifest = [IndexedFile(source_path=source_path, size_bytes=1, modified_time=1.0, chunk_count=655)]
+    result = check_manifest_consistency(chunks, manifest, settings, tmp_path / "reports", known_desync_path=known)
+    assert result.status == "fail"
+    assert result.count == 1
+
+
+def test_manifest_consistency_passes_when_recorded_numbers_match_exactly(tmp_path):
+    """Same path AND the exact documented (manifest_count, actual_count)
+    pair -- must still pass. Confirms the fix doesn't just make everything
+    fail; it only tightens the match to the specific documented desync.
+    """
+    settings = _settings(tmp_path)
+    docs_dir = settings.docs_dir
+    docs_dir.mkdir(parents=True, exist_ok=True)
+    source_path = str(docs_dir / "REG1_MS1.pdf")
+    known = tmp_path / "known_desync.json"
+    known.write_text(
+        json.dumps({"entries": [{"source_path": "REG1_MS1.pdf", "manifest_chunk_count": 655, "actual_chunk_count": 653}]}),
+        encoding="utf-8",
+    )
+    chunks = [_chunk(source_path=source_path, chunk_id=f"REG1_MS1-{i}") for i in range(653)]
+    manifest = [IndexedFile(source_path=source_path, size_bytes=1, modified_time=1.0, chunk_count=655)]
+    result = check_manifest_consistency(chunks, manifest, settings, tmp_path / "reports", known_desync_path=known)
+    assert result.status == "pass"
+    assert result.count == 0
+
+
 # ---------------------------------------------------------------------------
 # 6. Coverage
 # ---------------------------------------------------------------------------

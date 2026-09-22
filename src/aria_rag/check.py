@@ -31,6 +31,7 @@ KNOWN_UNMAPPED_FILES_PATH = CHECKS_DIR / "known_unmapped_files.json"
 KNOWN_MANIFEST_DESYNC_PATH = CHECKS_DIR / "known_manifest_desync.json"
 KNOWN_ZERO_CHUNK_FILES_PATH = CHECKS_DIR / "known_zero_chunk_files.json"
 KNOWN_ENCODING_FAILURES_PATH = CHECKS_DIR / "known_encoding_failures.json"
+KNOWN_NULL_SECTION_CHUNKS_PATH = CHECKS_DIR / "known_null_section_chunks.json"
 
 Status = Literal["pass", "fail", "warn"]
 
@@ -246,13 +247,22 @@ def _is_first_chunk_of_file(chunk_id: str) -> bool:
     return suffix.isdigit() and int(suffix) == 0
 
 
-def check_metadata_integrity(chunks: list[Chunk], reports_dir: Path) -> InvariantResult:
+def check_metadata_integrity(
+    chunks: list[Chunk], reports_dir: Path, known_null_section_path: Path | None = None,
+) -> InvariantResult:
+    known_null_section_path = known_null_section_path or KNOWN_NULL_SECTION_CHUNKS_PATH
+    known_null_section: set[str] = set()
+    if known_null_section_path.exists():
+        data = json.loads(known_null_section_path.read_text(encoding="utf-8"))
+        known_null_section = set(data.get("entries", []))
+
     null_page = [c for c in chunks if c.page is None]
     null_page_end = [c for c in chunks if c.page_end is None]
     bad_order = [c for c in chunks if c.page is not None and c.page_end is not None and c.page_end < c.page]
     null_section = [
         c for c in chunks
         if c.doc_family == "reglement_ecrit" and c.section is None and not _is_first_chunk_of_file(c.chunk_id)
+        and c.chunk_id not in known_null_section
     ]
     annexe_pollution = [c for c in chunks if c.section and _ANNEXE_POLLUTION.match(c.section)]
 
@@ -262,12 +272,14 @@ def check_metadata_integrity(chunks: list[Chunk], reports_dir: Path) -> Invarian
         "null_page_end": [c.chunk_id for c in null_page_end],
         "page_end_lt_page": [{"chunk_id": c.chunk_id, "page": c.page, "page_end": c.page_end} for c in bad_order],
         "unexplained_null_section": [c.chunk_id for c in null_section],
+        "known_null_section_count": len(known_null_section),
         "annexe_pollution": [{"chunk_id": c.chunk_id, "section": c.section} for c in annexe_pollution],
     })
     status: Status = "fail" if count else "pass"
     message = (
         f"null_page={len(null_page)} null_page_end={len(null_page_end)} "
         f"page_end<page={len(bad_order)} unexplained_null_section={len(null_section)} "
+        f"({len(known_null_section)} documented in {known_null_section_path.name}) "
         f"annexe_pollution={len(annexe_pollution)}"
     )
     return InvariantResult("3. Metadata integrity", status, count, message, details_path)
@@ -357,10 +369,22 @@ def check_manifest_consistency(
     known_desync_path: Path | None = None,
 ) -> InvariantResult:
     known_desync_path = known_desync_path or KNOWN_MANIFEST_DESYNC_PATH
-    known_paths: set[str] = set()
+    # Keyed by the FULL (path, manifest_count, actual_count) triple, not path
+    # alone -- a path stays allowlisted only for the exact desync it was
+    # documented for. Path-only matching (pre-2026-09-19) let a path's
+    # documented-but-stale numbers silently mask a DIFFERENT, new desync on
+    # the same path: today's Docling re-ingestion rewrote REG1_MS1.pdf's
+    # manifest entry with a fresh (655 vs 653) desync, but the allowlist
+    # still had it documented as (667 vs 666) from months earlier -- matched
+    # by path, so `aria-rag check` stayed green while the actual numbers had
+    # silently changed underneath it.
+    known_entries: set[tuple[str, int, int]] = set()
     if known_desync_path.exists():
         data = json.loads(known_desync_path.read_text(encoding="utf-8"))
-        known_paths = {e["source_path"] for e in data.get("entries", [])}
+        known_entries = {
+            (e["source_path"], e["manifest_chunk_count"], e["actual_chunk_count"])
+            for e in data.get("entries", [])
+        }
 
     actual_counts: dict[str, int] = {}
     for c in chunks:
@@ -374,7 +398,7 @@ def check_manifest_consistency(
             rel = _relative_path(m.source_path, settings.docs_dir)
             entry = {"source_path": rel, "manifest_chunk_count": m.chunk_count, "actual_chunk_count": actual}
             all_desyncs.append(entry)
-            if rel not in known_paths:
+            if (rel, m.chunk_count, actual) not in known_entries:
                 new_desyncs.append(entry)
 
     details_path = _write_details(reports_dir, "manifest_consistency", {
