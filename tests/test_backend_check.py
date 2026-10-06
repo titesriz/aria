@@ -269,7 +269,7 @@ def test_verify_backend_false_when_either_model_on_cpu():
 def test_verify_backend_skips_check_for_non_ollama_backend():
     with patch.object(backend_check.httpx, "post") as mock_post, \
          patch.object(backend_check.httpx, "get") as mock_get:
-        status = verify_backend(_settings(llm_backend="openai"))
+        status = verify_backend(_settings(llm_backend="claude"))
 
     mock_post.assert_not_called()
     mock_get.assert_not_called()
@@ -301,7 +301,7 @@ def test_startup_does_not_refuse_when_gpu_verified():
 
 
 def test_startup_does_not_refuse_for_non_ollama_backend():
-    assert startup_should_refuse("openai", _status(gpu_verified=False), allow_cpu=False) is False
+    assert startup_should_refuse("claude", _status(gpu_verified=False), allow_cpu=False) is False
 
 
 # ---------------------------------------------------------------------------

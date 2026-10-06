@@ -6,7 +6,7 @@ import time
 from contextlib import asynccontextmanager
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Optional
+from typing import Literal, Optional
 
 import faiss
 from fastapi import FastAPI, HTTPException, Request
@@ -119,7 +119,13 @@ class AskRequest(BaseModel):
     # SESSION_STATE.md. A client that OMITS this field now gets expansion;
     # a client that sends an explicit `false` still opts out.
     expand_query: bool = True
-    backend: Optional[str] = None
+    # Sovereignty rule: production is Ollama-only. Literal (not a plain str)
+    # so a request naming any other backend fails FastAPI/pydantic
+    # validation with a 422 at the boundary, instead of reaching
+    # answer_question and failing later as a 502 (still safe, since that
+    # dispatch also only recognizes "ollama" -- see llm.py -- but this is
+    # the earlier, clearer failure point). Added 2026-09-22.
+    backend: Optional[Literal["ollama"]] = None
 
 
 class Citation(BaseModel):
@@ -298,11 +304,13 @@ def ask(req: AskRequest) -> AskResponse:
     state = app.state
     settings: Settings = state.settings
     backend = req.backend or settings.llm_backend
-    synthesis_model = {
-        "ollama": settings.synthesis_model,
-        "openai": settings.chat_model,
-        "claude": settings.claude_model,
-    }.get(backend)
+    # Sovereignty rule: production only resolves "ollama" -- see
+    # llm.answer_question's dispatch, which raises for anything else before
+    # any external call could happen. openai/claude entries removed here
+    # 2026-09-22, not because a client can't send another string, but
+    # because there's no synthesis model to report for a backend that
+    # answer_question will refuse.
+    synthesis_model = {"ollama": settings.synthesis_model}.get(backend)
 
     timestamp = datetime.now(timezone.utc).isoformat()
     total_t0 = time.monotonic()

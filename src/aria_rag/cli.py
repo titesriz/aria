@@ -85,9 +85,14 @@ def build_parser() -> argparse.ArgumentParser:
     eval_parser.add_argument("--top-k", type=int, default=10, help="Number of chunks retrieved per query")
     eval_parser.add_argument(
         "--backend",
-        choices=["openai", "ollama", "claude"],
+        choices=["ollama"],
         default="ollama",
-        help="LLM backend for answer synthesis (default: ollama)",
+        help=(
+            "LLM backend for answer synthesis. Ollama only (sovereignty rule) -- "
+            "openai removed 2026-09-22, claude reserved for a future dedicated "
+            "no-corpus-baseline flag, not this one (it would run Claude WITH "
+            "retrieval, which isn't the baseline)."
+        ),
     )
     eval_parser.add_argument(
         "--output",
@@ -145,6 +150,29 @@ def build_parser() -> argparse.ArgumentParser:
         default=False,
         help="Exit non-zero if any case's query expansion failed (expansion_status=\"failed\"). For CI.",
     )
+    eval_parser.add_argument(
+        "--baseline-no-corpus",
+        action="store_true",
+        default=False,
+        help=(
+            "PoC validation instrument (2026-09-22): run ARIA (RAG, Ollama) AND a "
+            "no-corpus Claude baseline on the same dataset, judge both answers with "
+            "the same LLM judge, print a per-case comparison, and export a blind "
+            "calibration sheet. Requires ANTHROPIC_API_KEY unless --baseline-answers-file "
+            "is given. Result is 'en attente de calibration Charline' -- not a validated number."
+        ),
+    )
+    eval_parser.add_argument(
+        "--baseline-answers-file",
+        type=Path,
+        default=None,
+        metavar="PATH",
+        help=(
+            "Use pre-supplied baseline answers ({case_id: answer_text} JSON) instead of "
+            "calling the Anthropic API live -- same judge and comparison pipeline either way. "
+            "Only meaningful with --baseline-no-corpus."
+        ),
+    )
 
     ask_parser = subparsers.add_parser("ask", help="Search the index and optionally synthesize an answer")
     ask_parser.add_argument("question", help="Question to ask")
@@ -152,13 +180,13 @@ def build_parser() -> argparse.ArgumentParser:
     ask_parser.add_argument(
         "--no-llm",
         action="store_true",
-        help="Only return retrieved passages, even if OPENAI_API_KEY is set",
+        help="Only return retrieved passages, skip answer synthesis",
     )
     ask_parser.add_argument(
         "--backend",
-        choices=["openai", "ollama", "claude"],
+        choices=["ollama"],
         default=None,
-        help="LLM backend for answer synthesis",
+        help="LLM backend for answer synthesis. Ollama only (sovereignty rule).",
     )
     ask_parser.add_argument(
         "--family",
@@ -330,11 +358,18 @@ def main() -> None:
         return
 
     if args.command == "eval":
-        from aria_rag.eval import run_eval, _print_multi_comparison
+        from aria_rag.eval import run_eval, run_poc_validation, _print_multi_comparison
         no_llm = args.no_llm
         refresh_expansions = args.refresh_expansions
         strict_expansion = args.strict_expansion
-        if args.multi_alpha:
+        if args.baseline_no_corpus:
+            run_poc_validation(
+                dataset_path=args.dataset, top_k=args.top_k, ids=args.ids,
+                results_dir=args.output, timeout=args.timeout, alpha=args.alpha,
+                answers_file=args.baseline_answers_file, refresh_expansions=refresh_expansions,
+                settings=settings,
+            )
+        elif args.multi_alpha:
             print("Run 1/3 — baseline sans query expansion\n")
             r_baseline = run_eval(
                 dataset_path=args.dataset, top_k=args.top_k, backend=args.backend,

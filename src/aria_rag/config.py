@@ -45,9 +45,11 @@ class Settings:
     family_slots: dict[str, int] = field(default_factory=lambda: dict(DEFAULT_FAMILY_SLOTS))
     embedding_model: str = "sentence-transformers/paraphrase-multilingual-mpnet-base-v2"
     max_files: int | None = None
-    llm_backend: str = "openai"
-    openai_api_key: str | None = None
-    chat_model: str = "gpt-4.1-mini"
+    # Sovereignty rule: production only ever uses local Ollama (Mistral API
+    # planned as the future sovereign backend). Not "openai" -- removed
+    # entirely 2026-09-22, see SESSION_STATE.md -- so a fresh machine without
+    # .env never silently calls a US cloud API.
+    llm_backend: str = "ollama"
     ollama_host: str = "http://localhost:11434"
     # Deprecated: pre-split single model for both pipeline stages. Still
     # honored as a fallback (see load_settings) so an existing .env with only
@@ -63,6 +65,9 @@ class Settings:
     # the 13-case grid; see the synthesis engine bench report) — production
     # default as of the config split.
     synthesis_model: str = "ministral-3:8b"
+    # Reserved for an eval-only no-corpus baseline (llm.answer_with_claude) --
+    # never wired into the production dispatch (llm.answer_question). Kept,
+    # not removed alongside OpenAI, per the 2026-09-22 backend-removal task.
     anthropic_api_key: str | None = None
     claude_model: str = "claude-opus-4-6"
     # Synthesis-only; query_expansion.py sets no num_predict of its own.
@@ -92,9 +97,7 @@ def load_settings() -> Settings:
         lexical_boost_factor=float(os.getenv("ARIA_LEXICAL_BOOST", "2.0")),
         scoped_retrieval=os.getenv("ARIA_SCOPED_RETRIEVAL", "1") not in ("0", "false", "False"),
         embedding_model=os.getenv("ARIA_EMBEDDING_MODEL", "sentence-transformers/paraphrase-multilingual-mpnet-base-v2"),
-        llm_backend=os.getenv("ARIA_LLM_BACKEND", "openai"),
-        openai_api_key=os.getenv("OPENAI_API_KEY") or None,
-        chat_model=os.getenv("ARIA_CHAT_MODEL", "gpt-4.1-mini"),
+        llm_backend=os.getenv("ARIA_LLM_BACKEND", "ollama"),
         ollama_host=os.getenv("ARIA_OLLAMA_HOST", "http://localhost:11434"),
         ollama_model=ollama_model,
         expansion_model=expansion_model,

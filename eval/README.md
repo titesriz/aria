@@ -28,9 +28,9 @@ aria-rag eval
 # Cibler des use cases spécifiques
 aria-rag eval --ids UC-01 UC-03
 
-# Changer de backend
-aria-rag eval --backend openai    # nécessite OPENAI_API_KEY dans .env
-aria-rag eval --backend claude    # nécessite ANTHROPIC_API_KEY dans .env
+# --backend n'accepte que "ollama" (règle de souveraineté — production
+# Ollama uniquement). Claude reste réservé à une future baseline "sans
+# corpus" dédiée (llm.answer_with_claude), pas accessible via ce flag.
 
 # Ajuster le nombre de chunks récupérés
 aria-rag eval --top-k 12

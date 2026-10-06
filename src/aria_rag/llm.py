@@ -6,8 +6,6 @@ from pathlib import Path
 
 import anthropic
 import httpx
-import openai
-from openai import OpenAI
 
 from aria_rag.config import Settings
 from aria_rag.retriever import SearchHit
@@ -106,30 +104,6 @@ def build_prompt(question: str, hits: list[SearchHit]) -> PromptBundle:
     )
 
 
-def answer_with_openai(question: str, hits: list[SearchHit], settings: Settings) -> str:
-    if not settings.openai_api_key:
-        raise RuntimeError("OPENAI_API_KEY is not set.")
-
-    prompt = build_prompt(question, hits)
-    client = OpenAI(api_key=settings.openai_api_key, timeout=120)
-    try:
-        response = client.responses.create(
-            model=settings.chat_model,
-            input=[
-                {"role": "system", "content": prompt.system},
-                {"role": "user", "content": prompt.user},
-            ],
-            max_output_tokens=settings.num_predict,
-        )
-    except openai.OpenAIError as exc:
-        raise RuntimeError(f"OpenAI request failed ({type(exc).__name__}). Please try again.") from exc
-
-    text = (response.output_text or "").strip()
-    if not text:
-        raise RuntimeError("OpenAI returned an empty response.")
-    return text
-
-
 def answer_with_ollama(question: str, hits: list[SearchHit], settings: Settings) -> str:
     prompt = build_prompt(question, hits)
     payload = {
@@ -168,6 +142,10 @@ def answer_with_ollama(question: str, hits: list[SearchHit], settings: Settings)
 
 
 def answer_with_claude(question: str, hits: list[SearchHit], settings: Settings) -> str:
+    """EVAL-ONLY. Not reachable from production paths. Reserved for the
+    no-corpus baseline (sovereignty rule: production only ever uses local
+    Ollama — see 2026-09-22's backend-removal cleanup, SESSION_STATE.md).
+    """
     if not settings.anthropic_api_key:
         raise RuntimeError("ANTHROPIC_API_KEY is not set.")
 
@@ -203,11 +181,11 @@ def answer_with_claude(question: str, hits: list[SearchHit], settings: Settings)
 
 
 def answer_question(question: str, hits: list[SearchHit], settings: Settings, backend: str) -> str:
+    """Production dispatch — Ollama only (sovereignty rule). answer_with_claude
+    is intentionally NOT wired here; it's reserved for an eval-only no-corpus
+    baseline, called directly by eval code, never through this function.
+    """
     normalized = backend.lower()
-    if normalized == "openai":
-        return answer_with_openai(question, hits, settings)
     if normalized == "ollama":
         return answer_with_ollama(question, hits, settings)
-    if normalized == "claude":
-        return answer_with_claude(question, hits, settings)
     raise RuntimeError(f"Unsupported LLM backend: {backend}")

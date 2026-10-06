@@ -9,7 +9,9 @@ description = "Starter RAG project for the ARIA document corpus."
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
-  "openai>=1.30.0",
+  # Eval-only reserved (no-corpus baseline, llm.answer_with_claude) -- never
+  # imported by a production entry point. openai>=1.30.0 removed 2026-09-22
+  # (sovereignty rule, production is Ollama-only).
   "anthropic>=0.40.0",
   "pypdf>=4.2.0",
   "python-dotenv>=1.0.1",
