@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import random
 import re
 import subprocess
 import uuid
@@ -9,10 +10,39 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
+from aria_rag.config import Settings
+from aria_rag.judge import judge_answer
+
 _REPO_ROOT = Path(__file__).parent.parent.parent
 DEFAULT_DATASET = _REPO_ROOT / "eval" / "golden_dataset.json"
 DEFAULT_RESULTS_DIR = _REPO_ROOT / "eval" / "results"
 DEFAULT_EXPANSION_CACHE = _REPO_ROOT / "eval" / "expansion_cache.json"
+
+# Cases whose reponse_attendue contains an unresolved doctrinal branch
+# ("DOCTRINE À TRANCHER", "à vérifier", "À RECONSTRUIRE" -- see
+# golden_dataset.json) -- their judge scores are indicative only until
+# Charline resolves the branch. Reported separately, never silently folded
+# into the headline mean.
+INDICATIVE_ONLY_CASE_IDS = {"CH-04", "UC-16", "UC-04"}
+
+# The 4 cases Charline calibrates the judge against (see
+# export_calibration_sheet). Picked for this task, not derived from data.
+CALIBRATION_CASE_IDS = ["CH-03", "CH-01", "UC-02", "UC-05"]
+
+# Fairness (2026-09-22 PoC task): a reasonable system prompt a competent user
+# would write -- French urban-planning expert, Paris PLU bioclimatique scope,
+# encouraged to cite articles, encouraged to flag uncertainty rather than
+# invent a figure. No corpus, no retrieved context, no mention of ARIA.
+BASELINE_NO_CORPUS_SYSTEM_PROMPT = (
+    "Tu es un expert français en droit de l'urbanisme, spécialisé dans le Plan "
+    "Local d'Urbanisme (PLU) bioclimatique de Paris et le Code de la "
+    "Construction et de l'Habitation (CCH). Des architectes te posent des "
+    "questions réglementaires précises sur des projets à Paris. Réponds en "
+    "français, de manière structurée et précise. Cite les articles "
+    "réglementaires pertinents quand tu les connais (par exemple UG.3.2, ou "
+    "un article du CCH). Si tu n'es pas certain d'une règle, d'un seuil ou "
+    "d'un chiffre, dis-le clairement plutôt que d'inventer une valeur."
+)
 
 _PASSAGES_MARKER = "Retrieved passages:"
 _ANSWER_MARKER = "LLM answer:"
@@ -253,12 +283,25 @@ def _score_retrieval(
     return (len(expected) - len(missing)) / len(expected), missing
 
 
-def _score_answer(answer: str, expected_keywords: list[str]) -> tuple[float, list[str]]:
-    if not expected_keywords:
-        return 1.0, []
-    lower = answer.lower()
-    missing = [kw for kw in expected_keywords if kw.lower() not in lower]
-    return (len(expected_keywords) - len(missing)) / len(expected_keywords), missing
+def _judge_case(uc: dict[str, Any], answer: str, settings: Settings) -> dict[str, Any] | None:
+    """Wraps judge_answer with this golden case's reponse_attendue /
+    critere_reussite. Returns None (not judged) rather than calling the
+    judge on an empty/absent answer -- e.g. --no-llm runs, or a case whose
+    aria-rag ask subprocess errored before producing an answer.
+    """
+    if not answer:
+        return None
+    reponse_attendue = uc.get("reponse_attendue", "")
+    critere_reussite = uc.get("critere_reussite", "")
+    if not reponse_attendue and not critere_reussite:
+        return None
+    return judge_answer(uc["question"], answer, reponse_attendue, critere_reussite, settings)
+
+
+def _failed_forbidden_checks(judge: dict[str, Any] | None) -> list[str]:
+    if not judge or judge.get("judge_error"):
+        return []
+    return [c["check"] for c in judge.get("checks", []) if c.get("type") == "forbidden" and not c.get("pass")]
 
 
 # ---------------------------------------------------------------------------
@@ -298,7 +341,7 @@ def _print_result_table(results: list[dict[str, Any]], failed_ids: list[str]) ->
         rs, ans = r["retrieval_score"], r["answer_score"]
         # ANSI codes add invisible chars so we pad manually
         ret_cell = f"{_color(rs)}{rs:.0%} {_bar(rs)}{RESET}"
-        ans_cell = f"{_color(ans)}{ans:.0%} {_bar(ans)}{RESET}"
+        ans_cell = f"{_color(ans)}{ans:.0%} {_bar(ans)}{RESET}" if ans is not None else f"{_DIM}n/a{RESET}"
         id_label = (r["id"] + "!") if r["id"] in failed_ids else r["id"]
         print(f"{id_label:<{id_w}}{q_short:<{q_w}}{ret_cell:<{score_w + 10}}{ans_cell}")
 
@@ -306,18 +349,22 @@ def _print_result_table(results: list[dict[str, Any]], failed_ids: list[str]) ->
             print(f"{_RED}  {'':>{id_w}}✗ expansion failed : scored on fallback-to-original retrieval{RESET}")
         if r["missing_articles"]:
             print(f"{_DIM}  {'':>{id_w}}▸ articles manquants : {', '.join(r['missing_articles'])}{RESET}")
-        if r["missing_keywords"]:
-            print(f"{_DIM}  {'':>{id_w}}▸ keywords manquants  : {', '.join(r['missing_keywords'])}{RESET}")
+        failed_forbidden = _failed_forbidden_checks(r.get("judge"))
+        if failed_forbidden:
+            print(f"{_RED}  {'':>{id_w}}▸ checks interdits échoués : {'; '.join(failed_forbidden)}{RESET}")
+        if r.get("judge") and r["judge"].get("judge_error"):
+            print(f"{_YELLOW}  {'':>{id_w}}⚠ judge_error : le juge n'a pas produit de JSON valide (2 tentatives){RESET}")
         if r.get("error"):
             print(f"\033[91m  {'':>{id_w}}✗ erreur : {r['error']}{RESET}")
 
     print(sep)
     avg_ret = sum(r["retrieval_score"] for r in results) / len(results)
-    avg_ans = sum(r["answer_score"] for r in results) / len(results)
+    scored = [r["answer_score"] for r in results if r["answer_score"] is not None]
+    avg_ans_str = f"{_color(sum(scored) / len(scored))}{sum(scored) / len(scored):.0%} {_bar(sum(scored) / len(scored))}{RESET}" if scored else f"{_DIM}n/a{RESET}"
     print(
         f"{BOLD}{'MOYENNE':<{id_w}}{'':>{q_w}}"
         f"{_color(avg_ret)}{avg_ret:.0%} {_bar(avg_ret)}{RESET}{BOLD}   "
-        f"{_color(avg_ans)}{avg_ans:.0%} {_bar(avg_ans)}{RESET}"
+        f"{avg_ans_str}"
     )
     print(sep)
 
@@ -432,7 +479,10 @@ def run_eval(
     baseline_results: list[dict[str, Any]] | None = None,
     refresh_expansions: bool = False,
     strict_expansion: bool = False,
+    settings: Settings | None = None,
 ) -> list[dict[str, Any]]:
+    from aria_rag.config import load_settings
+    settings = settings or load_settings()
     ds_path = Path(dataset_path) if dataset_path else DEFAULT_DATASET
     out_dir = Path(results_dir) if results_dir else DEFAULT_RESULTS_DIR
 
@@ -470,7 +520,8 @@ def run_eval(
             )
             passages, answer, expansion_query, inferred_articles, expansion_status, hits = _parse_output(raw)
             ret_score, missing_arts = _score_retrieval(hits, _normalize_expectations(uc))
-            ans_score, missing_kws = _score_answer(answer, uc.get("expected_keywords", []))
+            judge = _judge_case(uc, answer, settings)
+            ans_score = judge["final_score"] if judge and not judge["judge_error"] else None
             error = None
         except Exception as exc:  # noqa: BLE001
             passages, answer, expansion_query, inferred_articles = "", "", "", []
@@ -478,9 +529,8 @@ def run_eval(
             # subprocess did — mark it failed too rather than silently
             # reporting no signal, so --strict-expansion still catches it.
             expansion_status = "failed" if expand_query else None
-            ret_score, ans_score = 0.0, 0.0
+            ret_score, ans_score, judge = 0.0, None, None
             missing_arts = [item["value"] for item in _normalize_expectations(uc)]
-            missing_kws = uc.get("expected_keywords", [])
             error = str(exc)
             print(f"    {_RED}ERREUR : {exc}{RESET}", flush=True)
 
@@ -490,9 +540,9 @@ def run_eval(
             "complexity": uc.get("complexity", ""),
             "validated": uc.get("validated"),
             "retrieval_score": round(ret_score, 4),
-            "answer_score": round(ans_score, 4),
+            "answer_score": round(ans_score, 4) if ans_score is not None else None,
+            "judge": judge,
             "missing_articles": missing_arts,
-            "missing_keywords": missing_kws,
             "alpha": alpha if expand_query else None,
             "expansion_query": expansion_query,
             "inferred_articles": inferred_articles,
@@ -520,3 +570,341 @@ def run_eval(
             )
 
     return results
+
+
+# ---------------------------------------------------------------------------
+# No-corpus baseline (PoC validation instrument, 2026-09-22)
+# ---------------------------------------------------------------------------
+
+def _answer_claude_no_corpus(question: str, settings: Settings) -> str:
+    """EVAL-ONLY synthesis call for the no-corpus baseline. Deliberately its
+    own function, not llm.answer_with_claude: that function builds a
+    RAG-context prompt (llm.build_prompt) and stays reserved/unreachable
+    from production per the 2026-09-22 backend-removal cleanup; this one
+    sends the question alone, with BASELINE_NO_CORPUS_SYSTEM_PROMPT, no
+    retrieved context, and no [N]-marker citation convention (there is no
+    numbered context to cite).
+    """
+    import anthropic
+
+    if not settings.anthropic_api_key:
+        raise RuntimeError("ANTHROPIC_API_KEY is not set.")
+    client = anthropic.Anthropic(api_key=settings.anthropic_api_key, timeout=120)
+    full_text: list[str] = []
+    try:
+        with client.messages.stream(
+            model=settings.claude_model,
+            max_tokens=settings.num_predict,
+            system=BASELINE_NO_CORPUS_SYSTEM_PROMPT,
+            messages=[{"role": "user", "content": question}],
+        ) as stream:
+            for text in stream.text_stream:
+                full_text.append(text)
+    except anthropic.AnthropicError as exc:
+        raise RuntimeError(f"Claude request failed ({type(exc).__name__}). Please try again.") from exc
+
+    text = "".join(full_text).strip()
+    if not text:
+        raise RuntimeError("Claude returned an empty response.")
+    return text
+
+
+def load_baseline_answers_from_file(path: Path) -> dict[str, str]:
+    """{case_id: answer_text} — an alternate input for run_baseline_no_corpus
+    when a live ANTHROPIC_API_KEY isn't available (or a baseline run was
+    sourced by other means, e.g. a manual chat session) but the SAME judge
+    and comparison pipeline should still score it. Not a second-class path:
+    the resulting results are structurally identical to a live run's.
+    """
+    data = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(data, dict):
+        raise ValueError(f"{path}: expected a JSON object of {{case_id: answer_text}}, got {type(data).__name__}")
+    return data
+
+
+def run_baseline_no_corpus(
+    dataset: list[dict[str, Any]],
+    settings: Settings,
+    answers_file: Path | None = None,
+) -> list[dict[str, Any]]:
+    """Run (or load) the no-corpus baseline for every case in `dataset`,
+    then judge each answer with the SAME judge as ARIA's run (_judge_case).
+    Result shape is deliberately parallel to run_eval's per-case dict
+    (id/question/raw_answer/judge/answer_score/error) minus retrieval-only
+    fields (retrieval_score, missing_articles, expansion_*) that don't apply
+    — there is no retrieval in this condition.
+    """
+    provided = load_baseline_answers_from_file(answers_file) if answers_file else {}
+    results: list[dict[str, Any]] = []
+    print(f"{BOLD}Baseline sans corpus (Claude, {settings.claude_model}) sur {len(dataset)} cas{RESET}\n")
+
+    for uc in dataset:
+        uc_id = uc["id"]
+        print(f"  {_DIM}→ [baseline] {uc_id}{RESET} {uc['question'][:80]}", flush=True)
+        answer, judge, error = "", None, None
+        try:
+            if uc_id in provided:
+                answer = provided[uc_id]
+            elif answers_file is not None:
+                raise RuntimeError(f"Pas de réponse fournie pour {uc_id} dans {answers_file}")
+            else:
+                answer = _answer_claude_no_corpus(uc["question"], settings)
+            judge = _judge_case(uc, answer, settings)
+        except Exception as exc:  # noqa: BLE001
+            error = str(exc)
+            print(f"    {_RED}ERREUR : {exc}{RESET}", flush=True)
+
+        results.append({
+            "id": uc_id,
+            "question": uc["question"],
+            "raw_answer": answer,
+            "judge": judge,
+            "answer_score": judge["final_score"] if judge and not judge["judge_error"] else None,
+            "error": error,
+        })
+    return results
+
+
+# ---------------------------------------------------------------------------
+# Comparison (ARIA vs. no-corpus baseline)
+# ---------------------------------------------------------------------------
+
+def _mean(values: list[float | None]) -> float | None:
+    present = [v for v in values if v is not None]
+    return sum(present) / len(present) if present else None
+
+
+def build_comparison_rows(aria_results: list[dict[str, Any]], baseline_results: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    by_id_base = {r["id"]: r for r in baseline_results}
+    rows = []
+    for a in aria_results:
+        uc_id = a["id"]
+        b = by_id_base.get(uc_id, {})
+        aria_score, base_score = a.get("answer_score"), b.get("answer_score")
+        rows.append({
+            "id": uc_id,
+            "question": a["question"],
+            "indicative_only": uc_id in INDICATIVE_ONLY_CASE_IDS,
+            "retrieval_score": a.get("retrieval_score"),
+            "aria_answer_score": aria_score,
+            "baseline_answer_score": base_score,
+            "delta": (aria_score - base_score) if (aria_score is not None and base_score is not None) else None,
+            "aria_failed_forbidden": _failed_forbidden_checks(a.get("judge")),
+            "baseline_failed_forbidden": _failed_forbidden_checks(b.get("judge")),
+        })
+    return rows
+
+
+def print_poc_comparison(rows: list[dict[str, Any]]) -> None:
+    id_w, q_w, score_w = 8, 40, 13
+    total_w = id_w + q_w + score_w * 3 + 10
+    sep = "─" * total_w
+
+    def _cell(score: float | None) -> str:
+        if score is None:
+            return f"{_DIM}n/a{RESET}"
+        return f"{_color(score)}{score:.0%}{RESET}"
+
+    print(sep)
+    print(f"{BOLD}{'ID':<{id_w}}{'Question':<{q_w}}{'Retrieval':^{score_w}}{'ARIA':^{score_w}}{'Baseline':^{score_w}}{'Δ':^10}{RESET}")
+    print(sep)
+    for r in rows:
+        q_short = (r["question"][: q_w - 2] + "…") if len(r["question"]) > q_w - 1 else r["question"]
+        flag = " *" if r["indicative_only"] else ""
+        delta = r["delta"]
+        delta_str = f"{'+' if delta > 0 else ''}{delta:.0%}" if delta is not None else "n/a"
+        print(
+            f"{r['id'] + flag:<{id_w}}{q_short:<{q_w}}"
+            f"{_cell(r['retrieval_score']):^{score_w + 9}}"
+            f"{_cell(r['aria_answer_score']):^{score_w + 9}}"
+            f"{_cell(r['baseline_answer_score']):^{score_w + 9}}"
+            f"{delta_str:^10}"
+        )
+        if r["aria_failed_forbidden"]:
+            print(f"{_RED}  {'':>{id_w}}▸ ARIA — checks interdits échoués : {'; '.join(r['aria_failed_forbidden'])}{RESET}")
+        if r["baseline_failed_forbidden"]:
+            print(f"{_RED}  {'':>{id_w}}▸ Baseline — checks interdits échoués : {'; '.join(r['baseline_failed_forbidden'])}{RESET}")
+    print(sep)
+
+    all_ids = [r["id"] for r in rows]
+    excl_ids = [r["id"] for r in rows if not r["indicative_only"]]
+    for label, ids_subset in (("12/12 cas", all_ids), (f"{len(excl_ids)}/12 cas (hors CH-04/UC-16/UC-04)", excl_ids)):
+        subset = [r for r in rows if r["id"] in ids_subset]
+        mean_aria = _mean([r["aria_answer_score"] for r in subset])
+        mean_base = _mean([r["baseline_answer_score"] for r in subset])
+        mean_ret = _mean([r["retrieval_score"] for r in subset])
+        print(
+            f"{BOLD}MOYENNE {label:<40}{RESET}"
+            f"retrieval={_cell(mean_ret)}  ARIA={_cell(mean_aria)}  baseline={_cell(mean_base)}"
+        )
+    print(f"{_DIM}* CH-04/UC-16/UC-04 : réponse attendue contient une branche non tranchée "
+          f"(DOCTRINE À TRANCHER / à vérifier / À RECONSTRUIRE) — score indicatif uniquement.{RESET}")
+    print(sep)
+
+
+def save_poc_comparison(
+    aria_results: list[dict[str, Any]],
+    baseline_results: list[dict[str, Any]],
+    rows: list[dict[str, Any]],
+    out_dir: Path,
+    baseline_source: str,
+) -> Path:
+    """Full outputs (both systems' answers + judge JSON), timestamped, per
+    CLAUDE.md's "every fix ships with a before/after eval run in
+    eval/results/" convention -- this is that record for the PoC comparison.
+    """
+    out_dir.mkdir(parents=True, exist_ok=True)
+    payload = {
+        "generated_at": datetime.now().isoformat(),
+        "baseline_source": baseline_source,  # "live_api" or the answers-file path
+        "indicative_only_case_ids": sorted(INDICATIVE_ONLY_CASE_IDS),
+        "comparison_rows": rows,
+        "aria_results": aria_results,
+        "baseline_results": baseline_results,
+    }
+    out_path = out_dir / f"poc_comparison_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex[:8]}.json"
+    out_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    return out_path
+
+
+# ---------------------------------------------------------------------------
+# Calibration sheet for Charline (blind A/B, judge verdicts shown)
+# ---------------------------------------------------------------------------
+
+def export_calibration_sheet(
+    aria_results: list[dict[str, Any]],
+    baseline_results: list[dict[str, Any]],
+    out_dir: Path,
+    case_ids: list[str] | None = None,
+    seed: int = 20260922,
+) -> tuple[Path, Path]:
+    """Writes a blind A/B markdown sheet (sheet_path) for Charline to mark
+    where she disagrees with the judge, plus a SEPARATE key file (key_path)
+    mapping A/B back to {aria, baseline_no_corpus} per case -- not shown on
+    the sheet itself, so the review stays genuinely blind. Per-case A/B
+    assignment is randomized with a fixed seed (reproducible, not
+    hand-picked to flatter either system).
+    """
+    case_ids = case_ids or CALIBRATION_CASE_IDS
+    by_id_aria = {r["id"]: r for r in aria_results}
+    by_id_base = {r["id"]: r for r in baseline_results}
+    rng = random.Random(seed)
+
+    key: dict[str, dict[str, str]] = {}
+    lines = [
+        "# Feuille de calibration du juge",
+        "",
+        "Pour chaque cas : lisez la question et les deux réponses (A/B, non "
+        "identifiées), puis le verdict du juge pour chacune. Indiquez votre "
+        "accord/désaccord sur chaque check et sur le score final dans les "
+        "cases `[ ]` (cochez `[x]` si vous êtes en désaccord avec le juge, "
+        "et notez pourquoi).",
+        "",
+        "---",
+        "",
+    ]
+    for uc_id in case_ids:
+        a, b = by_id_aria.get(uc_id), by_id_base.get(uc_id)
+        if a is None or b is None:
+            continue
+        systems = [("aria", a), ("baseline_no_corpus", b)]
+        rng.shuffle(systems)
+        (label_A, data_A), (label_B, data_B) = systems
+        key[uc_id] = {"A": label_A, "B": label_B}
+
+        lines.append(f"## {uc_id}")
+        lines.append("")
+        lines.append(f"**Question :** {a['question']}")
+        lines.append("")
+        for label, data in (("A", data_A), ("B", data_B)):
+            lines.append(f"### Réponse {label}")
+            lines.append("")
+            lines.append(data.get("raw_answer") or "*(pas de réponse)*")
+            lines.append("")
+            judge = data.get("judge")
+            score = data.get("answer_score")
+            score_str = f"{score:.0%}" if score is not None else "n/a (judge_error)"
+            lines.append(f"**Verdict du juge — Réponse {label} — score final : {score_str}**")
+            lines.append("")
+            if judge and not judge.get("judge_error"):
+                lines.append("| Désaccord ? | Check | Type | Résultat | Justification du juge |")
+                lines.append("|---|---|---|---|---|")
+                for c in judge.get("checks", []):
+                    result = "✅ pass" if c.get("pass") else "❌ fail"
+                    lines.append(f"| `[ ]` | {c.get('check','')} | {c.get('type','')} | {result} | {c.get('justification','')} |")
+                lines.append("")
+                lines.append(f"`[ ]` Désaccord sur le **substance_score** ({judge.get('substance_score')}) — commentaire : ____________")
+                lines.append("")
+                lines.append(f"*Rationale du juge : {judge.get('rationale','')}*")
+            else:
+                lines.append("*(judge_error — le juge n'a pas produit de verdict exploitable pour cette réponse)*")
+            lines.append("")
+        lines.append("---")
+        lines.append("")
+
+    out_dir.mkdir(parents=True, exist_ok=True)
+    ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+    sheet_path = out_dir / f"calibration_sheet_{ts}.md"
+    key_path = out_dir / f"calibration_key_{ts}.json"
+    sheet_path.write_text("\n".join(lines), encoding="utf-8")
+    key_path.write_text(json.dumps(key, ensure_ascii=False, indent=2), encoding="utf-8")
+    return sheet_path, key_path
+
+
+# ---------------------------------------------------------------------------
+# Orchestrator — `aria-rag eval --baseline-no-corpus`
+# ---------------------------------------------------------------------------
+
+def run_poc_validation(
+    dataset_path: Path | None = None,
+    top_k: int = 8,
+    ids: list[str] | None = None,
+    results_dir: Path | None = None,
+    timeout: int = 120,
+    alpha: float = 0.5,
+    answers_file: Path | None = None,
+    refresh_expansions: bool = False,
+    settings: Settings | None = None,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]], Path, Path, Path]:
+    """Runs ARIA (Ollama synthesis, query expansion on — ARIA's best
+    configured condition, matching how the baseline is also given a fair
+    prompt rather than a handicapped one) and the no-corpus baseline on the
+    same dataset, judges both with the same judge, prints the comparison,
+    saves full outputs, and exports the calibration sheet. Returns
+    (aria_results, baseline_results, comparison_path, sheet_path, key_path).
+    """
+    from aria_rag.config import load_settings
+    settings = settings or load_settings()
+    out_dir = Path(results_dir) if results_dir else DEFAULT_RESULTS_DIR
+    ds_path = Path(dataset_path) if dataset_path else DEFAULT_DATASET
+    dataset: list[dict[str, Any]] = json.loads(ds_path.read_text(encoding="utf-8"))
+    if ids:
+        dataset = [uc for uc in dataset if uc["id"] in ids]
+
+    print(f"{BOLD}=== 1/2 : ARIA (RAG, Ollama, query expansion) ==={RESET}\n")
+    aria_results = run_eval(
+        dataset_path=dataset_path, top_k=top_k, backend="ollama", ids=ids,
+        results_dir=results_dir, timeout=timeout, expand_query=True, alpha=alpha,
+        no_llm=False, refresh_expansions=refresh_expansions, settings=settings,
+    )
+
+    print(f"\n{BOLD}=== 2/2 : Baseline sans corpus (Claude) ==={RESET}\n")
+    baseline_results = run_baseline_no_corpus(dataset, settings, answers_file=answers_file)
+
+    rows = build_comparison_rows(aria_results, baseline_results)
+    print()
+    print_poc_comparison(rows)
+
+    baseline_source = str(answers_file) if answers_file else "live_api"
+    comparison_path = save_poc_comparison(aria_results, baseline_results, rows, out_dir, baseline_source)
+    print(f"\n{_DIM}Comparaison complète → {comparison_path}{RESET}")
+
+    sheet_path, key_path = export_calibration_sheet(aria_results, baseline_results, out_dir)
+    print(f"{_DIM}Feuille de calibration (Charline) → {sheet_path}{RESET}")
+    print(f"{_DIM}Clé A/B (ne pas montrer à Charline) → {key_path}{RESET}")
+    print(
+        f"\n{_YELLOW}⚠ en attente de calibration Charline — ce résultat n'est PAS validé "
+        f"tant que la feuille de calibration n'a pas été relue.{RESET}"
+    )
+
+    return aria_results, baseline_results, comparison_path, sheet_path, key_path

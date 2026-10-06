@@ -12,6 +12,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
+import pytest
+from pydantic import ValidationError
+
 from aria_rag.api import AskRequest
 
 
@@ -23,3 +26,24 @@ def test_expand_query_defaults_to_true_when_omitted():
 def test_expand_query_still_honors_explicit_false():
     req = AskRequest(question="quelles sont les règles de gabarit enveloppe ?", expand_query=False)
     assert req.expand_query is False
+
+
+# ---------------------------------------------------------------------------
+# backend — sovereignty rule (2026-09-22): Ollama-only, enforced at request
+# validation (422), not left to fail later as a 502 from answer_question.
+# ---------------------------------------------------------------------------
+
+def test_backend_omitted_defaults_to_none():
+    req = AskRequest(question="q?")
+    assert req.backend is None
+
+
+def test_backend_ollama_accepted():
+    req = AskRequest(question="q?", backend="ollama")
+    assert req.backend == "ollama"
+
+
+@pytest.mark.parametrize("rejected", ["openai", "claude", "mistral", ""])
+def test_backend_non_ollama_rejected_at_validation(rejected):
+    with pytest.raises(ValidationError):
+        AskRequest(question="q?", backend=rejected)

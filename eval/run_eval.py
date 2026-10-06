@@ -10,7 +10,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Évaluation ARIA RAG sur le golden dataset")
     parser.add_argument("--dataset", type=Path, default=DEFAULT_DATASET, metavar="PATH")
     parser.add_argument("--top-k", type=int, default=8)
-    parser.add_argument("--backend", choices=["openai", "ollama", "claude"], default="ollama")
+    parser.add_argument("--backend", choices=["ollama"], default="ollama")
     parser.add_argument("--output", type=Path, default=DEFAULT_RESULTS_DIR, metavar="DIR")
     parser.add_argument("--ids", nargs="+", metavar="UC-ID")
     parser.add_argument("--timeout", type=int, default=120)
