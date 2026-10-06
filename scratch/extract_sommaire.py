@@ -348,12 +348,35 @@ def _merge_letter_spaced_runs(items):
     return out
 
 
+def _page_dict(page):
+    """page.get_text("dict") with every block/line bbox expressed in the page's
+    VISIBLE (rotated) frame. PyMuPDF reports text coordinates in the unrotated
+    page space, while page.rect and the header/footer bands used below are in
+    the rotated frame. On a /Rotate 90 page (confirmed on ANN2A/ANN3/ANN7/
+    ANN9/ANN10: A3 landscape, text stored vertically) the two disagree: the
+    "Table des matières" title came out at y0=994 on an 842pt-high page (so
+    the marker was never found) and every sommaire entry at y0=71 (so all of
+    them were taken for the header band and dropped). rotation == 0 returns
+    PyMuPDF's dict untouched, so unrotated documents are byte-for-byte
+    unaffected.
+    """
+    d = page.get_text("dict")
+    if not page.rotation:
+        return d
+    m = page.rotation_matrix
+    for block in d.get("blocks", []):
+        block["bbox"] = tuple(pymupdf.Rect(block["bbox"]) * m)
+        for line in block.get("lines", []):
+            line["bbox"] = tuple(pymupdf.Rect(line["bbox"]) * m)
+    return d
+
+
 def get_page_lines_with_bbox(page):
     """Approximate per-line (text, x0, y0) triples — used only for the
     header/footer-margin split and the <6-lines short-circuit. NOT used for
     column bucketing (see get_page_lines_by_block)."""
     out = []
-    d = page.get_text("dict")
+    d = _page_dict(page)
     for block in d.get("blocks", []):
         if block.get("type") != 0:
             continue
@@ -388,7 +411,7 @@ def get_page_lines_by_block(page):
     trailing page number and close a group early.
     """
     out = []
-    d = page.get_text("dict")
+    d = _page_dict(page)
     for block in d.get("blocks", []):
         if block.get("type") != 0:
             continue
@@ -424,7 +447,7 @@ def get_page_block_geometry(page):
     block-count floor rejected outright even though it plainly carries as
     much content as the left column's several smaller blocks)."""
     out = []
-    d = page.get_text("dict")
+    d = _page_dict(page)
     for block in d.get("blocks", []):
         if block.get("type") != 0:
             continue

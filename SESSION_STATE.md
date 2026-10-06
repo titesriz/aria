@@ -6,6 +6,15 @@
 
 ---
 
+## 2026-10-06 — sommaire extractor: /Rotate 90 pages handled (aria-v2 review tool work)
+
+**Done:** `scratch/extract_sommaire.py`: new `_page_dict()` expresses text bboxes in the page's visible frame when `page.rotation != 0` (rotation 0 returns PyMuPDF's dict untouched). Root cause: on rotated A3 pages the "Table des matières" title sat outside `page.rect` (marker never found) and every entry fell in the top "header" band (dropped). Measured on the 32 hand-confirmed sommaire docs (`aria-v2/review_tool/toc_extraction.json`, trees in `toc_trees/`): ANN2A 0→8 entries, ANN10 1→5, ANN3 4→13 (anchors 0.75→1.0), ANN7 1→5, ANN9 1→5; the other 27 docs byte-identical (tree, warnings, anchors, pages). Marker now found on those 5 (was shape fallback). Re-ran high-level detection on all 408 docs (`toc_potential.json`, 657s): only those 5 changed (shape→marker); 32 docs with a potential sommaire, 15 with PDF bookmarks (bookmarks are NOT a pipeline source — rule not yet written in aria-v2/CLAUDE.md).
+Also built (aria-v2, uncommitted): review tool Pipeline page (/pipeline), sommaire check page (/sommaire), `document_reviews` table in `chunk_reviews.db`; all 34 tested docs hand-verified "correct".
+
+**Open threads:** ANN3 extracts 3 bogus entries (running header repeated on pages 3-5); ANN6 (4 entries, anchors 0.75) and PADD (anchors 0.8) have a non-rotation cause, not investigated; ANN2A/ANN3 numbering-less entries fine. Pattern fix for REG2A10_1DE2/2DE2 (unclassified, timeout) delegated to another Claude Code session. Notion sync (Architecture produit / dev log) not done.
+
+---
+
 ## 2026-09-22 — backend cleanup: OpenAI removed entirely; Claude taken out of production path
 
 **Read-only inventory first** (separate task, same day): grepped every `anthropic`/`claude`/`openai` reference across `src/`, `eval/`, `scripts/`, `tests/`; confirmed no "no-corpus"/LLM-alone baseline exists anywhere in the codebase (every path to `answer_question` always passes real retrieved hits), and 0/115 `eval/results/*.json` files ever used the claude backend — so neither backend was ever an eval baseline, both were just interchangeable production synthesis options.
