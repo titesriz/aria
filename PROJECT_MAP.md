@@ -38,7 +38,7 @@ No `frontend/`, `static/`, `templates/`, or `package.json` anywhere in this repo
 | `aria-rag ingest` | Extract PDFs → build/update the FAISS + BM25 index. Reuses extraction + embedding for unchanged files; the FAISS/BM25 index itself is rebuilt in full on every write. `--rebuild --family X` for a scoped rebuild. |
 | `aria-rag check` | Run 11 corpus/index invariants (`aria_rag.check`), report PASS/WARN/FAIL. Runs automatically after `ingest` unless `--skip-check`. |
 | `aria-rag ask "<question>"` | One-shot CLI query: retrieve + optionally synthesize an answer. `--no-llm` for retrieval-only, `--debug` for per-chunk scores. |
-| `aria-rag eval` | Run the golden-dataset evaluation (retrieval + answer scoring). `--no-llm`, `--multi-alpha`, `--expand-query` variants. |
+| `aria-rag eval` | Run the golden-dataset evaluation (retrieval + LLM-judged answer scoring). `--no-llm`, `--multi-alpha`, `--expand-query` variants. `--baseline-no-corpus [--baseline-answers-file PATH]` runs the PoC ARIA-vs-no-corpus-baseline comparison instead (needs `ANTHROPIC_API_KEY` unless answers are supplied from a file). |
 | `aria-rag serve` | Start the FastAPI server on port 8000 (`aria_rag.api:app` via uvicorn). Refuses to start if Ollama models aren't GPU-resident, unless `--allow-cpu`. |
 | `aria-rag sessions --last N` | Read-only digest of the last N logged `/ask` calls. |
 | `aria-rag referentiel export/import` | Round-trip `referentiel.yaml` ↔ `.xlsx` for domain-expert review. |
@@ -59,22 +59,24 @@ All CLI wiring lives in one file: **`src/aria_rag/cli.py`** (511 lines, `build_p
 | **Indexer** | `indexer.py` (~1000 lines, the biggest module) | Chunking (article-header-aware for `reglement_ecrit`, table-row-aware for annexe files, sliding-window fallback elsewhere) + embedding + FAISS/BM25 index build. `build_index()` is the core entry. | `sentence-transformers`, `faiss-cpu`, `rank-bm25` |
 | **Retriever** | `retriever.py` (~600 lines) | Hybrid FAISS+BM25 search fused by Reciprocal Rank Fusion, scoped per-family, plus a deterministic "annexe route" for address/list-style queries and a lexical boost for discriminating tokens (arrondissement numbers, article codes). | `faiss`, `sentence-transformers` |
 | **Query expansion** | `query_expansion.py` | Ollama call that infers likely PLU article codes from a natural-language question before retrieval; results cached to disk. | Ollama (gemma3:4b) |
-| **LLM synthesis** | `llm.py` | Builds the grounding-constrained prompt, dispatches to OpenAI / Ollama / Claude. Extracts `[N]` citation markers from the answer. | `openai`, `anthropic`, `httpx` |
+| **LLM synthesis** | `llm.py` | Builds the grounding-constrained prompt, dispatches to Ollama only (production). `answer_with_claude` exists but is reserved eval-only, not reachable from `answer_question`'s dispatch. Extracts `[N]` citation markers from the answer. | `anthropic` (eval-only), `httpx` |
 | **API** | `api.py` | FastAPI app: `/ask`, `/feedback`, `/document/{piece_id}`, `/health`. Loads the index once at startup (`lifespan`), refuses to start on unverified GPU backend. | `fastapi`, `uvicorn` |
 | **Check suite** | `check.py` (~650 lines, largest after indexer) | 11 numbered invariants over the live index (corpus mapping coverage, size caps, metadata integrity, encoding, manifest consistency, coverage, fragment floor, dedup ledger, referentiel coverage, annexe section plausibility). Each has a `checks/known_*.json` allowlist for documented, accepted exceptions. | — |
 | **Referentiel** | `referentiel.py` | Maps corpus files → "official document pieces" for citation resolution and the `/document` download endpoint. xlsx export/import for expert review. | `openpyxl` |
 | **Sessions** | `sessions.py` | Append-only JSONL logging of every API call + feedback submission, for offline review (`aria-rag sessions`). | — |
 | **Backend check** | `backend_check.py` | Verifies Ollama models are 100% GPU-resident before trusting latency/quality measurements (a documented, twice-bitten failure mode — see CLAUDE.md). | Ollama `/api/ps` |
-| **Eval harness** | `eval.py` | Runs the golden dataset through retrieval (+ optional synthesis), scores by section-metadata match (not raw text), prints a formatted comparison table. | — |
+| **Eval harness** | `eval.py` | Runs the golden dataset through retrieval (section-metadata match, not raw text) and answer synthesis (scored by `judge.py`, see below). `run_poc_validation()` (`aria-rag eval --baseline-no-corpus`) also runs a no-corpus Claude baseline on the same dataset, judges both with the same judge, prints a per-case comparison, and exports a blind A/B calibration sheet. | — |
+| **Answer judge** | `judge.py` | `judge_answer()`: LLM-as-judge on the local Ollama synthesis model, temperature 0. Splits a case's `critere_reussite` into required/forbidden checks (a "NE PAS ..." clause is forbidden), judges each pass/fail, judges substance agreement with `reponse_attendue` separately — `compute_final_score()` then combines these deterministically in code (a failed forbidden check caps the score at 0.3), never trusting the model's own arithmetic. Blind to which system produced the answer (prompt never names a system). Retries once on invalid JSON, then reports `judge_error` rather than guessing. | Ollama (`synthesis_model`) |
 
 ---
 
 ## 4. Dependencies & integrations
 
-**LLM/embedding backends** (pick one per call, via `--backend`/`ARIA_LLM_BACKEND`):
-- **Ollama** (local, default on this machine) — `gemma3:4b` for query expansion, `ministral-3:8b` for synthesis. Requires `OLLAMA_LLM_LIBRARY=vulkan` on this machine for GPU (see CLAUDE.md/memory). **No API key needed; this is the EU-sovereignty-compliant path.**
-- **OpenAI** — `gpt-4.1-mini` by default. Needs `OPENAI_API_KEY` (currently **unset** in `.env`).
-- **Anthropic/Claude** — `claude-opus-4-6` by default. Needs `ANTHROPIC_API_KEY` (currently **unset** in `.env`).
+**LLM synthesis backend — sovereignty rule: production is Ollama-only.**
+- **Ollama** (local) — `gemma3:4b` for query expansion, `ministral-3:8b` for synthesis. Requires `OLLAMA_LLM_LIBRARY=vulkan` on this machine for GPU (see CLAUDE.md/memory). No API key needed. The *only* backend reachable from `aria-rag ask`/`serve`/`eval` and the `/ask` API — enforced at three independent layers (`llm.answer_question`'s dispatch, `cli.py`'s `--backend` `choices`, `api.py`'s synthesis-model lookup; see `tests/test_backend_guard.py`).
+- **OpenAI** — removed entirely (2026-09-22). No code, dependency, or config references it.
+- **Anthropic/Claude** (`llm.answer_with_claude`) — kept, but deliberately **not wired into any production path**. Reserved for a future eval-only "no-corpus" baseline (Claude answering without retrieved context, to compare against the RAG pipeline) — that baseline itself doesn't exist yet, only the reserved backend function and its config (`ANTHROPIC_API_KEY`, `claude_model`) do.
+- **Mistral API** — planned as the future sovereign hosted backend (not yet implemented).
 
 **Embedding model** (retrieval, always local, no API): `sentence-transformers/paraphrase-multilingual-mpnet-base-v2`, CPU-bound on this machine (~27 min to re-embed the full ~27k-chunk corpus from scratch — see indexer.py's embedding cache, added 2026-09-19, for the mitigation).
 
@@ -114,7 +116,7 @@ list[SearchHit]  (content, source, page, section, scores)
     ├─→ cli.format_hits → printed to terminal (--no-llm stops here)
     │
     └─→ llm.answer_question → llm.build_prompt (numbered [N] context) →
-        backend call (Ollama/OpenAI/Claude) → answer text with [N] markers
+        Ollama call (only backend reachable here) → answer text with [N] markers
             │
             ▼
         api.ask: extract_cited_markers, resolve document_url via referentiel,

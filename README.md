@@ -11,7 +11,7 @@ python3 -m venv .venv
 source .venv/bin/activate
 pip install --upgrade pip
 pip install -e ".[dev]"
-cp .env.example .env   # fill in model choices; OpenAI/Anthropic keys only needed if you use those backends
+cp .env.example .env   # Ollama is the only production backend; no API key needed
 ```
 
 Ollama is the default local backend (no API key needed) — see `.env.example` for the expansion/synthesis model split.

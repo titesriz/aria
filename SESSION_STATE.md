@@ -6,6 +6,26 @@
 
 ---
 
+## 2026-09-22 — backend cleanup: OpenAI removed entirely; Claude taken out of production path
+
+**Read-only inventory first** (separate task, same day): grepped every `anthropic`/`claude`/`openai` reference across `src/`, `eval/`, `scripts/`, `tests/`; confirmed no "no-corpus"/LLM-alone baseline exists anywhere in the codebase (every path to `answer_question` always passes real retrieved hits), and 0/115 `eval/results/*.json` files ever used the claude backend — so neither backend was ever an eval baseline, both were just interchangeable production synthesis options.
+
+**OpenAI removed completely**: `llm.py` (`answer_with_openai`, `import openai`/`OpenAI`, its dispatch branch), `config.py` (`openai_api_key`, `chat_model`, `OPENAI_API_KEY` reading), `api.py`'s synthesis-model lookup entry, `cli.py`'s two `--backend` `choices` lists + the stale `OPENAI_API_KEY` mention in `--no-llm` help text, `eval/run_eval.py`'s `--backend` choices, `.env.example`, `pyproject.toml` (`openai>=1.30.0`), `eval/README.md`. `tests/test_backend_check.py`'s two non-ollama-backend fixtures swapped from `"openai"` to `"claude"` (same behavior under test — the GPU-check bypass for any non-ollama backend — just no longer referencing the removed one).
+
+**Default backend → `"ollama"`**, both `Settings.llm_backend`'s dataclass default and `load_settings()`'s `ARIA_LLM_BACKEND` env fallback (was `"openai"` — a fresh machine without `.env` would previously have silently tried a US API). `tests/test_config.py` (new) asserts this both ways (dataclass default, and `load_settings()` with `ARIA_LLM_BACKEND` explicitly unset + `load_dotenv` neutralized, so the test can't pass by accident via this machine's own `.env` already setting it correctly).
+
+**Claude taken out of the production path, not deleted**: removed from `answer_question`'s dispatch, `api.py`'s `/ask` lookup, and the `--backend` `choices` of `ask`/`eval` (`serve` never had a `--backend` flag — it resolves via `Settings.llm_backend`, covered by the default change above). `answer_with_claude()` and its config (`anthropic_api_key`, `claude_model`, the `anthropic` dependency) are kept, docstring-marked `EVAL-ONLY. Not reachable from production paths. Reserved for the no-corpus baseline.` — that baseline itself is a later task, not built here.
+
+**Guard test added** (`tests/test_backend_guard.py`, new, 11 tests): verifies non-reachability at all three independent layers — `answer_question` raises `RuntimeError` for `"openai"` and `"claude"`, accepts only `"ollama"`; `cli.py`'s `build_parser()` rejects `--backend openai`/`claude` for both `ask` and `eval` via `SystemExit` (argparse `choices`); `api.ask`'s synthesis-model dict literal (checked via AST parse of the function source, so the test breaks loudly if someone adds a key back) contains only `"ollama"`.
+
+**Docs**: `PROJECT_MAP.md` §4 rewritten (Ollama-only in production, Claude eval-only-reserved, Mistral API noted as the planned future sovereign backend) + its §3 LLM-synthesis row and §5 data-flow diagram, which both still said "OpenAI/Ollama/Claude".
+
+Full suite: 249 passed (was 236; +13 new: 2 in `test_config.py`, 11 in `test_backend_guard.py`).
+
+**Open threads**: unchanged from 2026-09-20's entry (REG1_MS1 manifest count reconciliation; Docling table-content-loss fix) — neither touched today. New: the no-corpus baseline itself (Claude answering without retrieval context, to compare against the RAG pipeline) is designed-for but not built — `answer_with_claude` is ready to be called directly by future eval code, just not wired to any CLI flag yet.
+
+---
+
 ## 2026-09-20 — doc-consistency cleanup (PROJECT_MAP/README/SESSION_STATE split), no code touched
 
 **Reconciled the "incremental" claim** across README.md and PROJECT_MAP §2, which both implied the whole `aria-rag ingest` write is incremental — it isn't: only extraction + embedding are cached for unchanged files, the FAISS/BM25 index structure is rebuilt in full every write (PROJECT_MAP §4 already had this right; used as the reference wording).
